@@ -43,6 +43,7 @@
 		011071882244EAD8006011E1 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011071872244EAD8006011E1 /* IOKit.framework */; };
 		0110718A2244EAF0006011E1 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011071892244EAF0006011E1 /* CoreVideo.framework */; };
 		0110718C2244EAFB006011E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0110718B2244EAFB006011E1 /* Foundation.framework */; };
+		01AAFDF022535DA000472426 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDEE22535DA000472426 /* Game.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,7 +175,6 @@
 
 /* Begin PBXFileReference section */
 		011071382244E270006011E1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		011071472244E4A9006011E1 /* Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = Game; path = /Users/andreis4/Desktop/Telenav/TelenavGame/Game/MyProject/build/Debug/Game; sourceTree = "<absolute>"; };
 		0110717A2244E83D006011E1 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = "../glfw-3.1.1/lib-MacOS-10.8/libglfw3.a"; sourceTree = "<group>"; };
 		011071812244EA6B006011E1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		011071832244EAA9006011E1 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = "../../../../Downloads/essentialmath-master/src/glfw-3.1.1/lib-MacOS-10.8/libglfw3.a"; sourceTree = "<group>"; };
@@ -182,6 +182,9 @@
 		011071872244EAD8006011E1 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		011071892244EAF0006011E1 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		0110718B2244EAFB006011E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		01AAFDEE22535DA000472426 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		01AAFDEF22535DA000472426 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
+		01AAFDF122535E5300472426 /* Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Game; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEEFF78D1B7FB311006B1B1A /* IvCollision.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvCollision.xcodeproj; path = IvCollision/IvCollision.xcodeproj; sourceTree = "<group>"; };
 		CEEFF7931B7FB31C006B1B1A /* IvCurves.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvCurves.xcodeproj; path = IvCurves/IvCurves.xcodeproj; sourceTree = "<group>"; };
 		CEEFF7991B7FB326006B1B1A /* IvEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvEngine.xcodeproj; path = IvEngine/IvEngine.xcodeproj; sourceTree = "<group>"; };
@@ -236,6 +239,8 @@
 		011071482244E4A9006011E1 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				01AAFDEE22535DA000472426 /* Game.cpp */,
+				01AAFDEF22535DA000472426 /* Game.hpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 				CEEFF78D1B7FB311006B1B1A /* IvCollision.xcodeproj */,
 				011071482244E4A9006011E1 /* Game */,
 				011071372244E270006011E1 /* Frameworks */,
+				01AAFDF122535E5300472426 /* Game */,
 			);
 			sourceTree = "<group>";
 		};
@@ -337,7 +343,7 @@
 			);
 			name = Game;
 			productName = Game;
-			productReference = 011071472244E4A9006011E1 /* Game */;
+			productReference = 01AAFDF122535E5300472426 /* Game */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -473,6 +479,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01AAFDF022535DA000472426 /* Game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,8 +581,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "/Users/andreis4/Desktop/Telenav/Game/MyProject/**";
-				LIBRARY_SEARCH_PATHS = "/Users/andreis4/Desktop/Telenav/Game/glfw-3.1.1/lib-MacOS-10.8";
+				HEADER_SEARCH_PATHS = "Game/**/**";
+				LIBRARY_SEARCH_PATHS = "../glfw-3.1.1/lib-MacOS-10.8/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -631,8 +638,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "/Users/andreis4/Desktop/Telenav/Game/MyProject/**";
-				LIBRARY_SEARCH_PATHS = "/Users/andreis4/Desktop/Telenav/Game/glfw-3.1.1/lib-MacOS-10.8";
+				HEADER_SEARCH_PATHS = "Game/**/**";
+				LIBRARY_SEARCH_PATHS = "../glfw-3.1.1/lib-MacOS-10.8/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
