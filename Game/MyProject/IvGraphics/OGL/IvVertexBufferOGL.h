@@ -45,20 +45,23 @@ public:
     friend class IvResourceManagerOGL;
     friend class IvRendererOGL;
     
-private:
+    
+protected:
     // constructor/destructor
     IvVertexBufferOGL();
     ~IvVertexBufferOGL() final;
     
     // creation 
-    bool Create( IvVertexFormat format, unsigned int numVertices, void* data,
-                 IvDataUsage usage );
+    bool Create( IvVertexFormat format, unsigned int numVertices, void* data,IvDataUsage usage );
+    
+    bool Create( VertexDescription format, unsigned int numVertices, void* data,IvDataUsage usage );
     
     // destruction
     void Destroy();
 
     // activate
     bool MakeActive();
+    bool MakeActive(unsigned int shaderID);
 
 private:
     // copy operations
@@ -68,6 +71,7 @@ private:
     GLuint      mBufferID;
     GLuint      mVertexArrayID;
     IvDataUsage mUsage;
+    VertexDescription format;
 };
 
 

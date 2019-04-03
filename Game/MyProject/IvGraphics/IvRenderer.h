@@ -183,6 +183,10 @@ public:
     virtual void Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, 
                       IvIndexBuffer* indexBuffer, unsigned int numIndices) = 0;
     virtual void Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, unsigned int numVertices) = 0;
+    
+     virtual void Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
+        IvIndexBuffer* indexBuffer, unsigned int numVertices,IvShaderProgram* shaderPtr) = 0;
+    
     inline void Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, IvIndexBuffer* indexBuffer) 
     {
         Draw( primType, vertexBuffer, indexBuffer, indexBuffer->GetNumIndices() );

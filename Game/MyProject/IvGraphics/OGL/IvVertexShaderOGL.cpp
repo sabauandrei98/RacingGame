@@ -17,6 +17,7 @@
 #include "IvVertexShaderOGL.h"
 #include "IvAssert.h"
 #include "IvDebugger.h"
+
 #include <string.h>
 
 //-------------------------------------------------------------------------------
@@ -154,6 +155,9 @@ IvVertexShaderOGL::~IvVertexShaderOGL()
     ASSERT(!mShaderID);
 }
 
+
+
+
 //-------------------------------------------------------------------------------
 // @ IvVertexShaderOGL::CreateFromFile()
 //-------------------------------------------------------------------------------
@@ -290,4 +294,9 @@ IvVertexShaderOGL::Destroy()
 {
     glDeleteShader(mShaderID);
     mShaderID = 0;
+}
+
+GLuint IvVertexShaderOGL::getShaderID()
+{
+    return mShaderID;
 }

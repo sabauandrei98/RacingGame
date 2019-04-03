@@ -21,6 +21,67 @@
 #include "IvVector3.h"
 #include "IvVector4.h"
 #include "IvColor.h"
+#include <vector>
+//-------------------------------------------------------------------------------
+//-- Classes ----------------------------------------------------------
+//-------------------------------------------------------------------------------
+
+struct VertexAttribute
+{
+    std::string name;
+    uint32_t    numFloats;
+    std::size_t offset = 0;
+};
+
+
+class VertexDescription
+{
+   
+    std::vector<VertexAttribute> attributes;
+    uint32_t m_size = 0;
+public:
+    VertexDescription() = default;
+    virtual ~VertexDescription();
+    
+    void addAttribute(const char* name, uint32_t count);
+    void removeAttribute(const char* name);
+    
+    uint32_t getVertexSize() const;
+    const std::vector<VertexAttribute> & getAttributes() const;
+    
+    
+    template <class T>
+    T* getAttribute(std::size_t vertexInde, const char * attribute_name, void * vertex_data) const;
+    template<class T>
+    T* nextVertexAttribute(T * attribute_ptr);
+    
+};
+
+//-------------
+//generic methods for Vertex Decsription
+//---------------
+template <class T>
+T* VertexDescription::getAttribute(std::size_t vertexInde, const char * attribute_name, void * vertex_data) const
+{
+    auto itr = std::find_if(attributes.begin(),attributes.end(), [&](const VertexAttribute & v){
+        if(v.name == attribute_name)
+            return true;
+        return false;
+    });
+    if(itr != attributes.end())
+    {
+        return reinterpret_cast<T*>(reinterpret_cast<char*>(vertex_data) + itr->offset);
+    }
+    return nullptr;
+}
+
+template<class T>
+T* VertexDescription::nextVertexAttribute(T * attribute_ptr)
+{
+    return reinterpret_cast<T*>(reinterpret_cast<char*>(attribute_ptr) + getVertexSize());
+}
+
+
 
 //-------------------------------------------------------------------------------
 //-- Typedefs, Structs ----------------------------------------------------------

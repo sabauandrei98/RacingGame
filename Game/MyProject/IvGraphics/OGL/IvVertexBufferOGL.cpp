@@ -32,9 +32,10 @@
 //-------------------------------------------------------------------------------
 // Default constructor
 //-------------------------------------------------------------------------------
-IvVertexBufferOGL::IvVertexBufferOGL() : IvVertexBuffer(), mBufferID(0), 
+IvVertexBufferOGL::IvVertexBufferOGL() :IvVertexBuffer(), mBufferID(0),
                                          mVertexArrayID(0)
 {
+    //format= new IvCustomVertexFormat("PC");
 }
 
 //-------------------------------------------------------------------------------
@@ -94,6 +95,7 @@ IvVertexBufferOGL::Create(IvVertexFormat format, unsigned int numVertices,
 #define POSITION 3
     size_t stride = kIvVFSize[mVertexFormat];
     size_t offset = 0;
+    
     switch (mVertexFormat)
     {
         case kPFormat:
@@ -151,6 +153,44 @@ IvVertexBufferOGL::Create(IvVertexFormat format, unsigned int numVertices,
     return true;
 }
 
+
+bool
+IvVertexBufferOGL::Create(VertexDescription format, unsigned int numVertices,void* data, IvDataUsage usage)
+{
+    this->format=format;
+    if ( numVertices == 0 || mBufferID != 0 )
+        return false;
+    
+    if ( usage == kImmutableUsage && !data )
+    {
+        return false;
+    }
+    
+    // create vertex array handle
+    glGenVertexArrays(1, &mVertexArrayID);
+    glBindVertexArray(mVertexArrayID);
+    
+    // create the handle
+    glGenBuffers( 1, &mBufferID );
+    glBindBuffer( GL_ARRAY_BUFFER, mBufferID );
+    
+    // allocate the memory
+    (void) glGetError();  // clear any previous errors (probably not safe)
+    glBufferData( GL_ARRAY_BUFFER, sizeof(VertexDescription), data,
+                 usage == kDynamicUsage ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW );
+    if ( glGetError() != GL_NO_ERROR )
+    {
+        Destroy();
+        return false;
+    }
+
+    mNumVertices = numVertices;
+    mUsage = usage;
+    
+    return true;
+}
+
+
 //-------------------------------------------------------------------------------
 // @ IvVertexBufferOGL::Destroy()
 //-------------------------------------------------------------------------------
@@ -181,7 +221,29 @@ IvVertexBufferOGL::MakeActive()
         return false;
     
     // set arrays active
+    
+    return true;
+}
+
+///---
+bool
+IvVertexBufferOGL::MakeActive(unsigned int shaderID)
+{
+    
+    if ( mBufferID == 0 || mNumVertices == 0 )
+        return false;
+    
+    // set arrays active
+    
     glBindVertexArray(mVertexArrayID);
+    
+    
+    for(const auto & attr :  format.getAttributes())
+    {
+        int location = glGetAttribLocation(shaderID, attr.name.c_str());
+        glEnableVertexAttribArray(location);
+        glVertexAttribPointer(location, attr.numFloats, GL_FLOAT, GL_TRUE, format.getVertexSize(),(void*)attr.offset);
+    }
     
     return true;
 }

@@ -19,6 +19,7 @@
 
 #include "../IvVertexShader.h"
 #include "../IvVertexFormats.h"
+#include "IvUniform.h"
 #if defined(__APPLE__) && defined(__MACH__)
 #include <OpenGL/gl3.h>
 #else
@@ -40,9 +41,9 @@ class IvVertexShaderOGL : private IvVertexShader
 {
 public:
     // interface routines
-
     friend class IvResourceManagerOGL;
     
+    GLuint getShaderID();
 private:
     // constructor/destructor
     IvVertexShaderOGL();
@@ -53,6 +54,9 @@ private:
     bool CreateFromString( const char* string );
     bool CreateDefault( IvVertexFormat format );
 
+ 
+    
+    
     void Destroy();
     
 private:

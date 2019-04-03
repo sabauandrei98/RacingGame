@@ -71,6 +71,11 @@ public:
     
     void Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, 
                       IvIndexBuffer* indexBuffer, unsigned int numIndices) final;
+    
+    void Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
+              IvIndexBuffer* indexBuffer, unsigned int numIndices,IvShaderProgram* shaderID) final;
+    
+    
     void Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, unsigned int numVertices) final;
     
 protected:
