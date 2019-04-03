@@ -42,9 +42,6 @@ void Test::setup(const char*shaderName)
     *position_ptr = IvVector3(1.0f,-1.0f,0.0f);
    
     
-    
-
-    
     for(int i=0;i<3;i++)
     {
         indices.push_back(i);
@@ -59,8 +56,9 @@ void Test::setup(const char*shaderName)
     IvFragmentShader*vf=IvRenderer::mRenderer->GetResourceManager()->CreateFragmentShaderFromFile(shaderName);
     mShader=IvRenderer::mRenderer->GetResourceManager()->CreateShaderProgram(vs,vf);
     
-    vertexBuffer = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(vertex_description, 3, vertex_data,kImmutableUsage);
-     indexBuffer = IvRenderer::mRenderer->GetResourceManager()->CreateIndexBuffer(3, indexPtr,kImmutableUsage);
+    vertexBuffer = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(vertex_description,3*vertex_description.getVertexSize(), vertex_data,kImmutableUsage);
+     indexBuffer = IvRenderer::mRenderer->GetResourceManager()->CreateIndexBuffer(
+        3*vertex_description.getVertexSize(),indexPtr,kImmutableUsage);
 
 }
 
