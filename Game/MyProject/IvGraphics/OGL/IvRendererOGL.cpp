@@ -223,7 +223,8 @@ IvRendererOGL::InitGL()
     
     // set up depth buffer
     glEnable(GL_DEPTH_TEST);                            
-    glDepthFunc(GL_LEQUAL); 
+    glDepthFunc(GL_LEQUAL);
+    
     
     // set up perspective correct textures
 //****    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
