@@ -16,11 +16,11 @@
 #include <IvRenderer.h>
 #include <IvResourceManager.h>
 
-class Mesh {
+class Mesh : std::enable_shared_from_this<Mesh> {
 private:
     // private variable(s)
-    IvVertexBuffer*     _vertex_buffer;
-    IvIndexBuffer*      _index_buffer;
+    IvVertexBuffer* _vertex_buffer;
+    IvIndexBuffer*  _index_buffer;
     
     // private function(s) and method(s)
     void destroyVertexBuffer();
@@ -35,6 +35,7 @@ public:
     // public functions and methods
     void setVertexBuffer(const std::vector<IvTNPVertex>&);
     void setIndexBuffer(const std::vector<unsigned int>&);
+    
     IvVertexBuffer* getVertexBuffer();
     IvIndexBuffer* getIndexBuffer();
 };

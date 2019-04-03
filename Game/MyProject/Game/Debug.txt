@@ -1,0 +1,783 @@
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+
+Fragment shader error: ERROR: 0:2: sampler2D can't be an in in the fragment shader
+ERROR: 0:8: Use of undeclared identifier 'defaultTexture'
+

@@ -15,7 +15,7 @@
 class MeshInstance : std::enable_shared_from_this<MeshInstance> {
 private:
     // private variable(s)
-    Mesh*                   _mesh;
+    std::shared_ptr<Mesh>   _mesh;
     IvShaderProgram*        _shader;
     std::vector<IvUniform*> _shader_uniforms;
     
@@ -25,14 +25,18 @@ private:
 public:
     // constructor(s) and destructor
     MeshInstance();
-    MeshInstance(const std::vector<IvTNPVertex>&, const std::vector<unsigned int>&, const std::string&, const std::vector<std::string>&);
-    virtual ~MeshInstance();
+    MeshInstance(const std::shared_ptr<Mesh>&, const std::string&, const std::vector<std::string>&);
+    ~MeshInstance();
     
     // public function(s) and method(s)
-    void setMesh(const std::vector<IvTNPVertex>&, const std::vector<unsigned int>&);
+    void setMesh(const std::shared_ptr<Mesh>&);
     void setShader(const std::string&);
-    void setShaderUniforms(const std::vector<std::string>&);
+    void addShaderUniforms(const std::vector<std::string>&);
     void setWorldViewProjectionMatrix(const IvMatrix44&);
     
     // TODO: implement uniform setters
+    
+    std::shared_ptr<Mesh> getMesh();
+    IvShaderProgram* getShader();
+    std::vector<IvUniform*> getShaderUniforms();
 };

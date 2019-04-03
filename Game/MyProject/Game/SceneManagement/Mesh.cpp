@@ -11,16 +11,19 @@
 // CONSTRUCTOR(S) AND DESTRUCTOR
 // -----------------------------
 
+// default constructor
 Mesh::Mesh() :
     _vertex_buffer(nullptr), _index_buffer(nullptr) {
-        
     }
 
-Mesh::Mesh(const std::vector<IvTNPVertex>& vertices, const std::vector<unsigned int>& indices) {
-    setVertexBuffer(vertices);
-    setIndexBuffer(indices);
-}
+// special constructor
+Mesh::Mesh(const std::vector<IvTNPVertex>& vertices, const std::vector<unsigned int>& indices) :
+    _vertex_buffer(nullptr), _index_buffer(nullptr) {
+        setVertexBuffer(vertices);
+        setIndexBuffer(indices);
+    }
 
+// destructor
 Mesh::~Mesh() {
     destroyVertexBuffer();
     destroyIndexBuffer();
@@ -30,13 +33,17 @@ Mesh::~Mesh() {
 // PRIVATE FUNCTION(S) AND METHOD(S)
 // ---------------------------------
 
+// destroys the vertex buffer
 void Mesh::destroyVertexBuffer() {
-    IvRenderer::mRenderer->GetResourceManager()->Destroy(_vertex_buffer);
+    if (_vertex_buffer)
+        IvRenderer::mRenderer->GetResourceManager()->Destroy(_vertex_buffer);
     _vertex_buffer = nullptr;
 }
 
+// destroys the index buffer
 void Mesh::destroyIndexBuffer() {
-    IvRenderer::mRenderer->GetResourceManager()->Destroy(_index_buffer);
+    if (_index_buffer)
+        IvRenderer::mRenderer->GetResourceManager()->Destroy(_index_buffer);
     _index_buffer = nullptr;
 }
 
@@ -44,12 +51,12 @@ void Mesh::destroyIndexBuffer() {
 // PUBLIC FUNCTION(S) AND METHOD(S)
 // --------------------------------
 
+// sets up the vertex buffer with a given vector of vertices (texture coordinates, normals, vertex positions)
 void Mesh::setVertexBuffer(const std::vector<IvTNPVertex>& vertices) {
     size_t          current_offset;
     IvTNPVertex*    data_ptr;
     
-    if (_vertex_buffer)
-        destroyVertexBuffer();
+    destroyVertexBuffer();
     
     current_offset = IvStackAllocator::mScratchAllocator->GetCurrentOffset();
     data_ptr = (IvTNPVertex*)IvStackAllocator::mScratchAllocator->Allocate(kIvVFSize[kTNPFormat] * vertices.size());
@@ -65,12 +72,12 @@ void Mesh::setVertexBuffer(const std::vector<IvTNPVertex>& vertices) {
     IvStackAllocator::mScratchAllocator->Reset(current_offset);
 }
 
+// sets up the index buffer with a given vector of indexes
 void Mesh::setIndexBuffer(const std::vector<unsigned int>& indices) {
     size_t      current_offset;
     UInt32*     index_ptr;
     
-    if (_vertex_buffer)
-        destroyVertexBuffer();
+    destroyIndexBuffer();
     
     current_offset = IvStackAllocator::mScratchAllocator->GetCurrentOffset();
     index_ptr = (UInt32*)IvStackAllocator::mScratchAllocator->Allocate(sizeof(UInt32)* indices.size());
@@ -83,10 +90,12 @@ void Mesh::setIndexBuffer(const std::vector<unsigned int>& indices) {
     IvStackAllocator::mScratchAllocator->Reset(current_offset);
 }
 
+// returns the vertex buffer
 IvVertexBuffer* Mesh::getVertexBuffer() {
     return _vertex_buffer;
 }
 
+// returns the index buffer
 IvIndexBuffer* Mesh::getIndexBuffer() {
     return _index_buffer;
 }
