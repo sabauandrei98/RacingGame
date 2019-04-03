@@ -7,7 +7,32 @@
 
 #include "Game.hpp"
 
-int main()
-{
-    return 0;
+bool IvGame::Create() {
+    IvGame::mGame = new Game();
+    return ( IvGame::mGame != 0 );
+}
+
+Game::Game() : IvGame() {
+    
+}
+
+Game::~Game() {
+    
+}
+
+bool Game::PostRendererInitialize() {
+    if (!IvGame::PostRendererInitialize())
+        return false;
+    
+    ::IvSetDefaultLighting();
+    return true;
+}
+
+void Game::UpdateObjects(float dt) {
+    
+}
+
+void Game::Render() {
+    IvSetDefaultViewer(10.0f, 10.0f, 10.0f);
+    IvDrawAxes();
 }
