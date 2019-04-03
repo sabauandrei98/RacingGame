@@ -44,6 +44,8 @@
 		0110718A2244EAF0006011E1 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011071892244EAF0006011E1 /* CoreVideo.framework */; };
 		0110718C2244EAFB006011E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0110718B2244EAFB006011E1 /* Foundation.framework */; };
 		01AAFDF022535DA000472426 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDEE22535DA000472426 /* Game.cpp */; };
+		01AAFDF42253684C00472426 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDF22253684C00472426 /* Camera.cpp */; };
+		01AAFDF822536A3600472426 /* CameraTestControler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDF622536A3600472426 /* CameraTestControler.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,8 +185,12 @@
 		011071892244EAF0006011E1 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		0110718B2244EAFB006011E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01AAFDEE22535DA000472426 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
-		01AAFDEF22535DA000472426 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		01AAFDF122535E5300472426 /* Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Game; sourceTree = BUILT_PRODUCTS_DIR; };
+		01AAFDF22253684C00472426 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		01AAFDF32253684C00472426 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
+		01AAFDF522536A3600472426 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		01AAFDF622536A3600472426 /* CameraTestControler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraTestControler.cpp; sourceTree = "<group>"; };
+		01AAFDF722536A3600472426 /* CameraTestControler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CameraTestControler.hpp; sourceTree = "<group>"; };
 		CEEFF78D1B7FB311006B1B1A /* IvCollision.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvCollision.xcodeproj; path = IvCollision/IvCollision.xcodeproj; sourceTree = "<group>"; };
 		CEEFF7931B7FB31C006B1B1A /* IvCurves.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvCurves.xcodeproj; path = IvCurves/IvCurves.xcodeproj; sourceTree = "<group>"; };
 		CEEFF7991B7FB326006B1B1A /* IvEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvEngine.xcodeproj; path = IvEngine/IvEngine.xcodeproj; sourceTree = "<group>"; };
@@ -239,8 +245,12 @@
 		011071482244E4A9006011E1 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				01AAFDF522536A3600472426 /* Game.h */,
 				01AAFDEE22535DA000472426 /* Game.cpp */,
-				01AAFDEF22535DA000472426 /* Game.hpp */,
+				01AAFDF622536A3600472426 /* CameraTestControler.cpp */,
+				01AAFDF722536A3600472426 /* CameraTestControler.hpp */,
+				01AAFDF32253684C00472426 /* Camera.hpp */,
+				01AAFDF22253684C00472426 /* Camera.cpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -479,7 +489,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01AAFDF42253684C00472426 /* Camera.cpp in Sources */,
 				01AAFDF022535DA000472426 /* Game.cpp in Sources */,
+				01AAFDF822536A3600472426 /* CameraTestControler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,7 +593,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "Game/**/**";
+				HEADER_SEARCH_PATHS = "../MyProject/**";
 				LIBRARY_SEARCH_PATHS = "../glfw-3.1.1/lib-MacOS-10.8/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -638,7 +650,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "Game/**/**";
+				HEADER_SEARCH_PATHS = "../MyProject/**";
 				LIBRARY_SEARCH_PATHS = "../glfw-3.1.1/lib-MacOS-10.8/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;

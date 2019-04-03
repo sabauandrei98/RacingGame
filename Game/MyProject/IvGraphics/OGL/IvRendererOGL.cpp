@@ -198,11 +198,6 @@ IvRendererOGL::Resize(unsigned int width, unsigned int height )
 
     SetProjectionMatrix(perspective);
 
-    IvMatrix44 ident;
-
-    SetViewMatrix(ident);
-    SetWorldMatrix(ident);
-
 }   // End of IvRendererOGL::Resize()
 
 
