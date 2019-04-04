@@ -81,7 +81,7 @@ void Test::setup(const char*shaderName)
 
 void Test::Draw()
 {
-    mShader->setUniform("unifColor",IvVector3{1.,0.,0.});
+   // mShader->setUniform("unifColor",IvVector3{1.,0.,0.});
     IvRenderer::mRenderer->Draw(kTriangleListPrim, vertexBuffer, indexBuffer,
         3,mShader);
 }

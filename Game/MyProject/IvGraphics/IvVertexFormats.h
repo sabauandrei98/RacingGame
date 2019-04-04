@@ -44,7 +44,6 @@ public:
     virtual ~VertexDescription();
     
     void addAttribute(const char* name, uint32_t count);
-    void removeAttribute(const char* name);
     
     uint32_t getVertexSize() const;
     const std::vector<VertexAttribute> & getAttributes() const;

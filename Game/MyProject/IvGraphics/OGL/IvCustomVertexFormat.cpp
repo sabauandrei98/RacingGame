@@ -28,10 +28,7 @@ void VertexDescription::addAttribute(const char *name,  uint32_t count)
     m_size += (sizeof(float) * count);
 }
 
-void VertexDescription::removeAttribute(const char *name)
-{
-    
-}
+
 
 uint32_t VertexDescription::getVertexSize() const
 {
