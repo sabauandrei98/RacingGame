@@ -36,10 +36,10 @@ public:
     // interface routines
     virtual IvUniform* GetUniform(char const* name) = 0;
     
-    virtual void setFloat(const char* name,float value)=0;
-    virtual void setVec2(const char* name,IvVector2 value)=0;
-    virtual void setVec3(const char* name,IvVector3 value)=0;
-    virtual void setVec4(const char* name,IvVector4 value)=0;
+    virtual void setUniform(const char* name,float value)=0;
+    virtual void setUniform(const char* name,IvVector2 value)=0;
+    virtual void setUniform(const char* name,IvVector3 value)=0;
+    virtual void setUniform(const char* name,IvVector4 value)=0;
     
     unsigned int getProgramID() { return programID; }
     void setProgramID(unsigned pID) { programID = pID; }

@@ -199,22 +199,22 @@ IvShaderProgramOGL::GetUniform(char const* name)
     return uniform;
 }
 
-void IvShaderProgramOGL::setFloat(const char*name, float value)
+void IvShaderProgramOGL::setUniform(const char*name, float value)
 {
     glUniform1f(glGetUniformLocation(mProgramID,name), value);
 }
 
-void IvShaderProgramOGL::setVec2(const char *name,IvVector2 value)
+void IvShaderProgramOGL::setUniform(const char *name,IvVector2 value)
 {
     glUniform2f(glGetUniformLocation(mProgramID,name), value.x,value.y);
 }
 
-void IvShaderProgramOGL::setVec3(const char *name,IvVector3 value)
+void IvShaderProgramOGL::setUniform(const char *name,IvVector3 value)
 {
     glUniform3f(glGetUniformLocation(mProgramID,name), value.x,value.y,value.z);
 }
 
-void IvShaderProgramOGL::setVec4(const char *name,IvVector4 value)
+void IvShaderProgramOGL::setUniform(const char *name,IvVector4 value)
 {
     glUniform4f(glGetUniformLocation(mProgramID,name), value.x,value.y,value.z,value.w);
 }
