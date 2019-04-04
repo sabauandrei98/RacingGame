@@ -52,7 +52,8 @@ protected:
     ~IvVertexBufferOGL() final;
     
     // creation 
-    bool Create( IvVertexFormat format, unsigned int numVertices, void* data,IvDataUsage usage );
+    bool Create( IvVertexFormat format, unsigned int numVertices, void* data,
+                IvDataUsage usage );
     
     bool Create( VertexDescription format, unsigned int numVertices, void* data,IvDataUsage usage );
     

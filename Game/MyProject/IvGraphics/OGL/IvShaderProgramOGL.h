@@ -46,12 +46,11 @@ public:
     // interface routines
     IvUniform* GetUniform(char const* name) final;
     
-    void setUniform(const char* name,float value);
-    void setUniform(const char* name,IvVector2 value);
-    void setUniform(const char* name,IvVector3 value);
-    void setUniform(const char* name,IvVector4 value);
+    void SetUniform(const char* name,float value);
+    void SetUniform(const char* name,IvVector2 value);
+    void SetUniform(const char* name,IvVector3 value);
+    void SetUniform(const char* name,IvVector4 value);
     
-
     friend class IvResourceManagerOGL;
     friend class IvRendererOGL;
     

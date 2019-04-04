@@ -15,12 +15,12 @@ bool IvGame::Create()
 }
 Game::Game()
 {
-    mPlayer=new Player();
+    //mPlayer=new Player();
     test=new Test();
 }
 Game::~Game()
 {
-    delete mPlayer;
+    //delete mPlayer;
     delete test;
 }
 bool Game::PostRendererInitialize()
@@ -28,7 +28,7 @@ bool Game::PostRendererInitialize()
     if ( !IvGame::PostRendererInitialize() )
         return false;
     
-    test->setup("testShader");
+    test->Setup("testShader");
     
     ::IvSetDefaultLighting();
     
@@ -37,11 +37,10 @@ bool Game::PostRendererInitialize()
 
 void Game::UpdateObjects( float dt )
 {
-    mPlayer->Update(dt);
+    
 }
 
 void Game::Render()
 {
-   // mPlayer->Render();
     test->Draw();
 }

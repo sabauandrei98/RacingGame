@@ -25,7 +25,7 @@ public:
     ~Game();
     bool PostRendererInitialize();
     
-    Player*         mPlayer;
+   // Player*         mPlayer;
     
     Test *test;
     

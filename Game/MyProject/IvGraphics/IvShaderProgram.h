@@ -36,13 +36,13 @@ public:
     // interface routines
     virtual IvUniform* GetUniform(char const* name) = 0;
     
-    virtual void setUniform(const char* name,float value)=0;
-    virtual void setUniform(const char* name,IvVector2 value)=0;
-    virtual void setUniform(const char* name,IvVector3 value)=0;
-    virtual void setUniform(const char* name,IvVector4 value)=0;
+    virtual void SetUniform(const char* name,float value)=0;
+    virtual void SetUniform(const char* name,IvVector2 value)=0;
+    virtual void SetUniform(const char* name,IvVector3 value)=0;
+    virtual void SetUniform(const char* name,IvVector4 value)=0;
     
-    unsigned int getProgramID() { return programID; }
-    void setProgramID(unsigned pID) { programID = pID; }
+    unsigned int GetProgramID() { return programID; }
+    void SetProgramID(unsigned pID) { programID = pID; }
     
 protected:
     // constructor/destructor

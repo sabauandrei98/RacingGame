@@ -19,38 +19,35 @@ Test::~Test()
 
 
 
-void Test::setup(const char*shaderName)
+void Test::Setup(const char*shaderName)
 {
 
-    VertexDescription vertex_description;
-    vertex_description.addAttribute("IvPos",3);
-    vertex_description.addAttribute("IvColor",3);
+    VertexDescription vertexDescription;
+    vertexDescription.AddAttribute("IvPos",3);
+    vertexDescription.AddAttribute("IvColor",3);
     
-    void* vertex_data = IvStackAllocator::mScratchAllocator->Allocate(3 * vertex_description.getVertexSize());
+    void* vertexData = IvStackAllocator::mScratchAllocator->Allocate(3 * vertexDescription.GetVertexSize());
     
-    IvVector3* position_ptr = vertex_description.getAttribute<IvVector3>("IvPos",vertex_data);
     
-    *position_ptr = IvVector3(-1.0f,-1.0f,0.0f);
+    IvVector3* positionPtr = vertexDescription.GetAttribute<IvVector3>("IvPos",vertexData);
+   
+    *positionPtr = IvVector3(-1.0f,-1.0f,0.0f);
+    positionPtr = vertexDescription.NextVertexAttribute(positionPtr);
     
-    position_ptr = vertex_description.nextVertexAttribute(position_ptr);
+    *positionPtr = IvVector3(0.0f,0.0f,0.0f);
+    positionPtr = vertexDescription.NextVertexAttribute(positionPtr);
     
-    *position_ptr = IvVector3(0.0f,0.0f,0.0f);
-    
-    position_ptr = vertex_description.nextVertexAttribute(position_ptr);
-    
-    *position_ptr = IvVector3(1.0f,-1.0f,0.0f);
+    *positionPtr = IvVector3(1.0f,-1.0f,0.0f);
 
-    IvVector3* color_ptr=vertex_description.getAttribute<IvVector3>("IvColor",vertex_data);
+    IvVector3* colorPtr=vertexDescription.GetAttribute<IvVector3>("IvColor",vertexData);
 
-    *color_ptr=IvVector3{1.,0.,0.};
+    *colorPtr=IvVector3{1.,0.,0.};
+    colorPtr=vertexDescription.NextVertexAttribute(colorPtr);
 
-    color_ptr=vertex_description.nextVertexAttribute(color_ptr);
+    *colorPtr=IvVector3{1.,1.,0.};
+    colorPtr=vertexDescription.NextVertexAttribute(colorPtr);
 
-    *color_ptr=IvVector3{1.,1.,0.};
-
-    color_ptr=vertex_description.nextVertexAttribute(color_ptr);
-
-    *color_ptr=IvVector3{1.,0.,1.};
+    *colorPtr=IvVector3{1.,0.,1.};
     
     
     for(int i=0;i<3;i++)
@@ -58,20 +55,22 @@ void Test::setup(const char*shaderName)
         indices.push_back(i);
     }
     
-    unsigned int numIndices =(unsigned int) indices.size();
-    UInt32* indexPtr = (UInt32*)IvStackAllocator::mScratchAllocator->Allocate(sizeof(UInt32)* numIndices);
+    unsigned int noIndices =(unsigned int) indices.size();
+    UInt32* indexPtr = (UInt32*)IvStackAllocator::mScratchAllocator->
+                        Allocate(sizeof(UInt32)* noIndices);
     
-    for ( unsigned int i = 0; i < numIndices; ++i )
+    for ( unsigned int i = 0; i < noIndices; ++i )
         indexPtr[i] = indices[i];
     
-    IvVertexShader* vs =IvRenderer::mRenderer->GetResourceManager()->CreateVertexShaderFromFile(shaderName);
+    IvVertexShader* vs =IvRenderer::mRenderer->GetResourceManager()
+                        ->CreateVertexShaderFromFile(shaderName);
     
     IvFragmentShader* vf=IvRenderer::mRenderer->GetResourceManager()->CreateFragmentShaderFromFile(shaderName);
     
     mShader=IvRenderer::mRenderer->GetResourceManager()->CreateShaderProgram(vs,vf);
     
     
-    vertexBuffer = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(vertex_description,3, vertex_data,kImmutableUsage);
+    vertexBuffer = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(vertexDescription,3, vertexData,kImmutableUsage);
     
      indexBuffer = IvRenderer::mRenderer->GetResourceManager()->CreateIndexBuffer(
         3,indexPtr,kImmutableUsage);

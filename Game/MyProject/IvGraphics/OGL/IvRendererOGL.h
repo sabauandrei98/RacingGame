@@ -69,14 +69,20 @@ public:
     IvShaderProgram* GetShaderProgram() final;
     void SetShaderProgram(IvShaderProgram* program) final;
     
+    
     void Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, 
                       IvIndexBuffer* indexBuffer, unsigned int numIndices) final;
     
     void Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
-              IvIndexBuffer* indexBuffer, unsigned int numIndices,IvShaderProgram* shaderID) final;
+              IvIndexBuffer* indexBuffer, unsigned int numIndices,
+              IvShaderProgram* shaderID) final;
     
     
-    void Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, unsigned int numVertices) final;
+    void Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
+              unsigned int numVertices) final;
+    
+    void Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
+              unsigned int numVertices,IvShaderProgram* shaderProgram) final;
     
 protected:
     int InitGL(void);

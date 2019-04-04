@@ -53,9 +53,6 @@ private:
     bool CreateFromString( const char* string );
     bool CreateDefault( IvVertexFormat format );
 
- 
-    
-    
     void Destroy();
     
 private:

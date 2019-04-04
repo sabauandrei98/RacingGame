@@ -28,6 +28,6 @@ class Test
 public:
     Test();
     ~Test();
-    void setup(const char* shaderName);
+    void Setup(const char* shaderName);
     void Draw();
 };

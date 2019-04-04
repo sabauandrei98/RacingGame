@@ -8,35 +8,46 @@
 #include"IvVertexFormats.h"
 #include <stdio.h>
 
-VertexDescription::~VertexDescription()
-{
-    
-}
 
-void VertexDescription::addAttribute(const char *name,  uint32_t count)
+//-------------------------------------------------------------------------------
+//-- Methods --------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------------------
+// @ VertexDescription::AddAttribute()
+//-------------------------------------------------------------------------------
+// Add a new attribute,by giving its name and the number of floats
+//-------------------------------------------------------------------------------
+void VertexDescription::AddAttribute(const char *name,  uint32_t noFloats)
 {
-    std::size_t new_offset = 0;
+    std::size_t newOffset = 0;
     for(const auto & atr : attributes)
     {
-        new_offset += sizeof(float) * atr.numFloats;
+        newOffset += sizeof(float) * atr.noFloats;
     }
     VertexAttribute vertex;
     vertex.name=name;
-    vertex.numFloats=count;
-    vertex.offset=new_offset;
+    vertex.noFloats=noFloats;
+    vertex.offset=newOffset;
     attributes.push_back(vertex);
-    m_size += (sizeof(float) * count);
+    vertexSize += (sizeof(float) * noFloats);
 }
 
 
-
-uint32_t VertexDescription::getVertexSize() const
+//-------------------------------------------------------------------------------
+// @ VertexDescription::GetVertexSize()
+//-------------------------------------------------------------------------------
+uint32_t VertexDescription::GetVertexSize() const
 {
-    return m_size;
+    return vertexSize;
 }
 
 
-const std::vector<VertexAttribute>& VertexDescription::getAttributes() const
+//-------------------------------------------------------------------------------
+// @ VertexDescription::GetAttributes()
+//-------------------------------------------------------------------------------
+const std::vector<VertexAttribute>& VertexDescription::GetAttributes() const
 {
     return attributes;
 }
