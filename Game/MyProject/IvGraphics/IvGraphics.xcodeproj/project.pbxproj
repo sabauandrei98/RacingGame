@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E0CFA6B225625AB00DE51FC /* IvRenderTargetOGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E0CFA69225625AB00DE51FC /* IvRenderTargetOGL.cpp */; };
+		5E0CFA6C225625AB00DE51FC /* IvRenderTargetOGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E0CFA6A225625AB00DE51FC /* IvRenderTargetOGL.h */; };
+		5E0CFA702256284700DE51FC /* IvFrameBufferOGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E0CFA6E2256284700DE51FC /* IvFrameBufferOGL.cpp */; };
+		5E0CFA712256284700DE51FC /* IvFrameBufferOGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E0CFA6F2256284700DE51FC /* IvFrameBufferOGL.h */; };
 		5E3EC44D2254BB9400BA62EA /* IvCustomVertexFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E3EC44C2254BB9400BA62EA /* IvCustomVertexFormat.cpp */; };
 		CE29002A0C94CA0C002F23B6 /* IvShaderProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = CE2900290C94CA0C002F23B6 /* IvShaderProgram.h */; };
 		CE29002D0C94CA1A002F23B6 /* IvShaderProgramOGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE29002B0C94CA1A002F23B6 /* IvShaderProgramOGL.cpp */; };
@@ -49,6 +53,12 @@
 
 /* Begin PBXFileReference section */
 		011070EF2244E034006011E1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		5E0CFA682256257C00DE51FC /* IvRenderTarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IvRenderTarget.h; sourceTree = "<group>"; };
+		5E0CFA69225625AB00DE51FC /* IvRenderTargetOGL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IvRenderTargetOGL.cpp; sourceTree = "<group>"; };
+		5E0CFA6A225625AB00DE51FC /* IvRenderTargetOGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IvRenderTargetOGL.h; sourceTree = "<group>"; };
+		5E0CFA6D225627F800DE51FC /* IvFrameBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IvFrameBuffer.h; sourceTree = "<group>"; };
+		5E0CFA6E2256284700DE51FC /* IvFrameBufferOGL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IvFrameBufferOGL.cpp; sourceTree = "<group>"; };
+		5E0CFA6F2256284700DE51FC /* IvFrameBufferOGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IvFrameBufferOGL.h; sourceTree = "<group>"; };
 		5E3EC44C2254BB9400BA62EA /* IvCustomVertexFormat.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IvCustomVertexFormat.cpp; sourceTree = "<group>"; };
 		CE2900290C94CA0C002F23B6 /* IvShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = IvShaderProgram.h; sourceTree = "<group>"; };
 		CE29002B0C94CA1A002F23B6 /* IvShaderProgramOGL.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = IvShaderProgramOGL.cpp; sourceTree = "<group>"; };
@@ -139,6 +149,8 @@
 				CEE19D750C67F7E100D80249 /* IvVertexBuffer.h */,
 				CEE19D880C67F7E100D80249 /* IvVertexFormats.h */,
 				CEEACEEB0C90EC7300995013 /* IvVertexShader.h */,
+				5E0CFA682256257C00DE51FC /* IvRenderTarget.h */,
+				5E0CFA6D225627F800DE51FC /* IvFrameBuffer.h */,
 				CEE19D780C67F7E100D80249 /* OGL */,
 			);
 			name = Source;
@@ -176,6 +188,10 @@
 				CEF2879E0C92292200FC2FAC /* IvVertexShaderOGL.cpp */,
 				CEF287A00C92292700FC2FAC /* IvVertexShaderOGL.h */,
 				5E3EC44C2254BB9400BA62EA /* IvCustomVertexFormat.cpp */,
+				5E0CFA69225625AB00DE51FC /* IvRenderTargetOGL.cpp */,
+				5E0CFA6A225625AB00DE51FC /* IvRenderTargetOGL.h */,
+				5E0CFA6E2256284700DE51FC /* IvFrameBufferOGL.cpp */,
+				5E0CFA6F2256284700DE51FC /* IvFrameBufferOGL.h */,
 			);
 			path = OGL;
 			sourceTree = "<group>";
@@ -201,9 +217,11 @@
 				CEF287A10C92292700FC2FAC /* IvVertexShaderOGL.h in Headers */,
 				CEF287D00C92311000FC2FAC /* IvFragmentShaderOGL.h in Headers */,
 				CEEFD4350C932FDE0050541B /* IvRendererOGL.h in Headers */,
+				5E0CFA712256284700DE51FC /* IvFrameBufferOGL.h in Headers */,
 				CE29002A0C94CA0C002F23B6 /* IvShaderProgram.h in Headers */,
 				CE29002E0C94CA1A002F23B6 /* IvShaderProgramOGL.h in Headers */,
 				CE2900840C94E0AA002F23B6 /* IvRendererHelpOGL.h in Headers */,
+				5E0CFA6C225625AB00DE51FC /* IvRenderTargetOGL.h in Headers */,
 				CE8C5E290D748EAC0006FDB9 /* IvTextureOGL.h in Headers */,
 				CE8C5E2B0D748EAC0006FDB9 /* IvUniformOGL.h in Headers */,
 				CE8C5E2D0D748EBA0006FDB9 /* IvColor.h in Headers */,
@@ -265,6 +283,7 @@
 			files = (
 				CEE19D990C67F7E100D80249 /* IvVertexBufferOGL.cpp in Sources */,
 				CEEACEBC0C90E90800995013 /* IvIndexBufferOGL.cpp in Sources */,
+				5E0CFA6B225625AB00DE51FC /* IvRenderTargetOGL.cpp in Sources */,
 				CEEACEC00C90E91500995013 /* IvResourceManagerOGL.cpp in Sources */,
 				CEF2879F0C92292200FC2FAC /* IvVertexShaderOGL.cpp in Sources */,
 				CEF287CF0C92311000FC2FAC /* IvFragmentShaderOGL.cpp in Sources */,
@@ -273,6 +292,7 @@
 				CE29002D0C94CA1A002F23B6 /* IvShaderProgramOGL.cpp in Sources */,
 				CE2900830C94E0AA002F23B6 /* IvRendererHelpOGL.cpp in Sources */,
 				CE8C5E280D748EAC0006FDB9 /* IvTextureOGL.cpp in Sources */,
+				5E0CFA702256284700DE51FC /* IvFrameBufferOGL.cpp in Sources */,
 				CE8C5E2A0D748EAC0006FDB9 /* IvUniformOGL.cpp in Sources */,
 				CE8C5E340D748EC90006FDB9 /* IvRenderer.cpp in Sources */,
 				CE8C5E350D748EC90006FDB9 /* IvRendererHelp.cpp in Sources */,
