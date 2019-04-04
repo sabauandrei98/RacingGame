@@ -11,16 +11,15 @@
 
 #include <IvGame.h>
 #include <IvRendererHelp.h>
-#include "SceneManagement/RenderPacket.hpp"
+#include "RenderPacket.hpp"
 
 class Game : public IvGame {
 private:
     Game(const Game& other);
     Game& operator =(const Game& other);
     
-    std::shared_ptr<Mesh>           _mesh;
-    std::shared_ptr<MeshInstance>   _mesh_instance;
-    std::shared_ptr<RenderPacket>   _render_packet;
+    std::shared_ptr<Mesh>  _mesh;
+    MeshInstance*          _mesh_instance;
     
 protected:
     virtual void UpdateObjects(float dt);

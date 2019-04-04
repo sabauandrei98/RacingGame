@@ -4,6 +4,8 @@
 //
 //  Created by Tamas Both - (p) on 03/04/2019.
 //
+//  MeshInstance class binds a shader and it's uniforms with a mesh.
+//  It needs a mesh a string for the shader name/location and a vector with uniform names
 
 #pragma once
 
@@ -12,12 +14,12 @@
 #include <IvUniform.h>
 #include <IvShaderProgram.h>
 
-class MeshInstance : std::enable_shared_from_this<MeshInstance> {
+class MeshInstance {
 private:
     // private variable(s)
-    std::shared_ptr<Mesh>   _mesh;
-    IvShaderProgram*        _shader;
-    std::vector<IvUniform*> _shader_uniforms;
+    std::shared_ptr<Mesh>       _mesh;
+    std::vector<IvUniform*>     _shader_uniforms;
+    IvShaderProgram*            _shader;
     
     // private function(s) and method(s)
     void destroyShader();
@@ -25,7 +27,6 @@ private:
 public:
     // constructor(s) and destructor
     MeshInstance();
-    MeshInstance(const std::shared_ptr<Mesh>&, const std::string&, const std::vector<std::string>&);
     ~MeshInstance();
     
     // public function(s) and method(s)
@@ -34,9 +35,10 @@ public:
     void addShaderUniforms(const std::vector<std::string>&);
     void setWorldViewProjectionMatrix(const IvMatrix44&);
     
-    // TODO: implement uniform setters
+    // TODO: implement different uniform setters
+    void setUniformValue(unsigned int, const IvVector4&);
     
-    std::shared_ptr<Mesh> getMesh();
+    const std::shared_ptr<Mesh>& getMesh() const;
+    const std::vector<IvUniform*>& getShaderUniforms() const;
     IvShaderProgram* getShader();
-    std::vector<IvUniform*> getShaderUniforms();
 };

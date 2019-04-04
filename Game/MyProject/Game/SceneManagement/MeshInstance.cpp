@@ -16,13 +16,6 @@ MeshInstance::MeshInstance() :
     _mesh(nullptr), _shader(nullptr) {
     }
 
-// special constructor
-MeshInstance::MeshInstance(const std::shared_ptr<Mesh>& mesh, const std::string& shader_name, const std::vector<std::string>& shader_uniforms) :
-    _mesh(mesh) {
-        setShader(shader_name);
-        addShaderUniforms(shader_uniforms);
-    }
-
 // destructor
 MeshInstance::~MeshInstance() {
 }
@@ -62,16 +55,22 @@ void MeshInstance::setWorldViewProjectionMatrix(const IvMatrix44& transform_matr
     IvRenderer::mRenderer->SetWorldMatrix(transform_matrix);
 }
 
+// sets the shader uniform values
+void MeshInstance::setUniformValue(unsigned int index, const IvVector4& value) {
+    _shader_uniforms[index]->SetValue(value, 0);
+}
+
 // returns the mesh
-std::shared_ptr<Mesh> MeshInstance::getMesh() {
+const std::shared_ptr<Mesh>& MeshInstance::getMesh() const {
     return _mesh;
 }
 
+// returns the shader
 IvShaderProgram* MeshInstance::getShader() {
     return _shader;
 }
 
 // returns the shader uniforms
-std::vector<IvUniform*> MeshInstance::getShaderUniforms() {
+const std::vector<IvUniform*>& MeshInstance::getShaderUniforms() const {
     return _shader_uniforms;
 }

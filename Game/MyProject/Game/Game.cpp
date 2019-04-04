@@ -26,37 +26,42 @@ bool Game::PostRendererInitialize() {
     
     std::vector<IvTNPVertex>    vertices;
     std::vector<unsigned int>   indices;
-    std::string                 shader;
     
     vertices.resize(4);
     vertices[0].position = {0.0, 0.0, 0.0};
-    vertices[1].position = {3.0, 3.0, 3.0};
-    vertices[2].position = {-2.0, 0.0, 3.0};
-    vertices[3].position = {0.0, 5.0, 0.0};
+    vertices[1].position = {0.0, 5.0, 0.0};
+    vertices[2].position = {5.0, 0.0, 0.0};
+    vertices[3].position = {5.0, 5.0, 0.0};
     
     indices.push_back(0);
     indices.push_back(1);
     indices.push_back(2);
-    indices.push_back(3);
     indices.push_back(1);
-    indices.push_back(0);
+    indices.push_back(2);
+    indices.push_back(3);
     
-    shader = "shaders/exampleShader";
+    _mesh = std::make_shared<Mesh>();
+    _mesh->setVertexBuffer(vertices, kTNPFormat);
+    _mesh->setIndexBuffer(indices);
     
-    _mesh = std::make_shared<Mesh>(vertices, indices);
-    _mesh_instance = std::make_shared<MeshInstance>(_mesh, shader, std::vector<std::string>());
-    _render_packet = std::make_shared<RenderPacket>(_mesh_instance);
+    _mesh_instance = new MeshInstance();
+    _mesh_instance->setMesh(_mesh);
+    _mesh_instance->setShader("shaders/example_shader");
+    _mesh_instance->addShaderUniforms(std::vector<std::string>{"color"});
+    _mesh_instance->setUniformValue(0, {1.0, 0.0, 0.0, 1.0});
     
     ::IvSetDefaultLighting();
     return true;
 }
 
 void Game::UpdateObjects(float dt) {
-    
 }
 
 void Game::Render() {
-    IvSetDefaultViewer(-10.0f, -10.0f, -10.0f);
+    RenderPacket    render_packet;
+    render_packet._mesh_instance = _mesh_instance;
+    render_packet.draw();
+
+    IvSetDefaultViewer(10.0f, 10.0f, 10.0f);
     IvDrawAxes();
-    _render_packet->Draw();
 }

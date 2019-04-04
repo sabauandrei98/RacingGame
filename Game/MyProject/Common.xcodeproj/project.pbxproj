@@ -31,6 +31,7 @@
 		00D669D02254E76200E7BBB8 /* MeshInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00D669CA2254E76200E7BBB8 /* MeshInstance.cpp */; };
 		00D669D12254E76200E7BBB8 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00D669CC2254E76200E7BBB8 /* Mesh.cpp */; };
 		00D669D22254E76200E7BBB8 /* RenderPacket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00D669CE2254E76200E7BBB8 /* RenderPacket.cpp */; };
+		00F436192255FD3E00E4EE47 /* NodeTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F436172255FD3E00E4EE47 /* NodeTransform.cpp */; };
 		011071632244E502006011E1 /* libIvCollision.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEFF7921B7FB311006B1B1A /* libIvCollision.a */; };
 		011071642244E502006011E1 /* libIvCurves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEFF7981B7FB31C006B1B1A /* libIvCurves.a */; };
 		011071652244E502006011E1 /* libIvEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEFF79E1B7FB326006B1B1A /* libIvEngine.a */; };
@@ -184,6 +185,8 @@
 		00D669CD2254E76200E7BBB8 /* MeshInstance.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MeshInstance.hpp; path = SceneManagement/MeshInstance.hpp; sourceTree = "<group>"; };
 		00D669CE2254E76200E7BBB8 /* RenderPacket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderPacket.cpp; path = SceneManagement/RenderPacket.cpp; sourceTree = "<group>"; };
 		00D669CF2254E76200E7BBB8 /* RenderPacket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RenderPacket.hpp; path = SceneManagement/RenderPacket.hpp; sourceTree = "<group>"; };
+		00F436172255FD3E00E4EE47 /* NodeTransform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = NodeTransform.cpp; path = SceneManagement/NodeTransform.cpp; sourceTree = "<group>"; };
+		00F436182255FD3E00E4EE47 /* NodeTransform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NodeTransform.hpp; path = SceneManagement/NodeTransform.hpp; sourceTree = "<group>"; };
 		011071382244E270006011E1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		0110717A2244E83D006011E1 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = "../glfw-3.1.1/lib-MacOS-10.8/libglfw3.a"; sourceTree = "<group>"; };
 		011071812244EA6B006011E1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -255,6 +258,8 @@
 				00D669CD2254E76200E7BBB8 /* MeshInstance.hpp */,
 				00D669CE2254E76200E7BBB8 /* RenderPacket.cpp */,
 				00D669CF2254E76200E7BBB8 /* RenderPacket.hpp */,
+				00F436172255FD3E00E4EE47 /* NodeTransform.cpp */,
+				00F436182255FD3E00E4EE47 /* NodeTransform.hpp */,
 				00D669B52254E35800E7BBB8 /* shaders */,
 				01AAFDEF22535DA000472426 /* Game.hpp */,
 				01AAFDEE22535DA000472426 /* Game.cpp */,
@@ -498,6 +503,7 @@
 			files = (
 				00D669D12254E76200E7BBB8 /* Mesh.cpp in Sources */,
 				00D669D22254E76200E7BBB8 /* RenderPacket.cpp in Sources */,
+				00F436192255FD3E00E4EE47 /* NodeTransform.cpp in Sources */,
 				01AAFDF022535DA000472426 /* Game.cpp in Sources */,
 				00D669D02254E76200E7BBB8 /* MeshInstance.cpp in Sources */,
 			);
