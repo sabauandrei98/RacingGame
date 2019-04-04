@@ -21,6 +21,77 @@
 #include "IvVector3.h"
 #include "IvVector4.h"
 #include "IvColor.h"
+#include <vector>
+//-------------------------------------------------------------------------------
+//-- Classes ----------------------------------------------------------
+//-------------------------------------------------------------------------------
+
+struct VertexAttribute
+{
+    std::string name;
+    uint32_t    noFloats;
+    std::size_t offset = 0;
+};
+
+
+class VertexDescription
+{
+    std::vector<VertexAttribute> attributes;
+    uint32_t vertexSize = 0;
+public:
+    VertexDescription() = default;
+    ~VertexDescription()=default;
+    
+    
+    void AddAttribute(const char* name, uint32_t noFloats);
+    
+    uint32_t GetVertexSize() const;
+    
+    const std::vector<VertexAttribute> & GetAttributes() const;
+    
+    template <class T>
+    T* GetAttribute( const char * attributeName, void * vertexData) const;
+    
+    template<class T>
+    T* NextVertexAttribute(T * attributePtr);
+    
+};
+
+//-------------------------------------------------
+//---Generic methods for Vertex Description--------
+//-------------------------------------------------
+
+
+//-------------------------------------------------------------------------------
+// @ VertexDescription::GetAttribute()
+//-------------------------------------------------------------------------------
+// Get the attribute after the name
+//-------------------------------------------------------------------------------
+template <class T>
+T* VertexDescription::GetAttribute( const char * attributeName, void * vertexData) const
+{
+    auto itr = std::find_if(attributes.begin(),attributes.end(), [&](const VertexAttribute & v){
+        if(v.name == attributeName)
+            return true;
+        return false;
+    });
+    if(itr != attributes.end())
+    {
+        return reinterpret_cast<T*>(reinterpret_cast<char*>(vertexData)
+            + itr->offset);
+    }
+    return nullptr;
+}
+
+//-------------------------------------------------------------------------------
+// @ VertexDescription::NextVertexAttribute()
+//-------------------------------------------------------------------------------
+template<class T>
+T* VertexDescription::NextVertexAttribute(T * attributePtr)
+{
+    return reinterpret_cast<T*>(reinterpret_cast<char*>(attributePtr)
+                +GetVertexSize());
+}
 
 //-------------------------------------------------------------------------------
 //-- Typedefs, Structs ----------------------------------------------------------
