@@ -295,8 +295,3 @@ IvVertexShaderOGL::Destroy()
     glDeleteShader(mShaderID);
     mShaderID = 0;
 }
-
-GLuint IvVertexShaderOGL::getShaderID()
-{
-    return mShaderID;
-}

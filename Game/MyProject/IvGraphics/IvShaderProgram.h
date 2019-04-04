@@ -41,8 +41,8 @@ public:
     virtual void setVec3(const char* name,IvVector3 value)=0;
     virtual void setVec4(const char* name,IvVector4 value)=0;
     
-    unsigned int GetProgramId() { return mUProgramId; }
-    void SetProgramid(unsigned pId) { mUProgramId = pId; }
+    unsigned int getProgramID() { return programID; }
+    void setProgramID(unsigned pID) { programID = pID; }
     
 protected:
     // constructor/destructor
@@ -55,7 +55,7 @@ private:
     IvShaderProgram& operator=(const IvShaderProgram& other);
     
 protected:
-    unsigned int mUProgramId;
+    unsigned int programID;
 }; 
 
 //-------------------------------------------------------------------------------

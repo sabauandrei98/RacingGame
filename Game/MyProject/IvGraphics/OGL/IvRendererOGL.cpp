@@ -563,12 +563,12 @@ void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
     glDrawElements(sPrimTypeMap[primType], numIndices, GL_UNSIGNED_INT, 0);
 }
 
-
-//
+//-------------------------------------------------------------------------------
+// @ IvRendererOGL::Draw()
+//-------------------------------------------------------------------------------
 void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
                          IvIndexBuffer* indexBuffer, unsigned int numIndices,IvShaderProgram* shaderPtr)
 {
-    //BindDefaultShaderIfNeeded(vertexBuffer->GetVertexFormat());
     SetShaderProgram(shaderPtr);
     
     // update any default uniforms
@@ -607,7 +607,7 @@ void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
     }
     
     if (vertexBuffer)
-        static_cast<IvVertexBufferOGL*>(vertexBuffer)->MakeActive(shaderPtr->GetProgramId());
+        static_cast<IvVertexBufferOGL*>(vertexBuffer)->MakeActive(shaderPtr->getProgramID());
     else
         return;
     

@@ -16,20 +16,19 @@ Test::~Test()
 {
     
 }
-struct test_vertex
-{
-    IvVector3 pos;
-};
+
+
 
 void Test::setup(const char*shaderName)
 {
 
     VertexDescription vertex_description;
     vertex_description.addAttribute("IvPos",3);
+    vertex_description.addAttribute("IvColor",3);
     
-    test_vertex* vertex_data = (test_vertex*)IvStackAllocator::mScratchAllocator->Allocate(vertex_description.getVertexSize());
+    void* vertex_data = IvStackAllocator::mScratchAllocator->Allocate(3 * vertex_description.getVertexSize());
     
-    IvVector3* position_ptr = vertex_description.getAttribute<IvVector3>(0,"IvPos",vertex_data);
+    IvVector3* position_ptr = vertex_description.getAttribute<IvVector3>("IvPos",vertex_data);
     
     *position_ptr = IvVector3(-1.0f,-1.0f,0.0f);
     
@@ -40,7 +39,19 @@ void Test::setup(const char*shaderName)
     position_ptr = vertex_description.nextVertexAttribute(position_ptr);
     
     *position_ptr = IvVector3(1.0f,-1.0f,0.0f);
-   
+
+    IvVector3* color_ptr=vertex_description.getAttribute<IvVector3>("IvColor",vertex_data);
+
+    *color_ptr=IvVector3{1.,0.,0.};
+
+    color_ptr=vertex_description.nextVertexAttribute(color_ptr);
+
+    *color_ptr=IvVector3{1.,1.,0.};
+
+    color_ptr=vertex_description.nextVertexAttribute(color_ptr);
+
+    *color_ptr=IvVector3{1.,0.,1.};
+    
     
     for(int i=0;i<3;i++)
     {
@@ -52,19 +63,25 @@ void Test::setup(const char*shaderName)
     
     for ( unsigned int i = 0; i < numIndices; ++i )
         indexPtr[i] = indices[i];
+    
     IvVertexShader* vs =IvRenderer::mRenderer->GetResourceManager()->CreateVertexShaderFromFile(shaderName);
-    IvFragmentShader*vf=IvRenderer::mRenderer->GetResourceManager()->CreateFragmentShaderFromFile(shaderName);
+    
+    IvFragmentShader* vf=IvRenderer::mRenderer->GetResourceManager()->CreateFragmentShaderFromFile(shaderName);
+    
     mShader=IvRenderer::mRenderer->GetResourceManager()->CreateShaderProgram(vs,vf);
     
-    vertexBuffer = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(vertex_description,3*vertex_description.getVertexSize(), vertex_data,kImmutableUsage);
+    
+    vertexBuffer = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(vertex_description,3, vertex_data,kImmutableUsage);
+    
      indexBuffer = IvRenderer::mRenderer->GetResourceManager()->CreateIndexBuffer(
-        3*vertex_description.getVertexSize(),indexPtr,kImmutableUsage);
+        3,indexPtr,kImmutableUsage);
 
 }
 
 
 void Test::Draw()
 {
+    mShader->setVec3("unifColor",IvVector3{1.,0.,0.});
     IvRenderer::mRenderer->Draw(kTriangleListPrim, vertexBuffer, indexBuffer,
         3,mShader);
 }

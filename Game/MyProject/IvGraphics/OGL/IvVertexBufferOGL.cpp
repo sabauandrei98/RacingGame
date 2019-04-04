@@ -176,7 +176,7 @@ IvVertexBufferOGL::Create(VertexDescription format, unsigned int numVertices,voi
     
     // allocate the memory
     (void) glGetError();  // clear any previous errors (probably not safe)
-    glBufferData( GL_ARRAY_BUFFER, sizeof(VertexDescription), data,
+    glBufferData( GL_ARRAY_BUFFER, numVertices * format.getVertexSize(), data,
                  usage == kDynamicUsage ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW );
     if ( glGetError() != GL_NO_ERROR )
     {

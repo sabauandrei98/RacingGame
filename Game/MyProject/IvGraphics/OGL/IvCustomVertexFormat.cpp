@@ -25,7 +25,7 @@ void VertexDescription::addAttribute(const char *name,  uint32_t count)
     vertex.numFloats=count;
     vertex.offset=new_offset;
     attributes.push_back(vertex);
-    m_size += sizeof(float) * count;
+    m_size += (sizeof(float) * count);
 }
 
 void VertexDescription::removeAttribute(const char *name)
@@ -37,6 +37,7 @@ uint32_t VertexDescription::getVertexSize() const
 {
     return m_size;
 }
+
 
 const std::vector<VertexAttribute>& VertexDescription::getAttributes() const
 {

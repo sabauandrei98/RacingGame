@@ -42,8 +42,7 @@ class IvVertexShaderOGL : private IvVertexShader
 public:
     // interface routines
     friend class IvResourceManagerOGL;
-    
-    GLuint getShaderID();
+
 private:
     // constructor/destructor
     IvVertexShaderOGL();

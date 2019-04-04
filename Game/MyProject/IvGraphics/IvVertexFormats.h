@@ -49,19 +49,18 @@ public:
     uint32_t getVertexSize() const;
     const std::vector<VertexAttribute> & getAttributes() const;
     
-    
     template <class T>
-    T* getAttribute(std::size_t vertexInde, const char * attribute_name, void * vertex_data) const;
+    T* getAttribute( const char * attribute_name, void * vertex_data) const;
     template<class T>
     T* nextVertexAttribute(T * attribute_ptr);
     
 };
 
-//-------------
-//generic methods for Vertex Decsription
-//---------------
+//-------------------------------------------------
+//---Generic methods for Vertex Description--------
+//-------------------------------------------------
 template <class T>
-T* VertexDescription::getAttribute(std::size_t vertexInde, const char * attribute_name, void * vertex_data) const
+T* VertexDescription::getAttribute( const char * attribute_name, void * vertex_data) const
 {
     auto itr = std::find_if(attributes.begin(),attributes.end(), [&](const VertexAttribute & v){
         if(v.name == attribute_name)
@@ -70,7 +69,8 @@ T* VertexDescription::getAttribute(std::size_t vertexInde, const char * attribut
     });
     if(itr != attributes.end())
     {
-        return reinterpret_cast<T*>(reinterpret_cast<char*>(vertex_data) + itr->offset);
+        return reinterpret_cast<T*>(reinterpret_cast<char*>(vertex_data)
+            + itr->offset);
     }
     return nullptr;
 }
@@ -78,10 +78,9 @@ T* VertexDescription::getAttribute(std::size_t vertexInde, const char * attribut
 template<class T>
 T* VertexDescription::nextVertexAttribute(T * attribute_ptr)
 {
-    return reinterpret_cast<T*>(reinterpret_cast<char*>(attribute_ptr) + getVertexSize());
+    return reinterpret_cast<T*>(reinterpret_cast<char*>(attribute_ptr)
+                +getVertexSize());
 }
-
-
 
 //-------------------------------------------------------------------------------
 //-- Typedefs, Structs ----------------------------------------------------------
