@@ -16,7 +16,6 @@ protected:
     IvRenderTarget(unsigned int texture);
     virtual ~IvRenderTarget(){}
     
-    
 private:
     unsigned int texture;
     
