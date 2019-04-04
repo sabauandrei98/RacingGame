@@ -19,5 +19,5 @@ public:
     void Update( float dt );
     void Render();
     
-    Camera cam;
+    Camera camera;
 };

@@ -1,11 +1,11 @@
 #include "CameraTestControler.hpp"
 
-CameraTestControler::CameraTestControler() : cam(45.0, 0.1, 35.0, 1280, 720)
+CameraTestControler::CameraTestControler() : camera(45.0, 0.1, 35.0, 1280, 720)
 {
     //SETTING CAMERA
-    cam.setPosition({-15.f, 0.0f, 5.0f });
-    cam.setLookAt({0.0f, 0.0f, 0.0f});
-    cam.setOrientation({0.0f, 0.0f, 1.0f});
+    camera.setPosition({-15.f, 0.0f, 5.0f });
+    camera.setLookAt({0.0f, 0.0f, 0.0f});
+    camera.setOrientation({0.0f, 0.0f, 1.0f});
 }
 
 
@@ -14,67 +14,92 @@ CameraTestControler::Update( float dt )
 {
     
     // set up translation
+    float translationSpeed = 3.0f;
     if (IvGame::mGame->mEventHandler->IsKeyDown('w'))
     {
-        cam.panUp(5 * dt);
+        camera.pan({0, dt * translationSpeed});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('s'))
     {
-        cam.panUp(-5 * dt);
+        camera.pan({0, -dt * translationSpeed});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
     {
-       cam.panRight(5 * dt);
+        camera.pan({dt * translationSpeed, 0});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
     {
-      cam.panRight(-5 * dt);
+        camera.pan({-dt * translationSpeed, 0});
+    }
+    
+    // set up rotation
+    IvVector3 point = {0, 0, 0};
+    float rotationSpeed = 3.0f;
+    if (IvGame::mGame->mEventHandler->IsKeyDown('y'))
+    {
+        camera.rotate({0, dt * rotationSpeed}, point);
+    }
+    if (IvGame::mGame->mEventHandler->IsKeyDown('h'))
+    {
+        camera.rotate({0, -dt * rotationSpeed}, point);
+    }
+    if (IvGame::mGame->mEventHandler->IsKeyDown('g'))
+    {
+        camera.rotate({dt * rotationSpeed, 0}, point);
+    }
+    if (IvGame::mGame->mEventHandler->IsKeyDown('j'))
+    {
+        camera.rotate({-dt * rotationSpeed, 0}, point);
     }
     
     
     // set up scaling
+    float scalingSpeed = 1.0f;
     if (IvGame::mGame->mEventHandler->IsKeyDown('q'))
     {
-        cam.zoom(5 * dt);
+        camera.zoom(dt * scalingSpeed);
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('e'))
     {
-        cam.zoom(-5 * dt);
+        camera.zoom(-dt * scalingSpeed);
     }
     
     // set up FOV
+    float fovSpeed = 0.5f;
     if (IvGame::mGame->mEventHandler->IsKeyDown('['))
     {
-        cam.setFieldOfView(cam.getFieldOfView() + dt * 3);
+        camera.setFieldOfView(camera.getFieldOfView() + dt * fovSpeed);
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown(']'))
     {
-        cam.setFieldOfView(cam.getFieldOfView() - dt * 3);
+        camera.setFieldOfView(camera.getFieldOfView() - dt * fovSpeed);
     }
     
     // set up NEAR
+    float nearSpeed = 3.0f;
     if (IvGame::mGame->mEventHandler->IsKeyDown(','))
     {
-        cam.setNear(cam.getNearPlane() + dt * 3);
+        camera.setNear(camera.getNearPlane() + dt * nearSpeed);
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('.'))
     {
-        cam.setNear(cam.getNearPlane() - dt * 3);
+        camera.setNear(camera.getNearPlane() - dt * nearSpeed);
     }
     
     
     // set up FAR
+    float farSpeed = 3.0f;
     if (IvGame::mGame->mEventHandler->IsKeyDown('\''))
     {
-        cam.setFar(cam.getFarPlane() + dt * 3);
+        camera.setFar(camera.getFarPlane() + dt * farSpeed);
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('\\'))
     {
-        cam.setFar(cam.getFarPlane() - dt * 3);
+        camera.setFar(camera.getFarPlane() - dt * farSpeed);
     }
     
     
-    if (cam.getNearPlane() > cam.getFarPlane())
+    if (camera.getNearPlane() > camera.getFarPlane())
         throw "NEAR > FAR";
     
 }
@@ -93,10 +118,10 @@ CameraTestControler::Render()
     IvDrawTeapot();
     
     //VIEW MATRIX
-    IvRenderer::mRenderer->SetViewMatrix(cam.getViewMatrix());
+    IvRenderer::mRenderer->SetViewMatrix(camera.getViewMatrix());
     
     //PROJECTION MATRIX
-    IvRenderer::mRenderer->SetProjectionMatrix(cam.getProjectionMatrix());
+    IvRenderer::mRenderer->SetProjectionMatrix(camera.getProjectionMatrix());
 }
 
 CameraTestControler::~CameraTestControler(){}

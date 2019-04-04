@@ -1,6 +1,7 @@
 #pragma once
 #include <stdio.h>
 #include <IvVector3.h>
+#include <IvVector2.h>
 #include <IvMatrix44.h>
 #include <IvMatrix33.h>
 #include <IvMath.h>
@@ -16,45 +17,51 @@ private:
     IvVector3 orientation;
     
     float fieldOfView;
-    float near;
-    float far;
-    float aspectRatio;
-    int width;
-    int height;
+    float nearPlane;
+    float farPlane;
+    int screenWidth;
+    int screenHeight;
 
-    
 public:
     Camera(){};
-    Camera(float FOV, float nearPlane, float farPlane, int width, int height);
+    Camera(const float fieldOfView, const float nearPlane, const float farPlane, const int screenWidth, const int screenHeight) :
+        fieldOfView(fieldOfView),
+        nearPlane(nearPlane),
+        farPlane(farPlane),
+        screenWidth(screenWidth),
+        screenHeight(screenHeight)
+        {};
+    
     ~Camera();
     
-    void setPosition(IvVector3 newPos);
-    void setLookAt(IvVector3 newLookAt);
-    void setOrientation(IvVector3 newOrientation);
+    void setPosition(const IvVector3& newPos);
+    void setLookAt(const IvVector3& newLookAt);
+    void setOrientation(const IvVector3& newOrientation);
     void setFieldOfView(float newFOV);
     void setNear(float newNear);
     void setFar(float newFar);
+    void setScreenWidth(float newWidth);
+    void setScreenHeight(float newHeight);
     
-    float getFieldOfView() { return fieldOfView; }
-    float getNearPlane() { return near; }
-    float getFarPlane() { return far; }
-    float getHeight() { return height; }
-    float getWidth() { return width; }
-    float getAspectRatio() { return aspectRatio; }
+    const float getFieldOfView() { return fieldOfView; }
+    const float getNearPlane() { return nearPlane; }
+    const float getFarPlane() { return farPlane; }
+    const float getHeight() { return screenHeight; }
+    const float getWidth() { return screenWidth; }
+    const IvVector3& getPosition() { return position; }
+    const IvVector3& getLookAt() { return lookAt; }
+    const IvVector3& getOrientation() { return orientation; }
+    const IvMatrix44& getTransformMatrix() { return transform;}
     
     IvMatrix44 getViewMatrix();
     IvMatrix44 getProjectionMatrix();
     
-    //last transform matrix (may not be updated)
-    IvMatrix44 getTransformMatrix() { return transform;}
     
-
 ///-------------------------------------------------------------------------------
 //--FUNCTIONALITIES---------------------------------------------------------------
 //--------------------------------------------------------------------------------
 
-    //base step value = 5.0f
     void zoom(float step);
-    void panUp(float step);
-    void panRight(float step);
+    void pan(const IvVector2& offset);
+    void rotate(const IvVector2& offset, IvVector3 point);
 };

@@ -247,8 +247,8 @@
 			children = (
 				01AAFDF522536A3600472426 /* Game.h */,
 				01AAFDEE22535DA000472426 /* Game.cpp */,
-				01AAFDF622536A3600472426 /* CameraTestControler.cpp */,
 				01AAFDF722536A3600472426 /* CameraTestControler.hpp */,
+				01AAFDF622536A3600472426 /* CameraTestControler.cpp */,
 				01AAFDF32253684C00472426 /* Camera.hpp */,
 				01AAFDF22253684C00472426 /* Camera.cpp */,
 			);
