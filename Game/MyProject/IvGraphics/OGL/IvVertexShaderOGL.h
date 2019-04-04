@@ -19,6 +19,7 @@
 
 #include "../IvVertexShader.h"
 #include "../IvVertexFormats.h"
+#include "IvUniform.h"
 #if defined(__APPLE__) && defined(__MACH__)
 #include <OpenGL/gl3.h>
 #else
@@ -40,9 +41,8 @@ class IvVertexShaderOGL : private IvVertexShader
 {
 public:
     // interface routines
-
     friend class IvResourceManagerOGL;
-    
+
 private:
     // constructor/destructor
     IvVertexShaderOGL();

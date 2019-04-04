@@ -563,13 +563,71 @@ void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
     glDrawElements(sPrimTypeMap[primType], numIndices, GL_UNSIGNED_INT, 0);
 }
 
+//-------------------------------------------------------------------------------
+// @ IvRendererOGL::Draw()
+//-------------------------------------------------------------------------------
+void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
+                         IvIndexBuffer* indexBuffer, unsigned int numIndices,
+                         IvShaderProgram* shaderPtr)
+{
+    SetShaderProgram(shaderPtr);
+    
+    // update any default uniforms
+    if ( mShader )
+    {
+        IvUniform* modelviewproj = mShader->GetUniform("IvModelViewProjectionMatrix");
+        if ( modelviewproj )
+        {
+            modelviewproj->SetValue(mWVPMat, 0);
+        }
+        IvUniform* normalMat = mShader->GetUniform("IvNormalMatrix");
+        if ( normalMat )
+        {
+            normalMat->SetValue(mNormalMat, 0);
+        }
+        IvUniform* diffuseColor = mShader->GetUniform("IvDiffuseColor");
+        if (diffuseColor)
+        {
+            diffuseColor->SetValue(mDiffuseColor,0);
+        }
+        IvUniform* ambient = mShader->GetUniform("IvLightAmbient");
+        if ( ambient )
+        {
+            ambient->SetValue(mLightAmbient,0);
+        }
+        IvUniform* diffuse = mShader->GetUniform("IvLightDiffuse");
+        if ( diffuse )
+        {
+            diffuse->SetValue(mLightDiffuse,0);
+        }
+        IvUniform* direction = mShader->GetUniform("IvLightDirection");
+        if ( direction )
+        {
+            direction->SetValue(mLightDirection,0);
+        }
+    }
+    
+    if (vertexBuffer)
+        static_cast<IvVertexBufferOGL*>(vertexBuffer)->MakeActive(shaderPtr->GetProgramID());
+    else
+        return;
+    
+    if (indexBuffer)
+        static_cast<IvIndexBufferOGL*>(indexBuffer)->MakeActive();
+    else
+        return;
+    
+    glDrawElements(sPrimTypeMap[primType], numIndices, GL_UNSIGNED_INT, 0);
+}
+
 
 //-------------------------------------------------------------------------------
 // @ IvRendererOGL::Draw()
 //-------------------------------------------------------------------------------
 // Draws the given buffers
 //-------------------------------------------------------------------------------
-void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, unsigned int numVertices)
+void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
+                         unsigned int numVertices)
 {
     BindDefaultShaderIfNeeded(vertexBuffer->GetVertexFormat());
 
@@ -616,6 +674,57 @@ void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, unsi
     glDrawArrays(sPrimTypeMap[primType], 0, numVertices);
 }
 
+//-------------------------------------------------------------------------------
+// @ IvRendererOGL::Draw()
+//-------------------------------------------------------------------------------
+// Draws the given buffers
+//-------------------------------------------------------------------------------
+void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, unsigned int numVertices,IvShaderProgram* shaderProgram)
+{
+    SetShaderProgram(shaderProgram);
+    
+    // update any default uniforms
+    if ( mShader )
+    {
+        IvUniform* modelviewproj = mShader->GetUniform("IvModelViewProjectionMatrix");
+        if ( modelviewproj )
+        {
+            modelviewproj->SetValue(mWVPMat, 0);
+        }
+        IvUniform* normalMat = mShader->GetUniform("IvNormalMatrix");
+        if ( normalMat )
+        {
+            normalMat->SetValue(mNormalMat, 0);
+        }
+        IvUniform* diffuseColor = mShader->GetUniform("IvDiffuseColor");
+        if (diffuseColor)
+        {
+            diffuseColor->SetValue(mDiffuseColor,0);
+        }
+        IvUniform* ambient = mShader->GetUniform("IvLightAmbient");
+        if ( ambient )
+        {
+            ambient->SetValue(mLightAmbient,0);
+        }
+        IvUniform* diffuse = mShader->GetUniform("IvLightDiffuse");
+        if ( diffuse )
+        {
+            diffuse->SetValue(mLightDiffuse,0);
+        }
+        IvUniform* direction = mShader->GetUniform("IvLightDirection");
+        if ( direction )
+        {
+            direction->SetValue(mLightDirection,0);
+        }
+    }
+    
+    if (vertexBuffer)
+        static_cast<IvVertexBufferOGL*>(vertexBuffer)->MakeActive(shaderProgram->GetProgramID());
+    else
+        return;
+    
+    glDrawArrays(sPrimTypeMap[primType], 0, numVertices);
+}
 
 //-------------------------------------------------------------------------------
 // @ IvRendererOGL::BindDefaultShaderIfNeeded()

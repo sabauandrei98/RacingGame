@@ -44,6 +44,10 @@
 		0110718A2244EAF0006011E1 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011071892244EAF0006011E1 /* CoreVideo.framework */; };
 		0110718C2244EAFB006011E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0110718B2244EAFB006011E1 /* Foundation.framework */; };
 		01AAFDF022535DA000472426 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDEE22535DA000472426 /* Game.cpp */; };
+		5E3EC4562254E26000BA62EA /* testShader.glslf in Copy Files */ = {isa = PBXBuildFile; fileRef = 5EC575682254A6C400DDE6FF /* testShader.glslf */; };
+		5E3EC4572254E26000BA62EA /* testShader.glslv in Copy Files */ = {isa = PBXBuildFile; fileRef = 5EC575692254A6D700DDE6FF /* testShader.glslv */; };
+		5EBC7C60225380F500F47544 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC7C5E225380F500F47544 /* Player.cpp */; };
+		5EC5756E2254A7EF00DDE6FF /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EC5756C2254A7EF00DDE6FF /* Test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,13 +166,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		011071452244E4A9006011E1 /* CopyFiles */ = {
+		011071452244E4A9006011E1 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				5E3EC4562254E26000BA62EA /* testShader.glslf in Copy Files */,
+				5E3EC4572254E26000BA62EA /* testShader.glslv in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -185,6 +192,12 @@
 		01AAFDEE22535DA000472426 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		01AAFDEF22535DA000472426 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		01AAFDF122535E5300472426 /* Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Game; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EBC7C5E225380F500F47544 /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		5EBC7C5F225380F500F47544 /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		5EC575682254A6C400DDE6FF /* testShader.glslf */ = {isa = PBXFileReference; lastKnownFileType = text; path = testShader.glslf; sourceTree = "<group>"; };
+		5EC575692254A6D700DDE6FF /* testShader.glslv */ = {isa = PBXFileReference; lastKnownFileType = text; path = testShader.glslv; sourceTree = "<group>"; };
+		5EC5756C2254A7EF00DDE6FF /* Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Test.cpp; sourceTree = "<group>"; };
+		5EC5756D2254A7EF00DDE6FF /* Test.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Test.hpp; sourceTree = "<group>"; };
 		CEEFF78D1B7FB311006B1B1A /* IvCollision.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvCollision.xcodeproj; path = IvCollision/IvCollision.xcodeproj; sourceTree = "<group>"; };
 		CEEFF7931B7FB31C006B1B1A /* IvCurves.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvCurves.xcodeproj; path = IvCurves/IvCurves.xcodeproj; sourceTree = "<group>"; };
 		CEEFF7991B7FB326006B1B1A /* IvEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvEngine.xcodeproj; path = IvEngine/IvEngine.xcodeproj; sourceTree = "<group>"; };
@@ -239,10 +252,48 @@
 		011071482244E4A9006011E1 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				5EC5756A2254A7CF00DDE6FF /* Test */,
+				5EC575672254A6B000DDE6FF /* Shader */,
+				5EBC7C5D225380E900F47544 /* Player */,
 				01AAFDEE22535DA000472426 /* Game.cpp */,
 				01AAFDEF22535DA000472426 /* Game.hpp */,
 			);
 			path = Game;
+			sourceTree = "<group>";
+		};
+		5EBC7C5D225380E900F47544 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				5EBC7C5E225380F500F47544 /* Player.cpp */,
+				5EBC7C5F225380F500F47544 /* Player.hpp */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		5EC575672254A6B000DDE6FF /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				5EC575682254A6C400DDE6FF /* testShader.glslf */,
+				5EC575692254A6D700DDE6FF /* testShader.glslv */,
+			);
+			path = Shader;
+			sourceTree = "<group>";
+		};
+		5EC5756A2254A7CF00DDE6FF /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				5EC5756B2254A7D800DDE6FF /* TestCustomAttributes */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		5EC5756B2254A7D800DDE6FF /* TestCustomAttributes */ = {
+			isa = PBXGroup;
+			children = (
+				5EC5756C2254A7EF00DDE6FF /* Test.cpp */,
+				5EC5756D2254A7EF00DDE6FF /* Test.hpp */,
+			);
+			path = TestCustomAttributes;
 			sourceTree = "<group>";
 		};
 		CE9F6FF61B7FB2E1007A3522 = {
@@ -335,7 +386,7 @@
 			buildPhases = (
 				011071432244E4A9006011E1 /* Sources */,
 				011071442244E4A9006011E1 /* Frameworks */,
-				011071452244E4A9006011E1 /* CopyFiles */,
+				011071452244E4A9006011E1 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -479,7 +530,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EC5756E2254A7EF00DDE6FF /* Test.cpp in Sources */,
 				01AAFDF022535DA000472426 /* Game.cpp in Sources */,
+				5EBC7C60225380F500F47544 /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,7 +588,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -581,7 +634,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "Game/**/**";
+				HEADER_SEARCH_PATHS = "../MyProject/**";
 				LIBRARY_SEARCH_PATHS = "../glfw-3.1.1/lib-MacOS-10.8/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -598,7 +651,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -638,7 +691,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "Game/**/**";
+				HEADER_SEARCH_PATHS = "../MyProject/**";
 				LIBRARY_SEARCH_PATHS = "../glfw-3.1.1/lib-MacOS-10.8/**";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;

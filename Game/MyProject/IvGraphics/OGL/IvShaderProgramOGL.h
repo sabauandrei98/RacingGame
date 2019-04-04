@@ -45,7 +45,12 @@ class IvShaderProgramOGL : public IvShaderProgram
 public:
     // interface routines
     IvUniform* GetUniform(char const* name) final;
-
+    
+    void SetUniform(const char* name,float value);
+    void SetUniform(const char* name,IvVector2 value);
+    void SetUniform(const char* name,IvVector3 value);
+    void SetUniform(const char* name,IvVector4 value);
+    
     friend class IvResourceManagerOGL;
     friend class IvRendererOGL;
     
@@ -71,6 +76,8 @@ private:
     GLuint              mProgramID;
     unsigned int        mNextTextureStage;
     std::map<std::string, IvUniformOGL*> mUniforms;
+    
+    
 };
 
 

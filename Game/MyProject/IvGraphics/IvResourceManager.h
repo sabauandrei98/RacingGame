@@ -45,8 +45,8 @@ enum IvDataUsage
 class IvResourceManager
 { 
 public:
-    virtual IvVertexBuffer* CreateVertexBuffer( IvVertexFormat format, unsigned int numVertices,
-                                               void* data, IvDataUsage usage ) = 0;
+    virtual IvVertexBuffer* CreateVertexBuffer( IvVertexFormat format, unsigned int numVertices,void* data, IvDataUsage usage ) = 0;
+    virtual IvVertexBuffer* CreateVertexBuffer( VertexDescription description, unsigned int numVertices,void* data, IvDataUsage usage) = 0;
     virtual void Destroy( IvVertexBuffer* vb ) = 0;
 
     virtual IvIndexBuffer* CreateIndexBuffer( unsigned int numIndices, void* data,
