@@ -37,9 +37,9 @@ public:
     virtual IvUniform* GetUniform(char const* name) = 0;
     
     virtual void SetUniform(const char* name,float value)=0;
-    virtual void SetUniform(const char* name,IvVector2 value)=0;
-    virtual void SetUniform(const char* name,IvVector3 value)=0;
-    virtual void SetUniform(const char* name,IvVector4 value)=0;
+    virtual void SetUniform(const char* name,const IvVector2& value)=0;
+    virtual void SetUniform(const char* name,const IvVector3& value)=0;
+    virtual void SetUniform(const char* name,const IvVector4& value)=0;
     
     unsigned int GetProgramID() { return programID; }
     void SetProgramID(unsigned pID) { programID = pID; }

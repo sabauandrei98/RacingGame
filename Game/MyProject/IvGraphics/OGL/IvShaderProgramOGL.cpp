@@ -214,7 +214,7 @@ void IvShaderProgramOGL::SetUniform(const char*name, float value)
 //-------------------------------------------------------------------------------
 //  IvVector2 set
 //-------------------------------------------------------------------------------
-void IvShaderProgramOGL::SetUniform(const char *name,IvVector2 value)
+void IvShaderProgramOGL::SetUniform(const char *name,const IvVector2& value)
 {
     glUniform2f(glGetUniformLocation(mProgramID,name), value.x,value.y);
 }
@@ -224,7 +224,7 @@ void IvShaderProgramOGL::SetUniform(const char *name,IvVector2 value)
 //-------------------------------------------------------------------------------
 //  IvVector3 set
 //-------------------------------------------------------------------------------
-void IvShaderProgramOGL::SetUniform(const char *name,IvVector3 value)
+void IvShaderProgramOGL::SetUniform(const char *name,const IvVector3& value)
 {
     glUniform3f(glGetUniformLocation(mProgramID,name), value.x,value.y,value.z);
 }
@@ -234,7 +234,7 @@ void IvShaderProgramOGL::SetUniform(const char *name,IvVector3 value)
 //-------------------------------------------------------------------------------
 //  IvVector4 set
 //-------------------------------------------------------------------------------
-void IvShaderProgramOGL::SetUniform(const char *name,IvVector4 value)
+void IvShaderProgramOGL::SetUniform(const char *name,const IvVector4& value)
 {
     glUniform4f(glGetUniformLocation(mProgramID,name), value.x,value.y,value.z,value.w);
 }
