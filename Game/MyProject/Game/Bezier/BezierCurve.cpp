@@ -45,11 +45,11 @@ BezierCurve::BezierCurve()
     int count = 2;
     IvVector3* mPositions = new IvVector3[count];
     mPositions[0] = {0, 0, 0};
-    mPositions[1] = {0, 15, 5};
+    mPositions[1] = {15, 0, 5};
     
     IvVector3* mControls = new IvVector3[2*(count-1)];
-    mControls[0] = {0, 14, 0};
-    mControls[1] = {0, -3, 5};
+    mControls[0] = {14, 0, 0};
+    mControls[1] = {-3, 0, 5};
     
     float* mTimes = new float[count];
     mTimes[0] = 2;
@@ -144,7 +144,6 @@ BezierCurve::Update( float dt )
 void
 BezierCurve::Render()
 {
-        // store current matrix
     IvRenderer::mRenderer->SetWorldMatrix( mTransform );
     
     // draw geometry
