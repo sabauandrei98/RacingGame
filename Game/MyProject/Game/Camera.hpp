@@ -48,31 +48,31 @@ public:
     void setScreenWidth(float newWidth);
     void setScreenHeight(float newHeight);
     
-    float getFieldOfView() const {
+    const float getFieldOfView() const {
         return fieldOfView;
     }
-    float getNearPlane() const {
+    const float getNearPlane() const {
         return nearPlane;
     }
-    float getFarPlane() const {
+    const float getFarPlane() const {
         return farPlane;
     }
-    float getHeight() const {
+    const float getHeight() const {
         return screenHeight;
     }
-    float getWidth() const {
+    const float getWidth() const {
         return screenWidth;
     }
-    IvVector3& getPosition() {
+    const IvVector3& getPosition() const {
         return position;
     }
-    IvVector3& getLookAt() {
+    const IvVector3& getLookAt() const {
         return lookAt;
     }
-    IvVector3& getRotation() {
+    const IvVector3& getRotation() const {
         return rotation;
     }
-    IvMatrix44& getTransformMatrix() {
+    const IvMatrix44& getTransformMatrix() const {
         return transform;
     }
     
