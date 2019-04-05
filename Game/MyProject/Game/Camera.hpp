@@ -48,23 +48,41 @@ public:
     void setScreenWidth(float newWidth);
     void setScreenHeight(float newHeight);
     
-    const float getFieldOfView() { return fieldOfView; }
-    const float getNearPlane() { return nearPlane; }
-    const float getFarPlane() { return farPlane; }
-    const float getHeight() { return screenHeight; }
-    const float getWidth() { return screenWidth; }
-    const IvVector3& getPosition() { return position; }
-    const IvVector3& getLookAt() { return lookAt; }
-    const IvVector3& getRotation() { return rotation; }
-    const IvMatrix44& getTransformMatrix() { return transform;}
+    float getFieldOfView() const {
+        return fieldOfView;
+    }
+    float getNearPlane() const {
+        return nearPlane;
+    }
+    float getFarPlane() const {
+        return farPlane;
+    }
+    float getHeight() const {
+        return screenHeight;
+    }
+    float getWidth() const {
+        return screenWidth;
+    }
+    IvVector3& getPosition() {
+        return position;
+    }
+    IvVector3& getLookAt() {
+        return lookAt;
+    }
+    IvVector3& getRotation() {
+        return rotation;
+    }
+    IvMatrix44& getTransformMatrix() {
+        return transform;
+    }
     
     
     IvMatrix44 getViewMatrix();
     IvMatrix44 getProjectionMatrix();
     
-    const IvMatrix44 rotateX(const float angle);
-    const IvMatrix44 rotateY(const float angle);
-    const IvMatrix44 rotateZ(const float angle);
+    IvMatrix44 const rotateX(const float angle);
+    IvMatrix44 const rotateY(const float angle);
+    IvMatrix44 const rotateZ(const float angle);
     
     
     
