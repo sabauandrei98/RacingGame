@@ -9,8 +9,9 @@
 
 #include "SceneNode.hpp"
 
-class SceneNode;
-
 class CameraSceneNode : public SceneNode {
+    // constructor(s) and destructor
+    CameraSceneNode(const std::string&);
+    
     // TODO
 };

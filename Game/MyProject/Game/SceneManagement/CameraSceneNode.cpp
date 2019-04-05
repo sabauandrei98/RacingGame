@@ -6,3 +6,11 @@
 //
 
 #include "CameraSceneNode.hpp"
+
+// -----------------------------
+// CONSTRUCTOR(S) AND DESTRUCTOR
+// -----------------------------
+
+CameraSceneNode::CameraSceneNode(const std::string& name) :
+    SceneNode(name) {
+    }

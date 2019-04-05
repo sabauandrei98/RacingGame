@@ -12,7 +12,7 @@
 // --------------------------------
 
 // sets the states and draws the function
-void RenderPacket::draw() {
+void RenderPacket::draw() const {
     // setting up shader and wvp_matrix
     IvRenderer::mRenderer->SetShaderProgram(_mesh_instance->getShader());
     _mesh_instance->setWorldViewProjectionMatrix(_world_view_projection_matrix);

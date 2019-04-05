@@ -7,10 +7,11 @@
 
 #pragma once
 
+#include <algorithm>
+
 #include "RenderPacket.hpp"
 #include "NodeTransform.hpp"
 #include "NodeAnimator.hpp"
-#include "CameraSceneNode.hpp"
 
 class NodeAnimator;
 class CameraSceneNode;
@@ -18,7 +19,7 @@ class CameraSceneNode;
 class SceneNode : std::enable_shared_from_this<SceneNode> {
 public:
     // public function(s) and method(s)
-    SceneNode();
+    SceneNode(const std::string&);
     virtual ~SceneNode();
     
     SceneNode* findFirstNodeWithName(std::string) const;

@@ -5,16 +5,16 @@
 //  Created by Tamas Both - (p) on 05/04/2019.
 //
 
-#include <algorithm>
-
 #include "SceneNode.hpp"
+#include "CameraSceneNode.hpp"
 
 // -----------------------------
 // CONSTRUCTOR(S) AND DESTRUCTOR
 // -----------------------------
 
-SceneNode::SceneNode() {
-}
+SceneNode::SceneNode(const std::string& name) :
+    _name(name) {
+    }
 
 SceneNode::~SceneNode() {
 }
@@ -54,8 +54,13 @@ void SceneNode::addChild(const SceneNode& child) {
 }
 
 // removes this node and all its children from the graph
-void SceneNode::remove() {
-    auto it = find(_parent->_children.begin(), _parent->_children.end(), this);
+void SceneNode::remove()
+{
+    auto it = find_if(_parent->_children.begin(), _parent->_children.end(),
+                      [this] (const auto& child) {
+                          return child.get() == this;
+                      });
+    
     _parent->_children.erase(it);
 }
 

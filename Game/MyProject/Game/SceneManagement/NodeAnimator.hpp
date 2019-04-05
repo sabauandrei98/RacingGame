@@ -7,8 +7,9 @@
 
 #pragma once
 
-#include "SceneNode.hpp"
 #include <memory>
+
+#include "SceneNode.hpp"
 
 class SceneNode;
 

@@ -23,5 +23,5 @@ public:
     bool                    _use_blend = false;
     
     // public function(s) and method(s)
-    void draw();
+    void draw() const;
 };

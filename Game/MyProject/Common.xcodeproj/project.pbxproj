@@ -35,6 +35,7 @@
 		00F4362022573AE700E4EE47 /* SceneNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F4361E22573AE700E4EE47 /* SceneNode.cpp */; };
 		00F4362322573C3A00E4EE47 /* NodeAnimator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F4362122573C3A00E4EE47 /* NodeAnimator.cpp */; };
 		00F436262257410800E4EE47 /* CameraSceneNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F436242257410800E4EE47 /* CameraSceneNode.cpp */; };
+		00F43631225773B400E4EE47 /* SceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00F4362F225773B400E4EE47 /* SceneGraph.cpp */; };
 		011071632244E502006011E1 /* libIvCollision.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEFF7921B7FB311006B1B1A /* libIvCollision.a */; };
 		011071642244E502006011E1 /* libIvCurves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEFF7981B7FB31C006B1B1A /* libIvCurves.a */; };
 		011071652244E502006011E1 /* libIvEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEFF79E1B7FB326006B1B1A /* libIvEngine.a */; };
@@ -196,6 +197,8 @@
 		00F4362222573C3A00E4EE47 /* NodeAnimator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = NodeAnimator.hpp; path = SceneManagement/NodeAnimator.hpp; sourceTree = "<group>"; };
 		00F436242257410800E4EE47 /* CameraSceneNode.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CameraSceneNode.cpp; path = SceneManagement/CameraSceneNode.cpp; sourceTree = "<group>"; };
 		00F436252257410800E4EE47 /* CameraSceneNode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = CameraSceneNode.hpp; path = SceneManagement/CameraSceneNode.hpp; sourceTree = "<group>"; };
+		00F4362F225773B400E4EE47 /* SceneGraph.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SceneGraph.cpp; path = SceneManagement/SceneGraph.cpp; sourceTree = "<group>"; };
+		00F43630225773B400E4EE47 /* SceneGraph.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = SceneGraph.hpp; path = SceneManagement/SceneGraph.hpp; sourceTree = "<group>"; };
 		011071382244E270006011E1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		0110717A2244E83D006011E1 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = "../glfw-3.1.1/lib-MacOS-10.8/libglfw3.a"; sourceTree = "<group>"; };
 		011071812244EA6B006011E1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -275,6 +278,8 @@
 				00F4361F22573AE700E4EE47 /* SceneNode.hpp */,
 				00F436242257410800E4EE47 /* CameraSceneNode.cpp */,
 				00F436252257410800E4EE47 /* CameraSceneNode.hpp */,
+				00F4362F225773B400E4EE47 /* SceneGraph.cpp */,
+				00F43630225773B400E4EE47 /* SceneGraph.hpp */,
 				00D669B52254E35800E7BBB8 /* shaders */,
 				01AAFDEF22535DA000472426 /* Game.hpp */,
 				01AAFDEE22535DA000472426 /* Game.cpp */,
@@ -519,6 +524,7 @@
 				00F4362022573AE700E4EE47 /* SceneNode.cpp in Sources */,
 				00F436262257410800E4EE47 /* CameraSceneNode.cpp in Sources */,
 				00D669D12254E76200E7BBB8 /* Mesh.cpp in Sources */,
+				00F43631225773B400E4EE47 /* SceneGraph.cpp in Sources */,
 				00D669D22254E76200E7BBB8 /* RenderPacket.cpp in Sources */,
 				00F436192255FD3E00E4EE47 /* NodeTransform.cpp in Sources */,
 				00F4362322573C3A00E4EE47 /* NodeAnimator.cpp in Sources */,
