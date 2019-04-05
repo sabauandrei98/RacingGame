@@ -3,9 +3,9 @@
 CameraTestControler::CameraTestControler() : camera(45.0, 0.1, 35.0, 1280, 720)
 {
     //SETTING CAMERA
-    camera.setPosition({-15.f, 0.0f, 5.0f });
+    camera.setPosition({-5.f, 0.0f, 5.0f });
     camera.setLookAt({0.0f, 0.0f, 0.0f});
-    camera.setOrientation({0.0f, 0.0f, 1.0f});
+    camera.setRotation({0.0f, 0.0f, 1.0f});
 }
 
 
@@ -25,33 +25,49 @@ CameraTestControler::Update( float dt )
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
     {
-        camera.pan({dt * translationSpeed, 0});
+        camera.pan({-dt * translationSpeed, 0});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
     {
-        camera.pan({-dt * translationSpeed, 0});
+        camera.pan({dt * translationSpeed, 0});
     }
     
     // set up rotation
     IvVector3 point = {0, 0, 0};
-    float rotationSpeed = 3.0f;
-    if (IvGame::mGame->mEventHandler->IsKeyDown('y'))
+    float rotationSpeed = 1.0f;
+    float x = 0, y = 0, z = 0;
+    if (IvGame::mGame->mEventHandler->IsKeyDown('t'))
     {
-        camera.rotate({0, dt * rotationSpeed}, point);
-    }
-    if (IvGame::mGame->mEventHandler->IsKeyDown('h'))
-    {
-        camera.rotate({0, -dt * rotationSpeed}, point);
+        x += dt * rotationSpeed;
+        camera.rotate({x, y, z});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('g'))
     {
-        camera.rotate({dt * rotationSpeed, 0}, point);
+        x -= dt * rotationSpeed;
+        camera.rotate({x, y, z});
+    }
+    if (IvGame::mGame->mEventHandler->IsKeyDown('y'))
+    {
+        y += dt * rotationSpeed;
+        camera.rotate({x, y, z});
+    }
+    if (IvGame::mGame->mEventHandler->IsKeyDown('h'))
+    {
+        y -= dt * rotationSpeed;
+        camera.rotate({x, y, z});
+    }
+    if (IvGame::mGame->mEventHandler->IsKeyDown('u'))
+    {
+        z += dt * rotationSpeed;
+        camera.rotate({x, y, z});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('j'))
     {
-        camera.rotate({-dt * rotationSpeed, 0}, point);
+        z -= dt * rotationSpeed;
+        camera.rotate({x, y, z});
     }
     
+  
     
     // set up scaling
     float scalingSpeed = 1.0f;
