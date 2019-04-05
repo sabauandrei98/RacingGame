@@ -14,19 +14,19 @@
 #include "RenderPacket.hpp"
 
 class Game : public IvGame {
-private:
-    Game(const Game& other);
-    Game& operator =(const Game& other);
-    
-    std::shared_ptr<Mesh>  _mesh;
-    MeshInstance*          _mesh_instance;
+public:
+    Game();
+    ~Game();
+    bool PostRendererInitialize();
     
 protected:
     virtual void UpdateObjects(float dt);
     virtual void Render();
     
-public:
-    Game();
-    ~Game();
-    bool PostRendererInitialize();
+private:
+    Game(const Game& other);
+    Game& operator =(const Game& other);
+    
+    std::shared_ptr<Mesh>           _mesh;
+    std::shared_ptr<MeshInstance>   _mesh_instance;
 };

@@ -7,6 +7,10 @@
 
 #include "RenderPacket.hpp"
 
+// --------------------------------
+// PUBLIC FUNCTION(S) AND METHOD(S)
+// --------------------------------
+
 // sets the states and draws the function
 void RenderPacket::draw() {
     // setting up shader and wvp_matrix

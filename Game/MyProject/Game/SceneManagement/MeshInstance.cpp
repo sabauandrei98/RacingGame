@@ -20,16 +20,6 @@ MeshInstance::MeshInstance() :
 MeshInstance::~MeshInstance() {
 }
 
-// ---------------------------------
-// PRIVATE FUNCTION(S) AND METHOD(S)
-// ---------------------------------
-
-void MeshInstance::destroyShader() {
-    if (_shader)
-        IvRenderer::mRenderer->GetResourceManager()->Destroy(_shader);
-    _shader = nullptr;
-}
-
 // --------------------------------
 // PUBLIC FUNCTION(S) AND METHOD(S)
 // --------------------------------
@@ -74,3 +64,14 @@ IvShaderProgram* MeshInstance::getShader() {
 const std::vector<IvUniform*>& MeshInstance::getShaderUniforms() const {
     return _shader_uniforms;
 }
+
+// ---------------------------------
+// PRIVATE FUNCTION(S) AND METHOD(S)
+// ---------------------------------
+
+void MeshInstance::destroyShader() {
+    if (_shader)
+        IvRenderer::mRenderer->GetResourceManager()->Destroy(_shader);
+    _shader = nullptr;
+}
+

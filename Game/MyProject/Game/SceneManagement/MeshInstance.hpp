@@ -14,16 +14,7 @@
 #include <IvUniform.h>
 #include <IvShaderProgram.h>
 
-class MeshInstance {
-private:
-    // private variable(s)
-    std::shared_ptr<Mesh>       _mesh;
-    std::vector<IvUniform*>     _shader_uniforms;
-    IvShaderProgram*            _shader;
-    
-    // private function(s) and method(s)
-    void destroyShader();
-    
+class MeshInstance : std::enable_shared_from_this<MeshInstance> {
 public:
     // constructor(s) and destructor
     MeshInstance();
@@ -41,4 +32,13 @@ public:
     const std::shared_ptr<Mesh>& getMesh() const;
     const std::vector<IvUniform*>& getShaderUniforms() const;
     IvShaderProgram* getShader();
+    
+private:
+    // private variable(s)
+    std::shared_ptr<Mesh>       _mesh;
+    std::vector<IvUniform*>     _shader_uniforms;
+    IvShaderProgram*            _shader;
+    
+    // private function(s) and method(s)
+    void destroyShader();
 };

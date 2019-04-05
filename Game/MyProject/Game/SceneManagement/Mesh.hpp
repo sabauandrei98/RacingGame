@@ -19,16 +19,6 @@
 #include <IvResourceManager.h>
 
 class Mesh : std::enable_shared_from_this<Mesh> {
-private:
-    // private variable(s)
-    IvVertexBuffer* _vertex_buffer;
-    IvIndexBuffer*  _index_buffer;
-    unsigned int    _buffer_size;
-    
-    // private function(s) and method(s)
-    void destroyVertexBuffer();
-    void destroyIndexBuffer();
-    
 public:
     // constructor(s) and destructor
     Mesh();
@@ -53,4 +43,14 @@ public:
     IvVertexBuffer* getVertexBuffer();
     IvIndexBuffer* getIndexBuffer();
     const unsigned int& getBufferSize() const;
+    
+private:
+    // private variable(s)
+    IvVertexBuffer* _vertex_buffer;
+    IvIndexBuffer*  _index_buffer;
+    unsigned int    _buffer_size;
+    
+    // private function(s) and method(s)
+    void destroyVertexBuffer();
+    void destroyIndexBuffer();
 };

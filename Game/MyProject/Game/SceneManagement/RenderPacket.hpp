@@ -15,9 +15,9 @@
 class RenderPacket  {
 public:
     // public variable(s)
-    MeshInstance*           _mesh_instance = nullptr;
-    IvMatrix44              _world_view_projection_matrix;
-    IvPrimType              _prim_type = kTriangleListPrim;
+    std::shared_ptr<MeshInstance>   _mesh_instance;
+    IvMatrix44                      _world_view_projection_matrix;
+    IvPrimType                      _prim_type = kTriangleListPrim;
     
     bool                    _use_depth = false;
     bool                    _use_blend = false;

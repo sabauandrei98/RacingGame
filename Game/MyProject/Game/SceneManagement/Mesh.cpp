@@ -22,24 +22,6 @@ Mesh::~Mesh() {
     destroyIndexBuffer();
 }
 
-// ---------------------------------
-// PRIVATE FUNCTION(S) AND METHOD(S)
-// ---------------------------------
-
-// destroys the vertex buffer
-void Mesh::destroyVertexBuffer() {
-    if (_vertex_buffer)
-        IvRenderer::mRenderer->GetResourceManager()->Destroy(_vertex_buffer);
-    _vertex_buffer = nullptr;
-}
-
-// destroys the index buffer
-void Mesh::destroyIndexBuffer() {
-    if (_index_buffer)
-        IvRenderer::mRenderer->GetResourceManager()->Destroy(_index_buffer);
-    _index_buffer = nullptr;
-}
-
 // --------------------------------
 // PUBLIC FUNCTION(S) AND METHOD(S)
 // --------------------------------
@@ -69,4 +51,22 @@ IvIndexBuffer* Mesh::getIndexBuffer() {
 // returns the size of the buffer
 const unsigned int& Mesh::getBufferSize() const {
     return _buffer_size;
+}
+
+// ---------------------------------
+// PRIVATE FUNCTION(S) AND METHOD(S)
+// ---------------------------------
+
+// destroys the vertex buffer
+void Mesh::destroyVertexBuffer() {
+    if (_vertex_buffer)
+        IvRenderer::mRenderer->GetResourceManager()->Destroy(_vertex_buffer);
+    _vertex_buffer = nullptr;
+}
+
+// destroys the index buffer
+void Mesh::destroyIndexBuffer() {
+    if (_index_buffer)
+        IvRenderer::mRenderer->GetResourceManager()->Destroy(_index_buffer);
+    _index_buffer = nullptr;
 }

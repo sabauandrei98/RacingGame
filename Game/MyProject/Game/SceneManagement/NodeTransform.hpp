@@ -12,6 +12,13 @@
 #include <IvMatrix44.h>
 
 class NodeTransform {
+public:
+    // public function(s) and method(s)
+    void set(const IvVector3&, const IvVector3&, const IvVector3&);
+    void set(const IvVector3&);
+    
+    const IvMatrix44& getMatrix();
+    
 private:
     // private variable(s)
     IvVector3   _position;
@@ -22,11 +29,4 @@ private:
     bool        _is_dirty = true;
     
     void calculate();
-    
-public:
-    // public function(s) and method(s)
-    void set(const IvVector3&, const IvVector3&, const IvVector3&);
-    void set(const IvVector3&);
-    
-    const IvMatrix44& getMatrix();
 };

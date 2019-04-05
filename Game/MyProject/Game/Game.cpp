@@ -44,7 +44,7 @@ bool Game::PostRendererInitialize() {
     _mesh->setVertexBuffer(vertices, kTNPFormat);
     _mesh->setIndexBuffer(indices);
     
-    _mesh_instance = new MeshInstance();
+    _mesh_instance = std::make_shared<MeshInstance>();
     _mesh_instance->setMesh(_mesh);
     _mesh_instance->setShader("shaders/example_shader");
     _mesh_instance->addShaderUniforms(std::vector<std::string>{"color"});
