@@ -59,7 +59,7 @@ void Camera::pan(const IvVector2& offset)
     lookAt += right * offset.x + viewUp * offset.y;
 }
 
-const IvMatrix44 Camera::rotateX(const float angle)
+const IvMatrix44 Camera::rotateX(const float angle) const
 {
     IvMatrix44 x;
     x[0] = 1;
@@ -72,7 +72,7 @@ const IvMatrix44 Camera::rotateX(const float angle)
     return x;
 }
 
-const IvMatrix44 Camera::rotateY(const float angle)
+const IvMatrix44 Camera::rotateY(const float angle) const
 {
     IvMatrix44 y;
     y[0] = cos(-angle);
@@ -85,7 +85,7 @@ const IvMatrix44 Camera::rotateY(const float angle)
     return y;
 }
 
-const IvMatrix44 Camera::rotateZ(const float angle)
+const IvMatrix44 Camera::rotateZ(const float angle) const
 {
     IvMatrix44 z;
     z[0] = cos(-angle);

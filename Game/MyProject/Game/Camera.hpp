@@ -25,6 +25,10 @@ private:
     float farPlane;
     int screenWidth;
     int screenHeight;
+    
+    const IvMatrix44 rotateX(const float angle) const;
+    const IvMatrix44 rotateY(const float angle) const;
+    const IvMatrix44 rotateZ(const float angle) const;
 
 public:
     Camera(){};
@@ -76,14 +80,8 @@ public:
         return transform;
     }
     
-    
     IvMatrix44 getViewMatrix();
     IvMatrix44 getProjectionMatrix();
-    
-    IvMatrix44 const rotateX(const float angle);
-    IvMatrix44 const rotateY(const float angle);
-    IvMatrix44 const rotateZ(const float angle);
-    
     
     
 ///-------------------------------------------------------------------------------
@@ -93,6 +91,5 @@ public:
     void zoom(float step);
     void pan(const IvVector2& offset);
     void rotate(const IvVector3& offset);
-    
-    
+
 };
