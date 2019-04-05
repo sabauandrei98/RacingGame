@@ -184,11 +184,11 @@
 		011071872244EAD8006011E1 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		011071892244EAF0006011E1 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		0110718B2244EAFB006011E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		01A5AEAE2257A2F5002EDC18 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		01AAFDEE22535DA000472426 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		01AAFDF122535E5300472426 /* Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Game; sourceTree = BUILT_PRODUCTS_DIR; };
 		01AAFDF22253684C00472426 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		01AAFDF32253684C00472426 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
-		01AAFDF522536A3600472426 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		01AAFDF622536A3600472426 /* CameraTestControler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraTestControler.cpp; sourceTree = "<group>"; };
 		01AAFDF722536A3600472426 /* CameraTestControler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CameraTestControler.hpp; sourceTree = "<group>"; };
 		CEEFF78D1B7FB311006B1B1A /* IvCollision.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvCollision.xcodeproj; path = IvCollision/IvCollision.xcodeproj; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 		011071482244E4A9006011E1 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				01AAFDF522536A3600472426 /* Game.h */,
+				01A5AEAE2257A2F5002EDC18 /* Game.hpp */,
 				01AAFDEE22535DA000472426 /* Game.cpp */,
 				01AAFDF722536A3600472426 /* CameraTestControler.hpp */,
 				01AAFDF622536A3600472426 /* CameraTestControler.cpp */,

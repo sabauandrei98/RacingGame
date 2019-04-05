@@ -6,7 +6,7 @@
 #include <IvMath.h>
 #include <IvVector3.h>
 #include <IvRendererHelp.h>
-#include "Game.h"
+#include "Game.hpp"
 #include "Camera.hpp"
 
 
