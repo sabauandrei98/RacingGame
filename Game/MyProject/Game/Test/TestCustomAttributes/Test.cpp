@@ -17,8 +17,6 @@ Test::~Test()
     
 }
 
-
-
 void Test::Setup(const char*shaderName)
 {
 
@@ -49,7 +47,7 @@ void Test::Setup(const char*shaderName)
 
     *colorPtr=IvVector3{1.,0.,1.};
     
-    
+
     for(int i=0;i<3;i++)
     {
         indices.push_back(i);

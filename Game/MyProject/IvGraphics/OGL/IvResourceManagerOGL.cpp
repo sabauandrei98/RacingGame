@@ -21,6 +21,8 @@
 #include "IvFragmentShaderOGL.h"
 #include "IvShaderProgramOGL.h"
 #include "IvTextureOGL.h"
+#include "IvRenderTargetOGL.h"
+#include "IvFrameBufferOGL.h"
 
 //-------------------------------------------------------------------------------
 //-- Static Members -------------------------------------------------------------
@@ -339,4 +341,23 @@ IvResourceManagerOGL::Destroy( IvTexture* tex )
     texOGL->Destroy();
     delete texOGL;
 }
-
+//-------------------------------------------------------------------------------
+// @ IvResourceManagerOGL::CreateRenderTarget()
+//-------------------------------------------------------------------------------
+// Create platform-dependent render target
+//-------------------------------------------------------------------------------
+IvRenderTarget*
+IvResourceManagerOGL::CreateRenderTarget(RenderTargetType renderTargetType)
+{
+    return new IvRenderTargetOGL(renderTargetType);
+}
+//-------------------------------------------------------------------------------
+// @ IvResourceManagerOGL::CreateFrameBuffer()
+//-------------------------------------------------------------------------------
+// Create platform-dependent frame buffer
+//-------------------------------------------------------------------------------
+IvFrameBuffer*
+IvResourceManagerOGL::CreateFrameBuffer(std::vector<IvRenderTarget*> renderTargets)
+{
+    return new IvFrameBufferOGL(renderTargets);
+}

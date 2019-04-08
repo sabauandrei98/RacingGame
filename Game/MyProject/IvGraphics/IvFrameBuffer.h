@@ -11,18 +11,28 @@
 #include<iostream>
 #include<vector>
 
+
+//-------------------------------------------------------------------------------
+//-- Typedefs, Structs ----------------------------------------------------------
+//-------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------
+//-- Classes --------------------------------------------------------------------
+//-------------------------------------------------------------------------------
 class IvFrameBuffer
 {
-private:
-    std::vector<IvRenderTarget*> renderTarget;
-protected:
+public:
     //constructor/destructor
     IvFrameBuffer()=default;
     virtual ~IvFrameBuffer() {}
     
-public:
-    virtual bool Create()=0;
-    virtual void AddRenderTarget(const IvRenderTarget& renderTarget);
-    virtual void Draw();
-    virtual void Draw(const IvRenderTarget& renderTarget)=0;
+    virtual void Bind(int width=1280,int height=720)=0;
+    virtual bool Unbind()=0;
+    virtual std::vector<IvRenderTarget*> GetTextures()=0;
+    virtual void AttachToCurrentlyFBO()=0;
+
+protected:
+
+private:
+
 };

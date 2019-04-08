@@ -53,7 +53,7 @@ static const char sShaderCPFormat[] =
 "    color = IvColor;\n"
 "}\n";
 
-static const char sShaderNPFormat[] = 
+static const char sShaderNPFormat[] =
 "uniform mat4 IvModelViewProjectionMatrix;\n"
 "uniform mat4 IvNormalMatrix;\n"
 "uniform vec4 IvLightDirection;\n"
@@ -72,7 +72,7 @@ static const char sShaderNPFormat[] =
 "    color = IvDiffuseColor*lightValue;\n"
 "}\n";
 
-static const char sShaderCNPFormat[] = 
+static const char sShaderCNPFormat[] =
 "uniform mat4 IvModelViewProjectionMatrix;\n"
 "uniform mat4 IvNormalMatrix;\n"
 "uniform vec4 IvLightDirection;\n"
@@ -91,21 +91,21 @@ static const char sShaderCNPFormat[] =
 "    color = IvColor*lightValue;\n"
 "}\n";
 
-static const char sShaderTCPFormat[] = 
+static const char sShaderTCPFormat[] =
 "uniform mat4 IvModelViewProjectionMatrix;\n"
 "layout(location = TEXCOORD0) in vec2 IvTexCoord0;"
 "layout(location = COLOR) in vec4 IvColor;"
 "layout(location = POSITION) in vec3 IvPos;"
-"//out vec2 uv;\n"
+"out vec2 uv;\n"
 "out vec4 color;\n"
 "void main()\n"
 "{\n"
 "    gl_Position = IvModelViewProjectionMatrix*vec4(IvPos,1.0);\n"
 "    color = IvColor;\n"
-"    //uv = IvTexCoord0.xy;\n"
+"    uv = IvTexCoord0.xy;\n"
 "}\n";
 
-static const char sShaderTNPFormat[] = 
+static const char sShaderTNPFormat[] =
 "uniform mat4 IvModelViewProjectionMatrix;\n"
 "uniform mat4 IvNormalMatrix;\n"
 "uniform vec4 IvLightDirection;\n"

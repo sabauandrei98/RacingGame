@@ -46,8 +46,16 @@
 		01AAFDF022535DA000472426 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDEE22535DA000472426 /* Game.cpp */; };
 		5E3EC4562254E26000BA62EA /* testShader.glslf in Copy Files */ = {isa = PBXBuildFile; fileRef = 5EC575682254A6C400DDE6FF /* testShader.glslf */; };
 		5E3EC4572254E26000BA62EA /* testShader.glslv in Copy Files */ = {isa = PBXBuildFile; fileRef = 5EC575692254A6D700DDE6FF /* testShader.glslv */; };
+		5E833B1F225B7B8100040747 /* player.tga in Copy Files */ = {isa = PBXBuildFile; fileRef = 5EE3532A225B745F00B7FE18 /* player.tga */; };
+		5E833B24225B7E7E00040747 /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E833B22225B7E7E00040747 /* Shape.cpp */; };
+		5E833B27225B849100040747 /* testBlurShader.glslv in Copy Files */ = {isa = PBXBuildFile; fileRef = 5E833B25225B838100040747 /* testBlurShader.glslv */; };
+		5E833B28225B849100040747 /* testBlurShader.glslf in Copy Files */ = {isa = PBXBuildFile; fileRef = 5E833B26225B839200040747 /* testBlurShader.glslf */; };
 		5EBC7C60225380F500F47544 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC7C5E225380F500F47544 /* Player.cpp */; };
 		5EC5756E2254A7EF00DDE6FF /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EC5756C2254A7EF00DDE6FF /* Test.cpp */; };
+		5EE352FA22573EEF00B7FE18 /* TestRT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EE352F822573EEF00B7FE18 /* TestRT.cpp */; };
+		5EE352FE2257803900B7FE18 /* testShaderRT.glslf in Copy Files */ = {isa = PBXBuildFile; fileRef = 5EE352FC2257423F00B7FE18 /* testShaderRT.glslf */; };
+		5EE352FF2257803900B7FE18 /* testShaderRT.glslv in Copy Files */ = {isa = PBXBuildFile; fileRef = 5EE352FD2257425100B7FE18 /* testShaderRT.glslv */; };
+		5EE35326225B39BD00B7FE18 /* b1.tga in Copy Files */ = {isa = PBXBuildFile; fileRef = 5EE35325225B39B300B7FE18 /* b1.tga */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +180,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				5E833B27225B849100040747 /* testBlurShader.glslv in Copy Files */,
+				5E833B28225B849100040747 /* testBlurShader.glslf in Copy Files */,
+				5E833B1F225B7B8100040747 /* player.tga in Copy Files */,
+				5EE35326225B39BD00B7FE18 /* b1.tga in Copy Files */,
+				5EE352FE2257803900B7FE18 /* testShaderRT.glslf in Copy Files */,
+				5EE352FF2257803900B7FE18 /* testShaderRT.glslv in Copy Files */,
 				5E3EC4562254E26000BA62EA /* testShader.glslf in Copy Files */,
 				5E3EC4572254E26000BA62EA /* testShader.glslv in Copy Files */,
 			);
@@ -192,12 +206,22 @@
 		01AAFDEE22535DA000472426 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		01AAFDEF22535DA000472426 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		01AAFDF122535E5300472426 /* Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Game; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E833B22225B7E7E00040747 /* Shape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Shape.cpp; sourceTree = "<group>"; };
+		5E833B23225B7E7E00040747 /* Shape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shape.hpp; sourceTree = "<group>"; };
+		5E833B25225B838100040747 /* testBlurShader.glslv */ = {isa = PBXFileReference; lastKnownFileType = text; path = testBlurShader.glslv; sourceTree = "<group>"; };
+		5E833B26225B839200040747 /* testBlurShader.glslf */ = {isa = PBXFileReference; lastKnownFileType = text; path = testBlurShader.glslf; sourceTree = "<group>"; };
 		5EBC7C5E225380F500F47544 /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		5EBC7C5F225380F500F47544 /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		5EC575682254A6C400DDE6FF /* testShader.glslf */ = {isa = PBXFileReference; lastKnownFileType = text; path = testShader.glslf; sourceTree = "<group>"; };
 		5EC575692254A6D700DDE6FF /* testShader.glslv */ = {isa = PBXFileReference; lastKnownFileType = text; path = testShader.glslv; sourceTree = "<group>"; };
 		5EC5756C2254A7EF00DDE6FF /* Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Test.cpp; sourceTree = "<group>"; };
 		5EC5756D2254A7EF00DDE6FF /* Test.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Test.hpp; sourceTree = "<group>"; };
+		5EE352F822573EEF00B7FE18 /* TestRT.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TestRT.cpp; sourceTree = "<group>"; };
+		5EE352F922573EEF00B7FE18 /* TestRT.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TestRT.hpp; sourceTree = "<group>"; };
+		5EE352FC2257423F00B7FE18 /* testShaderRT.glslf */ = {isa = PBXFileReference; lastKnownFileType = text; path = testShaderRT.glslf; sourceTree = "<group>"; };
+		5EE352FD2257425100B7FE18 /* testShaderRT.glslv */ = {isa = PBXFileReference; lastKnownFileType = text; path = testShaderRT.glslv; sourceTree = "<group>"; };
+		5EE35325225B39B300B7FE18 /* b1.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = b1.tga; sourceTree = "<group>"; };
+		5EE3532A225B745F00B7FE18 /* player.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = player.tga; sourceTree = "<group>"; };
 		CEEFF78D1B7FB311006B1B1A /* IvCollision.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvCollision.xcodeproj; path = IvCollision/IvCollision.xcodeproj; sourceTree = "<group>"; };
 		CEEFF7931B7FB31C006B1B1A /* IvCurves.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvCurves.xcodeproj; path = IvCurves/IvCurves.xcodeproj; sourceTree = "<group>"; };
 		CEEFF7991B7FB326006B1B1A /* IvEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvEngine.xcodeproj; path = IvEngine/IvEngine.xcodeproj; sourceTree = "<group>"; };
@@ -253,7 +277,6 @@
 			isa = PBXGroup;
 			children = (
 				5EC5756A2254A7CF00DDE6FF /* Test */,
-				5EC575672254A6B000DDE6FF /* Shader */,
 				5EBC7C5D225380E900F47544 /* Player */,
 				01AAFDEE22535DA000472426 /* Game.cpp */,
 				01AAFDEF22535DA000472426 /* Game.hpp */,
@@ -282,6 +305,8 @@
 		5EC5756A2254A7CF00DDE6FF /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				5EE35314225B304800B7FE18 /* Resources */,
+				5EE352F722573ED200B7FE18 /* TestRenderTargets */,
 				5EC5756B2254A7D800DDE6FF /* TestCustomAttributes */,
 			);
 			path = Test;
@@ -290,10 +315,43 @@
 		5EC5756B2254A7D800DDE6FF /* TestCustomAttributes */ = {
 			isa = PBXGroup;
 			children = (
+				5EC575672254A6B000DDE6FF /* Shader */,
 				5EC5756C2254A7EF00DDE6FF /* Test.cpp */,
 				5EC5756D2254A7EF00DDE6FF /* Test.hpp */,
 			);
 			path = TestCustomAttributes;
+			sourceTree = "<group>";
+		};
+		5EE352F722573ED200B7FE18 /* TestRenderTargets */ = {
+			isa = PBXGroup;
+			children = (
+				5EE352FB2257422B00B7FE18 /* Shader */,
+				5EE352F822573EEF00B7FE18 /* TestRT.cpp */,
+				5EE352F922573EEF00B7FE18 /* TestRT.hpp */,
+				5E833B22225B7E7E00040747 /* Shape.cpp */,
+				5E833B23225B7E7E00040747 /* Shape.hpp */,
+			);
+			path = TestRenderTargets;
+			sourceTree = "<group>";
+		};
+		5EE352FB2257422B00B7FE18 /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				5EE352FC2257423F00B7FE18 /* testShaderRT.glslf */,
+				5EE352FD2257425100B7FE18 /* testShaderRT.glslv */,
+				5E833B25225B838100040747 /* testBlurShader.glslv */,
+				5E833B26225B839200040747 /* testBlurShader.glslf */,
+			);
+			path = Shader;
+			sourceTree = "<group>";
+		};
+		5EE35314225B304800B7FE18 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5EE3532A225B745F00B7FE18 /* player.tga */,
+				5EE35325225B39B300B7FE18 /* b1.tga */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		CE9F6FF61B7FB2E1007A3522 = {
@@ -531,6 +589,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EC5756E2254A7EF00DDE6FF /* Test.cpp in Sources */,
+				5EE352FA22573EEF00B7FE18 /* TestRT.cpp in Sources */,
+				5E833B24225B7E7E00040747 /* Shape.cpp in Sources */,
 				01AAFDF022535DA000472426 /* Game.cpp in Sources */,
 				5EBC7C60225380F500F47544 /* Player.cpp in Sources */,
 			);

@@ -9,6 +9,7 @@
 
 #include"Player/Player.hpp"
 #include"Test/TestCustomAttributes/Test.hpp"
+#include"Test/TestRenderTargets/TestRT.hpp"
 
 #include <stdio.h>
 #include<iostream>
@@ -17,6 +18,7 @@
 #include<IvBezier.h>
 #include<IvVector3.h>
 #include<IvVertexFormats.h>
+#include<IvRendererOGL.h>
 
 class Game:public IvGame
 {
@@ -27,7 +29,7 @@ public:
     
    // Player*         mPlayer;
     
-    Test *test;
+    TestRT *test;
     
 protected:
     virtual void UpdateObjects( float dt );

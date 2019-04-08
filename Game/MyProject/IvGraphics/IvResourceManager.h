@@ -10,8 +10,7 @@
 // found in the LICENSE file.
 //===============================================================================
 
-#ifndef __IvResourceManager__h__
-#define __IvResourceManager__h__
+#pragma once
 
 //-------------------------------------------------------------------------------
 //-- Dependencies ---------------------------------------------------------------
@@ -19,6 +18,9 @@
 
 #include "IvVertexFormats.h"
 #include "IvTextureFormats.h"
+
+#include "IvRenderTarget.h"
+#include "IvFrameBuffer.h"
 
 //-------------------------------------------------------------------------------
 //-- Typedefs, Structs ----------------------------------------------------------
@@ -74,6 +76,10 @@ public:
                                      void** data, unsigned int levels, IvDataUsage usage) = 0;
     virtual void Destroy(IvTexture* tex) = 0;
 
+    virtual IvRenderTarget* CreateRenderTarget(RenderTargetType renderTargetType)=0;
+    
+    virtual IvFrameBuffer* CreateFrameBuffer(std::vector<IvRenderTarget*> renderTarget)=0;
+    
 protected:
     IvResourceManager() {}
     virtual ~IvResourceManager() {}
@@ -93,4 +99,3 @@ private:
 //-- Externs --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
 
-#endif

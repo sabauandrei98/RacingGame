@@ -16,6 +16,7 @@
 #include<IvVector3.h>
 #include<IvVector2.h>
 #include<IvVector4.h>
+#include"IvTexture.h"
 //-------------------------------------------------------------------------------
 //-- Dependencies ---------------------------------------------------------------
 //-------------------------------------------------------------------------------
@@ -40,6 +41,7 @@ public:
     virtual void SetUniform(const char* name,IvVector2 value)=0;
     virtual void SetUniform(const char* name,IvVector3 value)=0;
     virtual void SetUniform(const char* name,IvVector4 value)=0;
+    virtual void SetUniform(const char* name,unsigned int tetxure)=0;
     
     unsigned int GetProgramID() { return programID; }
     void SetProgramID(unsigned pID) { programID = pID; }

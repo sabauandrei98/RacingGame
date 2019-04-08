@@ -7,16 +7,33 @@
 
 #pragma once
 
+
+//-------------------------------------------------------------------------------
+//-- Typedefs, Structs ----------------------------------------------------------
+//-------------------------------------------------------------------------------
+
+enum RenderTargetType
+{
+    COLOR,
+    DEPTH,
+    DEPTH_STENCIL
+};
+
+//-------------------------------------------------------------------------------
+//-- Classes --------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+
 class IvRenderTarget
 {
 public:
-    virtual bool Create()=0;
+    virtual void Setup(int width,int height)=0;
+    virtual unsigned int GetReference()=0;
+    virtual RenderTargetType GetRenderTargetType()=0;
     
 protected:
-    IvRenderTarget(unsigned int texture);
+    IvRenderTarget(){}
     virtual ~IvRenderTarget(){}
     
 private:
-    unsigned int texture;
     
 };

@@ -16,7 +16,7 @@ bool IvGame::Create()
 Game::Game()
 {
     //mPlayer=new Player();
-    test=new Test();
+    test=new TestRT();
 }
 Game::~Game()
 {
@@ -25,10 +25,16 @@ Game::~Game()
 }
 bool Game::PostRendererInitialize()
 {
+    
+    IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
+    IvRendererOGL::mRenderer->SetDepthWrite(false);
+    IvRendererOGL::mRenderer->SetDepthTest(kDisableDepthTest);
+    
     if ( !IvGame::PostRendererInitialize() )
         return false;
     
-    test->Setup("testShader");
+    test->Create();
+    test->Setup();
     
     ::IvSetDefaultLighting();
     
@@ -42,5 +48,7 @@ void Game::UpdateObjects( float dt )
 
 void Game::Render()
 {
+//    IvSetDefaultViewer(-10.0,-10.0,10.0);
+//    IvDrawTeapot();
     test->Draw();
 }
