@@ -13,7 +13,8 @@
 // -----------------------------
 
 SceneNode::SceneNode(const std::string& name) :
-    _name(name) {
+    _name(name), _parent(nullptr) {
+        _absolute_transform.Identity();
     }
 
 SceneNode::~SceneNode() {
@@ -24,7 +25,7 @@ SceneNode::~SceneNode() {
 // --------------------------------
 
 // finds the first node with the given name, if it doesn't exists returns nullptr
-SceneNode* SceneNode::findFirstNodeWithName(std::string name) const {
+SceneNode* SceneNode::findFirstNodeWithName(const std::string& name) const {
     for (auto& i : _children)
         if (i->_name == name)
             return i.get();
@@ -39,7 +40,7 @@ SceneNode* SceneNode::findFirstNodeWithName(std::string name) const {
 }
 
 // finds all the nodes with the given name
-void SceneNode::findAllNodesWithName(std::string name, std::vector<SceneNode*>& scene_nodes) const {
+void SceneNode::findAllNodesWithName(const std::string& name, std::vector<SceneNode*>& scene_nodes) const {
     for (auto& i : _children)
         if (i->_name == name)
             scene_nodes.push_back(i.get());
@@ -49,8 +50,9 @@ void SceneNode::findAllNodesWithName(std::string name, std::vector<SceneNode*>& 
 }
 
 // adds a child
-void SceneNode::addChild(const SceneNode& child) {
-    _children.push_back(std::make_shared<SceneNode>(std::move(child)));
+void SceneNode::addChild(const std::shared_ptr<SceneNode>& child) {
+    child->_parent = this;
+    _children.push_back(child);
 }
 
 // removes this node and all its children from the graph
@@ -107,6 +109,7 @@ void SceneNode::updateNode(float dt) {
     //TODO: update the bounding box of this node
 }
 
+// collects the rendering packets
 void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<RenderPacket>& render_packets) {
     if (!_enabled)
         return;
@@ -114,10 +117,9 @@ void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<Ren
     //TODO: perform visibility testing here
     
     if (_rendarable) {
-        //TODO: calculate world view projection and other uniforms
-        
         RenderPacket packet;
         packet._mesh_instance = _rendarable;
+        packet._world_view_projection_matrix = _absolute_transform * camera->getView() * camera->getProjection();
         
         render_packets.push_back(packet);
     }
@@ -126,5 +128,14 @@ void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<Ren
         i->collectRenderingPackets(camera, render_packets);
 }
 
+// sets the node animator
+void SceneNode::setAnimator(const std::shared_ptr<NodeAnimator>& animator) {
+    _animator = animator;
+}
+
+// sets the mesh instance
+void SceneNode::setRenderable(const std::shared_ptr<MeshInstance>& renderable) {
+    _rendarable = renderable;
+}
 
 

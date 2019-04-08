@@ -22,16 +22,19 @@ public:
     SceneNode(const std::string&);
     virtual ~SceneNode();
     
-    SceneNode* findFirstNodeWithName(std::string) const;
-    void findAllNodesWithName(std::string, std::vector<SceneNode*>&) const;
+    SceneNode* findFirstNodeWithName(const std::string&) const;
+    void findAllNodesWithName(const std::string&, std::vector<SceneNode*>&) const;
     
-    void addChild(const SceneNode&);
+    void addChild(const std::shared_ptr<SceneNode>&);
     void remove();
     
     void setLocalTransform(const IvVector3&, const IvVector3&, const IvVector3&);
     void setLocalPosition(const IvVector3&);
     const IvMatrix44& getAbsoluteTransform() const;
     IvVector3 getAbsolutePosition() const;
+    
+    void setAnimator(const std::shared_ptr<NodeAnimator>&);
+    void setRenderable(const std::shared_ptr<MeshInstance>&);
     
     virtual void updateAbsoluteTransform();
     virtual void updateNode(float);

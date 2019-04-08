@@ -12,7 +12,7 @@
 class SceneGraph {
 public:
     // public function(s) and method(s)
-    inline void updateScene(float);
+    void updateScene(float);
     void drawScene();
     
     void setRoot(const std::shared_ptr<SceneNode>&);

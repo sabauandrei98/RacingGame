@@ -9,9 +9,17 @@
 
 #include "SceneNode.hpp"
 
-class CameraSceneNode : public SceneNode {
+class CameraSceneNode : std::enable_shared_from_this<CameraSceneNode>, public SceneNode {
+public:
     // constructor(s) and destructor
     CameraSceneNode(const std::string&);
+    const IvMatrix44& getView() const;
+    const IvMatrix44& getProjection() const;
+    
+private:
+    // private variable(s)
+    IvMatrix44  _view;
+    IvMatrix44  _projection;
     
     // TODO
 };

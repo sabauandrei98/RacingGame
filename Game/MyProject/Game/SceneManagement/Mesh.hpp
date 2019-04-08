@@ -25,6 +25,8 @@ public:
     ~Mesh();
     
     // public functions and methods
+    
+    // sets the vertex buffer 
     template <class T>
     void setVertexBuffer(const std::vector<T>& vertices, const IvVertexFormat& vertex_format) {
         size_t  current_offset;

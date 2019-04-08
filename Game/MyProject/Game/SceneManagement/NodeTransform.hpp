@@ -13,6 +13,9 @@
 
 class NodeTransform {
 public:
+    // constructor(s) and destructor
+    NodeTransform();
+    
     // public function(s) and method(s)
     void set(const IvVector3&, const IvVector3&, const IvVector3&);
     void set(const IvVector3&);
