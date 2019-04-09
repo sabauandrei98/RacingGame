@@ -36,3 +36,5 @@
 *.xcbkptlist
 *.xcuserdatad
 *.xcuserstate
+
+*.DS_Store
