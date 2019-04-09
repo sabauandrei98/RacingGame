@@ -25,4 +25,3 @@ private:
     Game& operator=( const Game& other );
 
 };
-

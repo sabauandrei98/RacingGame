@@ -46,6 +46,10 @@
 		01AAFDF022535DA000472426 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDEE22535DA000472426 /* Game.cpp */; };
 		01AAFDF42253684C00472426 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDF22253684C00472426 /* Camera.cpp */; };
 		01AAFDF822536A3600472426 /* CameraTestControler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDF622536A3600472426 /* CameraTestControler.cpp */; };
+		5E3EC4562254E26000BA62EA /* testShader.glslf in Copy Files */ = {isa = PBXBuildFile; fileRef = 5EC575682254A6C400DDE6FF /* testShader.glslf */; };
+		5E3EC4572254E26000BA62EA /* testShader.glslv in Copy Files */ = {isa = PBXBuildFile; fileRef = 5EC575692254A6D700DDE6FF /* testShader.glslv */; };
+		5EBC7C60225380F500F47544 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC7C5E225380F500F47544 /* Player.cpp */; };
+		5EC5756E2254A7EF00DDE6FF /* Test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EC5756C2254A7EF00DDE6FF /* Test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,13 +168,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		011071452244E4A9006011E1 /* CopyFiles */ = {
+		011071452244E4A9006011E1 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				5E3EC4562254E26000BA62EA /* testShader.glslf in Copy Files */,
+				5E3EC4572254E26000BA62EA /* testShader.glslv in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -191,6 +198,12 @@
 		01AAFDF32253684C00472426 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		01AAFDF622536A3600472426 /* CameraTestControler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraTestControler.cpp; sourceTree = "<group>"; };
 		01AAFDF722536A3600472426 /* CameraTestControler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CameraTestControler.hpp; sourceTree = "<group>"; };
+		5EBC7C5E225380F500F47544 /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		5EBC7C5F225380F500F47544 /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		5EC575682254A6C400DDE6FF /* testShader.glslf */ = {isa = PBXFileReference; lastKnownFileType = text; path = testShader.glslf; sourceTree = "<group>"; };
+		5EC575692254A6D700DDE6FF /* testShader.glslv */ = {isa = PBXFileReference; lastKnownFileType = text; path = testShader.glslv; sourceTree = "<group>"; };
+		5EC5756C2254A7EF00DDE6FF /* Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Test.cpp; sourceTree = "<group>"; };
+		5EC5756D2254A7EF00DDE6FF /* Test.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Test.hpp; sourceTree = "<group>"; };
 		CEEFF78D1B7FB311006B1B1A /* IvCollision.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvCollision.xcodeproj; path = IvCollision/IvCollision.xcodeproj; sourceTree = "<group>"; };
 		CEEFF7931B7FB31C006B1B1A /* IvCurves.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvCurves.xcodeproj; path = IvCurves/IvCurves.xcodeproj; sourceTree = "<group>"; };
 		CEEFF7991B7FB326006B1B1A /* IvEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IvEngine.xcodeproj; path = IvEngine/IvEngine.xcodeproj; sourceTree = "<group>"; };
@@ -245,7 +258,10 @@
 		011071482244E4A9006011E1 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				01A5AEAE2257A2F5002EDC18 /* Game.hpp */,
+/*				01A5AEAE2257A2F5002EDC18  Game.hpp , */
+				5EC5756A2254A7CF00DDE6FF /* Test */,
+				5EC575672254A6B000DDE6FF /* Shader */,
+				5EBC7C5D225380E900F47544 /* Player */,
 				01AAFDEE22535DA000472426 /* Game.cpp */,
 				01AAFDF722536A3600472426 /* CameraTestControler.hpp */,
 				01AAFDF622536A3600472426 /* CameraTestControler.cpp */,
@@ -253,6 +269,41 @@
 				01AAFDF22253684C00472426 /* Camera.cpp */,
 			);
 			path = Game;
+			sourceTree = "<group>";
+		};
+		5EBC7C5D225380E900F47544 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				5EBC7C5E225380F500F47544 /* Player.cpp */,
+				5EBC7C5F225380F500F47544 /* Player.hpp */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		5EC575672254A6B000DDE6FF /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				5EC575682254A6C400DDE6FF /* testShader.glslf */,
+				5EC575692254A6D700DDE6FF /* testShader.glslv */,
+			);
+			path = Shader;
+			sourceTree = "<group>";
+		};
+		5EC5756A2254A7CF00DDE6FF /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				5EC5756B2254A7D800DDE6FF /* TestCustomAttributes */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		5EC5756B2254A7D800DDE6FF /* TestCustomAttributes */ = {
+			isa = PBXGroup;
+			children = (
+				5EC5756C2254A7EF00DDE6FF /* Test.cpp */,
+				5EC5756D2254A7EF00DDE6FF /* Test.hpp */,
+			);
+			path = TestCustomAttributes;
 			sourceTree = "<group>";
 		};
 		CE9F6FF61B7FB2E1007A3522 = {
@@ -345,7 +396,7 @@
 			buildPhases = (
 				011071432244E4A9006011E1 /* Sources */,
 				011071442244E4A9006011E1 /* Frameworks */,
-				011071452244E4A9006011E1 /* CopyFiles */,
+				011071452244E4A9006011E1 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -490,8 +541,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				01AAFDF42253684C00472426 /* Camera.cpp in Sources */,
-				01AAFDF022535DA000472426 /* Game.cpp in Sources */,
 				01AAFDF822536A3600472426 /* CameraTestControler.cpp in Sources */,
+				5EC5756E2254A7EF00DDE6FF /* Test.cpp in Sources */,
+				01AAFDF022535DA000472426 /* Game.cpp in Sources */,
+				5EBC7C60225380F500F47544 /* Player.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,7 +600,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -610,7 +663,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
