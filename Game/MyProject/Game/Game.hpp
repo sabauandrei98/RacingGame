@@ -17,7 +17,7 @@ public:
     CameraTestControler*         cameraTest;
 
 protected:
-    virtual void UpdateObjects( float dt );
+    virtual void UpdateObjects(float dt);
     virtual void Render();
     
 private:
