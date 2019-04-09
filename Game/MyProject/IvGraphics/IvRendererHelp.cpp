@@ -181,17 +181,17 @@ IvDrawAxes()
         dataPtr[0].color.Set(255, 0, 0, 255);
         dataPtr[0].position.Set(0.0f, 0.0f, 0.0f);
         dataPtr[1].color.Set(255, 0, 0, 255);
-        dataPtr[1].position.Set(2.5f, 0.0f, 0.0f);
+        dataPtr[1].position.Set(100.5f, 0.0f, 0.0f);
 
         dataPtr[2].color.Set(0, 255, 0, 255);
         dataPtr[2].position.Set(0.0f, 0.0f, 0.0f);
         dataPtr[3].color.Set(0, 255, 0, 255);
-        dataPtr[3].position.Set(0.0f, 2.5f, 0.0f);
+        dataPtr[3].position.Set(0.0f, 100.5f, 0.0f);
 
         dataPtr[4].color.Set(0, 0, 255, 255);
         dataPtr[4].position.Set(0.0f, 0.0f, 0.0f);
         dataPtr[5].color.Set(0, 0, 255, 255);
-        dataPtr[5].position.Set(0.0f, 0.0f, 2.5f);
+        dataPtr[5].position.Set(0.0f, 0.0f, 100.5f);
 
         axesVerts = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(kCPFormat, 6, dataPtr,
                                                                                     kImmutableUsage);
@@ -236,9 +236,9 @@ IvDrawFloor()
             {
                 IvColor color;
                 if ( ( i & 0x1 ) == (j & 0x1 ))
-                    color.Set( 64, 64, 64, 255 );
+                    color.Set( 14, 14, 14, 255 );
                 else
-                    color.Set( 192, 192, 192, 255 );
+                    color.Set( 5, 5, 5, 255 );
                 vertexPtr[currentVertex].position.Set(0.0f + (float)i, 0.0f + (float)j, 0.0f);
                 vertexPtr[currentVertex].color = color;
                 vertexPtr[currentVertex+1].position.Set(3.0f + (float)i, 0.0f + (float)j, 0.0f);
