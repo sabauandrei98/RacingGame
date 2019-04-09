@@ -1,37 +1,44 @@
-bool IvGame::Create()
+#include "Game.hpp"
+
+bool
+IvGame::Create() 
 {
     IvGame::mGame = new Game();
     return ( IvGame::mGame != 0 );
-    
 }
-Game::Game()
-{
-    //mPlayer=new Player();
-    test=new Test();
-}
+
+Game::Game() : IvGame(){}
+
 Game::~Game()
 {
-    //delete mPlayer;
-    delete test;
+    delete cameraTest;
 }
-bool Game::PostRendererInitialize()
+
+
+bool 
+Game::PostRendererInitialize()
 {
+    // Set up base class 
     if ( !IvGame::PostRendererInitialize() )
         return false;
     
-    test->Setup("testShader");
-    
+    cameraTest = new CameraTestControler();
+    if (!cameraTest)
+        return false;
+
     ::IvSetDefaultLighting();
-    
+
     return true;
 }
 
-void Game::UpdateObjects( float dt )
+void
+Game::UpdateObjects( float dt )
 {
-    
+    cameraTest->Update( dt );
+}
+void
+Game::Render()
+{
+    cameraTest->Render();
 }
 
-void Game::Render()
-{
-    test->Draw();
-}

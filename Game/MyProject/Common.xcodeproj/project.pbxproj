@@ -52,6 +52,8 @@
 		0110718A2244EAF0006011E1 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011071892244EAF0006011E1 /* CoreVideo.framework */; };
 		0110718C2244EAFB006011E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0110718B2244EAFB006011E1 /* Foundation.framework */; };
 		01AAFDF022535DA000472426 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDEE22535DA000472426 /* Game.cpp */; };
+		01AAFDF42253684C00472426 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDF22253684C00472426 /* Camera.cpp */; };
+		01AAFDF822536A3600472426 /* CameraTestControler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDF622536A3600472426 /* CameraTestControler.cpp */; };
 		5E3EC4562254E26000BA62EA /* testShader.glslf in Copy Files */ = {isa = PBXBuildFile; fileRef = 5EC575682254A6C400DDE6FF /* testShader.glslf */; };
 		5E3EC4572254E26000BA62EA /* testShader.glslv in Copy Files */ = {isa = PBXBuildFile; fileRef = 5EC575692254A6D700DDE6FF /* testShader.glslv */; };
 		5EBC7C60225380F500F47544 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC7C5E225380F500F47544 /* Player.cpp */; };
@@ -215,8 +217,11 @@
 		011071892244EAF0006011E1 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		0110718B2244EAFB006011E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01AAFDEE22535DA000472426 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
-		01AAFDEF22535DA000472426 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		01AAFDF122535E5300472426 /* Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Game; sourceTree = BUILT_PRODUCTS_DIR; };
+		01AAFDF22253684C00472426 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		01AAFDF32253684C00472426 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
+		01AAFDF622536A3600472426 /* CameraTestControler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraTestControler.cpp; sourceTree = "<group>"; };
+		01AAFDF722536A3600472426 /* CameraTestControler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CameraTestControler.hpp; sourceTree = "<group>"; };
 		5EBC7C5E225380F500F47544 /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		5EBC7C5F225380F500F47544 /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		5EC575682254A6C400DDE6FF /* testShader.glslf */ = {isa = PBXFileReference; lastKnownFileType = text; path = testShader.glslf; sourceTree = "<group>"; };
@@ -277,7 +282,6 @@
 		011071482244E4A9006011E1 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				00D669CC2254E76200E7BBB8 /* Mesh.cpp */,
 				00D669CB2254E76200E7BBB8 /* Mesh.hpp */,
 				00D669CA2254E76200E7BBB8 /* MeshInstance.cpp */,
@@ -295,14 +299,14 @@
 				00F4362F225773B400E4EE47 /* SceneGraph.cpp */,
 				00F43630225773B400E4EE47 /* SceneGraph.hpp */,
 				00D669B52254E35800E7BBB8 /* shaders */,
-=======
 				5EC5756A2254A7CF00DDE6FF /* Test */,
 				5EC575672254A6B000DDE6FF /* Shader */,
 				5EBC7C5D225380E900F47544 /* Player */,
 				01AAFDEE22535DA000472426 /* Game.cpp */,
->>>>>>> master
-				01AAFDEF22535DA000472426 /* Game.hpp */,
-				01AAFDEE22535DA000472426 /* Game.cpp */,
+				01AAFDF722536A3600472426 /* CameraTestControler.hpp */,
+				01AAFDF622536A3600472426 /* CameraTestControler.cpp */,
+				01AAFDF32253684C00472426 /* Camera.hpp */,
+				01AAFDF22253684C00472426 /* Camera.cpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -576,7 +580,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				00F4362022573AE700E4EE47 /* SceneNode.cpp in Sources */,
 				00F436262257410800E4EE47 /* CameraSceneNode.cpp in Sources */,
 				00D669D12254E76200E7BBB8 /* Mesh.cpp in Sources */,
@@ -584,13 +587,12 @@
 				00D669D22254E76200E7BBB8 /* RenderPacket.cpp in Sources */,
 				00F436192255FD3E00E4EE47 /* NodeTransform.cpp in Sources */,
 				00F4362322573C3A00E4EE47 /* NodeAnimator.cpp in Sources */,
-				01AAFDF022535DA000472426 /* Game.cpp in Sources */,
 				00D669D02254E76200E7BBB8 /* MeshInstance.cpp in Sources */,
-=======
+				01AAFDF42253684C00472426 /* Camera.cpp in Sources */,
+				01AAFDF822536A3600472426 /* CameraTestControler.cpp in Sources */,
 				5EC5756E2254A7EF00DDE6FF /* Test.cpp in Sources */,
 				01AAFDF022535DA000472426 /* Game.cpp in Sources */,
 				5EBC7C60225380F500F47544 /* Player.cpp in Sources */,
->>>>>>> master
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,7 +648,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -709,7 +711,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
