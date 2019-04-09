@@ -37,8 +37,9 @@ class IvTexture;
 class IvResourceManagerOGL : public IvResourceManager
 { 
 public:
-    IvVertexBuffer* CreateVertexBuffer(IvVertexFormat format, unsigned int numVertices,
-                                       void* data, IvDataUsage usage) final;
+    IvVertexBuffer* CreateVertexBuffer(IvVertexFormat format, unsigned int numVertices,void* data, IvDataUsage usage) final ;
+    IvVertexBuffer* CreateVertexBuffer(VertexDescription description,unsigned int numVertices,void* data, IvDataUsage usage) final;
+    
     void Destroy(IvVertexBuffer* vb) final;
     
     IvIndexBuffer* CreateIndexBuffer(unsigned int numIndices, void* data,

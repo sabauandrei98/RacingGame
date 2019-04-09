@@ -54,11 +54,22 @@ IvResourceManagerOGL::~IvResourceManagerOGL()
 // Create platform-dependent vertex buffer
 //-------------------------------------------------------------------------------
 IvVertexBuffer* 
-IvResourceManagerOGL::CreateVertexBuffer( IvVertexFormat format, unsigned int numVertices,
-                                          void* data, IvDataUsage usage )
+IvResourceManagerOGL::CreateVertexBuffer( IvVertexFormat format, unsigned int numVertices,void* data, IvDataUsage usage )
 {
     IvVertexBufferOGL* newBuffer = new IvVertexBufferOGL();
     if ( !newBuffer->Create( format, numVertices, data, usage ) )
+    {
+        delete newBuffer;
+        newBuffer = 0;
+    }
+    return newBuffer;
+}
+
+IvVertexBuffer*
+IvResourceManagerOGL::CreateVertexBuffer( VertexDescription description, unsigned int numVertices,void* data, IvDataUsage usage)
+{
+    IvVertexBufferOGL* newBuffer = new IvVertexBufferOGL();
+    if ( !newBuffer->Create( description, numVertices, data, usage ) )
     {
         delete newBuffer;
         newBuffer = 0;
@@ -136,7 +147,7 @@ IvVertexShader*
 IvResourceManagerOGL::CreateVertexShaderFromString( const char* string )
 {
     IvVertexShaderOGL* vertexShader = new IvVertexShaderOGL();
-    if ( !vertexShader->CreateFromString(  string ) )
+    if ( !vertexShader->CreateFromString( string ))
     {
         delete vertexShader;
         vertexShader = 0;

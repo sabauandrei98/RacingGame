@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E3EC44D2254BB9400BA62EA /* IvCustomVertexFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E3EC44C2254BB9400BA62EA /* IvCustomVertexFormat.cpp */; };
 		CE29002A0C94CA0C002F23B6 /* IvShaderProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = CE2900290C94CA0C002F23B6 /* IvShaderProgram.h */; };
 		CE29002D0C94CA1A002F23B6 /* IvShaderProgramOGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE29002B0C94CA1A002F23B6 /* IvShaderProgramOGL.cpp */; };
 		CE29002E0C94CA1A002F23B6 /* IvShaderProgramOGL.h in Headers */ = {isa = PBXBuildFile; fileRef = CE29002C0C94CA1A002F23B6 /* IvShaderProgramOGL.h */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		011070EF2244E034006011E1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		5E3EC44C2254BB9400BA62EA /* IvCustomVertexFormat.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IvCustomVertexFormat.cpp; sourceTree = "<group>"; };
 		CE2900290C94CA0C002F23B6 /* IvShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = IvShaderProgram.h; sourceTree = "<group>"; };
 		CE29002B0C94CA1A002F23B6 /* IvShaderProgramOGL.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = IvShaderProgramOGL.cpp; sourceTree = "<group>"; };
 		CE29002C0C94CA1A002F23B6 /* IvShaderProgramOGL.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = IvShaderProgramOGL.h; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				CEE19D7B0C67F7E100D80249 /* IvVertexBufferOGL.h */,
 				CEF2879E0C92292200FC2FAC /* IvVertexShaderOGL.cpp */,
 				CEF287A00C92292700FC2FAC /* IvVertexShaderOGL.h */,
+				5E3EC44C2254BB9400BA62EA /* IvCustomVertexFormat.cpp */,
 			);
 			path = OGL;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				CEF2879F0C92292200FC2FAC /* IvVertexShaderOGL.cpp in Sources */,
 				CEF287CF0C92311000FC2FAC /* IvFragmentShaderOGL.cpp in Sources */,
 				CEEFD4340C932FDE0050541B /* IvRendererOGL.cpp in Sources */,
+				5E3EC44D2254BB9400BA62EA /* IvCustomVertexFormat.cpp in Sources */,
 				CE29002D0C94CA1A002F23B6 /* IvShaderProgramOGL.cpp in Sources */,
 				CE2900830C94E0AA002F23B6 /* IvRendererHelpOGL.cpp in Sources */,
 				CE8C5E280D748EAC0006FDB9 /* IvTextureOGL.cpp in Sources */,
