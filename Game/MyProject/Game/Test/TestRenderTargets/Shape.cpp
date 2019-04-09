@@ -29,19 +29,24 @@ void Shape::SetVertexDescription(VertexDescription vertexDescription)
 
 void Shape::Setup(const char *shaderName,const char* textureName)
 {
-
     std::vector<unsigned int> indices;
     for(int i=0;i<noVertices;i++)
     {
         indices.push_back(i);
     }
     
-    unsigned int noIndices =(unsigned int) indices.size();
-    UInt32* indexPtr = (UInt32*)IvStackAllocator::mScratchAllocator->
-    Allocate(sizeof(UInt32)* noIndices);
+//    size_t currentOffset = IvStackAllocator::mScratchAllocator->GetCurrentOffset();
+//
+//    unsigned int noIndices =(unsigned int) indices.size();
+//    UInt32* indexPtr = (UInt32*)IvStackAllocator::mScratchAllocator->
+//    Allocate(sizeof(UInt32)* noIndices);
+//
+//    IvStackAllocator::mScratchAllocator->Reset(currentOffset);
     
-    for ( unsigned int i = 0; i < noIndices; ++i )
-        indexPtr[i] = indices[i];
+//    for ( unsigned int i = 0; i < noIndices; ++i )
+//        indexPtr[i] = indices[i];
+    
+    this->LoadTexture(textureName);
     
     IvVertexShader* vs =IvRenderer::mRenderer->GetResourceManager()
     ->CreateVertexShaderFromFile(shaderName);
@@ -56,16 +61,7 @@ void Shape::Setup(const char *shaderName,const char* textureName)
     ->CreateVertexBuffer(vertexDescription,noVertices,vertexData,kImmutableUsage);
     
     indexBuffer = IvRenderer::mRenderer->GetResourceManager()
-    ->CreateIndexBuffer(noVertices,indexPtr,kImmutableUsage);
-    
-    IvImage *image=IvImage::CreateFromFile(textureName);
-    if(image)
-    {
-        mTexture=IvRenderer::mRenderer->GetResourceManager()
-        ->CreateTexture((image->GetBytesPerPixel()==4) ? kRGBA32TexFmt : kRGB24TexFmt,image
-                        ->GetWidth(), image->GetHeight(), image->GetPixels(), kImmutableUsage);
-    }
-    
+    ->CreateIndexBuffer(noVertices,indices.data(),kImmutableUsage);
     
 }
 
@@ -74,13 +70,26 @@ void Shape::SetNoVertices(unsigned int noVertices)
     this->noVertices=noVertices;
 }
 
+void Shape::LoadTexture(const char* textureName)
+{
+    IvImage *image=IvImage::CreateFromFile(textureName);
+    if(image)
+    {
+        mTexture=IvRenderer::mRenderer->GetResourceManager()
+        ->CreateTexture((image->GetBytesPerPixel()==4) ? kRGBA32TexFmt : kRGB24TexFmt,image
+                        ->GetWidth(), image->GetHeight(), image->GetPixels(), kImmutableUsage);
+    }
+}
+
 void Shape::SetTexture(const char *name, unsigned int reference)
 {
     mShader->SetUniform(name,reference);
+    IvRenderer::mRenderer->SetShaderProgram(mShader);
 }
 
-void Shape::SetTexture()
+void Shape::SetUniforms()
 {
+    IvRenderer::mRenderer->SetShaderProgram(mShader);
     textureUniform=mShader->GetUniform("Texture");
     if(textureUniform)
         textureUniform->SetValue(mTexture);
@@ -93,16 +102,5 @@ void Shape::Draw()
                                 indexBuffer,
                                 noVertices,
                                 mShader);
-    
-  
-    //   mShader->SetUniform("MyColor",IvVector4{0.1,0.5,0.1,0.6});
-    //   IvRenderer::mRenderer->Draw(kTriangleListPrim,
-    //                                    vertexBuffer,
-    //                                    indexBuffer,
-    //                                    3,
-    //                                    mShader);
-    
-    
- 
 }
 

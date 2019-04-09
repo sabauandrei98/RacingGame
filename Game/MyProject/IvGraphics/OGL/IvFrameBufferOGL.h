@@ -29,8 +29,8 @@ public:
     
     void Bind(int width=1280,int height=720);
     bool Unbind();
-    std::vector<IvRenderTarget*> GetTextures();
-    void AttachToCurrentlyFBO();
+    
+    std::vector<IvRenderTarget*> GetTextures() const ;
 
 protected:
     IvFrameBufferOGL();

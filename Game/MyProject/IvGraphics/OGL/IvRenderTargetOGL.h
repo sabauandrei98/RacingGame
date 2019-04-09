@@ -28,9 +28,11 @@ class IvRenderTargetOGL:private IvRenderTarget
 public:
     friend class IvResourceManagerOGL;
     
-    void Setup(int width,int height);
-    unsigned int GetReference();
-    RenderTargetType GetRenderTargetType();
+    unsigned int GetReference() const;
+    RenderTargetType GetRenderTargetType() const;
+    
+    void SetStencilStatements(const std::vector<StencilStatements>& stencilStatements);
+    std::vector<StencilStatements> GetStencilStatements() const;
     
 protected:
     //constructor/desctructor
@@ -38,7 +40,10 @@ protected:
     IvRenderTargetOGL(const RenderTargetType& renderTargetType);
     ~IvRenderTargetOGL();
     
+    void Setup(int width,int height);
+    
 private:
     unsigned int reference;
     RenderTargetType renderTargetType;
+    std::vector<StencilStatements> stencilStamentes;
 };

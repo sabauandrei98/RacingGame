@@ -7,7 +7,7 @@
 
 #include "IvRenderTargetOGL.h"
 
-IvRenderTargetOGL::IvRenderTargetOGL():renderTargetType(RenderTargetType::COLOR),reference(0)
+IvRenderTargetOGL::IvRenderTargetOGL()
 {
     
 }
@@ -21,18 +21,31 @@ IvRenderTargetOGL::~IvRenderTargetOGL()
     if(renderTargetType==RenderTargetType::COLOR)
         glDeleteTextures(1,&reference);
     else if(renderTargetType==RenderTargetType::DEPTH)
-        glDeleteRenderbuffers(1,&reference);
+        glDeleteRenderbuffers(2,&reference);
+    else if(renderTargetType==RenderTargetType::DEPTH_STENCIL)
+        glDeleteRenderbuffers(3,&reference);
 }
 
-unsigned int IvRenderTargetOGL::GetReference()
+unsigned int IvRenderTargetOGL::GetReference() const
 {
     return reference;
 }
 
-RenderTargetType IvRenderTargetOGL::GetRenderTargetType()
+RenderTargetType IvRenderTargetOGL::GetRenderTargetType() const
 {
     return renderTargetType;
 }
+
+void IvRenderTargetOGL::SetStencilStatements(const std::vector<StencilStatements> &stencilStatements)
+{
+    this->stencilStamentes=stencilStatements;
+}
+
+std::vector<StencilStatements> IvRenderTargetOGL::GetStencilStatements() const
+{
+    return stencilStamentes;
+}
+
 
 void IvRenderTargetOGL::Setup(int width,int height)
 {
@@ -57,27 +70,30 @@ void IvRenderTargetOGL::Setup(int width,int height)
                         GL_TEXTURE_MAG_FILTER,
                         GL_LINEAR);
     
-       // glBindTexture(GL_TEXTURE_2D,0);
+        glBindTexture(GL_TEXTURE_2D,0);
     }
     else if(renderTargetType==RenderTargetType::DEPTH)
     {
-        glGenRenderbuffers(2,&reference);
-        glBindRenderbuffer(GL_RENDERBUFFER,reference);
+        unsigned int mReference;
+        glGenRenderbuffers(2,&mReference);
+        glBindRenderbuffer(GL_RENDERBUFFER,mReference);
         glRenderbufferStorage(GL_RENDERBUFFER,
                               GL_DEPTH_COMPONENT,
                               width,
                               height);
-        
-     //   glBindRenderbuffer(GL_RENDERBUFFER,0);
+        reference=mReference;
+        glBindRenderbuffer(GL_RENDERBUFFER,0);
     }
     else if(renderTargetType==RenderTargetType::DEPTH_STENCIL)
     {
-        glGenRenderbuffers(3, &reference);
-        glBindRenderbuffer(GL_RENDERBUFFER,reference);
+        unsigned int mReference;
+        glGenRenderbuffers(3, &mReference);
+        glBindRenderbuffer(GL_RENDERBUFFER,mReference);
         glRenderbufferStorage(GL_RENDERBUFFER,
                               GL_DEPTH24_STENCIL8,
                               width,
                               height);
+        reference=mReference;
     }
 }
 

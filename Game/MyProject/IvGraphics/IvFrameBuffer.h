@@ -28,9 +28,8 @@ public:
     
     virtual void Bind(int width=1280,int height=720)=0;
     virtual bool Unbind()=0;
-    virtual std::vector<IvRenderTarget*> GetTextures()=0;
-    virtual void AttachToCurrentlyFBO()=0;
-
+    virtual std::vector<IvRenderTarget*> GetTextures() const =0  ;
+    
 protected:
 
 private:

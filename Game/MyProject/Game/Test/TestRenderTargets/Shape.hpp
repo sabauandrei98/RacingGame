@@ -24,6 +24,7 @@
 
 class Shape
 {
+public:
     IvFrameBuffer* frameBuffer;
     
     unsigned int noVertices;
@@ -41,15 +42,18 @@ class Shape
 public:
     Shape();
     ~Shape();
-    void Setup(const char*shaderName,const char* textureName);
+    void Setup(const char *shaderName,const char* textureName);
+    
     void Draw();
     
     void SetVertexData(void* vertexData);
     void SetVertexDescription(VertexDescription vertexDescription);
     void SetNoVertices(unsigned int noVertices);
     
-    void SetTexture();
+    void SetUniforms();
     void SetTexture(const char* name,unsigned int reference);
+    
+    void LoadTexture(const char* textureName);
     
 };
 

@@ -78,13 +78,13 @@ void TestRT::Create()
     
     IvVector3* positionPtr2 = vertexDescription2.GetAttribute<IvVector3>("IvPos",vertexData2);
     
-    *positionPtr2 = IvVector3(-0.3f,-0.3f,-0.1f);
+    *positionPtr2 = IvVector3(-0.3f,-0.3f,0.2f);
     positionPtr2 = vertexDescription2.NextVertexAttribute(positionPtr2);
     
-    *positionPtr2 = IvVector3(-0.3f,0.3f,-0.1f);
+    *positionPtr2 = IvVector3(-0.3f,0.3f,0.2f);
     positionPtr2 = vertexDescription2.NextVertexAttribute(positionPtr2);
     
-    *positionPtr2 = IvVector3(0.3f,-0.3f,-0.1f);
+    *positionPtr2 = IvVector3(0.3f,-0.3f,0.2f);
     
     IvVector2* uvPtr2=vertexDescription2.GetAttribute<IvVector2>("IvCoord",vertexData2);
     
@@ -104,17 +104,65 @@ void TestRT::Create()
     
     shapes.push_back(shape2);
     
-    //create framebuffer
     
+    VertexDescription vertexDescription3;
+    vertexDescription3.AddAttribute("IvPos",3);
+    vertexDescription3.AddAttribute("IvCoord",2);
+    
+    void* vertexData3 = IvStackAllocator::mScratchAllocator->Allocate(3 * vertexDescription3.GetVertexSize());
+    
+    
+    IvVector3* positionPtr3 = vertexDescription3.GetAttribute<IvVector3>("IvPos",vertexData3);
+    
+    *positionPtr3 = IvVector3(-0.4f,-0.4f,0.1f);
+    positionPtr3 = vertexDescription3.NextVertexAttribute(positionPtr3);
+    
+    *positionPtr3 = IvVector3(-0.4f,0.4f,0.1f);
+    positionPtr3 = vertexDescription3.NextVertexAttribute(positionPtr3);
+    
+    *positionPtr3 = IvVector3(0.4f,-0.4f,0.1f);
+    
+    IvVector2* uvPtr3=vertexDescription3.GetAttribute<IvVector2>("IvCoord",vertexData3);
+    
+    *uvPtr3=IvVector2{1.,0.};
+    uvPtr3=vertexDescription3.NextVertexAttribute(uvPtr3);
+    
+    *uvPtr3=IvVector2{1.,1.};
+    uvPtr3=vertexDescription3.NextVertexAttribute(uvPtr3);
+    
+    *uvPtr3=IvVector2{0.,0.};
+    
+    
+    Shape* shape3=new Shape();
+    shape3->SetNoVertices(3);
+    shape3->SetVertexData(vertexData3);
+    shape3->SetVertexDescription(vertexDescription3);
+    
+    shapes.push_back(shape3);
+    
+    //------ create framebuffer  -------//
     IvRenderTarget* renderTarget=IvRenderer::mRenderer->GetResourceManager()
     ->CreateRenderTarget(RenderTargetType::COLOR);
     
-//    IvRenderTarget* renderTarget2=IvRenderer::mRenderer->GetResourceManager()
-//    ->CreateRenderTarget(RenderTargetType::DEPTH);
+    IvRenderTarget* renderTarget2=IvRenderer::mRenderer->GetResourceManager()
+    ->CreateRenderTarget(RenderTargetType::DEPTH);
     
+    IvRenderTarget* renderTarget3=IvRenderer::mRenderer->GetResourceManager()
+    ->CreateRenderTarget(RenderTargetType::DEPTH_STENCIL);
+    
+//    std::vector<StencilStatements> stencilStatements;
+//
+//    StencilStatements statement;
+//    statement.stencilFunc=StencilStatementsFunc::EQUAL;
+//
+//    stencilStatements.push_back(statement);
+//
+//    renderTarget3->SetStencilStatements(stencilStatements);
+
     std::vector<IvRenderTarget*> renderTargets;
     renderTargets.push_back(renderTarget);
-    //renderTargets.push_back(renderTarget2);
+    renderTargets.push_back(renderTarget2);
+    renderTargets.push_back(renderTarget3);
     
     frameBuffer=IvRenderer::mRenderer->GetResourceManager()
     ->CreateFrameBuffer(renderTargets);
@@ -129,30 +177,41 @@ TestRT::~TestRT()
 void TestRT::Setup()
 {
     shapes[0]->Setup("testShaderRT","b1.tga");
-    //shapes[1]->Setup("testBlurShader","player.tga");
+    shapes[1]->Setup("testBlurShader","b1.tga");
+   // shapes[2]->Setup("testShaderRT","b1.tga");
 }
 
 void TestRT::Draw()
 {
-    
     frameBuffer->Bind();
 
-    shapes[0]->SetTexture();
+    IvRenderer::mRenderer->SetClearColor(1.0, 0.0, 0.0, 1.0);
+    IvRenderer::mRenderer->ClearBuffers(kColorClear);
+    
+    
+    shapes[0]->SetUniforms();
     shapes[0]->Draw();
     
-//    shapes[1]->SetTexture();
-//    shapes[1]->Draw();
-
+//    shapes[2]->SetUniforms();
+//    shapes[2]->Draw();
     
-    frameBuffer->Unbind();
-
-    frameBuffer->AttachToCurrentlyFBO();
+    shapes[1]->SetUniforms();
+    shapes[1]->Draw();
+    
+    if(!frameBuffer->Unbind())
+        std::cout<<"Cannot unbind framebuffer!"<<std::endl;
 
     IvRenderTarget* render=frameBuffer->GetTextures()[0];
 
     shapes[0]->SetTexture("Texture",render->GetReference());
     shapes[0]->Draw();
+
+//    IvRenderTarget* render3=frameBuffer->GetTextures()[2];
+//    shapes[2]->SetTexture("Texture",render3->GetReference());
+//    shapes[2]->Draw();
     
-//    shapes[1]->SetTexture("Texture",render->GetReference());
-//    shapes[1]->Draw();
+    IvRenderTarget* render2=frameBuffer->GetTextures()[1];
+    shapes[1]->SetTexture("Texture",render2->GetReference());
+    shapes[1]->Draw();
+    
 }

@@ -238,6 +238,7 @@ IvVertexBufferOGL::MakeActive(unsigned int shaderID)
     
     // set arrays active
     glBindVertexArray(mVertexArrayID);
+    glBindBuffer( GL_ARRAY_BUFFER, mBufferID );
     
     for(const auto & attr :  format.GetAttributes())
     {

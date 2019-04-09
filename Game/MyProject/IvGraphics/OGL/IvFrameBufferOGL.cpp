@@ -11,6 +11,7 @@ IvFrameBufferOGL::IvFrameBufferOGL():fbo(0)
 {
     
 }
+
 IvFrameBufferOGL::IvFrameBufferOGL(const std::vector<IvRenderTarget*>& renderTargets)
 {
     glGenFramebuffers(1,&fbo);
@@ -25,16 +26,16 @@ IvFrameBufferOGL::~IvFrameBufferOGL()
 void IvFrameBufferOGL::Bind(int width,int height)
 {
     glBindFramebuffer(GL_FRAMEBUFFER,fbo);
-    
+    unsigned int colorIndex = 0;
     for(int i=0;i<renderTargets.size();i++)
     {
         renderTargets[i]->Setup(width,height);
-        glActiveTexture(GL_TEXTURE0 + i);
+        //glActiveTexture(GL_TEXTURE0 + i);
         if(renderTargets[i]->GetRenderTargetType()==RenderTargetType::COLOR)
         {
             glClear(GL_COLOR_BUFFER_BIT);
             glFramebufferTexture2D(GL_FRAMEBUFFER,
-                                   GL_COLOR_ATTACHMENT0+i,
+                                   GL_COLOR_ATTACHMENT0 + colorIndex++,
                                    GL_TEXTURE_2D,
                                    renderTargets[i]->GetReference(),
                                    0);
@@ -51,10 +52,51 @@ void IvFrameBufferOGL::Bind(int width,int height)
         }
         if(renderTargets[i]->GetRenderTargetType()==RenderTargetType::DEPTH_STENCIL)
         {
+            glClear(GL_DEPTH_BUFFER_BIT);
+            glEnable(GL_DEPTH_TEST);
+            glEnable(GL_STENCIL_TEST);
+            std::vector<StencilStatements> stencilStatements=renderTargets[i]->GetStencilStatements();
+            for(int ii=0;ii<stencilStatements.size();ii++)
+            {
+                switch (stencilStatements[i].stencilFunc){
+                    case NEVER:
+                        glStencilFunc(GL_NEVER,1,0xFF);
+                        break;
+                    case ALWAYS:
+                        glStencilFunc(GL_ALWAYS,1, 0xFF);
+                        break;
+                    case LESS:
+                        glStencilFunc(GL_LESS,1, 0xFF);
+                        break;
+                    case LEQUAL:
+                        glStencilFunc(GL_LEQUAL,1, 0xFF);
+                        break;
+                    case EQUAL:
+                        glStencilFunc(GL_EQUAL,1, 0xFF);
+                        break;
+                    case GEQUAL:
+                        glStencilFunc(GL_GEQUAL,1, 0xFF);
+                        break;
+                    case GREATER:
+                        glStencilFunc(GL_GREATER,1, 0xFF);
+                        break;
+                    case GNOTEQUAL:
+                        glStencilFunc(GL_NOTEQUAL,1, 0xFF);
+                        break;
+                    default:
+                        break;
+                        
+                    glStencilOp(GL_REPLACE, GL_KEEP, GL_KEEP);
+                    glStencilMask(0xFF);
+                }
+                
+            }
             glFramebufferRenderbuffer(GL_FRAMEBUFFER,
                                       GL_DEPTH_STENCIL_ATTACHMENT,
                                       GL_RENDERBUFFER,
                                       renderTargets[i]->GetReference());
+            glDisable(GL_STENCIL_TEST);
+            glDisable(GL_DEPTH_TEST);
         }
     }
 }
@@ -66,30 +108,7 @@ bool IvFrameBufferOGL::Unbind()
     return true;
 }
 
-std::vector<IvRenderTarget*> IvFrameBufferOGL::GetTextures()
+std::vector<IvRenderTarget*> IvFrameBufferOGL::GetTextures() const
 {
     return renderTargets;
-}
-
-void IvFrameBufferOGL::AttachToCurrentlyFBO()
-{
-    for(int index=0;index<renderTargets.size();index++)
-    {
-        if(renderTargets[index]->GetRenderTargetType()==RenderTargetType::COLOR)
-            glFramebufferTexture2D(GL_FRAMEBUFFER,
-                                   GL_COLOR_ATTACHMENT0+index,
-                                   GL_TEXTURE_2D,
-                                   renderTargets[index]->GetReference(),
-                                   0);
-        else if(renderTargets[index]->GetRenderTargetType()==RenderTargetType::DEPTH)
-            glFramebufferRenderbuffer(GL_FRAMEBUFFER,
-                                   GL_DEPTH_ATTACHMENT,
-                                   GL_TEXTURE_2D,
-                                   renderTargets[index]->GetReference());
-        else if(renderTargets[index]->GetRenderTargetType()==RenderTargetType::DEPTH_STENCIL)
-            glFramebufferRenderbuffer(GL_FRAMEBUFFER,
-                                   GL_DEPTH_STENCIL_ATTACHMENT,
-                                   GL_TEXTURE_2D,
-                                   renderTargets[index]->GetReference());
-    }
 }

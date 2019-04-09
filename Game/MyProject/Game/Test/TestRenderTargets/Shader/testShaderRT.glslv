@@ -1,4 +1,4 @@
-uniform mat4 IvModelViewProjectionMatrix;
+//uniform mat4 IvModelViewProjectionMatrix;
 
 in vec3 IvPos;
 in vec3 IvColor;
@@ -11,5 +11,5 @@ void main()
 {
     color=IvColor;
     uvCoord=IvCoord;
-    gl_Position =  vec4(IvPos,1.0);
+    gl_Position = vec4(IvPos,1.0);
 }

@@ -25,18 +25,18 @@ Game::~Game()
 }
 bool Game::PostRendererInitialize()
 {
+    test->Create();
     
     IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
-    IvRendererOGL::mRenderer->SetDepthWrite(false);
-    IvRendererOGL::mRenderer->SetDepthTest(kDisableDepthTest);
+//    IvRendererOGL::mRenderer->SetDepthWrite(false);
+//    IvRendererOGL::mRenderer->SetDepthTest(kDisableDepthTest);
+    
+    test->Setup();
     
     if ( !IvGame::PostRendererInitialize() )
         return false;
     
-    test->Create();
-    test->Setup();
-    
-    ::IvSetDefaultLighting();
+    //::IvSetDefaultLighting();
     
     return true;
 }
@@ -48,7 +48,5 @@ void Game::UpdateObjects( float dt )
 
 void Game::Render()
 {
-//    IvSetDefaultViewer(-10.0,-10.0,10.0);
-//    IvDrawTeapot();
     test->Draw();
 }
