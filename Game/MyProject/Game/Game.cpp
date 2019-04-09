@@ -114,12 +114,11 @@ Game::Render()                                  // Here's Where We Do All The Dr
     IvSetDefaultViewer( 0.0, -25.0, 10.0f );
 
     // draw coordinate axes
-    IvDrawAxes();
+    //IvDrawAxes();
     
 
     bezierCurve->Render();
 
-    
-    IvDrawTeapot();
+
 }
 

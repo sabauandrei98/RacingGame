@@ -751,6 +751,7 @@ IvBezier::SubdivideCurve( IvCPVertex* currentVertex, const IvVector3& P0, const 
 }   // End of IvBezier::SubdivideCurve()
 
 
+
 //-------------------------------------------------------------------------------
 // @ IvBezier::Render()
 //-------------------------------------------------------------------------------

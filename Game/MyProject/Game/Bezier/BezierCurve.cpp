@@ -41,33 +41,46 @@
 //-------------------------------------------------------------------------------
 BezierCurve::BezierCurve()
 {
+    initializeCurve();
+    Point p;
+    p.position = {0, 0, 0};
+    p.isControl = true;
+    addPoint(1, p);
     
-    int count = 2;
-    IvVector3* mPositions = new IvVector3[count];
-    mPositions[0] = {0, 0, 0};
-    mPositions[1] = {15, 0, 5};
-    
-    IvVector3* mControls = new IvVector3[2*(count-1)];
-    mControls[0] = {14, 0, 0};
-    mControls[1] = {-3, 0, 5};
-    
-    float* mTimes = new float[count];
-    mTimes[0] = 2;
-    mTimes[1] = 4;
-    
-   
-    Initialize(mPositions, mControls, mTimes, count);
     
 }   // End of BezierCurve::BezierCurve()
 
 
-//-------------------------------------------------------------------------------
-// @ BezierCurve::~BezierCurve()
-//-------------------------------------------------------------------------------
-// Destructor
-//-------------------------------------------------------------------------------
+void BezierCurve::initializeCurve()
+{
+    Point p1, p2;
+    p1.position = {-4, 0, 0};
+    p2.position = {0, 0, 4};
+    
+    points.push_back(p1);
+    points.push_back(p2);
+}
+
 BezierCurve::~BezierCurve()
 {
+    
+}
+
+void BezierCurve::addPoint(int position, Point p)
+{
+    if (position == 0 || position == points.size())
+        if (p.isControl == true)
+            return;
+        
+    points.insert(points.begin() + position, p);
+}
+
+void BezierCurve::deletePoint(int pointIndex)
+{
+    if (pointIndex > points.size() - 1)
+        return;
+    
+    points.erase(points.begin() + pointIndex);
 }
 
 void
@@ -146,9 +159,99 @@ BezierCurve::Render()
 {
     IvRenderer::mRenderer->SetWorldMatrix( mTransform );
     
-    // draw geometry
-    IvDrawTeapot();
+    buildCurve();
+    Draw();
+}
+
+IvVector3 BezierCurve::lerp(IvVector3& a, IvVector3& b, float t)
+{
+    float cx = (float)a.x + (float)(b.x - a.x) * t;
+    float cz = (float)a.z + (float)(b.z - a.z) * t;
     
-    IvBezier::Render();
+    return {cx, 0, cz};
+}
+
+IvVector3 BezierCurve::getPointFromLine(float t, vector<IvVector3>& line)
+{
+    std::vector<IvVector3> remainingPoints;
+    for(int i = 0; i < line.size() - 1; i++)
+    {
+        remainingPoints.push_back(lerp(line[i], line[i+1], t));
+    }
     
+    if (remainingPoints.size() > 1)
+        getPointFromLine(t, remainingPoints);
+    
+    return remainingPoints[0];
+}
+
+void BezierCurve::extractPoints(vector<IvVector3>& line)
+{
+    float tStep = 0.1f;
+    for(float t = tStep; t <= 1 - tStep; t += tStep)
+    {
+        renderPoints.push_back(getPointFromLine(t, line));
+    }
+}
+
+void BezierCurve::buildCurve()
+{
+    renderPoints.clear();
+    int lastFixedPointIndex = 0;
+    vector<IvVector3> curvePart;
+    curvePart.push_back(points[lastFixedPointIndex].position);
+    
+    for(int i = 1; i < points.size(); i++)
+    {
+        
+        if(points[i].isControl == false)
+        {
+            lastFixedPointIndex = i;
+            curvePart.push_back(points[i].position);
+            extractPoints(curvePart);
+            curvePart.clear();
+        }
+        else
+            curvePart.push_back(points[i].position);
+    }
+}
+
+
+void BezierCurve::Draw()
+{
+    
+  
+    size_t currentOffset = IvStackAllocator::mScratchAllocator->GetCurrentOffset();
+    IvCPVertex* dataPtr = (IvCPVertex*) IvStackAllocator::mScratchAllocator->Allocate(kIvVFSize[kCPFormat] * renderPoints.size());
+    
+    if (nullptr == dataPtr)
+    {
+        return;
+    }
+    
+    for(int i = 0; i < renderPoints.size(); i++)
+    {
+        dataPtr[i].position = renderPoints[i];
+        dataPtr[i].color.Set(255, 0, 0, 255);
+    }
+    
+    
+    IvVertexBuffer* axesVerts = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(kCPFormat, (unsigned int)renderPoints.size(), dataPtr,
+                                                                                kImmutableUsage);
+    
+    IvStackAllocator::mScratchAllocator->Reset(currentOffset);
+    
+    
+    IvSetWorldIdentity();
+    
+    // clear to default shader
+    IvShaderProgram* oldShader = IvRenderer::mRenderer->GetShaderProgram();
+    IvRenderer::mRenderer->SetShaderProgram(0);
+    
+    // draw it
+    IvRenderer::mRenderer->Draw(kLineListPrim, axesVerts);
+    
+    // restore original shader
+    IvRenderer::mRenderer->SetShaderProgram(oldShader);
+
 }
