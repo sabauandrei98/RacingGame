@@ -1,244 +1,325 @@
-//===============================================================================
-// @ BezierCurve.cpp
-// ------------------------------------------------------------------------------
-// BezierCurve object
-//
-// Copyright (C) 2008-2015 by James M. Van Verth and Lars M. Bishop.
-// All rights reserved.
-//
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-//
-// This example demonstrates the three basic transforms and how they interact
-// with each other.   At each frame we append transforms to the current matrix,
-// which is stored for the next frame.  The key commands are:
-//
-// I, K - translate in x
-// J, L - translate in y
-// U, O - rotate around z axis
-// P, : - uniformly scale
-//
-//===============================================================================
-
-//-------------------------------------------------------------------------------
-//-- Dependencies ---------------------------------------------------------------
-//-------------------------------------------------------------------------------
-
 #include "BezierCurve.hpp"
 
-//-------------------------------------------------------------------------------
-//-- Static Members -------------------------------------------------------------
-//-------------------------------------------------------------------------------
-
-//-------------------------------------------------------------------------------
-//-- Methods --------------------------------------------------------------------
-//-------------------------------------------------------------------------------
-
-//-------------------------------------------------------------------------------
-// @ BezierCurve::BezierCurve()
-//-------------------------------------------------------------------------------
-// Constructor
-//-------------------------------------------------------------------------------
 BezierCurve::BezierCurve()
 {
-    initializeCurve();
+    initializeCurveTestData();
+}
+
+
+void BezierCurve::initializeCurveTestData()
+{
     Point p;
-    p.position = {0, 0, 0};
+    
+    p.position = {-5, 0, -5};
+    points.push_back(p);
+    
+    p.position = {-10, 0, 2};
     p.isControl = true;
-    addPoint(1, p);
+    points.push_back(p);
     
+    p.position = {-5, 0, 7};
+    p.isControl = true;
+    points.push_back(p);
     
-}   // End of BezierCurve::BezierCurve()
-
-
-void BezierCurve::initializeCurve()
-{
-    Point p1, p2;
-    p1.position = {-4, 0, 0};
-    p2.position = {0, 0, 4};
+    p.position = {-2, 0, 5};
+    p.isControl = false;
+    points.push_back(p);
     
-    points.push_back(p1);
-    points.push_back(p2);
+    p.position = {1, 0, 1};
+    p.isControl = true;
+    points.push_back(p);
+    
+    p.position = {-3, 0, -5};
+    p.isControl = true;
+    points.push_back(p);
+    
+    p.position = {0, 0, -5};
+    p.isControl = false;
+    points.push_back(p);
+    
+    p.position = {4, 0, -3};
+    p.isControl = true;
+    points.push_back(p);
+    
+    p.position = {3, 0, 4};
+    p.isControl = true;
+    points.push_back(p);
+    
+    p.position = {2, 0, 5};
+    p.isControl = false;
+    points.push_back(p);
 }
 
-BezierCurve::~BezierCurve()
-{
-    
-}
+BezierCurve::~BezierCurve(){}
 
-void BezierCurve::addPoint(int position, Point p)
-{
-    if (position == 0 || position == points.size())
-        if (p.isControl == true)
-            return;
-        
-    points.insert(points.begin() + position, p);
-}
 
-void BezierCurve::deletePoint(int pointIndex)
-{
-    if (pointIndex > points.size() - 1)
-        return;
-    
-    points.erase(points.begin() + pointIndex);
-}
 
 void
 BezierCurve::Update( float dt )
 {
-    // get change in transform for this frame
-    IvMatrix44 scale, rotate, xlate;
-    scale.Identity();
-    rotate.Identity();
-    float s = 1.0f;
-    float r = 0.0f;
-    float x = 0.0f, y = 0.0f, z = 0.0f;
-    
-    // set up scaling
-    if (IvGame::mGame->mEventHandler->IsKeyDown(';'))
+    //go to next point
+    if (IvGame::mGame->mEventHandler->IsKeyReleased('.'))
     {
-        s -= 0.25f*dt;
-    }
-    if (IvGame::mGame->mEventHandler->IsKeyDown('p'))
-    {
-        s += 0.25f*dt;
-    }
-    scale.Scaling( IvVector3(s, s, s) );
-    
-    // set up rotate
-    if (IvGame::mGame->mEventHandler->IsKeyDown('o'))
-    {
-        r -= kPI*0.25f*dt;
-    }
-    if (IvGame::mGame->mEventHandler->IsKeyDown('u'))
-    {
-        r += kPI*0.25f*dt;
-    }
-    rotate.RotationZ( r );
-    
-    // set up translation
-    if (IvGame::mGame->mEventHandler->IsKeyDown('k'))
-    {
-        x -= 3.0f*dt;
-    }
-    if (IvGame::mGame->mEventHandler->IsKeyDown('i'))
-    {
-        x += 3.0f*dt;
-    }
-    if (IvGame::mGame->mEventHandler->IsKeyDown('l'))
-    {
-        y -= 3.0f*dt;
-    }
-    if (IvGame::mGame->mEventHandler->IsKeyDown('j'))
-    {
-        y += 3.0f*dt;
-    }
-    IvVector3 xlatevector(x,y,z);
-    xlate.Translation( xlatevector );
-    
-    // clear transform
-    if (IvGame::mGame->mEventHandler->IsKeyPressed(' '))
-    {
-        mTransform.Identity();
+        if (editIndex + 1 <= points.size() - 1)
+            editIndex ++;
     }
     
-    // append transforms for this frame to current transform
-    // note order: mTransform is applied first, then scale, then rotate, then xlate
-    mTransform = xlate*rotate*scale*mTransform;
+    //go to prev point
+    if (IvGame::mGame->mEventHandler->IsKeyReleased(','))
+    {
+        if (editIndex - 1 >= 0)
+            editIndex --;
+    }
     
-}   // End of BezierCurve::Update()
-
-
-//-------------------------------------------------------------------------------
-// @ BezierCurve::Render()
-//-------------------------------------------------------------------------------
-// Render stuff
-//-------------------------------------------------------------------------------
-void
-BezierCurve::Render()
-{
-    IvRenderer::mRenderer->SetWorldMatrix( mTransform );
-    
-    buildCurve();
-    Draw();
+    static unsigned char input[4] = {'w','a','s','d'};
+    for(int i = 0; i < 4; i++)
+    if (IvGame::mGame->mEventHandler->IsKeyDown(input[i]))
+    {
+        
+        IvVector3 offset = {0, 0, 0};
+        if (input[i] == 'w')
+            offset.z = editSpeed * dt;
+        if (input[i] == 's')
+            offset.z = -editSpeed * dt;
+        if (input[i] == 'a')
+            offset.x = -editSpeed * dt;
+        if (input[i] == 'd')
+            offset.x = editSpeed * dt;
+        
+        
+        //FIXED POINT
+        if(points[editIndex].isControl == false)
+        {
+            //first fixed point
+            if(editIndex == 0)
+            {
+                points[editIndex].position += offset;
+                points[editIndex + 1].position += offset;
+            }
+            else
+                //last fixed point
+                if(editIndex == points.size() - 1)
+                {
+                    points[editIndex].position += offset;
+                    points[editIndex - 1].position += offset;
+                }
+                //other fixed point
+                else{
+                    points[editIndex - 1].position += offset;
+                    points[editIndex].position += offset;
+                    points[editIndex + 1].position += offset;
+                }
+        }
+        
+        //CONTROL POINT
+        if (points[editIndex].isControl == true)
+        {
+            //first or last control point
+            if(editIndex == 1 || editIndex == points.size() - 2)
+            {
+                points[editIndex].position += offset;
+            }
+            else
+            {
+                //left control point
+                if (points[editIndex + 1].isControl == false)
+                {
+                    points[editIndex].position += offset;
+                    points[editIndex + 2].position.x = points[editIndex + 1].position.x * 2 - points[editIndex].position.x;
+                    points[editIndex + 2].position.z = points[editIndex + 1].position.z * 2 - points[editIndex].position.z;
+                }
+                else
+                //right control point
+                if (points[editIndex - 1].isControl == false)
+                {
+                    points[editIndex].position += offset;
+                    points[editIndex - 2].position.x = points[editIndex - 1].position.x * 2 - points[editIndex].position.x;
+                    points[editIndex - 2].position.z = points[editIndex - 1].position.z * 2 - points[editIndex].position.z;
+                }
+                
+            }
+        }
+    }
 }
 
-IvVector3 BezierCurve::lerp(IvVector3& a, IvVector3& b, float t)
+
+const IvVector3 BezierCurve::lerp(IvVector3& a, IvVector3& b, float t) const
 {
     float cx = (float)a.x + (float)(b.x - a.x) * t;
     float cz = (float)a.z + (float)(b.z - a.z) * t;
-    
     return {cx, 0, cz};
 }
 
-IvVector3 BezierCurve::getPointFromLine(float t, vector<IvVector3>& line)
+const IvVector3 BezierCurve::getPointFromLine(float t, std::vector<IvVector3>& line) const
 {
     std::vector<IvVector3> remainingPoints;
-    for(int i = 0; i < line.size() - 1; i++)
-    {
-        remainingPoints.push_back(lerp(line[i], line[i+1], t));
-    }
+    for(int i = 0; i < line.size(); i++)
+        remainingPoints.push_back(line[i]);
     
-    if (remainingPoints.size() > 1)
-        getPointFromLine(t, remainingPoints);
-    
+    for(int i = 0; i < remainingPoints.size() - 1; i++)
+        for(int j = 0; j < remainingPoints.size() - i - 1; j++)
+            remainingPoints[j] = lerp(remainingPoints[j], remainingPoints[j+1], t);
+
     return remainingPoints[0];
 }
 
-void BezierCurve::extractPoints(vector<IvVector3>& line)
+void BezierCurve::extractPoints(std::vector<IvVector3>& line)
 {
-    float tStep = 0.1f;
-    for(float t = tStep; t <= 1 - tStep; t += tStep)
-    {
+    for(float t = 0; t <= 1; t += tStep)
         renderPoints.push_back(getPointFromLine(t, line));
-    }
 }
 
 void BezierCurve::buildCurve()
 {
     renderPoints.clear();
     int lastFixedPointIndex = 0;
-    vector<IvVector3> curvePart;
+    std::vector<IvVector3> curvePart;
     curvePart.push_back(points[lastFixedPointIndex].position);
     
     for(int i = 1; i < points.size(); i++)
     {
-        
         if(points[i].isControl == false)
         {
             lastFixedPointIndex = i;
             curvePart.push_back(points[i].position);
             extractPoints(curvePart);
             curvePart.clear();
+            
+            //put the start point
+            curvePart.push_back(points[i].position);
         }
         else
             curvePart.push_back(points[i].position);
     }
+    
+    //put the ending point
+    renderPoints.push_back(curvePart[curvePart.size() - 1]);
 }
 
 
-void BezierCurve::Draw()
+void
+BezierCurve::Draw()
 {
+    //generate curve
+    buildCurve();
     
-  
     size_t currentOffset = IvStackAllocator::mScratchAllocator->GetCurrentOffset();
-    IvCPVertex* dataPtr = (IvCPVertex*) IvStackAllocator::mScratchAllocator->Allocate(kIvVFSize[kCPFormat] * renderPoints.size());
+    IvCPVertex* lineDataPtr = (IvCPVertex*) IvStackAllocator::mScratchAllocator->Allocate(kIvVFSize[kCPFormat] * renderPoints.size());
+    IvCPVertex* pointDataPtr = (IvCPVertex*) IvStackAllocator::mScratchAllocator->Allocate(kIvVFSize[kCPFormat] * renderPoints.size());
     
-    if (nullptr == dataPtr)
-    {
+    int noOfPoints = (int) points.size();
+    int noOfControl, noOfFixed;
+    
+    noOfFixed = (noOfPoints - 2) / 2 + noOfPoints % 2;
+    noOfControl = noOfPoints - noOfFixed;
+    
+    IvCPVertex* controlDataPtr = (IvCPVertex*) IvStackAllocator::mScratchAllocator->Allocate(kIvVFSize[kCPFormat] * noOfControl);
+    IvCPVertex* fixedDataPtr = (IvCPVertex*) IvStackAllocator::mScratchAllocator->Allocate(kIvVFSize[kCPFormat] * noOfFixed);
+    IvCPVertex* tangentDataPtr = (IvCPVertex*) IvStackAllocator::mScratchAllocator->Allocate(kIvVFSize[kCPFormat] * noOfControl * 2);
+    
+    
+    if (nullptr == lineDataPtr || nullptr == pointDataPtr || nullptr == controlDataPtr)
         return;
-    }
     
+    //lines RED
     for(int i = 0; i < renderPoints.size(); i++)
     {
-        dataPtr[i].position = renderPoints[i];
-        dataPtr[i].color.Set(255, 0, 0, 255);
+        lineDataPtr[i].position = renderPoints[i];
+        lineDataPtr[i].color.Set(255, 0, 0, 255);
+    }
+    
+    //points GREEN
+    for(int i = 0; i < renderPoints.size(); i++)
+    {
+        pointDataPtr[i].position = renderPoints[i];
+        pointDataPtr[i].color.Set(0, 255, 0, 255);
+    }
+    
+    //control LIGHT BLUE color
+    int controlIndex = 0;
+    for(int i = 0; i < points.size(); i++)
+    {
+        if (points[i].isControl == true)
+        {
+            controlDataPtr[controlIndex].position = points[i].position;
+            
+            //make the editable point YELLOW
+            if(editIndex == i)
+                controlDataPtr[controlIndex].color.Set(255, 255, 0, 255);
+            else
+                controlDataPtr[controlIndex].color.Set(0, 155, 255, 255);
+            
+            controlIndex++;
+        }
+    }
+    
+    //fixed PINK color
+    int fixedIndex = 0;
+    for(int i = 0; i < points.size(); i++)
+    {
+        if (points[i].isControl == false)
+        {
+            fixedDataPtr[fixedIndex].position = points[i].position;
+            
+            //make the editable point YELLOW
+            if(editIndex == i)
+                fixedDataPtr[fixedIndex].color.Set(255, 255, 0, 255);
+            else
+                fixedDataPtr[fixedIndex].color.Set(155, 0, 155, 255);
+            
+            fixedIndex++;
+        }
+    }
+    
+    //tangent PINK color
+    int tangendIndex = 0;
+    
+    //first point
+    tangentDataPtr[tangendIndex].position = points[1].position;
+    tangentDataPtr[tangendIndex].color.Set(60, 60, 0, 255);
+    tangendIndex++;
+    tangentDataPtr[tangendIndex].position = points[0].position;
+    tangentDataPtr[tangendIndex].color.Set(60, 60, 0, 255);
+    tangendIndex++;
+    
+    //last point
+    tangentDataPtr[tangendIndex].position = points[points.size()-1].position;
+    tangentDataPtr[tangendIndex].color.Set(60, 60, 0, 255);
+    tangendIndex++;
+    tangentDataPtr[tangendIndex].position = points[points.size()-2].position;
+    tangentDataPtr[tangendIndex].color.Set(60, 60, 0, 255);
+    tangendIndex++;
+    
+    
+    for(int i = 1; i < points.size()-1; i++)
+    {
+        if (points[i].isControl == false)
+        {
+            //left point
+            tangentDataPtr[tangendIndex].position = points[i].position;
+            tangentDataPtr[tangendIndex].color.Set(60, 60, 0, 255);
+            tangendIndex++;
+            tangentDataPtr[tangendIndex].position = points[i-1].position;
+            tangentDataPtr[tangendIndex].color.Set(60, 60, 0, 255);
+            tangendIndex++;
+            
+            //right point
+            tangentDataPtr[tangendIndex].position = points[i].position;
+            tangentDataPtr[tangendIndex].color.Set(60, 60, 0, 255);
+            tangendIndex++;
+            tangentDataPtr[tangendIndex].position = points[i+1].position;
+            tangentDataPtr[tangendIndex].color.Set(60, 60, 0, 255);
+            tangendIndex++;
+        }
     }
     
     
-    IvVertexBuffer* axesVerts = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(kCPFormat, (unsigned int)renderPoints.size(), dataPtr,
-                                                                                kImmutableUsage);
     
+    IvVertexBuffer* lines = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(kCPFormat, (unsigned int)renderPoints.size(), lineDataPtr,kImmutableUsage);
+    IvVertexBuffer* points = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(kCPFormat, (unsigned int)renderPoints.size(), pointDataPtr,kImmutableUsage);
+    IvVertexBuffer* control = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(kCPFormat, noOfControl, controlDataPtr,kImmutableUsage);
+    IvVertexBuffer* fixed = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(kCPFormat, noOfFixed, fixedDataPtr,kImmutableUsage);
+    IvVertexBuffer* tangents = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(kCPFormat, noOfControl * 2, tangentDataPtr,kImmutableUsage);
     IvStackAllocator::mScratchAllocator->Reset(currentOffset);
     
     
@@ -248,10 +329,20 @@ void BezierCurve::Draw()
     IvShaderProgram* oldShader = IvRenderer::mRenderer->GetShaderProgram();
     IvRenderer::mRenderer->SetShaderProgram(0);
     
-    // draw it
-    IvRenderer::mRenderer->Draw(kLineListPrim, axesVerts);
+    
+    IvRenderer::mRenderer->Draw(kLineStripPrim, lines);
+    IvRenderer::mRenderer->Draw(kLineListPrim, tangents);
+    IvRenderer::mRenderer->Draw(kPointListPrim, points);
+    IvRenderer::mRenderer->Draw(kPointListPrim, control);
+    IvRenderer::mRenderer->Draw(kPointListPrim, fixed);
     
     // restore original shader
     IvRenderer::mRenderer->SetShaderProgram(oldShader);
-
+    
+    //release memory
+    IvRenderer::mRenderer->GetResourceManager()->Destroy(lines);
+    IvRenderer::mRenderer->GetResourceManager()->Destroy(tangents);
+    IvRenderer::mRenderer->GetResourceManager()->Destroy(points);
+    IvRenderer::mRenderer->GetResourceManager()->Destroy(control);
+    IvRenderer::mRenderer->GetResourceManager()->Destroy(fixed);
 }

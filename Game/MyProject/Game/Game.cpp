@@ -112,13 +112,6 @@ Game::Render()                                  // Here's Where We Do All The Dr
 {   
     // set up viewer
     IvSetDefaultViewer( 0.0, -25.0, 10.0f );
-
-    // draw coordinate axes
-    //IvDrawAxes();
-    
-
-    bezierCurve->Render();
-
-
+    bezierCurve->Draw();
 }
 
