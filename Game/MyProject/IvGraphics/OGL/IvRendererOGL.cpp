@@ -95,6 +95,10 @@ IvRendererOGL::Create()
 //-------------------------------------------------------------------------------
 IvRendererOGL::IvRendererOGL() : IvRenderer()
 {
+   // for ( unsigned int i = 0; i < kVertexFormatCount; ++i )
+    {
+        //sDefaultShaders[i] = nullptr;
+    }
     mShader = nullptr;
 
     mAPI = kOpenGL;

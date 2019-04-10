@@ -38,7 +38,6 @@ protected:
     ~IvRenderTargetOGL();
     void Destroy();
     void Setup(uint32_t width,uint32_t height);
-    
 private:
     unsigned int reference;
     RenderTargetType renderTargetType;

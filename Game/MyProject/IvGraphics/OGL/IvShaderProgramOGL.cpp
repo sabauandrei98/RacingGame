@@ -250,7 +250,7 @@ void IvShaderProgramOGL::SetUniform(const char *name,unsigned int texture)
     glActiveTexture(GL_TEXTURE0+unit);
     glBindTexture(GL_TEXTURE_2D, texture);
     glUniform1i(glGetUniformLocation(mProgramID,name), 0);
-    unit++;
+   
 }
 
 

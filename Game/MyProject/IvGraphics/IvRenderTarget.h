@@ -17,8 +17,7 @@
 enum RenderTargetType
 {
     COLOR,
-    DEPTH,
-    DEPTH_STENCIL
+    DEPTH
 };
 
 //-------------------------------------------------------------------------------

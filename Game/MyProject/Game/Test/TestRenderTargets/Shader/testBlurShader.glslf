@@ -5,7 +5,7 @@ uniform sampler2D Texture;
 
 out vec4 fragColor;
 
-const float offset = 1.0 / 200.0;
+const float offset = 1.0 / 300.0;
 
 void main()
 {
@@ -21,9 +21,9 @@ void main()
                             );
 
 
-    float kernel[9] = float[](  1.0 / 20, 3.0 / 20, 1.0 / 20,
-                                3.0 / 20, 4.0 / 20, 3.0 / 20,
-                                1.0 / 20, 3.0 / 20, 1.0 / 20);
+    float kernel[9] = float[](  1.0 / 16, 2.0 / 16, 1.0 / 16,
+                                2.0 / 16, 4.0 / 16, 2.0 / 16,
+                                1.0 / 16, 2.0 / 16, 1.0 / 16);
 
 
 
@@ -33,7 +33,7 @@ void main()
 
     vec3 col = vec3(0.0);
     for(int i = 0; i < 9; i++)
-    col += sampleTex[i] * kernel[i];
+        col += sampleTex[i] * kernel[i];
 
     fragColor = vec4(col, 1.0);
 

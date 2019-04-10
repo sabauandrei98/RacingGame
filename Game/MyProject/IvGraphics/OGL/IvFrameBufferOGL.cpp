@@ -69,6 +69,8 @@ void
 IvFrameBufferOGL::Create(uint32_t width,uint32_t height)
 {
     unsigned int colorIndex = 0;
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
     for(int i=0;i<renderTargets.size();i++)
     {
         renderTargets[i]->Setup(width,height);
@@ -80,21 +82,16 @@ IvFrameBufferOGL::Create(uint32_t width,uint32_t height)
                                    renderTargets[i]->GetReference(),
                                    0);
         }
-        if(renderTargets[i]->GetRenderTargetType()==RenderTargetType::DEPTH)
+        else if(renderTargets[i]->GetRenderTargetType()==RenderTargetType::DEPTH)
         {
             glFramebufferRenderbuffer(GL_FRAMEBUFFER,
                                       GL_DEPTH_ATTACHMENT,
                                       GL_RENDERBUFFER,
                                       renderTargets[i]->GetReference());
         }
-        if(renderTargets[i]->GetRenderTargetType()==RenderTargetType::DEPTH_STENCIL)
-        {
-            glFramebufferRenderbuffer(GL_FRAMEBUFFER,
-                                      GL_DEPTH_STENCIL_ATTACHMENT,
-                                      GL_RENDERBUFFER,
-                                      renderTargets[i]->GetReference());
-        }
     }
+    
+    glBindFramebuffer(GL_FRAMEBUFFER,0);
 }
 
 //-------------------------------------------------------------------------------
@@ -107,22 +104,26 @@ IvFrameBufferOGL::Bind()
 {
     if(this->created==false)
     {
-        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-        this->Create(this->width,this->height);
         this->created=true;
+        this->Create(this->width,this->height);
     }
+    
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    glViewport(0, 0, width, height);
 }
 
 //-------------------------------------------------------------------------------
-// @ IvFrameBufferOGL::Unbind()
+// @ IvFrameBufferOGL::BindToDefault()
 //-------------------------------------------------------------------------------
-// Unbind framebuffer
+// Bind to default framebuffer
 //-------------------------------------------------------------------------------
-bool IvFrameBufferOGL::Unbind()
+bool IvFrameBufferOGL::BindToDefault()
 {
     if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
         return false;
+    
     glBindFramebuffer(GL_FRAMEBUFFER,0);
+    glViewport(0, 0, IvRenderer::mRenderer->GetWidth(), IvRenderer::mRenderer->GetHeight());
     return true;
 }
 

@@ -29,7 +29,7 @@ public:
     
     virtual void Create(uint32_t width,uint32_t height)=0;
     virtual void Bind()=0;
-    virtual bool Unbind()=0;
+    virtual bool BindToDefault()=0;
     virtual const std::vector<IvRenderTarget*>& GetTextures() const =0  ;
     
 protected:

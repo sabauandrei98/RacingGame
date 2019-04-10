@@ -1,6 +1,6 @@
 #version 150
 
-const float offset = 1.0 / 300.0;
+const float offset = 1.0 / 512.0;
 
 in vec2 uvCoord;
 
@@ -10,19 +10,6 @@ out vec4 fragColor;
 
 void main()
 {
-    //fragColor=vec4(color,1.);
-
-    //fragColor=vec4(1.-vec3(texture(Texture,uvCoord)*MyColor),1.);
-
-    //vec4 FragColor = texture(Texture, uvCoord);
-
-    //float average = (FragColor.r + FragColor.g + FragColor.b) / 3.0;
-
-    //float average=0.2126 * FragColor.r + 0.7152 * FragColor.g + 0.0722 * FragColor.b;
-
-    // fragColor = vec4(average, average, average, 1.0);
-
-
     //------kernel effects------
     vec2 offsets[9] = vec2[](   vec2(-offset,  offset), // top-left
                                 vec2( 0.    ,  offset), // top-center
@@ -34,18 +21,7 @@ void main()
                                 vec2( 0.    , -offset), // bottom-center
                                 vec2( offset, -offset)  // bottom-right
                             );
-    /*
-    float kernel[9] = float[](-1, -1, -1,
-                              -1,  9, -1,
-                              -1, -1, -1);
-    */
 
-    /*
-    //-----blur
-    float kernel[9] = float[](  1.0 / 20, 3.0 / 16, 1.0 / 20,
-                                3.0 / 20, 4.0 / 16, 3.0 / 20,
-                                1.0 / 20, 3.0 / 16, 1.0 / 20);
-    */
     //----edge detection
     float kernel[9]=float[](    1.0,  1.0, 1.0,
                                 1.0, -8.0, 1.0,

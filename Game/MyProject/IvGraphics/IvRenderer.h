@@ -131,10 +131,10 @@ enum IvStencilFunc
     kNoteEqualStenciTest,
     kAlwaysStencilTest,
     
-    kLastStencilTest=kAlwaysStencilTest
+    kLastStencilTest = kAlwaysStencilTest,
 };
 
-const int kStencilTestCount=kLastStencilTest;
+const int kStencilTestCount=kLastStencilTest + 1;
 
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------

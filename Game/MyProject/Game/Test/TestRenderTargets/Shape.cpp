@@ -73,8 +73,8 @@ void Shape::LoadTexture(const char* textureName)
 
 void Shape::SetTexture(const char *name, unsigned int reference)
 {
-    mShader->SetUniform(name,reference);
     IvRenderer::mRenderer->SetShaderProgram(mShader);
+    mShader->SetUniform(name,reference);
 }
 
 void Shape::SetUniforms()

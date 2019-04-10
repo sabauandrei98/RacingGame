@@ -7,6 +7,7 @@
 #pragma once
 
 #include"IvFrameBuffer.h"
+#include"IvRenderer.h"
 
 #if defined(__APPLE__) && defined(__MACH__)
 #include <OpenGL/gl3.h>
@@ -29,7 +30,7 @@ public:
     
     void Create(uint32_t width,uint32_t height);
     void Bind();
-    bool Unbind();
+    bool BindToDefault();
     
     const std::vector<IvRenderTarget*>& GetTextures() const ;
 

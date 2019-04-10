@@ -36,7 +36,7 @@ bool Game::PostRendererInitialize()
     if ( !IvGame::PostRendererInitialize() )
         return false;
     
-    //::IvSetDefaultLighting();
+    ::IvSetDefaultLighting();
     
     return true;
 }
