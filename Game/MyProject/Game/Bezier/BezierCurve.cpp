@@ -5,7 +5,6 @@ BezierCurve::BezierCurve()
     initializeCurveTestData();
 }
 
-
 void BezierCurve::initializeCurveTestData()
 {
     Point p;
@@ -51,7 +50,6 @@ void BezierCurve::initializeCurveTestData()
 }
 
 BezierCurve::~BezierCurve(){}
-
 
 
 void
@@ -271,7 +269,7 @@ BezierCurve::Draw()
         }
     }
     
-    //tangent PINK color
+    //tangent LIGHT YELLOW color
     int tangendIndex = 0;
     
     //first point
@@ -313,8 +311,6 @@ BezierCurve::Draw()
         }
     }
     
-    
-    
     IvVertexBuffer* lines = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(kCPFormat, (unsigned int)renderPoints.size(), lineDataPtr,kImmutableUsage);
     IvVertexBuffer* points = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(kCPFormat, (unsigned int)renderPoints.size(), pointDataPtr,kImmutableUsage);
     IvVertexBuffer* control = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(kCPFormat, noOfControl, controlDataPtr,kImmutableUsage);
@@ -322,13 +318,11 @@ BezierCurve::Draw()
     IvVertexBuffer* tangents = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(kCPFormat, noOfControl * 2, tangentDataPtr,kImmutableUsage);
     IvStackAllocator::mScratchAllocator->Reset(currentOffset);
     
-    
     IvSetWorldIdentity();
     
     // clear to default shader
     IvShaderProgram* oldShader = IvRenderer::mRenderer->GetShaderProgram();
     IvRenderer::mRenderer->SetShaderProgram(0);
-    
     
     IvRenderer::mRenderer->Draw(kLineStripPrim, lines);
     IvRenderer::mRenderer->Draw(kLineListPrim, tangents);
