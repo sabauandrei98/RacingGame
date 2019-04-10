@@ -44,6 +44,7 @@ private:
     
     //only for testing
     void initializeCurveTestData();
+    
     void buildCurve();
     void extractPoints(std::vector<IvVector3>& line);
     const IvVector3 getPointFromLine(float t, std::vector<IvVector3>& line) const;
