@@ -1,9 +1,7 @@
 #version 150
 
 in vec2 uvCoord;
-
 uniform sampler2D Texture;
-//uniform vec4 MyColor;
 
 out vec4 fragColor;
 

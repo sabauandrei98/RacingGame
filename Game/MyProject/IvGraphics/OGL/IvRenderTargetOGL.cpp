@@ -7,16 +7,51 @@
 
 #include "IvRenderTargetOGL.h"
 
+//-------------------------------------------------------------------------------
+//-- Static Members -------------------------------------------------------------
+//-------------------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------------------
+//-- Methods --------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------
+// @ IvRenderTargetOGL::IvRenderTargetOGL()
+//-------------------------------------------------------------------------------
+// Default constructor
+//-------------------------------------------------------------------------------
 IvRenderTargetOGL::IvRenderTargetOGL()
 {
     
 }
+
+//-------------------------------------------------------------------------------
+// @ IvRenderTargetOGL::IvRenderTargetOGL()
+//-------------------------------------------------------------------------------
+// Constructor
+//-------------------------------------------------------------------------------
 IvRenderTargetOGL::IvRenderTargetOGL(const RenderTargetType& renderTargetType)
 {
     this->renderTargetType=renderTargetType;
 }
 
+//-------------------------------------------------------------------------------
+// @ IvRenderTargetOGL::~IvRenderTargetOGL()
+//-------------------------------------------------------------------------------
+// Destructor
+//-------------------------------------------------------------------------------
 IvRenderTargetOGL::~IvRenderTargetOGL()
+{
+}
+
+//-------------------------------------------------------------------------------
+// @ IvRenderTargetOGL::Destroy()
+//-------------------------------------------------------------------------------
+// Clean up
+//-------------------------------------------------------------------------------
+void
+IvRenderTargetOGL::Destroy()
 {
     if(renderTargetType==RenderTargetType::COLOR)
         glDeleteTextures(1,&reference);
@@ -26,28 +61,28 @@ IvRenderTargetOGL::~IvRenderTargetOGL()
         glDeleteRenderbuffers(3,&reference);
 }
 
+//-------------------------------------------------------------------------------
+// @ IvRenderTargetOGL::GetReference()
+//-------------------------------------------------------------------------------
+// Get attachement reference
+//-------------------------------------------------------------------------------
 unsigned int IvRenderTargetOGL::GetReference() const
 {
     return reference;
 }
 
+//-------------------------------------------------------------------------------
+// @ IvRenderTargetOGL::GetRenderTargetType()
+//-------------------------------------------------------------------------------
 RenderTargetType IvRenderTargetOGL::GetRenderTargetType() const
 {
     return renderTargetType;
 }
 
-void IvRenderTargetOGL::SetStencilStatements(const std::vector<StencilStatements> &stencilStatements)
-{
-    this->stencilStamentes=stencilStatements;
-}
-
-std::vector<StencilStatements> IvRenderTargetOGL::GetStencilStatements() const
-{
-    return stencilStamentes;
-}
-
-
-void IvRenderTargetOGL::Setup(int width,int height)
+//-------------------------------------------------------------------------------
+// @ IvRenderTargetOGL::Setup()
+//-------------------------------------------------------------------------------
+void IvRenderTargetOGL::Setup(uint32_t width,uint32_t height)
 {
     if(renderTargetType==RenderTargetType::COLOR)
     {

@@ -31,19 +31,15 @@ public:
     unsigned int GetReference() const;
     RenderTargetType GetRenderTargetType() const;
     
-    void SetStencilStatements(const std::vector<StencilStatements>& stencilStatements);
-    std::vector<StencilStatements> GetStencilStatements() const;
-    
 protected:
     //constructor/desctructor
     IvRenderTargetOGL();
     IvRenderTargetOGL(const RenderTargetType& renderTargetType);
     ~IvRenderTargetOGL();
-    
-    void Setup(int width,int height);
+    void Destroy();
+    void Setup(uint32_t width,uint32_t height);
     
 private:
     unsigned int reference;
     RenderTargetType renderTargetType;
-    std::vector<StencilStatements> stencilStamentes;
 };

@@ -37,10 +37,9 @@ struct VertexAttribute
 class VertexDescription
 {
 public:
-    VertexDescription() {};
-    ~VertexDescription()=default;
-    
-    
+    VertexDescription(){}
+    ~VertexDescription(){}
+
     void AddAttribute(const char* name, uint32_t noFloats);
     
     uint32_t GetVertexSize() const;

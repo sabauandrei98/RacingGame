@@ -119,6 +119,23 @@ enum IvAPI
     kD3D11
 };
 
+enum IvStencilFunc
+{
+    kDisableStencilTest,
+    kNeverStencilTest,
+    kEqualStencilTest,
+    kLessStencilTest,
+    kLessEqualStencilTest,
+    kGreaterStencilTest,
+    kGreaterEqualStencilTest,
+    kNoteEqualStenciTest,
+    kAlwaysStencilTest,
+    
+    kLastStencilTest=kAlwaysStencilTest
+};
+
+const int kStencilTestCount=kLastStencilTest;
+
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
@@ -155,6 +172,9 @@ public:
     virtual void SetShadeMode(IvShadeMode shade) = 0;
     virtual IvShadeMode GetShadeMode() = 0;
 
+    virtual void SetStencilFunc(IvStencilFunc)=0;
+    virtual void SetStencilMask(uint32_t mask)=0;
+    
     virtual void SetDepthTest(IvDepthTestFunc func) = 0;
     virtual IvDepthTestFunc GetDepthTest() = 0;
     virtual void SetDepthWrite(bool write) = 0;

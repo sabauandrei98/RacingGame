@@ -357,7 +357,31 @@ IvResourceManagerOGL::CreateRenderTarget(RenderTargetType renderTargetType)
 // Create platform-dependent frame buffer
 //-------------------------------------------------------------------------------
 IvFrameBuffer*
-IvResourceManagerOGL::CreateFrameBuffer(std::vector<IvRenderTarget*> renderTargets)
+IvResourceManagerOGL::CreateFrameBuffer(std::vector<IvRenderTarget*> renderTargets,uint32_t width,uint32_t height)
 {
-    return new IvFrameBufferOGL(renderTargets);
+    return new IvFrameBufferOGL(renderTargets,width,height);
+}
+//-------------------------------------------------------------------------------
+// @ IvResourceManagerOGL::Destroy()
+//-------------------------------------------------------------------------------
+// Delete platform-dependent frame buffer
+//-------------------------------------------------------------------------------
+void
+IvResourceManagerOGL::Destroy(IvFrameBuffer* frameBuffer)
+{
+    IvFrameBuffer* fbo=static_cast<IvFrameBuffer*>(frameBuffer);
+    fbo->Destroy();
+    delete fbo;
+}
+//-------------------------------------------------------------------------------
+// @ IvResourceManagerOGL::Destroy()
+//-------------------------------------------------------------------------------
+// Delete platform-dependent render target
+//-------------------------------------------------------------------------------
+void
+IvResourceManagerOGL::Destroy(IvRenderTarget* renderTarget)
+{
+    IvRenderTarget* rt=static_cast<IvRenderTarget*>(renderTarget);
+    rt->Destroy();
+    delete rt;
 }

@@ -27,18 +27,25 @@ class IvFrameBufferOGL:private IvFrameBuffer
 public:
     friend class IvResourceManagerOGL;
     
-    void Bind(int width=1280,int height=720);
+    void Create(uint32_t width,uint32_t height);
+    void Bind();
     bool Unbind();
     
-    std::vector<IvRenderTarget*> GetTextures() const ;
+    const std::vector<IvRenderTarget*>& GetTextures() const ;
 
 protected:
+    //constructor/destructor
     IvFrameBufferOGL();
-    IvFrameBufferOGL(const std::vector<IvRenderTarget*>& renderTargets);
+    IvFrameBufferOGL(const std::vector<IvRenderTarget*>& renderTargets,uint32_t width,uint32_t height);
     ~IvFrameBufferOGL();
+    void Destroy();
     
 private:
     unsigned int fbo;
     std::vector<IvRenderTarget*> renderTargets;
+    
+    bool created=false;
+    uint32_t width=1024;
+    uint32_t height=768;
 };
 

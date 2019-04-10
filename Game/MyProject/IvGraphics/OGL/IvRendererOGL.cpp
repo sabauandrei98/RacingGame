@@ -68,6 +68,7 @@ static GLenum sBlendOp[kBlendOpCount] =
 
 static GLenum sDepthFunc[kDepthTestCount];
 
+static GLenum sStencilFunc[kStencilTestCount];
 //-------------------------------------------------------------------------------
 //-- Methods --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
@@ -113,6 +114,15 @@ IvRendererOGL::IvRendererOGL() : IvRenderer()
     sDepthFunc[kGreaterEqualDepthTest] = GL_GEQUAL;
     sDepthFunc[kLessDepthTest] = GL_LESS;
     sDepthFunc[kLessEqualDepthTest] = GL_LEQUAL;
+    
+    sStencilFunc[kNeverStencilTest]=GL_NEVER;
+    sStencilFunc[kEqualStencilTest]=GL_EQUAL;
+    sStencilFunc[kLessDepthTest]=GL_LESS;
+    sStencilFunc[kLessEqualDepthTest]=GL_LEQUAL;
+    sStencilFunc[kGreaterDepthTest]=GL_GREATER;
+    sStencilFunc[kGreaterEqualDepthTest]=GL_GEQUAL;
+    sStencilFunc[kNoteEqualStenciTest]=GL_NOTEQUAL;
+    sStencilFunc[kAlwaysStencilTest]=GL_ALWAYS;
 
 }   // End of IvRendererOGL::IvRendererOGL()
 
@@ -338,6 +348,30 @@ void IvRendererOGL::SetDepthTest(IvDepthTestFunc func)
     glDepthFunc(sDepthFunc[func]);
 }
 
+//-------------------------------------------------------------------------------
+// @ IvRendererOGL::SetStencilFunc()
+//-------------------------------------------------------------------------------
+// Set the stencil function
+//-------------------------------------------------------------------------------
+void IvRendererOGL::SetStencilFunc(IvStencilFunc stencilFunc)
+{
+    if (stencilFunc == kDisableStencilTest)
+        glDisable(GL_STENCIL_TEST);
+    else
+        glEnable(GL_STENCIL_TEST);
+    
+    glStencilFunc(stencilFunc, 1, 0xFF);
+}
+
+//-------------------------------------------------------------------------------
+// @ IvRendererOGL::SetStencilMask()
+//-------------------------------------------------------------------------------
+// Set the stencil mask
+//-------------------------------------------------------------------------------
+void IvRendererOGL::SetStencilMask(uint32_t mask)
+{
+    glStencilMask(mask);
+}
 
 //-------------------------------------------------------------------------------
 // @ IvRendererOGL::GetDepthTest()

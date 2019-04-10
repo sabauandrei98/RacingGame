@@ -7,6 +7,7 @@
 
 #pragma once
 #include"Shape.hpp"
+#include<IvRendererOGL.h>
 
 class TestRT
 {    

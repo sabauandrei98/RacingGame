@@ -15,11 +15,9 @@ void TestRT::Create()
 {
     VertexDescription vertexDescription;
     vertexDescription.AddAttribute("IvPos",3);
-    vertexDescription.AddAttribute("IvColor",3);
     vertexDescription.AddAttribute("IvCoord",2);
     
     void* vertexData = IvStackAllocator::mScratchAllocator->Allocate(4 * vertexDescription.GetVertexSize());
-    
     
     IvVector3* positionPtr = vertexDescription.GetAttribute<IvVector3>("IvPos",vertexData);
     
@@ -33,20 +31,6 @@ void TestRT::Create()
     positionPtr = vertexDescription.NextVertexAttribute(positionPtr);
     
     *positionPtr = IvVector3(1.0f,1.0f,0.0f);
-    
-    IvVector3*colorPtr=
-    vertexDescription.GetAttribute<IvVector3>("IvColor",vertexData);
-    
-    *colorPtr=IvVector3{1.,0.,0.};
-    colorPtr=vertexDescription.NextVertexAttribute(colorPtr);
-    
-    *colorPtr=IvVector3{1.,1.,0.};
-    colorPtr=vertexDescription.NextVertexAttribute(colorPtr);
-    
-    *colorPtr=IvVector3{1.,0.,1.};
-    colorPtr=vertexDescription.NextVertexAttribute(colorPtr);
-    
-    *colorPtr=IvVector3{0.,0.,1.};
     
     IvVector2* uvPtr=vertexDescription.GetAttribute<IvVector2>("IvCoord",vertexData);
     
@@ -74,7 +58,6 @@ void TestRT::Create()
     vertexDescription2.AddAttribute("IvCoord",2);
     
     void* vertexData2 = IvStackAllocator::mScratchAllocator->Allocate(3 * vertexDescription2.GetVertexSize());
-    
     
     IvVector3* positionPtr2 = vertexDescription2.GetAttribute<IvVector3>("IvPos",vertexData2);
     
@@ -146,72 +129,50 @@ void TestRT::Create()
     
     IvRenderTarget* renderTarget2=IvRenderer::mRenderer->GetResourceManager()
     ->CreateRenderTarget(RenderTargetType::DEPTH);
-    
-    IvRenderTarget* renderTarget3=IvRenderer::mRenderer->GetResourceManager()
-    ->CreateRenderTarget(RenderTargetType::DEPTH_STENCIL);
-    
-//    std::vector<StencilStatements> stencilStatements;
-//
-//    StencilStatements statement;
-//    statement.stencilFunc=StencilStatementsFunc::EQUAL;
-//
-//    stencilStatements.push_back(statement);
-//
-//    renderTarget3->SetStencilStatements(stencilStatements);
 
     std::vector<IvRenderTarget*> renderTargets;
     renderTargets.push_back(renderTarget);
     renderTargets.push_back(renderTarget2);
-    renderTargets.push_back(renderTarget3);
     
     frameBuffer=IvRenderer::mRenderer->GetResourceManager()
-    ->CreateFrameBuffer(renderTargets);
+    ->CreateFrameBuffer(renderTargets,1024,768);
     
 }
 
 TestRT::~TestRT()
 {
-    
+    for(int i=0;i<shapes.size();i++)
+        delete shapes[i];
 }
 
 void TestRT::Setup()
 {
     shapes[0]->Setup("testShaderRT","b1.tga");
     shapes[1]->Setup("testBlurShader","b1.tga");
-   // shapes[2]->Setup("testShaderRT","b1.tga");
 }
 
 void TestRT::Draw()
 {
+    
     frameBuffer->Bind();
-
-    IvRenderer::mRenderer->SetClearColor(1.0, 0.0, 0.0, 1.0);
-    IvRenderer::mRenderer->ClearBuffers(kColorClear);
-    
-    
+ 
     shapes[0]->SetUniforms();
     shapes[0]->Draw();
-    
-//    shapes[2]->SetUniforms();
-//    shapes[2]->Draw();
     
     shapes[1]->SetUniforms();
     shapes[1]->Draw();
     
     if(!frameBuffer->Unbind())
+    {
         std::cout<<"Cannot unbind framebuffer!"<<std::endl;
-
-    IvRenderTarget* render=frameBuffer->GetTextures()[0];
-
-    shapes[0]->SetTexture("Texture",render->GetReference());
-    shapes[0]->Draw();
-
-//    IvRenderTarget* render3=frameBuffer->GetTextures()[2];
-//    shapes[2]->SetTexture("Texture",render3->GetReference());
-//    shapes[2]->Draw();
     
-    IvRenderTarget* render2=frameBuffer->GetTextures()[1];
-    shapes[1]->SetTexture("Texture",render2->GetReference());
-    shapes[1]->Draw();
+        IvRenderTarget* render=frameBuffer->GetTextures()[0];
+        shapes[0]->SetTexture("Texture",render->GetReference());
+        shapes[0]->Draw();
+    
+        IvRenderTarget* render2=frameBuffer->GetTextures()[1];
+        shapes[1]->SetTexture("Texture",render2->GetReference());
+        shapes[1]->Draw();
+    }
     
 }

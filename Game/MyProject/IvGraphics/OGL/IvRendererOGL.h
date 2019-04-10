@@ -52,6 +52,9 @@ public:
     void SetShadeMode(IvShadeMode shade) final;
     IvShadeMode GetShadeMode() final;
     
+    void SetStencilFunc(IvStencilFunc stencilFunc);
+    void SetStencilMask(uint32_t mask);
+    
     void SetWVPMat(IvMatrix44& matrix);
 
     void SetDepthTest(IvDepthTestFunc func) final;

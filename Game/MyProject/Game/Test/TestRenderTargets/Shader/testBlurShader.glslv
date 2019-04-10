@@ -1,5 +1,3 @@
-//uniform mat4 IvModelViewProjectionMatrix;
-
 in vec3 IvPos;
 in vec2 IvCoord;
 

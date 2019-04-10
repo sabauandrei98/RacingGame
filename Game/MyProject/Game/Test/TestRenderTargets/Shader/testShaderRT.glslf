@@ -1,14 +1,12 @@
 #version 150
 
-in vec3 color;
+const float offset = 1.0 / 300.0;
+
 in vec2 uvCoord;
 
 uniform sampler2D Texture;
-//uniform vec4 MyColor;
 
 out vec4 fragColor;
-
-const float offset = 1.0 / 300.0;
 
 void main()
 {
@@ -62,5 +60,4 @@ void main()
         col += sampleTex[i] * kernel[i];
 
     fragColor = vec4(col, 1.0);
-
 }

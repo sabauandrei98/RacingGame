@@ -34,18 +34,6 @@ void Shape::Setup(const char *shaderName,const char* textureName)
     {
         indices.push_back(i);
     }
-    
-//    size_t currentOffset = IvStackAllocator::mScratchAllocator->GetCurrentOffset();
-//
-//    unsigned int noIndices =(unsigned int) indices.size();
-//    UInt32* indexPtr = (UInt32*)IvStackAllocator::mScratchAllocator->
-//    Allocate(sizeof(UInt32)* noIndices);
-//
-//    IvStackAllocator::mScratchAllocator->Reset(currentOffset);
-    
-//    for ( unsigned int i = 0; i < noIndices; ++i )
-//        indexPtr[i] = indices[i];
-    
     this->LoadTexture(textureName);
     
     IvVertexShader* vs =IvRenderer::mRenderer->GetResourceManager()
@@ -78,6 +66,8 @@ void Shape::LoadTexture(const char* textureName)
         mTexture=IvRenderer::mRenderer->GetResourceManager()
         ->CreateTexture((image->GetBytesPerPixel()==4) ? kRGBA32TexFmt : kRGB24TexFmt,image
                         ->GetWidth(), image->GetHeight(), image->GetPixels(), kImmutableUsage);
+        delete image;
+        image = 0;
     }
 }
 

@@ -23,12 +23,14 @@ class IvFrameBuffer
 {
 public:
     //constructor/destructor
-    IvFrameBuffer()=default;
-    virtual ~IvFrameBuffer() {}
+    IvFrameBuffer(){}
+    virtual ~IvFrameBuffer(){}
+    virtual void Destroy()=0;
     
-    virtual void Bind(int width=1280,int height=720)=0;
+    virtual void Create(uint32_t width,uint32_t height)=0;
+    virtual void Bind()=0;
     virtual bool Unbind()=0;
-    virtual std::vector<IvRenderTarget*> GetTextures() const =0  ;
+    virtual const std::vector<IvRenderTarget*>& GetTextures() const =0  ;
     
 protected:
 

@@ -78,7 +78,11 @@ public:
 
     virtual IvRenderTarget* CreateRenderTarget(RenderTargetType renderTargetType)=0;
     
-    virtual IvFrameBuffer* CreateFrameBuffer(std::vector<IvRenderTarget*> renderTarget)=0;
+    virtual IvFrameBuffer* CreateFrameBuffer(std::vector<IvRenderTarget*> renderTarget,uint32_t width,uint32_t height)=0;
+    
+    virtual void Destroy(IvRenderTarget* renderTarget) = 0;
+    
+    virtual void Destroy(IvFrameBuffer* frameBuffer) = 0;
     
 protected:
     IvResourceManager() {}
