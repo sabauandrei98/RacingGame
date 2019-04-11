@@ -1,10 +1,3 @@
-//
-//  Game.hpp
-//  Game
-//
-//  Created by Andrei Sabu - (p) on 4/2/19.
-//
-
 #pragma once
 
 #include"Player/Player.hpp"
@@ -19,24 +12,27 @@
 #include<IvVector3.h>
 #include<IvVertexFormats.h>
 #include<IvRendererOGL.h>
+#include "CameraTestControler.hpp"
 
-class Game:public IvGame
+
+class CameraTestControler;
+
+class Game : public IvGame
 {
 public:
     Game();
     ~Game();
     bool PostRendererInitialize();
     
-   // Player*         mPlayer;
-    
     TestRT *test;
-    
+    CameraTestControler*         cameraTest;
+
 protected:
-    virtual void UpdateObjects( float dt );
+    virtual void UpdateObjects(float dt);
     virtual void Render();
     
 private:
     Game( const Game& other );
     Game& operator=( const Game& other );
-};
 
+};

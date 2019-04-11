@@ -1,52 +1,56 @@
-//
-//  Game.cpp
-//  Game
-//
-//  Created by Andrei Sabu - (p) on 4/2/19.
-//
-
 #include "Game.hpp"
 
-bool IvGame::Create()
+bool
+IvGame::Create() 
 {
     IvGame::mGame = new Game();
     return ( IvGame::mGame != 0 );
-    
 }
-Game::Game()
+
+Game::Game() : IvGame()
 {
-    //mPlayer=new Player();
-    test=new TestRT();
+    test=new TestRT(); 
 }
+
 Game::~Game()
 {
-    //delete mPlayer;
     delete test;
+    delete cameraTest;
 }
-bool Game::PostRendererInitialize()
+
+
+bool 
+Game::PostRendererInitialize()
 {
     test->Create();
     
     IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
     IvRendererOGL::mRenderer->SetDepthWrite(false);
     IvRendererOGL::mRenderer->SetDepthTest(kDisableDepthTest);
-    
+ 
     test->Setup();
-    
+
+    // Set up base class 
     if ( !IvGame::PostRendererInitialize() )
         return false;
     
+    cameraTest = new CameraTestControler();
+    if (!cameraTest)
+        return false;
+
     ::IvSetDefaultLighting();
-    
+
     return true;
 }
 
-void Game::UpdateObjects( float dt )
+void
+Game::UpdateObjects( float dt )
 {
-    
+    cameraTest->Update( dt );
+}
+void
+Game::Render()
+{
+    cameraTest->Render();
 }
 
-void Game::Render()
-{
-    test->Draw();
-}

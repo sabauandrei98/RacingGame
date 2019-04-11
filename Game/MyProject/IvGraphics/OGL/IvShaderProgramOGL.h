@@ -48,9 +48,9 @@ public:
     IvUniform* GetUniform(char const* name) final;
     
     void SetUniform(const char* name,float value);
-    void SetUniform(const char* name,IvVector2 value);
-    void SetUniform(const char* name,IvVector3 value);
-    void SetUniform(const char* name,IvVector4 value);
+    void SetUniform(const char* name,const IvVector2& value);
+    void SetUniform(const char* name,const IvVector3& value);
+    void SetUniform(const char* name,const IvVector4& value);
     void SetUniform(const char* name,unsigned int texture);
     
     friend class IvResourceManagerOGL;

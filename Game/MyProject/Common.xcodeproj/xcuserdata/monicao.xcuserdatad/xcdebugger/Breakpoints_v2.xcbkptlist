@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IvGraphics/OGL/IvRendererOGL.cpp"
-            timestampString = "576664119.79883"
+            timestampString = "576665775.693665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "647"
             endingLineNumber = "647"
-            landmarkName = "IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, IvIndexBuffer* indexBuffer, unsigned int numIndices, IvShaderProgram* shaderPtr)"
+            landmarkName = "IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, unsigned int numVertices)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,13 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IvGraphics/OGL/IvRendererOGL.cpp"
-            timestampString = "576664119.799504"
+            timestampString = "576665775.694249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "782"
-            endingLineNumber = "782"
-            landmarkName = "IvRendererOGL::BindDefaultShaderIfNeeded(IvVertexFormat format)"
-            landmarkType = "7">
+            startingLineNumber = "770"
+            endingLineNumber = "770">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
