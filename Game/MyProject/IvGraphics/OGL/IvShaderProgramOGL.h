@@ -22,6 +22,7 @@
 
 #include "../IvShaderProgram.h"
 #include "../IvVertexFormats.h"
+
 #if defined(__APPLE__) && defined(__MACH__)
 #include <OpenGL/gl3.h>
 #else
@@ -50,6 +51,7 @@ public:
     void SetUniform(const char* name,const IvVector2& value);
     void SetUniform(const char* name,const IvVector3& value);
     void SetUniform(const char* name,const IvVector4& value);
+    void SetUniform(const char* name,unsigned int texture);
     
     friend class IvResourceManagerOGL;
     friend class IvRendererOGL;

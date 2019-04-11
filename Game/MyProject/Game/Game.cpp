@@ -7,10 +7,14 @@ IvGame::Create()
     return ( IvGame::mGame != 0 );
 }
 
-Game::Game() : IvGame(){}
+Game::Game() : IvGame()
+{
+    test=new TestRT(); 
+}
 
 Game::~Game()
 {
+    delete test;
     delete cameraTest;
 }
 
@@ -18,6 +22,14 @@ Game::~Game()
 bool 
 Game::PostRendererInitialize()
 {
+    test->Create();
+    
+    IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
+    IvRendererOGL::mRenderer->SetDepthWrite(false);
+    IvRendererOGL::mRenderer->SetDepthTest(kDisableDepthTest);
+ 
+    test->Setup();
+
     // Set up base class 
     if ( !IvGame::PostRendererInitialize() )
         return false;

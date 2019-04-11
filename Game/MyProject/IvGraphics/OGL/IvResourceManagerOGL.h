@@ -67,6 +67,14 @@ public:
                                               void** data, unsigned int levels, IvDataUsage usage) final;
     void Destroy(IvTexture* tex) final;
     
+    IvRenderTarget* CreateRenderTarget(RenderTargetType renderTargetType) final;
+    
+    IvFrameBuffer* CreateFrameBuffer(std::vector<IvRenderTarget*> renderTarget,uint32_t width,uint32_t height) final;
+    
+    void Destroy(IvRenderTarget* renderTarget) final;
+    
+    void Destroy(IvFrameBuffer* frameBuffer) final;
+    
 private: 
     IvResourceManagerOGL();
     ~IvResourceManagerOGL() final;

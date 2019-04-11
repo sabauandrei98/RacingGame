@@ -16,6 +16,8 @@
 #include"IvRenderer.h"
 #include"IvRendererHelp.h"
 #include"IvResourceManager.h"
+#include"IvFrameBuffer.h"
+#include"IvFrameBufferOGL.h"
 
 class Test
 {

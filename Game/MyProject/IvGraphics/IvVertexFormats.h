@@ -36,13 +36,10 @@ struct VertexAttribute
 
 class VertexDescription
 {
-    std::vector<VertexAttribute> attributes;
-    uint32_t vertexSize = 0;
 public:
-    VertexDescription() = default;
-    ~VertexDescription()=default;
-    
-    
+    VertexDescription(){}
+    ~VertexDescription(){}
+
     void AddAttribute(const char* name, uint32_t noFloats);
     
     uint32_t GetVertexSize() const;
@@ -54,6 +51,10 @@ public:
     
     template<class T>
     T* NextVertexAttribute(T * attributePtr);
+    
+private:
+    std::vector<VertexAttribute> attributes;
+    uint32_t vertexSize = 0;
     
 };
 

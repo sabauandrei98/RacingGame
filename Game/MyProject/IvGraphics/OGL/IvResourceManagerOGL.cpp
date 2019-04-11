@@ -21,6 +21,8 @@
 #include "IvFragmentShaderOGL.h"
 #include "IvShaderProgramOGL.h"
 #include "IvTextureOGL.h"
+#include "IvRenderTargetOGL.h"
+#include "IvFrameBufferOGL.h"
 
 //-------------------------------------------------------------------------------
 //-- Static Members -------------------------------------------------------------
@@ -339,4 +341,47 @@ IvResourceManagerOGL::Destroy( IvTexture* tex )
     texOGL->Destroy();
     delete texOGL;
 }
-
+//-------------------------------------------------------------------------------
+// @ IvResourceManagerOGL::CreateRenderTarget()
+//-------------------------------------------------------------------------------
+// Create platform-dependent render target
+//-------------------------------------------------------------------------------
+IvRenderTarget*
+IvResourceManagerOGL::CreateRenderTarget(RenderTargetType renderTargetType)
+{
+    return new IvRenderTargetOGL(renderTargetType);
+}
+//-------------------------------------------------------------------------------
+// @ IvResourceManagerOGL::CreateFrameBuffer()
+//-------------------------------------------------------------------------------
+// Create platform-dependent frame buffer
+//-------------------------------------------------------------------------------
+IvFrameBuffer*
+IvResourceManagerOGL::CreateFrameBuffer(std::vector<IvRenderTarget*> renderTargets,uint32_t width,uint32_t height)
+{
+    return new IvFrameBufferOGL(renderTargets,width,height);
+}
+//-------------------------------------------------------------------------------
+// @ IvResourceManagerOGL::Destroy()
+//-------------------------------------------------------------------------------
+// Delete platform-dependent frame buffer
+//-------------------------------------------------------------------------------
+void
+IvResourceManagerOGL::Destroy(IvFrameBuffer* frameBuffer)
+{
+    IvFrameBuffer* fbo=static_cast<IvFrameBuffer*>(frameBuffer);
+    fbo->Destroy();
+    delete fbo;
+}
+//-------------------------------------------------------------------------------
+// @ IvResourceManagerOGL::Destroy()
+//-------------------------------------------------------------------------------
+// Delete platform-dependent render target
+//-------------------------------------------------------------------------------
+void
+IvResourceManagerOGL::Destroy(IvRenderTarget* renderTarget)
+{
+    IvRenderTarget* rt=static_cast<IvRenderTarget*>(renderTarget);
+    rt->Destroy();
+    delete rt;
+}

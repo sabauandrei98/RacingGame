@@ -35,7 +35,6 @@
 IvVertexBufferOGL::IvVertexBufferOGL() :IvVertexBuffer(), mBufferID(0),
                                          mVertexArrayID(0)
 {
-    //format= new IvCustomVertexFormat("PC");
 }
 
 //-------------------------------------------------------------------------------
@@ -221,7 +220,8 @@ IvVertexBufferOGL::MakeActive()
         return false;
     
     // set arrays active
-
+    glBindVertexArray(mVertexArrayID);
+    
     return true;
 }
 
@@ -238,14 +238,18 @@ IvVertexBufferOGL::MakeActive(unsigned int shaderID)
     
     // set arrays active
     glBindVertexArray(mVertexArrayID);
+    glBindBuffer( GL_ARRAY_BUFFER, mBufferID );
     
     for(const auto & attr :  format.GetAttributes())
     {
         int location = glGetAttribLocation(shaderID, attr.name.c_str());
         glEnableVertexAttribArray(location);
-        glVertexAttribPointer(location, attr.noFloats,
-                              GL_FLOAT, GL_TRUE,
-                              format.GetVertexSize(),(void*)attr.offset);
+        glVertexAttribPointer(location,
+                              attr.noFloats,
+                              GL_FLOAT,
+                              GL_TRUE,
+                              format.GetVertexSize(),
+                              (void*)attr.offset);
     }
     
     return true;

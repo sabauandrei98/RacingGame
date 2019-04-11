@@ -238,3 +238,20 @@ void IvShaderProgramOGL::SetUniform(const char *name,const IvVector4& value)
 {
     glUniform4f(glGetUniformLocation(mProgramID,name), value.x,value.y,value.z,value.w);
 }
+
+//-------------------------------------------------------------------------------
+// @ IvShaderProgramOGL::SetUniform()
+//-------------------------------------------------------------------------------
+//  IvTexture set
+//-------------------------------------------------------------------------------
+void IvShaderProgramOGL::SetUniform(const char *name,unsigned int texture)
+{
+    static GLuint unit=0;
+    glActiveTexture(GL_TEXTURE0+unit);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glUniform1i(glGetUniformLocation(mProgramID,name), 0);
+   
+}
+
+
+
