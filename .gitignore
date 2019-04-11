@@ -38,6 +38,10 @@
 *.xcuserdatad
 *.xcuserstate
 
+# Visual Studio
+*.sln
+
+# OSX
 *.DS_Store
 
 # Ignore build folder
