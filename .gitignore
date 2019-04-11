@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+# Xcode related files
+*.xcscheme
+*.xcbkptlist
+*.xcuserdatad
+*.xcuserstate
+
+*.DS_Store
