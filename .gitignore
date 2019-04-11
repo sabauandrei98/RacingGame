@@ -38,3 +38,6 @@
 *.xcuserstate
 
 *.DS_Store
+
+# Ignore build folder
+Game/MyProject/build/

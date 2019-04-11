@@ -25,8 +25,8 @@ Game::PostRendererInitialize()
     test->Create();
     
     IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
-    IvRendererOGL::mRenderer->SetDepthWrite(false);
-    IvRendererOGL::mRenderer->SetDepthTest(kDisableDepthTest);
+    IvRendererOGL::mRenderer->SetDepthWrite(true);
+    IvRendererOGL::mRenderer->SetDepthTest(kLessEqualDepthTest);
  
     test->Setup();
 
