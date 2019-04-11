@@ -43,6 +43,7 @@
 		011071882244EAD8006011E1 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011071872244EAD8006011E1 /* IOKit.framework */; };
 		0110718A2244EAF0006011E1 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011071892244EAF0006011E1 /* CoreVideo.framework */; };
 		0110718C2244EAFB006011E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0110718B2244EAFB006011E1 /* Foundation.framework */; };
+		01A1F88A225E0C8E00D8431F /* RoadGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01A1F888225E0C8E00D8431F /* RoadGenerator.cpp */; };
 		01AAFDF022535DA000472426 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFDEE22535DA000472426 /* Game.cpp */; };
 		01AAFE082254EBA900472426 /* BezierCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01AAFE062254EBA900472426 /* BezierCurve.cpp */; };
 /* End PBXBuildFile section */
@@ -183,6 +184,8 @@
 		011071872244EAD8006011E1 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		011071892244EAF0006011E1 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		0110718B2244EAFB006011E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		01A1F888225E0C8E00D8431F /* RoadGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RoadGenerator.cpp; sourceTree = "<group>"; };
+		01A1F889225E0C8E00D8431F /* RoadGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RoadGenerator.hpp; sourceTree = "<group>"; };
 		01AAFDEE22535DA000472426 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		01AAFDF122535E5300472426 /* Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Game; sourceTree = BUILT_PRODUCTS_DIR; };
 		01AAFE012254EB1D00472426 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
@@ -242,11 +245,21 @@
 		011071482244E4A9006011E1 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				01A1F887225E0C7200D8431F /* RoadGenerator */,
 				01AAFE052254EB8300472426 /* Bezier */,
 				01AAFE012254EB1D00472426 /* Game.h */,
 				01AAFDEE22535DA000472426 /* Game.cpp */,
 			);
 			path = Game;
+			sourceTree = "<group>";
+		};
+		01A1F887225E0C7200D8431F /* RoadGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				01A1F889225E0C8E00D8431F /* RoadGenerator.hpp */,
+				01A1F888225E0C8E00D8431F /* RoadGenerator.cpp */,
+			);
+			path = RoadGenerator;
 			sourceTree = "<group>";
 		};
 		01AAFE052254EB8300472426 /* Bezier */ = {
@@ -493,6 +506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01AAFE082254EBA900472426 /* BezierCurve.cpp in Sources */,
+				01A1F88A225E0C8E00D8431F /* RoadGenerator.cpp in Sources */,
 				01AAFDF022535DA000472426 /* Game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

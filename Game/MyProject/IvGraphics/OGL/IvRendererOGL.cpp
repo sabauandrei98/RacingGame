@@ -183,6 +183,25 @@ IvRendererOGL::Resize(unsigned int width, unsigned int height )
     glViewport(0,0,width,height);                       
     mWidth = width;
     mHeight = height;
+    
+    // set default projection matrix
+    float d = 1.0f/IvTan(mFOV/180.0f*kPI*0.5f);
+    float recip = 1.0f/(mNear-mFar);
+    IvMatrix44 perspective;
+    
+    perspective(0,0) = d/((GLfloat)width/(GLfloat)height);
+    perspective(1,1) = d;
+    perspective(2,2) = (mNear+mFar)*recip;
+    perspective(2,3) = 2*mNear*mFar*recip;
+    perspective(3,2) = -1.0f;
+    perspective(3,3) = 0.0f;
+    
+    SetProjectionMatrix(perspective);
+    
+    IvMatrix44 ident;
+    
+    SetViewMatrix(ident);
+    SetWorldMatrix(ident);
 
 }   // End of IvRendererOGL::Resize()
 

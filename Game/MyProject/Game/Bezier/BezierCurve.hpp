@@ -33,14 +33,16 @@ public:
     void Update( float dt );
     void Draw();
     
-private:
+    const std::vector<IvVector3>& getPoints() const {return renderPoints;}
+    static const IvVector3 lerp(IvVector3& a, IvVector3& b, float t);
     
-    std::vector<Point> points;
-    std::vector<IvVector3> renderPoints;
+private:
     
     int editIndex = 0;
     const float editSpeed = 8.0f;
     const float tStep = 0.05f;
+    std::vector<Point> points;
+    std::vector<IvVector3> renderPoints;
     
     //only for testing
     void initializeCurveTestData();
@@ -48,6 +50,5 @@ private:
     void buildCurve();
     void extractPoints(std::vector<IvVector3>& line);
     const IvVector3 getPointFromLine(float t, std::vector<IvVector3>& line) const;
-    const IvVector3 lerp(IvVector3& a, IvVector3& b, float t) const;
 };
 

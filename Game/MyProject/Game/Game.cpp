@@ -81,6 +81,10 @@ Game::PostRendererInitialize()
     if (!bezierCurve)
         return false;
     
+    roadGenerator = new RoadGenerator(bezierCurve);
+    if (!roadGenerator)
+        return false;
+    
 
     // Set some lights
     ::IvSetDefaultLighting();
@@ -98,6 +102,7 @@ void
 Game::UpdateObjects( float dt )
 {
     bezierCurve->Update(dt);
+    road
     
 }   // End of Game::Update()
 

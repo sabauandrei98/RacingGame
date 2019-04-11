@@ -141,7 +141,7 @@ BezierCurve::Update( float dt )
 }
 
 
-const IvVector3 BezierCurve::lerp(IvVector3& a, IvVector3& b, float t) const
+const IvVector3 BezierCurve::lerp(IvVector3& a, IvVector3& b, float t)
 {
     float cx = (float)a.x + (float)(b.x - a.x) * t;
     float cz = (float)a.z + (float)(b.z - a.z) * t;
@@ -193,6 +193,7 @@ void BezierCurve::buildCurve()
     //put the ending point
     renderPoints.push_back(curvePart[curvePart.size() - 1]);
 }
+
 
 
 void
