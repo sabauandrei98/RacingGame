@@ -71,7 +71,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if (CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR)
-	message(FATAL_ERROR "Please select another build directory!")
+    message(FATAL_ERROR "Please select another build directory!")
 endif()
 
 # SRC FILES
@@ -111,63 +111,63 @@ file(GLOB_RECURSE GLSLF_FILES ${PROJECT_SOURCE_DIR}/Game/*.glslf)
 
 # INCLUDE PATHS
 include_directories(
-	${PROJECT_SOURCE_DIR}/../glfw-3.1.1/include/
+    ${PROJECT_SOURCE_DIR}/../glfw-3.1.1/include/
 
-	${PROJECT_SOURCE_DIR}/IvCollision/
-	${PROJECT_SOURCE_DIR}/IvCurves/
-	${PROJECT_SOURCE_DIR}/IvEngine/
-	${PROJECT_SOURCE_DIR}/IvEngine/OGL/
-	${PROJECT_SOURCE_DIR}/IvGraphics/
-	${PROJECT_SOURCE_DIR}/IvGraphics/OGL/
-	${PROJECT_SOURCE_DIR}/IvMath/
-	${PROJECT_SOURCE_DIR}/IvRandom/
-	${PROJECT_SOURCE_DIR}/IvScene/
-	${PROJECT_SOURCE_DIR}/IvUtility/
+    ${PROJECT_SOURCE_DIR}/IvCollision/
+    ${PROJECT_SOURCE_DIR}/IvCurves/
+    ${PROJECT_SOURCE_DIR}/IvEngine/
+    ${PROJECT_SOURCE_DIR}/IvEngine/OGL/
+    ${PROJECT_SOURCE_DIR}/IvGraphics/
+    ${PROJECT_SOURCE_DIR}/IvGraphics/OGL/
+    ${PROJECT_SOURCE_DIR}/IvMath/
+    ${PROJECT_SOURCE_DIR}/IvRandom/
+    ${PROJECT_SOURCE_DIR}/IvScene/
+    ${PROJECT_SOURCE_DIR}/IvUtility/
 
-	${PROJECT_SOURCE_DIR}/Game/
-	${PROJECT_SOURCE_DIR}/Game/Player/
-	${PROJECT_SOURCE_DIR}/Game/SceneManagement/
-	${PROJECT_SOURCE_DIR}/Game/shaders/
-	${PROJECT_SOURCE_DIR}/Game/Test/
-	${PROJECT_SOURCE_DIR}/Game/Test/Resources/
-	${PROJECT_SOURCE_DIR}/Game/Test/TestCustomAttributes/
-	${PROJECT_SOURCE_DIR}/Game/Test/TestCustomAttributes/Shader/
-	${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/
-	${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/Shader/
+    ${PROJECT_SOURCE_DIR}/Game/
+    ${PROJECT_SOURCE_DIR}/Game/Player/
+    ${PROJECT_SOURCE_DIR}/Game/SceneManagement/
+    ${PROJECT_SOURCE_DIR}/Game/shaders/
+    ${PROJECT_SOURCE_DIR}/Game/Test/
+    ${PROJECT_SOURCE_DIR}/Game/Test/Resources/
+    ${PROJECT_SOURCE_DIR}/Game/Test/TestCustomAttributes/
+    ${PROJECT_SOURCE_DIR}/Game/Test/TestCustomAttributes/Shader/
+    ${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/
+    ${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/Shader/
 )
 
 # LINK PATHS
 link_directories(
-	${PROJECT_SOURCE_DIR}/../glfw-3.1.1/lib-MacOS-10.8/
+    ${PROJECT_SOURCE_DIR}/../glfw-3.1.1/lib-MacOS-10.8/
 )
 
 POPULATE_SOURCE_FOLDER_RECURSIVE(ALL_ENGINE_SOURCE_FILES "${PROJECT_SOURCE_DIR}" "Source Files")
 
 # EXECUTABLE
 add_executable(RacingGame
-	${COLLISION_SRC_FILES}
-	${CURVES_SRC_FILES}
-	${ENGINE_SRC_FILES}
-	${ENGINE_OGL_SRC_FILES}
-	${GRAPHICS_SRC_FILES}
-	${GRAPHICS_OGL_SRC_FILES}
-	${MATH_SRC_FILES}
-	${RANDOM_SRC_FILES}
-	${SCENE_SRC_FILES}
-	${UTILITY_SRC_FILES}
-	${SRC_FILES}
+    ${COLLISION_SRC_FILES}
+    ${CURVES_SRC_FILES}
+    ${ENGINE_SRC_FILES}
+    ${ENGINE_OGL_SRC_FILES}
+    ${GRAPHICS_SRC_FILES}
+    ${GRAPHICS_OGL_SRC_FILES}
+    ${MATH_SRC_FILES}
+    ${RANDOM_SRC_FILES}
+    ${SCENE_SRC_FILES}
+    ${UTILITY_SRC_FILES}
+    ${SRC_FILES}
 
-	${COLLISION_HDR_FILES}
-	${CURVES_HDR_FILES}
-	${ENGINE_HDR_FILES}
-	${ENGINE_OGL_HDR_FILES}
-	${GRAPHICS_HDR_FILES}
-	${GRAPHICS_OGL_HDR_FILES}
-	${MATH_HDR_FILES}
-	${RANDOM_HDR_FILES}
-	${SCENE_HDR_FILES}
-	${UTILITY_HDR_FILES}
-	${H_FILES}
+    ${COLLISION_HDR_FILES}
+    ${CURVES_HDR_FILES}
+    ${ENGINE_HDR_FILES}
+    ${ENGINE_OGL_HDR_FILES}
+    ${GRAPHICS_HDR_FILES}
+    ${GRAPHICS_OGL_HDR_FILES}
+    ${MATH_HDR_FILES}
+    ${RANDOM_HDR_FILES}
+    ${SCENE_HDR_FILES}
+    ${UTILITY_HDR_FILES}
+    ${H_FILES}
     ${HPP_FILES}
 
     ${GLSL_FILES}
