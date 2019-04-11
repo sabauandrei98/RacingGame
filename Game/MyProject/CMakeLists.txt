@@ -11,25 +11,29 @@ function(POPULATE_SOURCE_FOLDER allSources projectSourceDir sourceFolder virtual
 
     ## get all the headers from the folder
     file (GLOB LOCAL_HEADERS_FILES "${projectSourceDir}/${sourceFolder}/*.h" "${projectSourceDir}/${sourceFolder}/*.hpp")
+    file (GLOB LOCAL_GLSL_FILES "${projectSourceDir}/${sourceFolder}/*.glsl" "${projectSourceDir}/${sourceFolder}/*.glslf"
+        "${projectSourceDir}/${sourceFolder}/*.glslv")
 
     ## add the files to the source tree
     set(${allSources}
             ${${allSources}}
             ${LOCAL_SOURCES_FILES}
             ${LOCAL_HEADERS_FILES}
+            ${LOCAL_GLSL_FILES}
             PARENT_SCOPE)
 
     ## create the source group for the files
     if (NOT "${virtualFolder}" STREQUAL "")
         SET(SOURCE_GROUP_PATH "${virtualFolder}\\\\${SOURCE_GROUP_PATH}")
     endif(NOT "${virtualFolder}" STREQUAL "")
-    source_group(${SOURCE_GROUP_PATH} FILES ${LOCAL_SOURCES_FILES} ${LOCAL_HEADERS_FILES})
+    source_group(${SOURCE_GROUP_PATH} FILES ${LOCAL_SOURCES_FILES} ${LOCAL_HEADERS_FILES} ${LOCAL_GLSL_FILES})
 endfunction(POPULATE_SOURCE_FOLDER)
 
 function(POPULATE_SOURCE_FOLDER_RECURSIVE allSources projectSourceDir virtualFolder)
     ## recursive get all files
     set(ALL_LOCAL_FILES "")
-    file (GLOB_RECURSE ALL_LOCAL_FILES "${projectSourceDir}/*.h" "${projectSourceDir}/*.hpp" "${projectSourceDir}/*.cpp" "${projectSourceDir}/*.c")
+    file (GLOB_RECURSE ALL_LOCAL_FILES "${projectSourceDir}/*.h" "${projectSourceDir}/*.hpp" "${projectSourceDir}/*.cpp" "${projectSourceDir}/*.c"
+        "${projectSourceDir}/*.glsl" "${projectSourceDir}/*.glslf" "${projectSourceDir}/*.glslv")
 
     SET(DIR_LIST "")
     foreach (CURRENT_FILE ${ALL_LOCAL_FILES})
@@ -98,6 +102,11 @@ file(GLOB UTILITY_HDR_FILES ${PROJECT_SOURCE_DIR}/IvUtility/*.h)
 
 file(GLOB_RECURSE HDR_FILES ${PROJECT_SOURCE_DIR}/Game/*.h)
 
+# GLSL FILES
+file(GLOB_RECURSE GLSL_FILES  ${PROJECT_SOURCE_DIR}/Game/*.glsl)
+file(GLOB_RECURSE GLSLV_FILES ${PROJECT_SOURCE_DIR}/Game/*.glslv)
+file(GLOB_RECURSE GLSLF_FILES ${PROJECT_SOURCE_DIR}/Game/*.glslf)
+
 # INCLUDE PATHS
 include_directories(
 	${PROJECT_SOURCE_DIR}/../glfw-3.1.1/include/
@@ -130,8 +139,7 @@ link_directories(
 	${PROJECT_SOURCE_DIR}/../glfw-3.1.1/lib-MacOS-10.8/
 )
 
-POPULATE_SOURCE_FOLDER_RECURSIVE(ALL_ENGINE_SOURCE_FILES "${PROJECT_SOURCE_DIR}/" "Source Files")
-POPULATE_SOURCE_FOLDER_RECURSIVE(ALL_ENGINE_SOURCE_FILES "${PROJECT_SOURCE_DIR}/" "Header Files")
+POPULATE_SOURCE_FOLDER_RECURSIVE(ALL_ENGINE_SOURCE_FILES "${PROJECT_SOURCE_DIR}" "Source Files")
 
 # EXECUTABLE
 add_executable(RacingGame
@@ -158,6 +166,10 @@ add_executable(RacingGame
 	${SCENE_HDR_FILES}
 	${UTILITY_HDR_FILES}
 	${HDR_FILES}
+
+    ${GLSL_FILES}
+    ${GLSLF_FILES}
+    ${GLSLV_FILES}
 )
 
 # LINK LIBS
