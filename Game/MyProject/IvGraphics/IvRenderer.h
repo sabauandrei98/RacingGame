@@ -134,7 +134,7 @@ enum IvStencilFunc
     kLastStencilTest = kAlwaysStencilTest,
 };
 
-const int kStencilTestCount=kLastStencilTest + 1;
+const int kStencilTestCount=kLastStencilTest+1  ;
 
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------

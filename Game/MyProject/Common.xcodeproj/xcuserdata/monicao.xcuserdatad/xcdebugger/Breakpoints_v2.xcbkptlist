@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IvGraphics/OGL/IvRendererOGL.cpp"
-            timestampString = "576585050.117835"
+            timestampString = "576586066.845216"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "647"
@@ -26,28 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IvGraphics/OGL/IvRendererOGL.cpp"
-            timestampString = "576585050.118789"
+            timestampString = "576586066.846231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "782"
             endingLineNumber = "782"
             landmarkName = "IvRendererOGL::BindDefaultShaderIfNeeded(IvVertexFormat format)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IvGraphics/OGL/IvShaderProgramOGL.cpp"
-            timestampString = "576585050.119566"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "IvShaderProgramOGL::Destroy()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
