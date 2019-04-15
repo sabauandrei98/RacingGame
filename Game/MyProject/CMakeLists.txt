@@ -101,7 +101,7 @@ file(GLOB SCENE_HDR_FILES ${PROJECT_SOURCE_DIR}/IvScene/*.h)
 file(GLOB UTILITY_HDR_FILES ${PROJECT_SOURCE_DIR}/IvUtility/*.h)
 
 file(GLOB_RECURSE H_FILES ${PROJECT_SOURCE_DIR}/Game/*.h)
-file(GLOB_RECURSE HPP_FILES ${PROJECT_SOURCE_DIR}/Game/*.hpp)
+file(GLOB_RECURSE HPP_FILES ${PROJECT_SOURCE_DIR}/Game/*.hpp) 
 
 
 # GLSL FILES
@@ -112,6 +112,7 @@ file(GLOB_RECURSE GLSLF_FILES ${PROJECT_SOURCE_DIR}/Game/*.glslf)
 # INCLUDE PATHS
 include_directories(
     ${PROJECT_SOURCE_DIR}/../glfw-3.1.1/include/
+    ${PROJECT_SOURCE_DIR}/../assimp/include/
 
     ${PROJECT_SOURCE_DIR}/IvCollision/
     ${PROJECT_SOURCE_DIR}/IvCurves/
@@ -139,6 +140,7 @@ include_directories(
 # LINK PATHS
 link_directories(
     ${PROJECT_SOURCE_DIR}/../glfw-3.1.1/lib-MacOS-10.8/
+    ${PROJECT_SOURCE_DIR}/../assimp/lib/
 )
 
 POPULATE_SOURCE_FOLDER_RECURSIVE(ALL_ENGINE_SOURCE_FILES "${PROJECT_SOURCE_DIR}" "Source Files")
@@ -183,4 +185,6 @@ target_link_libraries(RacingGame
     "-framework IOKit"
     "-framework AppKit"
     libglfw3.a
+    libIrrXML.a
+    libassimp.4.1.0.dylib
 )

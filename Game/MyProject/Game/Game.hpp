@@ -13,6 +13,9 @@
 #include<IvVertexFormats.h>
 #include<IvRendererOGL.h>
 #include "CameraTestControler.hpp"
+#include "SceneManagement/SceneGraph.hpp"
+#include "SceneManagement/CameraSceneNode.hpp"
+#include "ModelLoader/ModelLoader.hpp"
 
 
 class CameraTestControler;
@@ -25,7 +28,10 @@ public:
     bool PostRendererInitialize();
     
     TestRT *test;
-    CameraTestControler*         cameraTest;
+    CameraTestControler*                cameraTest;
+    std::unique_ptr<SceneGraph>         _scene_graph;
+    std::shared_ptr<SceneNode>          _root;
+    std::shared_ptr<CameraSceneNode>    _camera;
 
 protected:
     virtual void UpdateObjects(float dt);
