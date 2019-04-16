@@ -8,6 +8,7 @@
 #pragma once
 
 #include "SceneNode.hpp"
+#include "../Camera.hpp"
 
 class CameraSceneNode : std::enable_shared_from_this<CameraSceneNode>, public SceneNode {
 public:

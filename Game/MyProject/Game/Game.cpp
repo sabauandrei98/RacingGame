@@ -37,7 +37,10 @@ Game::PostRendererInitialize()
     _scene_graph->setRoot(_root);
     _scene_graph->setCamera(_camera);
     
-    ModelLoader::loadModel("../../Models/jeep/jeep.fbx", "../../Models/jeep/jeep.tga", "../../Game/shaders/example_shader", _root.get());
+    ModelLoader::loadModel("../../Models/jeep/jeep.fbx", "../../Game/shaders/example_shader", _root.get());
+    ModelLoader::loadModel("../../Models/van/van.FBX", "../../Game/shaders/example_shader", _root.get());
+    _root->getChild(1)->setLocalPosition({5.0, 0., 0.});
+    _root->setLocalPosition({0.0, 5.0, 0.0});
 
     // Set up base class 
     if ( !IvGame::PostRendererInitialize() )
@@ -61,7 +64,7 @@ Game::UpdateObjects( float dt )
 void
 Game::Render()
 {
+        cameraTest->Render();
     _scene_graph->drawScene();
-    cameraTest->Render();
 }
 
