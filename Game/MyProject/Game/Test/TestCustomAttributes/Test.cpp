@@ -19,13 +19,11 @@ Test::~Test()
 
 void Test::Setup(const char*shaderName)
 {
-
     VertexDescription vertexDescription;
     vertexDescription.AddAttribute("IvPos",3);
     vertexDescription.AddAttribute("IvColor",3);
     
     void* vertexData = IvStackAllocator::mScratchAllocator->Allocate(3 * vertexDescription.GetVertexSize());
-    
     
     IvVector3* positionPtr = vertexDescription.GetAttribute<IvVector3>("IvPos",vertexData);
    

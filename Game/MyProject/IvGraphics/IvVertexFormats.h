@@ -101,13 +101,14 @@ T* VertexDescription::NextVertexAttribute(T * attributePtr)
 // enum for requesting format
 enum IvVertexFormat 
 {
-    kPFormat,       // position only
-    kCPFormat,      // color, position
-    kNPFormat,      // normal, position
-    kCNPFormat,     // color, normal, position
-    kTCPFormat,     // texture coord, color, position
-    kTNPFormat,      // texture coord, normal, position
-
+    kPFormat,               // position only
+    kCPFormat,              // color, position
+    kNPFormat,              // normal, position
+    kCNPFormat,             // color, normal, position
+    kTCPFormat,             // texture coord, color, position
+    kTNPFormat,             // texture coord, normal, position
+    kVertexDescription,     // anything we want
+    
     kLastVertexFormat = kTNPFormat
 
 };

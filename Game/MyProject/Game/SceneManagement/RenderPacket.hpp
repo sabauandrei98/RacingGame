@@ -21,6 +21,7 @@ public:
     
     bool            _use_depth = false;
     bool            _use_blend = false;
+    bool            _use_wireframe=false;
     
     // public function(s) and method(s)
     void draw() const;

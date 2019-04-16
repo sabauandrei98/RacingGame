@@ -9,12 +9,11 @@ IvGame::Create()
 
 Game::Game() : IvGame()
 {
-    test=new TestRT(); 
+    test=new TestHelper();
 }
 
 Game::~Game()
 {
-    delete test;
     delete cameraTest;
 }
 
@@ -22,14 +21,12 @@ Game::~Game()
 bool 
 Game::PostRendererInitialize()
 {
-    test->Create();
-    
     IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
     IvRendererOGL::mRenderer->SetDepthWrite(true);
     IvRendererOGL::mRenderer->SetDepthTest(kLessEqualDepthTest);
- 
+    
     test->Setup();
-
+    
     // Set up base class 
     if ( !IvGame::PostRendererInitialize() )
         return false;
@@ -51,6 +48,8 @@ Game::UpdateObjects( float dt )
 void
 Game::Render()
 {
+   // IvRenderer::mRenderer->SetFillMode(kWireframeFill);
     cameraTest->Render();
+    test->Draw(); 
 }
 

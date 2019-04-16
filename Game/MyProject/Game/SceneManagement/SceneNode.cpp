@@ -51,7 +51,7 @@ void SceneNode::findAllNodesWithName(const std::string& name, std::vector<SceneN
 
 // adds a child
 void SceneNode::addChild(const std::shared_ptr<SceneNode>& child) {
-    child->_parent = this;
+     child->_parent = this;
     _children.push_back(child);
 }
 
@@ -120,6 +120,11 @@ void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<Ren
         RenderPacket packet;
         packet._mesh_instance = _rendarable.get();
         packet._world_view_projection_matrix = _absolute_transform * camera->getView() * camera->getProjection();
+        packet._use_blend = true;
+        packet._use_depth = true;
+        
+        
+        packet._prim_type=kTriangleStripPrim;
         
         render_packets.push_back(packet);
     }
