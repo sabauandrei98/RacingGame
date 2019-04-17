@@ -80,8 +80,8 @@ public:
         return transform;
     }
     
-    IvMatrix44 getViewMatrix();
-    IvMatrix44 getProjectionMatrix();
+    IvMatrix44 getViewMatrix() const;
+    IvMatrix44 getProjectionMatrix() const;
     
     
 ///-------------------------------------------------------------------------------

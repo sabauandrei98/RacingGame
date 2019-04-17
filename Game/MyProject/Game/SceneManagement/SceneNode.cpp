@@ -124,7 +124,10 @@ void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<Ren
     if (_rendarable) {
         RenderPacket packet;
         packet._mesh_instance = _rendarable.get();
-        packet._world_view_projection_matrix = _absolute_transform * camera->getView() * camera->getProjection();
+        packet._world_view_projection_matrix = camera->getProjectionMatrix() * camera->getViewMatrix() * _absolute_transform;
+
+//        std::cout << camera->getViewMatrix() << std::endl;
+//        std::cout << camera->getProjectionMatrix() << std::endl;
         packet._use_blend = true;
         packet._use_depth = true;
         
