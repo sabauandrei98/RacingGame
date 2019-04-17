@@ -67,7 +67,6 @@ IvGame::~IvGame()
     }
 
     IvCleanUpRendererHelpData();
-    IvRenderer::Destroy();
 
     if (mClock)
     {
@@ -80,7 +79,8 @@ IvGame::~IvGame()
         delete IvStackAllocator::mScratchAllocator;
         IvStackAllocator::mScratchAllocator = 0;
     }
-
+    
+    IvRenderer::Destroy();
 }   // End of IvGame::~IvGame() 
 
 //-------------------------------------------------------------------------------

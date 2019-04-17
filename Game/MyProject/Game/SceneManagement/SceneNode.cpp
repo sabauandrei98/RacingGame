@@ -123,7 +123,6 @@ void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<Ren
         packet._use_blend = true;
         packet._use_depth = true;
         
-        
         packet._prim_type=kTriangleStripPrim;
         
         render_packets.push_back(packet);

@@ -18,10 +18,13 @@
 class MyHelperSceneNode:public SceneNode
 {
 public:
+	
     MyHelperSceneNode(const std::string& name,RenderPacket renderPacket);
     ~MyHelperSceneNode(){}
     
     void collectRenderingPackets(CameraSceneNode*,std::vector<RenderPacket>&);
+
 private:
+
     RenderPacket       myRenderPacket;
 };

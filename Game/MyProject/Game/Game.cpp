@@ -1,5 +1,5 @@
 #include "Game.hpp"
-
+#include "Helper/HelperRender.h"
 bool
 IvGame::Create() 
 {
@@ -9,7 +9,7 @@ IvGame::Create()
 
 Game::Game() : IvGame()
 {
-    test=new TestHelper();
+  
 }
 
 Game::~Game()
@@ -24,8 +24,6 @@ Game::PostRendererInitialize()
     IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
     IvRendererOGL::mRenderer->SetDepthWrite(true);
     IvRendererOGL::mRenderer->SetDepthTest(kLessEqualDepthTest);
-    
-    test->Setup();
     
     // Set up base class 
     if ( !IvGame::PostRendererInitialize() )
@@ -48,8 +46,7 @@ Game::UpdateObjects( float dt )
 void
 Game::Render()
 {
-   // IvRenderer::mRenderer->SetFillMode(kWireframeFill);
     cameraTest->Render();
-    test->Draw(); 
+    HelperRender::DrawBox();
 }
 
