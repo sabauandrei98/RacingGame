@@ -6,7 +6,7 @@
 //-- Dependencies ---------------------------------------------------------------
 //-------------------------------------------------------------------------------
 #include "Mesh.hpp"
-#include "HelperManager.h"
+#include "HelperManager.hpp"
 #include <stdio.h>
 #include <map>
 //-------------------------------------------------------------------------------
@@ -19,8 +19,9 @@ public:
     ~MeshManager(){}
     
     std::shared_ptr<Mesh> GetMesh(const std::string& name);
-
+    
 private:
     std::map<std::string,bool> createdMeshes;
     std::map<std::string,std::shared_ptr<Mesh>> meshes;
 };
+

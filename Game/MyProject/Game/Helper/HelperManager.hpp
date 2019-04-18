@@ -10,7 +10,7 @@
 #include "IvImage.h"
 #include "SceneGraph.hpp"
 #include "CameraSceneNode.hpp"
-#include "MyHelperSceneNode.h"
+#include "HelperSceneNode.hpp"
 
 //-------------------------------------------------------------------------------
 //-- Typedefs,Static ------------------------------------------------------------
@@ -32,6 +32,7 @@ namespace HelperManager
     IvVector3 GetMiddlePoint(const IvVector3& point1,const IvVector3& point2);
     void RefineTriangles(std::vector<IvTNPVertex>& vertices,std::vector<unsigned int>& indices,int recursionLevel);
     float CalculateLength(const IvVector3& point);
-
+    
 };
+
 

@@ -6,7 +6,7 @@
 //-- Dependencies ---------------------------------------------------------------
 //-------------------------------------------------------------------------------
 
-#include "TestHelper.h"
+#include "TestHelper.hpp"
 TestHelper::TestHelper()
 {
     meshManager=new MeshManager();

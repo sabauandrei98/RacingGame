@@ -1,32 +1,30 @@
 //-------------------------------------------------------------------------------
-//-- TestHelper.h  --------------------------------------------------------------
+//-- HelperSceneNode.h --------------------------------------------------------
 //-------------------------------------------------------------------------------
 #pragma once
 //-------------------------------------------------------------------------------
 //-- Dependencies ---------------------------------------------------------------
 //-------------------------------------------------------------------------------
-#include "SceneGraph.hpp"
-#include "Helper/HelperManager.h"
-#include "Helper/MeshManager.h"
+#include "SceneNode.hpp"
+#include "CameraSceneNode.hpp"
+//-------------------------------------------------------------------------------
+//-- Typedefs, Structs ----------------------------------------------------------
+//-------------------------------------------------------------------------------
+
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
-class TestHelper
+
+class HelperSceneNode:public SceneNode
 {
 public:
-    TestHelper();
-   
-    void DrawBox();
-    void DrawQuad();
-    void DrawSphere();
+    
+    HelperSceneNode(const std::string& name,RenderPacket renderPacket);
+    virtual ~HelperSceneNode(){}
+    
+    void collectRenderingPackets(CameraSceneNode*,std::vector<RenderPacket>&);
     
 private:
-    std::shared_ptr<SceneNode> box;
-    std::vector<bool>    createdBoxes;
-    std::vector<bool>    createdQuads;
-    std::vector<bool>    createdSphere;
-    
-    std::vector<std::shared_ptr<SceneGraph>> toBeRendered;
-    
-    MeshManager*         meshManager;
+    RenderPacket       m_renderPacket;
 };
+

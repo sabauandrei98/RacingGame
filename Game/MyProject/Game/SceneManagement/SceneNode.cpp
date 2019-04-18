@@ -115,6 +115,7 @@ void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<Ren
         return;
     
     //TODO: perform visibility testing here
+    //if not visible return;
     
     if (_rendarable) {
         RenderPacket packet;
