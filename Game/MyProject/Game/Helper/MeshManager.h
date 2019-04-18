@@ -18,9 +18,10 @@ public:
     MeshManager(){}
     ~MeshManager(){}
     
-    std::shared_ptr<Mesh> GetMesh(std::string name);
-
+    std::shared_ptr<Mesh> GetMesh(const std::string& name);
+    
 private:
     std::map<std::string,bool> createdMeshes;
     std::map<std::string,std::shared_ptr<Mesh>> meshes;
 };
+

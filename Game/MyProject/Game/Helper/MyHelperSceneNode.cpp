@@ -11,7 +11,7 @@
 //-------------------------------------------------------------------------------
 MyHelperSceneNode::MyHelperSceneNode(const std::string& name,RenderPacket renderPacket):SceneNode(name)
 {
-    myRenderPacket=renderPacket;
+    m_renderPacket=renderPacket;
 }
 //-------------------------------------------------------------------------------
 // @ MySceneNodeHelper::collectRenderPacket()
@@ -20,10 +20,10 @@ void
 MyHelperSceneNode::collectRenderingPackets(CameraSceneNode * camera, std::vector<RenderPacket> & renderPackets)
 {
     if (SceneNode::_rendarable) {
-        myRenderPacket._mesh_instance = SceneNode::_rendarable.get();
-        myRenderPacket._world_view_projection_matrix = SceneNode::_absolute_transform * camera->getView() * camera->getProjection();
+        m_renderPacket._mesh_instance = SceneNode::_rendarable.get();
+        m_renderPacket._world_view_projection_matrix = SceneNode::_absolute_transform * camera->getView() * camera->getProjection();
        
-        renderPackets.push_back(myRenderPacket);
+        renderPackets.push_back(m_renderPacket);
     }
     for (auto& i : _children)
         i->collectRenderingPackets(camera, renderPackets);

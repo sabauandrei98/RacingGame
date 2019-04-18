@@ -16,7 +16,7 @@ namespace HelperManager{
         IvVertexFormat format=IvVertexFormat::kTNPFormat;
         std::vector<IvTNPVertex> vertices;
         std::vector<unsigned int> indices;
-
+        
         IvTNPVertex vertex1;
         IvTNPVertex vertex2;
         IvTNPVertex vertex3;
@@ -43,7 +43,7 @@ namespace HelperManager{
         vertex2.position=IvVector3(x-0.5,y-0.5,z-0.5);     //v2'
         vertex3.position=IvVector3(x+0.5,y-0.5,z+0.5);     //v3'
         vertex4.position=IvVector3(x-0.5,y-0.5,z+0.5);     //v4'
-       
+        
         vertex1.texturecoord=IvVector2(1.,0.);
         vertex2.texturecoord=IvVector2(1.,1.);
         vertex3.texturecoord=IvVector2(0.,0.);
@@ -71,19 +71,19 @@ namespace HelperManager{
         indices.push_back(7);
         indices.push_back(1);
         indices.push_back(3);
-    
+        
         //right
         indices.push_back(4);
         indices.push_back(6);
         indices.push_back(0);
         indices.push_back(2);
-    
+        
         //up
         indices.push_back(6);
         indices.push_back(7);
         indices.push_back(2);
         indices.push_back(3);
-    
+        
         //down
         indices.push_back(0);
         indices.push_back(4);
@@ -102,8 +102,8 @@ namespace HelperManager{
     std::shared_ptr<Mesh> CreateQuadMesh()
     {
         std::shared_ptr<Mesh> quad=std::make_shared<Mesh>();
-
-
+        
+        
         float x=0;
         float y=0;
         float z=0;
@@ -111,7 +111,7 @@ namespace HelperManager{
         IvVertexFormat format=IvVertexFormat::kTNPFormat;
         std::vector<IvTNPVertex> vertices;
         std::vector<unsigned int> indices;
-
+        
         IvTNPVertex vertex1;
         IvTNPVertex vertex2;
         IvTNPVertex vertex3;
@@ -139,7 +139,7 @@ namespace HelperManager{
         
         for(int i=0;i<4;i++)
             indices.push_back(i);
-
+        
         //setting buffers
         quad->setVertexBuffer(vertices, format);
         quad->setIndexBuffer(indices);
@@ -151,19 +151,19 @@ namespace HelperManager{
     //---------------------------------------------------------------------------
     std::shared_ptr<Mesh> CreateSphereMesh()
     {
-
+        
         std::shared_ptr<Mesh> sphereMesh=std::make_shared<Mesh>();
-
+        
         IvVertexFormat format=IvVertexFormat::kTNPFormat;
         
         std::vector<IvTNPVertex> vertices;
         std::vector<unsigned int> indices;
-
+        
         IvTNPVertex vertex1;
         IvTNPVertex vertex2;
         IvTNPVertex vertex3;
         IvTNPVertex vertex4;
-
+        
         //first create 12 points
         float t=(1.0+sqrt(5.0))/2.0;
         std::vector<IvVector3> points;
@@ -177,34 +177,34 @@ namespace HelperManager{
         points.push_back(IvVector3( 0, 1, t));    // p5
         points.push_back(IvVector3( 0,-1,-t));    // p6
         points.push_back(IvVector3( 0, 1,-t));    // p7
-    
+        
         points.push_back(IvVector3( t, 0,-1));    // p8
         points.push_back(IvVector3( t, 0, 1));    // p9
         points.push_back(IvVector3(-t, 0,-1));    // p10
         points.push_back(IvVector3(-t, 0, 1));    // p11
-    
-
+        
+        
         // 12 vertices
         vertex1.position=points[0];
         vertex2.position=points[1];
         vertex3.position=points[2];
         vertex4.position=points[3];
-    
+        
         vertices.push_back(vertex1);
         vertices.push_back(vertex2);
         vertices.push_back(vertex3);
         vertices.push_back(vertex4);
-    
+        
         vertex1.position=points[4];
         vertex2.position=points[5];
         vertex3.position=points[6];
         vertex4.position=points[7];
-    
+        
         vertices.push_back(vertex1);
         vertices.push_back(vertex2);
         vertices.push_back(vertex3);
         vertices.push_back(vertex4);
-    
+        
         vertex1.position=points[8];
         vertex2.position=points[9];
         vertex3.position=points[10];
@@ -214,101 +214,101 @@ namespace HelperManager{
         vertices.push_back(vertex2);
         vertices.push_back(vertex3);
         vertices.push_back(vertex4);
-
-    
+        
+        
         indices.push_back(0);
         indices.push_back(11);
         indices.push_back(5);
-    
+        
         indices.push_back(0);
         indices.push_back(5);
         indices.push_back(1);
-    
+        
         indices.push_back(0);
         indices.push_back(1);
         indices.push_back(7);
-    
+        
         indices.push_back(0);
         indices.push_back(7);
         indices.push_back(10);
-    
+        
         indices.push_back(0);
         indices.push_back(10);
         indices.push_back(11);
-    
-    
+        
+        
         indices.push_back(1);
         indices.push_back(5);
         indices.push_back(9);
-    
+        
         indices.push_back(5);
         indices.push_back(11);
         indices.push_back(4);
-    
+        
         indices.push_back(11);
         indices.push_back(10);
         indices.push_back(2);
-    
+        
         indices.push_back(10);
         indices.push_back(7);
         indices.push_back(6);
-    
+        
         indices.push_back(7);
         indices.push_back(1);
         indices.push_back(8);
-    
-    
+        
+        
         indices.push_back(3);
         indices.push_back(9);
         indices.push_back(4);
-    
+        
         indices.push_back(3);
         indices.push_back(4);
         indices.push_back(2);
-    
+        
         indices.push_back(3);
         indices.push_back(2);
         indices.push_back(6);
-    
+        
         indices.push_back(3);
         indices.push_back(6);
         indices.push_back(8);
-    
+        
         indices.push_back(3);
         indices.push_back(8);
         indices.push_back(9);
-    
-    
+        
+        
         indices.push_back(4);
         indices.push_back(9);
         indices.push_back(5);
-    
+        
         indices.push_back(2);
         indices.push_back(4);
         indices.push_back(11);
-    
+        
         indices.push_back(6);
         indices.push_back(2);
         indices.push_back(10);
-    
+        
         indices.push_back(8);
         indices.push_back(6);
         indices.push_back(7);
-    
+        
         indices.push_back(9);
         indices.push_back(8);
         indices.push_back(1);
-    
+        
         indices.push_back(10);
         indices.push_back(11);
         indices.push_back(5);
-    
+        
         
         RefineTriangles(vertices,indices,4);
         
         sphereMesh->setVertexBuffer(vertices, format);
         sphereMesh->setIndexBuffer(indices);
-    
+        
         return sphereMesh;
     }
     //---------------------------------------------------------------------------
@@ -320,10 +320,10 @@ namespace HelperManager{
         std::shared_ptr<MeshInstance> meshInstance=std::make_shared<MeshInstance>();
         meshInstance->setMesh(mesh);
         meshInstance->setShader(shaderName);
-            
+        
         return meshInstance;
     }
-        
+    
     //---------------------------------------------------------------------------
     // @HelperManager::CreateMeshInstance()
     //---------------------------------------------------------------------------
@@ -446,11 +446,11 @@ namespace HelperManager{
     //---------------------------------------------------------------------------
     // @HelperManager::GetMiddlePoint()
     //---------------------------------------------------------------------------
-    IvVector3 GetMiddlePoint(IvVector3 p1, IvVector3 p2)
+    IvVector3 GetMiddlePoint(const IvVector3& point1,const IvVector3& point2)
     {
-        IvVector3 mid=IvVector3(    (p1.x+p2.x)/2.0,
-                                    (p1.y+p2.y)/2.0,
-                                    (p1.z+p2.z)/2.0);
+        IvVector3 mid=IvVector3(    (point1.x+point2.x)/2.0,
+                                    (point1.y+point2.y)/2.0,
+                                    (point1.z+point2.z)/2.0);
         
         return mid;
     }
@@ -541,12 +541,12 @@ namespace HelperManager{
             indices.clear();
             indices=newIndices;
         }
-    
+        
     }
     //---------------------------------------------------------------------------
     // @HelperManager:: CalculateLength()
     //---------------------------------------------------------------------------
-    float CalculateLength(IvVector3 point)
+    float CalculateLength(const IvVector3& point)
     {
         return sqrt(point.x*point.x+point.y*point.y+point.z*point.z);
     }
