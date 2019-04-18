@@ -12,6 +12,7 @@
 #include "RenderPacket.hpp"
 #include "NodeTransform.hpp"
 #include "NodeAnimator.hpp"
+#include "BoundingBox.hpp"
 
 class NodeAnimator;
 class CameraSceneNode;
@@ -50,6 +51,7 @@ protected:
     
     NodeTransform                           _transform;
     IvMatrix44                              _absolute_transform;
+    BoundingBox                             _bounding_box;
     
     std::shared_ptr<NodeAnimator>           _animator;
     std::shared_ptr<MeshInstance>           _rendarable;
