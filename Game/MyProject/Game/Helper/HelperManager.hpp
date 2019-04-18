@@ -10,7 +10,7 @@
 #include "IvImage.h"
 #include "SceneGraph.hpp"
 #include "CameraSceneNode.hpp"
-#include "MyHelperSceneNode.h"
+#include "HelperSceneNode.hpp"
 
 //-------------------------------------------------------------------------------
 //-- Typedefs,Static ------------------------------------------------------------

@@ -3,7 +3,7 @@
 #include"Player/Player.hpp"
 #include"Test/TestCustomAttributes/Test.hpp"
 #include"Test/TestRenderTargets/TestRT.hpp"
-#include"Test/TestHelper/TestHelper.h"
+#include"Test/TestHelper/TestHelper.hpp"
 
 #include <stdio.h>
 #include<iostream>

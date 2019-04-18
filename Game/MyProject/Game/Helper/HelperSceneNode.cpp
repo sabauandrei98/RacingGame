@@ -1,7 +1,7 @@
 //-------------------------------------------------------------------------------
 //-- MySceneNodeHelper.cpp ------------------------------------------------------
 //-------------------------------------------------------------------------------
-#include "MyHelperSceneNode.h"
+#include "HelperSceneNode.hpp"
 //-------------------------------------------------------------------------------
 //  PUBLIC METHODS
 //-------------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 //-------------------------------------------------------------------------------
 // @ MySceneNodeHelper::MySceneNodeHelper()
 //-------------------------------------------------------------------------------
-MyHelperSceneNode::MyHelperSceneNode(const std::string& name,RenderPacket renderPacket):SceneNode(name)
+HelperSceneNode::HelperSceneNode(const std::string& name,RenderPacket renderPacket):SceneNode(name)
 {
     m_renderPacket=renderPacket;
 }
@@ -17,7 +17,7 @@ MyHelperSceneNode::MyHelperSceneNode(const std::string& name,RenderPacket render
 // @ MySceneNodeHelper::collectRenderPacket()
 //-------------------------------------------------------------------------------
 void
-MyHelperSceneNode::collectRenderingPackets(CameraSceneNode * camera, std::vector<RenderPacket> & renderPackets)
+HelperSceneNode::collectRenderingPackets(CameraSceneNode * camera, std::vector<RenderPacket> & renderPackets)
 {
     if (SceneNode::_rendarable) {
         m_renderPacket._mesh_instance = SceneNode::_rendarable.get();

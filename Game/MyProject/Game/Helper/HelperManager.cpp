@@ -1,7 +1,7 @@
 //-------------------------------------------------------------------------------
 //-- HelperManager.cpp ----------------------------------------------------------
 //-------------------------------------------------------------------------------
-#include "HelperManager.h"
+#include "HelperManager.hpp"
 
 namespace HelperManager{
     //---------------------------------------------------------------------------
@@ -350,7 +350,7 @@ namespace HelperManager{
         myRenderPacket._use_wireframe = wireframeValue;
         myRenderPacket._prim_type = kTriangleListPrim;
         
-        std::shared_ptr<MyHelperSceneNode> node = std::make_shared<MyHelperSceneNode>("node", myRenderPacket);
+        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", myRenderPacket);
         node->setRenderable(meshInstance);
         
         return node;
@@ -368,7 +368,7 @@ namespace HelperManager{
         myRenderPacket._use_wireframe = wireframeValue;
         myRenderPacket._prim_type = kTriangleStripPrim;
         
-        std::shared_ptr<MyHelperSceneNode> node = std::make_shared<MyHelperSceneNode>("node", myRenderPacket);
+        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", myRenderPacket);
         node->setRenderable(meshInstance);
         
         return node;
@@ -385,7 +385,7 @@ namespace HelperManager{
         myRenderPacket._use_wireframe = wireframeValue;
         myRenderPacket._prim_type = kTriangleStripPrim;
         
-        std::shared_ptr<MyHelperSceneNode> node = std::make_shared<MyHelperSceneNode>("node", myRenderPacket);
+        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", myRenderPacket);
         node->setRenderable(meshInstance);
         
         IvVector3 position=IvVector3(0,0,0);
@@ -413,7 +413,7 @@ namespace HelperManager{
         myRenderPacket._use_wireframe = wireframeValue;
         myRenderPacket._prim_type = kTriangleStripPrim;
         
-        std::shared_ptr<MyHelperSceneNode> node = std::make_shared<MyHelperSceneNode>("node", myRenderPacket);
+        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", myRenderPacket);
         node->setRenderable(meshInstance);
         
         IvVector3 position=IvVector3(0,0,0);
