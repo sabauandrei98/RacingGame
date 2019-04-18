@@ -26,5 +26,5 @@ public:
 
 private:
 
-    RenderPacket       myRenderPacket;
+    RenderPacket       m_renderPacket;
 };

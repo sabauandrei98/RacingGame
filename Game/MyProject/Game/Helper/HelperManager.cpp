@@ -446,11 +446,11 @@ namespace HelperManager{
     //---------------------------------------------------------------------------
     // @HelperManager::GetMiddlePoint()
     //---------------------------------------------------------------------------
-    IvVector3 GetMiddlePoint(IvVector3 p1, IvVector3 p2)
+    IvVector3 GetMiddlePoint(const IvVector3& point1,const IvVector3& point2)
     {
-        IvVector3 mid=IvVector3(    (p1.x+p2.x)/2.0,
-                                    (p1.y+p2.y)/2.0,
-                                    (p1.z+p2.z)/2.0);
+        IvVector3 mid=IvVector3(    (point1.x+point2.x)/2.0,
+                                    (point1.y+point2.y)/2.0,
+                                    (point1.z+point2.z)/2.0);
         
         return mid;
     }
@@ -546,7 +546,7 @@ namespace HelperManager{
     //---------------------------------------------------------------------------
     // @HelperManager:: CalculateLength()
     //---------------------------------------------------------------------------
-    float CalculateLength(IvVector3 point)
+    float CalculateLength(const IvVector3& point)
     {
         return sqrt(point.x*point.x+point.y*point.y+point.z*point.z);
     }
