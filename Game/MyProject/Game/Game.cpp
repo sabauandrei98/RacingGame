@@ -18,10 +18,13 @@ Game::~Game()
     delete cameraTest;
 }
 
-
 bool 
 Game::PostRendererInitialize()
 {
+    // Set up base class
+    if ( !IvGame::PostRendererInitialize() )
+        return false;
+    
     test->Create();
     
     IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
@@ -37,14 +40,11 @@ Game::PostRendererInitialize()
     _scene_graph->setRoot(_root);
     _scene_graph->setCamera(_camera);
     
-    ModelLoader::loadModel("../../Models/jeep/jeep.fbx", "../../Game/shaders/example_shader", _root.get());
-    ModelLoader::loadModel("../../Models/van/van.FBX", "../../Game/shaders/example_shader", _root.get());
-    _root->getChild(1)->setLocalPosition({5.0, 0., 0.});
-    _root->setLocalPosition({0.0, 5.0, 0.0});
-
-    // Set up base class 
-    if ( !IvGame::PostRendererInitialize() )
-        return false;
+    _root->addChild(ModelLoader::loadModel("jeep.fbx", "example_shader"));
+    _root->addChild(ModelLoader::loadModel("van.FBX", "example_shader"));
+    _root->addChild(ModelLoader::loadModel("jeep.fbx", "example_shader"));
+    _root->getChild(0)->setLocalPosition({5., 0., 0.});
+    _root->getChild(1)->setLocalPosition({0., 5., 0.});
     
     cameraTest = new CameraTestControler();
     if (!cameraTest)
