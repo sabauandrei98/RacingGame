@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "Helper/HelperRender.h"
 bool
 IvGame::Create() 
 {
@@ -9,11 +8,12 @@ IvGame::Create()
 
 Game::Game() : IvGame()
 {
-  
+    test=new TestHelper();
 }
 
 Game::~Game()
 {
+    delete test;
     delete cameraTest;
 }
 
@@ -47,6 +47,6 @@ void
 Game::Render()
 {
     cameraTest->Render();
-    HelperRender::DrawBox();
+    test->DrawBox();
 }
 

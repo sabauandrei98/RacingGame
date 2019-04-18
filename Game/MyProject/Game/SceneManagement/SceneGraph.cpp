@@ -11,7 +11,7 @@
 // PUBLIC FUNCTION(S) AND METHOD(S)
 // --------------------------------
 
-// updates all the nodes starting with roor
+// updates all the nodes starting with root
 void SceneGraph::updateScene(float dt) {
     _root->updateNode(dt);
 }

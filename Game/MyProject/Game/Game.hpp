@@ -3,6 +3,7 @@
 #include"Player/Player.hpp"
 #include"Test/TestCustomAttributes/Test.hpp"
 #include"Test/TestRenderTargets/TestRT.hpp"
+#include"Test/TestHelper/TestHelper.h"
 
 #include <stdio.h>
 #include<iostream>
@@ -24,6 +25,7 @@ public:
     ~Game();
     bool PostRendererInitialize();
     
+    TestHelper*                  test;
     CameraTestControler*         cameraTest;
 
 protected:

@@ -3,10 +3,9 @@
 //-------------------------------------------------------------------------------
 #include "HelperManager.h"
 
-namespace HelperManager
-{
+namespace HelperManager{
     //---------------------------------------------------------------------------
-    // @ CreateBoxMesh()
+    // @HelperManager::CreateBoxMesh()
     //---------------------------------------------------------------------------
     std::shared_ptr<Mesh> CreateBoxMesh()
     {
@@ -98,7 +97,7 @@ namespace HelperManager
         return square;
     }
     //---------------------------------------------------------------------------
-    // @ CreateQuadMesh()
+    // @HelperManager::CreateQuadMesh()
     //---------------------------------------------------------------------------
     std::shared_ptr<Mesh> CreateQuadMesh()
     {
@@ -148,7 +147,7 @@ namespace HelperManager
         return quad;
     }
     //---------------------------------------------------------------------------
-    // @ CreateSphereMesh()
+    // @HelperManager::CreateSphereMesh()
     //---------------------------------------------------------------------------
     std::shared_ptr<Mesh> CreateSphereMesh()
     {
@@ -313,7 +312,7 @@ namespace HelperManager
         return sphereMesh;
     }
     //---------------------------------------------------------------------------
-    // @ CreateMeshInstance()
+    // @HelperManager::CreateMeshInstance()
     //---------------------------------------------------------------------------
     std::shared_ptr<MeshInstance> CreateMeshInstance(const std::shared_ptr<Mesh> &mesh,
                                                      const char* shaderName)
@@ -326,7 +325,7 @@ namespace HelperManager
     }
         
     //---------------------------------------------------------------------------
-    // @ CreateMeshInstance()
+    // @HelperManager::CreateMeshInstance()
     //---------------------------------------------------------------------------
     std::shared_ptr<MeshInstance> CreateMeshInstance(const std::shared_ptr<Mesh> &mesh,
                                                      const std::vector<std::string>& uniforms,
@@ -339,9 +338,113 @@ namespace HelperManager
         
         return meshInstance;
     }
+    //---------------------------------------------------------------------------
+    // @HelperManager::BuildSphere()
+    //---------------------------------------------------------------------------
+    std::shared_ptr<SceneNode>
+    BuildSphere(const std::shared_ptr<MeshInstance>&meshInstance,bool wireframeValue)
+    {
+        RenderPacket myRenderPacket;
+        myRenderPacket._use_blend = true;
+        myRenderPacket._use_depth = true;
+        myRenderPacket._use_wireframe = wireframeValue;
+        myRenderPacket._prim_type = kTriangleListPrim;
+        
+        std::shared_ptr<MyHelperSceneNode> node = std::make_shared<MyHelperSceneNode>("node", myRenderPacket);
+        node->setRenderable(meshInstance);
+        
+        return node;
+    }
     
     //---------------------------------------------------------------------------
-    // @ GetMiddlePoint()
+    // @HelperManager::BuildBox()
+    //---------------------------------------------------------------------------
+    std::shared_ptr<SceneNode>
+    BuildBox(const std::shared_ptr<MeshInstance>&meshInstance,bool wireframeValue)
+    {
+        RenderPacket myRenderPacket;
+        myRenderPacket._use_blend = true;
+        myRenderPacket._use_depth = true;
+        myRenderPacket._use_wireframe = wireframeValue;
+        myRenderPacket._prim_type = kTriangleStripPrim;
+        
+        std::shared_ptr<MyHelperSceneNode> node = std::make_shared<MyHelperSceneNode>("node", myRenderPacket);
+        node->setRenderable(meshInstance);
+        
+        return node;
+    }
+    //---------------------------------------------------------------------------
+    // @HelperManager::BuildQuad()
+    //---------------------------------------------------------------------------
+    std::shared_ptr<SceneNode>
+    BuildQuad(const std::shared_ptr<MeshInstance>&meshInstance,IvVector3 axis,bool wireframeValue)
+    {
+        RenderPacket myRenderPacket;
+        myRenderPacket._use_blend = true;
+        myRenderPacket._use_depth = true;
+        myRenderPacket._use_wireframe = wireframeValue;
+        myRenderPacket._prim_type = kTriangleStripPrim;
+        
+        std::shared_ptr<MyHelperSceneNode> node = std::make_shared<MyHelperSceneNode>("node", myRenderPacket);
+        node->setRenderable(meshInstance);
+        
+        IvVector3 position=IvVector3(0,0,0);
+        IvVector3 rotation=IvVector3(0,0,0);
+        IvVector3 scale=IvVector3(1,1,1);
+        if (axis == IvVector3::xAxis)
+            rotation += IvVector3(0, 1.5, 0);
+        else if (axis == IvVector3::yAxis)
+            rotation += IvVector3(1.5, 0, 0);
+        else if (axis == IvVector3::zAxis)
+            rotation += IvVector3(0, 0, 1.5);
+        node->setLocalTransform(position, rotation, scale);
+        return node;
+    }
+    
+    //---------------------------------------------------------------------------
+    // @HelperManager::BuildTexturedQuad()
+    //---------------------------------------------------------------------------
+    std::shared_ptr<SceneNode>
+    BuildTexturedQuad(const std::shared_ptr<MeshInstance>&meshInstance,const char* textureName,const char* shaderName,IvVector3 axis,bool wireframeValue)
+    {
+        RenderPacket myRenderPacket;
+        myRenderPacket._use_blend = true;
+        myRenderPacket._use_depth = true;
+        myRenderPacket._use_wireframe = wireframeValue;
+        myRenderPacket._prim_type = kTriangleStripPrim;
+        
+        std::shared_ptr<MyHelperSceneNode> node = std::make_shared<MyHelperSceneNode>("node", myRenderPacket);
+        node->setRenderable(meshInstance);
+        
+        IvVector3 position=IvVector3(0,0,0);
+        IvVector3 rotation=IvVector3(0,0,0);
+        IvVector3 scale=IvVector3(1,1,1);
+        if (axis == IvVector3::xAxis)
+            rotation += IvVector3(0, 1.5, 0);
+        else if (axis == IvVector3::yAxis)
+            rotation += IvVector3(1.5, 0, 0);
+        else if (axis == IvVector3::zAxis)
+            rotation += IvVector3(0, 0, 1.5);
+        node->setLocalTransform(position, rotation, scale);
+        
+        IvImage* image = IvImage::CreateFromFile(textureName);
+        IvTexture* quadTexture;
+        
+        if (image)
+        {
+            quadTexture = IvRenderer::mRenderer->GetResourceManager()->CreateTexture((image->GetBytesPerPixel() == 4) ? kRGBA32TexFmt : kRGB24TexFmt, image->GetWidth(), image->GetHeight(), image->GetPixels(), kImmutableUsage);
+            delete image;
+            image = 0;
+        }
+        
+        IvUniform* unif = meshInstance->getShaderUniforms()[0];
+        if (unif)
+            unif->SetValue(quadTexture);
+        
+        return node;
+    }
+    //---------------------------------------------------------------------------
+    // @HelperManager::GetMiddlePoint()
     //---------------------------------------------------------------------------
     IvVector3 GetMiddlePoint(IvVector3 p1, IvVector3 p2)
     {
@@ -352,7 +455,7 @@ namespace HelperManager
         return mid;
     }
     //---------------------------------------------------------------------------
-    // @ RefineTriangles()
+    // @HelperManager::RefineTriangles()
     //---------------------------------------------------------------------------
     void RefineTriangles(std::vector<IvTNPVertex>& vertices,std::vector<unsigned int>& indices,int recursionLevel)
     {
@@ -441,7 +544,7 @@ namespace HelperManager
     
     }
     //---------------------------------------------------------------------------
-    // @ CalculateLength()
+    // @HelperManager:: CalculateLength()
     //---------------------------------------------------------------------------
     float CalculateLength(IvVector3 point)
     {
