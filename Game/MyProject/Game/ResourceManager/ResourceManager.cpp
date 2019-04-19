@@ -37,8 +37,11 @@ const ResourceManager::TexturePtr& ResourceManager::getTexture(const std::string
     StringToTexture::iterator location;
     IvTexture*                texture;
     
+    // if the texture is in the cache returns it
     location = textures.find(name);
     if (location != textures.end()) {
+        // puts the used texture at the end of the list
+        // the last used texture will be the first element of the list
         texture_cache.remove(name);
         texture_cache.push_back(name);
         
@@ -53,6 +56,7 @@ const ResourceManager::TexturePtr& ResourceManager::getTexture(const std::string
     texture_cache.push_back(name);
     
     if (textures.size() > SIZE_OF_CACHE) {
+        // if the cache is full deletes the last used element
         textures.erase(texture_cache.front());
         texture_cache.pop_front();
     }
@@ -66,8 +70,11 @@ const ResourceManager::ConstAiScenePtr& ResourceManager::getModel(const std::str
     const aiScene*              scene;
     Assimp::Importer            importer;
     
+    // if the model is in the cache returns it
     location = models.find(name);
     if (location != models.end()) {
+        // puts the used model at the end of the list
+        // the last used model will be the first element of the list
         model_cache.remove(name);
         model_cache.push_back(name);
         
@@ -75,8 +82,10 @@ const ResourceManager::ConstAiScenePtr& ResourceManager::getModel(const std::str
     }
     
     importer.ReadFile("../../Models/" + name, aiProcess_Triangulate | aiProcess_FlipUVs);
-    scene = importer.GetOrphanedScene();
     
+    // when the importer runs out of scope it deletes all of his owned scenes, thus I have to own the scenes stored in models map
+    // and I have to delete them properly
+    scene = importer.GetOrphanedScene();
     if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         std::cout << "ERROR::ASSIMP::" << importer.GetErrorString() << std::endl;
         return NULL_POINTER;
@@ -86,6 +95,7 @@ const ResourceManager::ConstAiScenePtr& ResourceManager::getModel(const std::str
     model_cache.push_back(name);
     
     if (models.size() > SIZE_OF_CACHE) {
+        // if the cache is full deletes the last used element
         models.erase(model_cache.front());
         model_cache.pop_front();
     }
@@ -97,6 +107,7 @@ const ResourceManager::ConstAiScenePtr& ResourceManager::getModel(const std::str
 // PRIVATE FUNCTION(S) AND METHOD(S)
 // ---------------------------------
 
+// returns a pointer to the loaded texture or returns nullptr if not exists
 IvTexture* ResourceManager::loadTexture(const std::string& file_name) const {
     IvImage*    image = IvImage::CreateFromFile(file_name.c_str());
     
@@ -110,6 +121,7 @@ IvTexture* ResourceManager::loadTexture(const std::string& file_name) const {
 // PRIVATE CONSTRUCTOR
 // -------------------
 
+// private constructor for the singleton pattern
 ResourceManager::ResourceManager() :
     SIZE_OF_CACHE(10),
     CUSTOM_DELETER([](IvTexture* texture) {

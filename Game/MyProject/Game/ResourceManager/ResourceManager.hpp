@@ -49,7 +49,7 @@ private:
     // private variable(s)
     const unsigned int      SIZE_OF_CACHE;
     const Lambda            CUSTOM_DELETER;
-    TexturePtr        FALLBACK_TEXTURE;
+    TexturePtr              FALLBACK_TEXTURE;
     const ConstAiScenePtr   NULL_POINTER;
     
     mutable StringToTexture textures;

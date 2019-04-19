@@ -7,10 +7,6 @@
 
 #include "ModelLoader.hpp"
 
-// --------------------------------
-// PUBLIC FUNCTION(S) AND METHOD(S)
-// --------------------------------
-
 // loads a model and returns the root scene node of it
 std::shared_ptr<SceneNode> ModelLoader::loadModel(const std::string& name, const std::string& shader_name) {
     ResourceManager::ConstAiScenePtr    new_scene;
@@ -25,10 +21,6 @@ std::shared_ptr<SceneNode> ModelLoader::loadModel(const std::string& name, const
     return new_root;
 }
 
-// --------------------------------
-// PRIVATE FUNCTION(S) AND METHOD(S)
-// --------------------------------
-
 // transforms the assimp scene node to my scene node
 void ModelLoader::processNode(aiNode* node, const aiScene* scene, SceneNode* my_scene_node, const std::string& shader_name) {
     for (unsigned int i = 0; i < node->mNumMeshes; i++) {
@@ -36,6 +28,7 @@ void ModelLoader::processNode(aiNode* node, const aiScene* scene, SceneNode* my_
         my_scene_node->addChild(makeSceneNode(mesh, scene, node, shader_name));
     }
     
+    // there are children without mesh too
     for (unsigned int i = node->mNumMeshes; i < node->mNumChildren; i++)
         my_scene_node->addChild(makeSceneNode(nullptr, scene, node, shader_name));
     
