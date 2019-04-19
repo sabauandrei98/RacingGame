@@ -13,6 +13,7 @@
 #include "NodeTransform.hpp"
 #include "NodeAnimator.hpp"
 #include "BoundingBox.hpp"
+#include "../Camera.hpp"
 
 class NodeAnimator;
 class CameraSceneNode;
@@ -27,6 +28,7 @@ public:
     void findAllNodesWithName(const std::string&, std::vector<SceneNode*>&) const;
     
     void addChild(const std::shared_ptr<SceneNode>&);
+    SceneNode* getChild(unsigned int);
     void remove();
     
     void setLocalTransform(const IvVector3&, const IvVector3&, const IvVector3&);
@@ -40,7 +42,7 @@ public:
     
     virtual void updateAbsoluteTransform();
     virtual void updateNode(float);
-    virtual void collectRenderingPackets(CameraSceneNode*, std::vector<RenderPacket>&);
+    virtual void collectRenderingPackets(const Camera*, std::vector<RenderPacket>&);
     
 protected:
     // protected variable(s)

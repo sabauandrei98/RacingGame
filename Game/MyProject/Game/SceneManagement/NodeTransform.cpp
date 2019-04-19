@@ -27,23 +27,18 @@ void NodeTransform::set(const IvVector3& position, const IvVector3& rotation, co
     _rotation = rotation;
     _scale = scale;
     
-    _is_dirty = true;
+    calculate();
 }
 
 // sets the position
 void NodeTransform::set(const IvVector3& position) {
     _position = position;
     
-    _is_dirty = true;
+    calculate();
 }
 
 // returns the transform matrix
 const IvMatrix44& NodeTransform::getMatrix() {
-    if (_is_dirty) {
-        calculate();
-        _is_dirty = false;
-    }
-    
     return _transform_matrix;
 }
 
@@ -68,4 +63,3 @@ void NodeTransform::calculate() {
     
     _transform_matrix = position * rotation * scale * _transform_matrix;
 }
-

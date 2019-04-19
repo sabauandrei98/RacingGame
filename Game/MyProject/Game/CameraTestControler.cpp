@@ -126,13 +126,12 @@ CameraTestControler::Render()
 {
     
     //DRAW AXES
-    IvDrawAxes();
+    //IvDrawAxes();
     
 //    IvDrawFloor();
 //
 //    //DRAW AN OBJECT
 //    IvDrawTeapot();
-    
     //VIEW MATRIX
     IvRenderer::mRenderer->SetViewMatrix(camera.getViewMatrix());
     

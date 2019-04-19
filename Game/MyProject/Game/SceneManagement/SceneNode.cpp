@@ -55,6 +55,11 @@ void SceneNode::addChild(const std::shared_ptr<SceneNode>& child) {
     _children.push_back(child);
 }
 
+// returns a pointer to the child
+SceneNode* SceneNode::getChild(unsigned int index) {
+    return _children[index].get();
+}
+
 // removes this node and all its children from the graph
 void SceneNode::remove()
 {
@@ -131,7 +136,7 @@ void SceneNode::updateNode(float dt) {
 }
 
 // collects the rendering packets
-void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<RenderPacket>& render_packets) {
+void SceneNode::collectRenderingPackets(const Camera* camera, std::vector<RenderPacket>& render_packets) {
     if (!_enabled)
         return;
     
@@ -141,7 +146,7 @@ void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<Ren
         RenderPacket packet;
         packet._mesh_instance = _rendarable.get();
         packet._use_depth = true;
-        packet._world_view_projection_matrix = _absolute_transform;// * camera->getView() * camera->getProjection();
+        packet._world_view_projection_matrix = camera->getProjectionMatrix() * camera->getViewMatrix() * _absolute_transform;
         
         render_packets.push_back(packet);
     }
