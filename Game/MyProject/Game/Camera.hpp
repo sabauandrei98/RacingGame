@@ -8,7 +8,7 @@
 #include <IvMath.h>
 #include <iostream>
 
-class Camera{
+class Camera : std::enable_shared_from_this<Camera> {
 
 private:
     

@@ -115,7 +115,7 @@ void SceneNode::updateNode(float dt) {
 }
 
 // collects the rendering packets
-void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<RenderPacket>& render_packets) {
+void SceneNode::collectRenderingPackets(const Camera* camera, std::vector<RenderPacket>& render_packets) {
     if (!_enabled)
         return;
     

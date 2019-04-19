@@ -11,8 +11,8 @@
 // CONSTRUCTOR(S) AND DESTRUCTOR
 // -----------------------------
 
-CameraSceneNode::CameraSceneNode(const std::string& name, const Camera& camera) :
-    SceneNode(name), Camera(camera) {
+CameraSceneNode::CameraSceneNode(const std::string& name, const CameraSceneNode::CameraPtr& camera) :
+    SceneNode(name), _camera(camera) {
     }
 
 // --------------------------------
@@ -24,19 +24,19 @@ void CameraSceneNode::updateNode(float dt) {
     
     if (IvGame::mGame->mEventHandler->IsKeyDown('w'))
     {
-        pan({0, dt * translationSpeed});
+        _camera->pan({0, dt * translationSpeed});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('s'))
     {
-        pan({0, -dt * translationSpeed});
+        _camera->pan({0, -dt * translationSpeed});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
     {
-        pan({-dt * translationSpeed, 0});
+        _camera->pan({-dt * translationSpeed, 0});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
     {
-        pan({dt * translationSpeed, 0});
+        _camera->pan({dt * translationSpeed, 0});
     }
     
     // set up rotation
@@ -46,65 +46,65 @@ void CameraSceneNode::updateNode(float dt) {
     if (IvGame::mGame->mEventHandler->IsKeyDown('t'))
     {
         x += dt * rotationSpeed;
-        rotate({x, y, z});
+        _camera->rotate({x, y, z});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('g'))
     {
         x -= dt * rotationSpeed;
-        rotate({x, y, z});
+        _camera->rotate({x, y, z});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('y'))
     {
         y += dt * rotationSpeed;
-        rotate({x, y, z});
+        _camera->rotate({x, y, z});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('h'))
     {
         y -= dt * rotationSpeed;
-        rotate({x, y, z});
+        _camera->rotate({x, y, z});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('u'))
     {
         z += dt * rotationSpeed;
-        rotate({x, y, z});
+        _camera->rotate({x, y, z});
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('j'))
     {
         z -= dt * rotationSpeed;
-        rotate({x, y, z});
+        _camera->rotate({x, y, z});
     }
     
     // set up scaling
     float scalingSpeed = 1.0f;
     if (IvGame::mGame->mEventHandler->IsKeyDown('q'))
     {
-        zoom(dt * scalingSpeed);
+        _camera->zoom(dt * scalingSpeed);
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('e'))
     {
-        zoom(-dt * scalingSpeed);
+        _camera->zoom(-dt * scalingSpeed);
     }
     
     // set up FOV
     float fovSpeed = 0.5f;
     if (IvGame::mGame->mEventHandler->IsKeyDown('['))
     {
-        setFieldOfView(getFieldOfView() + dt * fovSpeed);
+        _camera->setFieldOfView(_camera->getFieldOfView() + dt * fovSpeed);
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown(']'))
     {
-        setFieldOfView(getFieldOfView() - dt * fovSpeed);
+        _camera->setFieldOfView(_camera->getFieldOfView() - dt * fovSpeed);
     }
     
     // set up NEAR
     float nearSpeed = 3.0f;
     if (IvGame::mGame->mEventHandler->IsKeyDown(','))
     {
-        setNear(getNearPlane() + dt * nearSpeed);
+        _camera->setNear(_camera->getNearPlane() + dt * nearSpeed);
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('.'))
     {
-        setNear(getNearPlane() - dt * nearSpeed);
+        _camera->setNear(_camera->getNearPlane() - dt * nearSpeed);
     }
     
     
@@ -112,13 +112,13 @@ void CameraSceneNode::updateNode(float dt) {
     float farSpeed = 3.0f;
     if (IvGame::mGame->mEventHandler->IsKeyDown('\''))
     {
-        setFar(getFarPlane() + dt * farSpeed);
+        _camera->setFar(_camera->getFarPlane() + dt * farSpeed);
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('\\'))
     {
-        setFar(getFarPlane() - dt * farSpeed);
+        _camera->setFar(_camera->getFarPlane() - dt * farSpeed);
     }
     
-    if (getNearPlane() > getFarPlane())
+    if (_camera->getNearPlane() > _camera->getFarPlane())
         throw "NEAR > FAR";
 }
