@@ -132,7 +132,6 @@ void SceneNode::updateNode(float dt) {
         points.insert(points.end(), i->_bounding_box.getPoints().begin(), i->_bounding_box.getPoints().end());
 
     _bounding_box.calculate(points);
-    
 }
 
 // collects the rendering packets

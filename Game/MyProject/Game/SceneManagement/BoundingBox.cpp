@@ -74,7 +74,7 @@ const BoundingBox::Bounds& BoundingBox::getPoints() const {
 void BoundingBox::calculatePoints(const BorderPoint& points, const IvMatrix44& transform) {
     _points.resize(8);
     
-    // sets the points local position
+    // sets the points absolute positions
     _points[0] = {points[0].x, points[1].x, points[2].x};
     _points[1] = {points[0].x, points[1].x, points[2].y};
     _points[2] = {points[0].x, points[1].y, points[2].x};
@@ -84,11 +84,11 @@ void BoundingBox::calculatePoints(const BorderPoint& points, const IvMatrix44& t
     _points[6] = {points[0].y, points[1].y, points[2].x};
     _points[7] = {points[0].y, points[1].y, points[2].y};
     
-//    for (IvVector3& i : _points) {
-//        IvVector4 vector = {i.x, i.y, i.z, 1.};
-//        vector = vector * transform;
-//        i = {vector.x, vector.y, vector.z};
-//    }
+    for (IvVector3& i : _points) {
+        IvVector4 vector = {i.x, i.y, i.z, 1.};
+        vector = transform * vector;
+        i = {vector.x, vector.y, vector.z};
+    }
     
     _min = _points[0];
     _max = _points[7];
