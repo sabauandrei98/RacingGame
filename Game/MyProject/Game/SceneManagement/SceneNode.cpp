@@ -13,7 +13,7 @@
 // -----------------------------
 
 SceneNode::SceneNode(const std::string& name) :
-    _name(name), _parent(nullptr) {
+    _parent(nullptr), _name(name) {
         _absolute_transform.Identity();
     }
 
@@ -86,6 +86,11 @@ IvVector3 SceneNode::getAbsolutePosition() const {
     return IvVector3(_absolute_transform(0, 3), _absolute_transform(1, 3), _absolute_transform(2, 3));
 }
 
+// returns the bounding box
+const BoundingBox& SceneNode::getBoundingBox() const {
+    return _bounding_box;
+}
+
 // updates the absolute transform matrix
 void SceneNode::updateAbsoluteTransform() {
     _absolute_transform = _transform.getMatrix();
@@ -106,7 +111,23 @@ void SceneNode::updateNode(float dt) {
     for (auto& i : _children)
         i->updateNode(dt);
     
-    //TODO: update the bounding box of this node
+    //updates the bounding box of this node
+    BoundingBox::Bounds points;
+    
+    if (_rendarable->getMesh()) {
+        _bounding_box.calculate(_rendarable->getMesh(), _absolute_transform);
+        
+        if (_children.size() == 0)
+            return;
+
+        points.insert(points.end(), _bounding_box.getPoints().begin(), _bounding_box.getPoints().end());
+    }
+    
+    for (auto i : _children)
+        points.insert(points.end(), i->_bounding_box.getPoints().begin(), i->_bounding_box.getPoints().end());
+
+    _bounding_box.calculate(points);
+    
 }
 
 // collects the rendering packets
@@ -119,7 +140,8 @@ void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<Ren
     if (_rendarable) {
         RenderPacket packet;
         packet._mesh_instance = _rendarable.get();
-        packet._world_view_projection_matrix = _absolute_transform * camera->getView() * camera->getProjection();
+        packet._use_depth = true;
+        packet._world_view_projection_matrix = _absolute_transform;// * camera->getView() * camera->getProjection();
         
         render_packets.push_back(packet);
     }

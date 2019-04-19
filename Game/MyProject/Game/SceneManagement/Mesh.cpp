@@ -53,6 +53,11 @@ const unsigned int& Mesh::getBufferSize() const {
     return _buffer_size;
 }
 
+// returns the _min_max_vertices vector
+const std::vector<IvVector2>& Mesh::getMinMaxVertices() const {
+    return _min_max_vertices;
+}
+
 // ---------------------------------
 // PRIVATE FUNCTION(S) AND METHOD(S)
 // ---------------------------------
