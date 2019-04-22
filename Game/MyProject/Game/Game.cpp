@@ -47,6 +47,6 @@ void
 Game::Render()
 {
     cameraTest->Render();
-    test->DrawBox();
+    test->DrawSphere();
 }
 
