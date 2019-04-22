@@ -59,6 +59,7 @@ void Camera::pan(const IvVector2& offset)
     lookAt += right * offset.x + viewUp * offset.y;
 }
 
+
 const IvMatrix44 Camera::rotateX(const float angle) const
 {
     IvMatrix44 x;
@@ -154,5 +155,29 @@ void Camera::setScreenHeight(float newHeight)
 }
 
 
+IvVector3
+Camera::screenToWorld(unsigned int mouseX, unsigned int mouseY)
+{
+    // normalise the coordinates
+    float x=(2.0*mouseX)/getWidth()-1.0f;
+    float y=1.0f-(2.0*mouseY)/getHeight();
+    IvVector2 normalisedCoordinates(x,y);
+    
+    // clip space
+    IvVector4 clipCoordinates=IvVector4(normalisedCoordinates.x,normalisedCoordinates.y,-1.0,0.0);
+    
+    // eye space
+    IvVector4 eyeCoordinates=AffineInverse(getProjectionMatrix())*clipCoordinates;
+    eyeCoordinates=IvVector4(eyeCoordinates.x,eyeCoordinates.y,-1.0,0.0);
+    
+    // world space
+    IvVector4 worldCoordinatesNeeded=AffineInverse(getViewMatrix())*eyeCoordinates;
+    IvVector3 worldCoordinates(worldCoordinatesNeeded.x,worldCoordinatesNeeded.y,worldCoordinatesNeeded.z);
+    //worldCoordinates.Normalize();
+    
+    return worldCoordinates;
+}
+
 Camera::~Camera(){}
+
 

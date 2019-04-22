@@ -46,12 +46,18 @@ TestCollision::TestRayBox()
 void TestCollision::Update(float t)
 {
     box->updateScene(t);
-//    unsigned int x,y;
-//    if(IvGame::mGame->mEventHandler->IsMousePressed(x, y))
-//    {
-//        std::cout<<x <<" "<<y<< std::endl;
-//        mouseCoordinates=IvVector3(x,y,-1);
-//    }
+    unsigned int x,y;
+    Camera m_camera(45.0, 0.1, 35.0, 1280, 720);
+    m_camera.setPosition({-5.f, 0.0f, 5.0f });
+    m_camera.setLookAt({0.0f, 0.0f, 0.0f});
+    m_camera.setRotation({0.0f, 0.0f, 1.0f});
+    
+    if(IvGame::mGame->mEventHandler->IsMousePressed(x, y))
+    {
+        std::cout<<x <<" "<<y<< std::endl;
+        mouseCoordinates=m_camera.screenToWorld(x,y);
+        std::cout<<mouseCoordinates.x<<" "<<mouseCoordinates.y<<" "<<mouseCoordinates.z<<std::endl;
+    }
     
 }
 void TestCollision::Render()

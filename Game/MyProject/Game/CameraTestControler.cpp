@@ -6,6 +6,12 @@ CameraTestControler::CameraTestControler() : camera(45.0, 0.1, 35.0, 1280, 720)
     camera.setPosition({-5.f, 0.0f, 5.0f });
     camera.setLookAt({0.0f, 0.0f, 0.0f});
     camera.setRotation({0.0f, 0.0f, 1.0f});
+    
+    
+    MeshManager* meshManager=new MeshManager();
+    std::shared_ptr<SceneNode> boxNode=HelperManager::BuildBox(HelperManager::CreateMeshInstance(meshManager->GetMesh("box")));
+    boxGraph=std::make_shared<SceneGraph>();
+    boxGraph->setRoot(boxNode);
 }
 
 
@@ -118,6 +124,20 @@ CameraTestControler::Update( float dt )
     if (camera.getNearPlane() > camera.getFarPlane())
         throw "NEAR > FAR";
     
+    unsigned int mouseX,mouseY;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mouseX, mouseY))
+    {
+        std::cout<<mouseX <<" "<<mouseY<< std::endl;
+        mouseCoordinates=camera.screenToWorld(mouseX,mouseY);
+        
+
+        std::cout<<mouseCoordinates.x<<" "<<mouseCoordinates.y<<" "<<mouseCoordinates.z<<std::endl;
+        
+        mousePicker=true;
+        boxGraph->updateScene(dt);
+    }
+   
+    
 }
 
 
@@ -130,6 +150,14 @@ CameraTestControler::Render()
     
     //IvDrawFloor();
     
+    if(mousePicker)
+    {
+        boxGraph->getRoot()->setLocalPosition(mouseCoordinates);
+        
+        boxGraph->setCamera(std::make_shared<CameraSceneNode>("camera",camera));
+        
+        boxGraph->drawScene();
+    }
     //DRAW AN OBJECT
     //IvDrawTeapot();
     

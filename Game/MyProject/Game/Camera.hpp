@@ -52,6 +52,8 @@ public:
     void setScreenWidth(float newWidth);
     void setScreenHeight(float newHeight);
     
+    IvVector3 screenToWorld(unsigned int x,unsigned int y);
+    
     const float getFieldOfView() const {
         return fieldOfView;
     }

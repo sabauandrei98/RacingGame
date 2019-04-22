@@ -20,4 +20,8 @@ public:
     void Render();
     
     Camera camera;
+    
+    IvVector3 mouseCoordinates;
+    bool mousePicker;
+    std::shared_ptr<SceneGraph> boxGraph;
 };

@@ -54,8 +54,8 @@ Game::UpdateObjects( float dt )
 void
 Game::Render()
 {
- //   cameraTest->Render();
+    cameraTest->Render();
     //test->DrawBox();
-    testCollision->Render();
+    //testCollision->Render();
 }
 
