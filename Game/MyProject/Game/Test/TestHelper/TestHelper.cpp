@@ -20,6 +20,10 @@ TestHelper::TestHelper()
     createdSphere.push_back(false);
 
 }
+TestHelper::~TestHelper()
+{
+    delete meshManager;
+}
 void
 TestHelper::DrawBox()
 {
@@ -30,8 +34,13 @@ TestHelper::DrawBox()
         
         createdBoxes[0]=true;
     
+        Camera m_camera(45.0, 0.1, 35.0, 1280, 720);
+        m_camera.setPosition({-5.f, 0.0f, 5.0f });
+        m_camera.setLookAt({0.0f, 0.0f, 0.0f});
+        m_camera.setRotation({0.0f, 0.0f, 1.0f});
+       
         toBeRendered[0]->setRoot(boxNode);
-        toBeRendered[0]->setCamera(std::make_shared<CameraSceneNode>("camera"));
+        toBeRendered[0]->setCamera(std::make_shared<CameraSceneNode>("camera",m_camera));
         toBeRendered[0]->updateScene(0.01);
     }
     toBeRendered[0]->drawScene();
@@ -44,8 +53,13 @@ TestHelper::DrawBox()
         
         createdBoxes[1]=true;
     
+        Camera m_camera(45.0, 0.1, 35.0, 1280, 720);
+        m_camera.setPosition({-5.f, 0.0f, 5.0f });
+        m_camera.setLookAt({0.0f, 0.0f, 0.0f});
+        m_camera.setRotation({0.0f, 0.0f, 1.0f});
+        
         toBeRendered[1]->setRoot(boxNode2);
-        toBeRendered[1]->setCamera(std::make_shared<CameraSceneNode>("camera"));
+        toBeRendered[1]->setCamera(std::make_shared<CameraSceneNode>("camera",m_camera));
         toBeRendered[1]->updateScene(0.01);
     }
     toBeRendered[1]->drawScene();
@@ -58,8 +72,14 @@ TestHelper::DrawQuad()
     {
         std::shared_ptr<SceneNode> quadNode=HelperManager::BuildQuad(HelperManager::CreateMeshInstance(meshManager->GetMesh("quad")));
         toBeRendered.push_back(std::make_shared<SceneGraph>());
+        
+        Camera m_camera(45.0, 0.1, 35.0, 1280, 720);
+        m_camera.setPosition({-5.f, 0.0f, 5.0f });
+        m_camera.setLookAt({0.0f, 0.0f, 0.0f});
+        m_camera.setRotation({0.0f, 0.0f, 1.0f});
+        
         toBeRendered[0]->setRoot(quadNode);
-        toBeRendered[0]->setCamera(std::make_shared<CameraSceneNode>("camera"));
+        toBeRendered[0]->setCamera(std::make_shared<CameraSceneNode>("camera",m_camera));
         toBeRendered[0]->updateScene(0.01);
         
         createdQuads[0]=true;
@@ -73,8 +93,13 @@ TestHelper::DrawQuad()
         std::shared_ptr<SceneNode> quadNode2=HelperManager::BuildTexturedQuad(HelperManager::CreateMeshInstance(meshManager->GetMesh("quad"),uniforms),"cross.tga");
         toBeRendered.push_back(std::make_shared<SceneGraph>());
     
+        Camera m_camera(45.0, 0.1, 35.0, 1280, 720);
+        m_camera.setPosition({-5.f, 0.0f, 5.0f });
+        m_camera.setLookAt({0.0f, 0.0f, 0.0f});
+        m_camera.setRotation({0.0f, 0.0f, 1.0f});
+        
         toBeRendered[1]->setRoot(quadNode2);
-        toBeRendered[1]->setCamera(std::make_shared<CameraSceneNode>("camera"));
+        toBeRendered[1]->setCamera(std::make_shared<CameraSceneNode>("camera",m_camera));
         toBeRendered[1]->updateScene(0.01);
         
         createdQuads[1]=true;
@@ -93,9 +118,13 @@ void TestHelper::DrawSphere()
         IvVector3 position=IvVector3(0,0,0);
         IvVector3 scale=IvVector3(1,1,1);
   
+        Camera m_camera(45.0, 0.1, 35.0, 1280, 720);
+        m_camera.setPosition({-5.f, 0.0f, 5.0f });
+        m_camera.setLookAt({0.0f, 0.0f, 0.0f});
+        m_camera.setRotation({0.0f, 0.0f, 1.0f});
     
         toBeRendered[0]->setRoot(sphereNode);
-        toBeRendered[0]->setCamera(std::make_shared<CameraSceneNode>("camera"));
+        toBeRendered[0]->setCamera(std::make_shared<CameraSceneNode>("camera",m_camera));
         toBeRendered[0]->getRoot()->setLocalTransform(position, rotation, scale);
         toBeRendered[0]->updateScene(0.01);
         
@@ -109,8 +138,13 @@ void TestHelper::DrawSphere()
         sphereNode2->setLocalTransform(IvVector3(1,1,1), IvVector3(0,0,0), IvVector3(2,2,2));
         toBeRendered.push_back(std::make_shared<SceneGraph>());
     
+        Camera m_camera(45.0, 0.1, 35.0, 1280, 720);
+        m_camera.setPosition({-5.f, 0.0f, 5.0f });
+        m_camera.setLookAt({0.0f, 0.0f, 0.0f});
+        m_camera.setRotation({0.0f, 0.0f, 1.0f});
+        
         toBeRendered[1]->setRoot(sphereNode2);
-        toBeRendered[1]->setCamera(std::make_shared<CameraSceneNode>("camera"));
+        toBeRendered[1]->setCamera(std::make_shared<CameraSceneNode>("camera",m_camera));
         toBeRendered[1]->updateScene(0.01);
         
         createdSphere[1]=true;

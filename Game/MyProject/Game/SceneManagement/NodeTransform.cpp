@@ -12,6 +12,10 @@
 // -----------------------------
 
 NodeTransform::NodeTransform() {
+    _transform_matrix.Identity();
+    _position = {0., 0., 0.};
+    _rotation = {0., 0., 0.};
+    _scale = {1., 1., 1.};
 }
 
 // --------------------------------
@@ -60,4 +64,3 @@ void NodeTransform::calculate() {
     
     _transform_matrix = position * rotation * scale * _transform_matrix;
 }
-

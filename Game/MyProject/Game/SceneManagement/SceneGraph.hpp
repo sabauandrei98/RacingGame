@@ -9,6 +9,8 @@
 
 #include "SceneNode.hpp"
 
+class CameraSceneNode;
+
 class SceneGraph {
 public:
     // public function(s) and method(s)

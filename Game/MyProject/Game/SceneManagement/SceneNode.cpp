@@ -51,8 +51,13 @@ void SceneNode::findAllNodesWithName(const std::string& name, std::vector<SceneN
 
 // adds a child
 void SceneNode::addChild(const std::shared_ptr<SceneNode>& child) {
-     child->_parent = this;
+    child->_parent = this;
     _children.push_back(child);
+}
+
+// returns a pointer to the child
+SceneNode* SceneNode::getChild(unsigned int index) {
+    return _children[index].get();
 }
 
 // removes this node and all its children from the graph
@@ -115,16 +120,16 @@ void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<Ren
         return;
     
     //TODO: perform visibility testing here
-    //if not visible return;
     
     if (_rendarable) {
         RenderPacket packet;
         packet._mesh_instance = _rendarable.get();
-        packet._world_view_projection_matrix = _absolute_transform * camera->getView() * camera->getProjection();
+        packet._world_view_projection_matrix = camera->getProjectionMatrix() * camera->getViewMatrix() * _absolute_transform;
+
+//        std::cout << camera->getViewMatrix() << std::endl;
+//        std::cout << camera->getProjectionMatrix() << std::endl;
         packet._use_blend = true;
         packet._use_depth = true;
-        
-        packet._prim_type=kTriangleStripPrim;
         
         render_packets.push_back(packet);
     }

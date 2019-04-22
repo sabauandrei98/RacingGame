@@ -26,6 +26,7 @@ public:
     void findAllNodesWithName(const std::string&, std::vector<SceneNode*>&) const;
     
     void addChild(const std::shared_ptr<SceneNode>&);
+    SceneNode* getChild(unsigned int);
     void remove();
     
     void setLocalTransform(const IvVector3&, const IvVector3&, const IvVector3&);

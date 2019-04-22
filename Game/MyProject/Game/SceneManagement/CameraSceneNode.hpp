@@ -7,19 +7,17 @@
 
 #pragma once
 
-#include "SceneNode.hpp"
+#include <IvGame.h>
+#include <IvEventHandler.h>
 
-class CameraSceneNode : std::enable_shared_from_this<CameraSceneNode>, public SceneNode {
+#include "SceneNode.hpp"
+#include "../Camera.hpp"
+
+class CameraSceneNode : std::enable_shared_from_this<CameraSceneNode>, public SceneNode, public Camera {
 public:
     // constructor(s) and destructor
-    CameraSceneNode(const std::string&);
-    const IvMatrix44& getView() const;
-    const IvMatrix44& getProjection() const;
+    CameraSceneNode(const std::string&, const Camera&);
     
-private:
-    // private variable(s)
-    IvMatrix44  _view;
-    IvMatrix44  _projection;
-    
-    // TODO
+    // public function(s) and method(s)
+    void updateNode(float);
 };

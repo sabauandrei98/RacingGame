@@ -344,13 +344,13 @@ namespace HelperManager{
     std::shared_ptr<SceneNode>
     BuildSphere(const std::shared_ptr<MeshInstance>&meshInstance,bool wireframeValue)
     {
-        RenderPacket myRenderPacket;
-        myRenderPacket._use_blend = true;
-        myRenderPacket._use_depth = true;
-        myRenderPacket._use_wireframe = wireframeValue;
-        myRenderPacket._prim_type = kTriangleListPrim;
+        RenderPacket m_renderPacket;
+        m_renderPacket._use_blend = true;
+        m_renderPacket._use_depth = true;
+        m_renderPacket._use_wireframe = wireframeValue;
+        m_renderPacket._prim_type = kTriangleListPrim;
         
-        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", myRenderPacket);
+        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", m_renderPacket);
         node->setRenderable(meshInstance);
         
         return node;
@@ -362,13 +362,13 @@ namespace HelperManager{
     std::shared_ptr<SceneNode>
     BuildBox(const std::shared_ptr<MeshInstance>&meshInstance,bool wireframeValue)
     {
-        RenderPacket myRenderPacket;
-        myRenderPacket._use_blend = true;
-        myRenderPacket._use_depth = true;
-        myRenderPacket._use_wireframe = wireframeValue;
-        myRenderPacket._prim_type = kTriangleStripPrim;
+        RenderPacket m_renderPacket;
+        m_renderPacket._use_blend = true;
+        m_renderPacket._use_depth = true;
+        m_renderPacket._use_wireframe = wireframeValue;
+        m_renderPacket._prim_type = kTriangleStripPrim;
         
-        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", myRenderPacket);
+        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", m_renderPacket);
         node->setRenderable(meshInstance);
         
         return node;
@@ -379,13 +379,13 @@ namespace HelperManager{
     std::shared_ptr<SceneNode>
     BuildQuad(const std::shared_ptr<MeshInstance>&meshInstance,IvVector3 axis,bool wireframeValue)
     {
-        RenderPacket myRenderPacket;
-        myRenderPacket._use_blend = true;
-        myRenderPacket._use_depth = true;
-        myRenderPacket._use_wireframe = wireframeValue;
-        myRenderPacket._prim_type = kTriangleStripPrim;
+        RenderPacket m_renderPacket;
+        m_renderPacket._use_blend = true;
+        m_renderPacket._use_depth = true;
+        m_renderPacket._use_wireframe = wireframeValue;
+        m_renderPacket._prim_type = kTriangleStripPrim;
         
-        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", myRenderPacket);
+        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", m_renderPacket);
         node->setRenderable(meshInstance);
         
         IvVector3 position=IvVector3(0,0,0);
@@ -407,13 +407,13 @@ namespace HelperManager{
     std::shared_ptr<SceneNode>
     BuildTexturedQuad(const std::shared_ptr<MeshInstance>&meshInstance,const char* textureName,const char* shaderName,IvVector3 axis,bool wireframeValue)
     {
-        RenderPacket myRenderPacket;
-        myRenderPacket._use_blend = true;
-        myRenderPacket._use_depth = true;
-        myRenderPacket._use_wireframe = wireframeValue;
-        myRenderPacket._prim_type = kTriangleStripPrim;
+        RenderPacket m_renderPacket;
+        m_renderPacket._use_blend = true;
+        m_renderPacket._use_depth = true;
+        m_renderPacket._use_wireframe = wireframeValue;
+        m_renderPacket._prim_type = kTriangleStripPrim;
         
-        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", myRenderPacket);
+        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", m_renderPacket);
         node->setRenderable(meshInstance);
         
         IvVector3 position=IvVector3(0,0,0);

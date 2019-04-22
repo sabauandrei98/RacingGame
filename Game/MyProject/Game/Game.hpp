@@ -4,6 +4,7 @@
 #include"Test/TestCustomAttributes/Test.hpp"
 #include"Test/TestRenderTargets/TestRT.hpp"
 #include"Test/TestHelper/TestHelper.hpp"
+#include"Test/TestRayBoxIntersection/TestCollision.hpp"
 
 #include <stdio.h>
 #include<iostream>
@@ -26,6 +27,7 @@ public:
     bool PostRendererInitialize();
     
     TestHelper*                  test;
+    TestCollision*               testCollision;
     CameraTestControler*         cameraTest;
 
 protected:
