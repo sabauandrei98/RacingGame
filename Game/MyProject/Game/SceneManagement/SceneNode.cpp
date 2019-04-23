@@ -117,21 +117,15 @@ void SceneNode::updateNode(float dt) {
         i->updateNode(dt);
     
     //updates the bounding box of this node
-    BoundingBox::Bounds points;
+    if (_rendarable->getMesh())
+        _bounding_box.calculate(_rendarable->getMesh()->getMinVertices(), _rendarable->getMesh()->getMaxVertices(), _absolute_transform);
+    else
+        _bounding_box.invalidate();
     
-    if (_rendarable->getMesh()) {
-        _bounding_box.calculate(_rendarable->getMesh(), _absolute_transform);
-        
-        if (_children.size() == 0)
-            return;
-
-        points.insert(points.end(), _bounding_box.getPoints().begin(), _bounding_box.getPoints().end());
+    for (const auto& i : _children) {
+        _bounding_box.expand(i->_bounding_box.getMin());
+        _bounding_box.expand(i->_bounding_box.getMax());
     }
-    
-    for (auto i : _children)
-        points.insert(points.end(), i->_bounding_box.getPoints().begin(), i->_bounding_box.getPoints().end());
-
-    _bounding_box.calculate(points);
 }
 
 // collects the rendering packets

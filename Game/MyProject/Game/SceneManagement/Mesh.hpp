@@ -18,6 +18,7 @@
 #include <IvStackAllocator.h>
 #include <IvRenderer.h>
 #include <IvResourceManager.h>
+#include <IvVector3.h>
 
 class Mesh : std::enable_shared_from_this<Mesh> {
 public:
@@ -40,32 +41,23 @@ public:
         
         IvStackAllocator::mScratchAllocator->Reset(current_offset);
         
-        // sets the starting values
-        _min_max_vertices.resize(3);
-        _min_max_vertices[0].x = vertices[0].position.x;
-        _min_max_vertices[0].y = vertices[0].position.x;
-        _min_max_vertices[1].x = vertices[0].position.y;
-        _min_max_vertices[1].y = vertices[0].position.y;
-        _min_max_vertices[2].x = vertices[0].position.z;
-        _min_max_vertices[2].y = vertices[0].position.z;
+        _min_vertices = IvVector3(std::numeric_limits<float>::infinity(),
+                                  std::numeric_limits<float>::infinity(),
+                                  std::numeric_limits<float>::infinity());
+        _max_vertices = IvVector3(-std::numeric_limits<float>::infinity(),
+                                  -std::numeric_limits<float>::infinity(),
+                                  -std::numeric_limits<float>::infinity());
         
-        // calculates the min and max for each axe
-        for (T i : vertices) {
-            if (i.position.x < _min_max_vertices[0].x)
-                _min_max_vertices[0].x = i.position.x;
-            if (i.position.x > _min_max_vertices[0].y)
-                _min_max_vertices[0].y = i.position.x;
+        for (const auto& vertex : vertices) {
+            _min_vertices = IvVector3(std::min(_min_vertices.x, vertex.position.x),
+                                      std::min(_min_vertices.y, vertex.position.y),
+                                      std::min(_min_vertices.z, vertex.position.z));
             
-            if (i.position.y < _min_max_vertices[1].x)
-                _min_max_vertices[1].x = i.position.y;
-            if (i.position.y > _min_max_vertices[1].y)
-                _min_max_vertices[1].y = i.position.y;
-            
-            if (i.position.z < _min_max_vertices[2].x)
-                _min_max_vertices[2].x = i.position.z;
-            if (i.position.z > _min_max_vertices[2].y)
-                _min_max_vertices[2].y = i.position.z;
+            _max_vertices = IvVector3(std::max(_max_vertices.x, vertex.position.x),
+                                      std::max(_max_vertices.y, vertex.position.y),
+                                      std::max(_max_vertices.z, vertex.position.z));
         }
+
     }
     
     void setIndexBuffer(const std::vector<unsigned int>&);
@@ -73,14 +65,16 @@ public:
     IvVertexBuffer* getVertexBuffer();
     IvIndexBuffer* getIndexBuffer();
     const unsigned int& getBufferSize() const;
-    const std::vector<IvVector2>& getMinMaxVertices() const;
+    const IvVector3& getMinVertices() const;
+    const IvVector3& getMaxVertices() const;
     
 private:
     // private variable(s)
-    IvVertexBuffer*         _vertex_buffer;
-    IvIndexBuffer*          _index_buffer;
-    std::vector<IvVector2>  _min_max_vertices;
-    unsigned int            _buffer_size;
+    IvVertexBuffer* _vertex_buffer;
+    IvIndexBuffer*  _index_buffer;
+    IvVector3       _min_vertices;
+    IvVector3       _max_vertices;
+    unsigned int    _buffer_size;
     
     // private function(s) and method(s)
     void destroyVertexBuffer();

@@ -113,7 +113,6 @@ Game::Render()
     IvRenderer::mRenderer->Draw(kLineListPrim, mesh->getVertexBuffer(), mesh->getIndexBuffer());
 
     box = _child1->getBoundingBox();
-    vertices.resize(8);
     for (int i = 0; i < 8; i++) {
         vertices[i].position = box.getPoints()[i];
         vertices[i].color = {255, 255, 255, 255};
@@ -124,7 +123,6 @@ Game::Render()
     IvRenderer::mRenderer->Draw(kLineListPrim, mesh->getVertexBuffer(), mesh->getIndexBuffer());
 
     box = _child2->getBoundingBox();
-    vertices.resize(8);
     for (int i = 0; i < 8; i++) {
         vertices[i].position = box.getPoints()[i];
         vertices[i].color = {255, 255, 255, 255};
@@ -135,7 +133,6 @@ Game::Render()
     IvRenderer::mRenderer->Draw(kLineListPrim, mesh->getVertexBuffer(), mesh->getIndexBuffer());
     
     box = _child3->getBoundingBox();
-    vertices.resize(8);
     for (int i = 0; i < 8; i++) {
         vertices[i].position = box.getPoints()[i];
         vertices[i].color = {255, 255, 255, 255};

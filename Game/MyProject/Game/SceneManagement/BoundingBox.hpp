@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <array>
+
 #include <IvVector3.h>
 
 #include "Mesh.hpp"
@@ -14,13 +16,13 @@
 class BoundingBox {
 public:
     // typedefs
-    typedef std::shared_ptr<Mesh>   MeshPtr;
-    typedef std::vector<IvVector3>  Bounds;
-    typedef std::vector<IvVector2>  BorderPoint;
+    typedef std::shared_ptr<Mesh>       MeshPtr;
+    typedef std::array<IvVector3, 8>    Bounds;
     
     // public function(s) and method(s)
-    void calculate(const MeshPtr&, const IvMatrix44&);
-    void calculate(const Bounds&);
+    void calculate(const IvVector3&, const IvVector3&, const IvMatrix44&);
+    void invalidate();
+    void expand(const IvVector3&);
     
     const IvVector3& getMax() const;
     const IvVector3& getMin() const;
@@ -36,5 +38,5 @@ private:
     Bounds      _points;
     
     // private function(s) and method(s)
-    void calculatePoints(const BorderPoint&, const IvMatrix44&);
+    void calculatePoints(const IvVector3&, const IvVector3&);
 };

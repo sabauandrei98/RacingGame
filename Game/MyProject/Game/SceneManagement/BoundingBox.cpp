@@ -12,43 +12,39 @@
 // --------------------------------
 
 // calculates the bounding box with given mesh and trasform matrix
-void BoundingBox::calculate(const MeshPtr& mesh, const IvMatrix44& transform) {
-    calculatePoints(mesh->getMinMaxVertices(), transform);
-}
-
-// calculates the bounding box with given bounding boxes
-void BoundingBox::calculate(const BoundingBox::Bounds& points) {
-    BorderPoint borders;
-    IvMatrix44  transform;
+void BoundingBox::calculate(const IvVector3& min, const IvVector3& max, const IvMatrix44& transform) {
+    // sets the points absolute positions
+    calculatePoints(min, max);
     
-    // sets the starting values
-    borders.resize(3);
-    borders[0].x = points[0].x;
-    borders[0].y = points[0].x;
-    borders[1].x = points[0].y;
-    borders[1].y = points[0].y;
-    borders[2].x = points[0].z;
-    borders[2].y = points[0].z;
-    
-    // calculates the min and max for each axe
-    for (IvVector3 i : points) {
-        if (i.x < borders[0].x)
-            borders[0].x = i.x;
-        if (i.x > borders[0].y)
-            borders[0].y = i.x;
-        
-        if (i.y < borders[1].x)
-            borders[1].x = i.y;
-        if (i.y > borders[1].y)
-            borders[1].y = i.y;
-        
-        if (i.z < borders[2].x)
-            borders[2].x = i.z;
-        if (i.z > borders[2].y)
-            borders[2].y = i.z;
+    for (IvVector3& i : _points) {
+        IvVector4 vector = {i.x, i.y, i.z, 1.};
+        vector = transform * vector;
+        i = {vector.x, vector.y, vector.z};
     }
     
-    calculatePoints(borders, transform);
+    _min = _points[0];
+    _max = _points[7];
+    _center = (_min + _max) / 2;
+}
+
+void BoundingBox::invalidate() {
+    _min = IvVector3(std::numeric_limits<float>::infinity(),
+                     std::numeric_limits<float>::infinity(),
+                     std::numeric_limits<float>::infinity());
+    
+    _max = IvVector3(-std::numeric_limits<float>::infinity(),
+                     -std::numeric_limits<float>::infinity(),
+                     -std::numeric_limits<float>::infinity());
+    
+    _center = IvVector3(0.f, 0.f, 0.f);
+}
+
+void BoundingBox::expand(const IvVector3& v) {
+    _min = IvVector3(std::min(_min.x, v.x), std::min(_min.y, v.y), std::min(_min.z, v.z));
+    _max = IvVector3(std::max(_max.x, v.x), std::max(_max.y, v.y), std::max(_max.z, v.z));
+    _center = (_min + _max) / 2;
+    
+    calculatePoints(_min, _max);
 }
 
 const IvVector3& BoundingBox::getMax() const {
@@ -67,30 +63,17 @@ const BoundingBox::Bounds& BoundingBox::getPoints() const {
     return _points;
 }
 
-// ---------------------------------
+// --------------------------------
 // PRIVATE FUNCTION(S) AND METHOD(S)
 // --------------------------------
 
-void BoundingBox::calculatePoints(const BorderPoint& points, const IvMatrix44& transform) {
-    _points.resize(8);
-    
-    // sets the points absolute positions
-    _points[0] = {points[0].x, points[1].x, points[2].x};
-    _points[1] = {points[0].x, points[1].x, points[2].y};
-    _points[2] = {points[0].x, points[1].y, points[2].x};
-    _points[3] = {points[0].x, points[1].y, points[2].y};
-    _points[4] = {points[0].y, points[1].x, points[2].x};
-    _points[5] = {points[0].y, points[1].x, points[2].y};
-    _points[6] = {points[0].y, points[1].y, points[2].x};
-    _points[7] = {points[0].y, points[1].y, points[2].y};
-    
-    for (IvVector3& i : _points) {
-        IvVector4 vector = {i.x, i.y, i.z, 1.};
-        vector = transform * vector;
-        i = {vector.x, vector.y, vector.z};
-    }
-    
-    _min = _points[0];
-    _max = _points[7];
-    _center = (_min + _max) / 2;
+void BoundingBox::calculatePoints(const IvVector3& min, const IvVector3& max) {
+    _points[0] = {min.x, min.y, min.z};
+    _points[1] = {min.x, min.y, max.z};
+    _points[2] = {min.x, max.y, min.z};
+    _points[3] = {min.x, max.y, max.z};
+    _points[4] = {max.x, min.y, min.z};
+    _points[5] = {max.x, min.y, max.z};
+    _points[6] = {max.x, max.y, min.z};
+    _points[7] = {max.x, max.y, max.z};
 }
