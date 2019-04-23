@@ -11,6 +11,7 @@ function(POPULATE_SOURCE_FOLDER allSources projectSourceDir sourceFolder virtual
 
     ## get all the headers from the folder
     file (GLOB LOCAL_HEADERS_FILES "${projectSourceDir}/${sourceFolder}/*.h" "${projectSourceDir}/${sourceFolder}/*.hpp")
+    file (GLOB LOCAL_GLSL_FILES "${projectSourceDir}/${sourceFolder}/*.glsl" "${projectSourceDir}/${sourceFolder}/*.glslf""${projectSourceDir}/${sourceFolder}/*.glslv")
 
     ## add the files to the source tree
     set(${allSources}
@@ -96,7 +97,8 @@ file(GLOB RANDOM_HDR_FILES ${PROJECT_SOURCE_DIR}/IvRandom/*.h)
 file(GLOB SCENE_HDR_FILES ${PROJECT_SOURCE_DIR}/IvScene/*.h)
 file(GLOB UTILITY_HDR_FILES ${PROJECT_SOURCE_DIR}/IvUtility/*.h)
 
-file(GLOB_RECURSE HDR_FILES ${PROJECT_SOURCE_DIR}/Game/*.h)
+file(GLOB_RECURSE H_FILES ${PROJECT_SOURCE_DIR}/Game/*.h)
+file(GLOB_RECURSE HPP_FILES ${PROJECT_SOURCE_DIR}/Game/*.hpp)
 
 # INCLUDE PATHS
 include_directories(
@@ -165,7 +167,8 @@ add_executable(RacingGame
 	${RANDOM_HDR_FILES}
 	${SCENE_HDR_FILES}
 	${UTILITY_HDR_FILES}
-	${HDR_FILES}
+    ${H_FILES}
+    ${HPP_FILES}
 )
 
 # LINK LIBS

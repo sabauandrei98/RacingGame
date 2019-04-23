@@ -26,7 +26,6 @@ public:
     ~Game();
     bool PostRendererInitialize();
     
-    TestHelper*                  test;
     TestCollision*               testCollision;
     CameraTestControler*         cameraTest;
 

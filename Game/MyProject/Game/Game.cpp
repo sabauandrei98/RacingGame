@@ -8,13 +8,11 @@ IvGame::Create()
 
 Game::Game() : IvGame()
 {
-    test=new TestHelper();
     testCollision=new TestCollision();
 }
 
 Game::~Game()
 {
-    delete test;
     delete testCollision;
     delete cameraTest;
 }
@@ -38,8 +36,7 @@ Game::PostRendererInitialize()
     ::IvSetDefaultLighting();
 
     testCollision->TestRayBox();
-    
-    
+
     return true;
 }
 
@@ -55,7 +52,6 @@ void
 Game::Render()
 {
     cameraTest->Render();
-    //test->DrawBox();
     //testCollision->Render();
 }
 
