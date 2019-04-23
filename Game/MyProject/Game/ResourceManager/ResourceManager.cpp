@@ -40,9 +40,9 @@ const ResourceManager::TexturePtr& ResourceManager::getTexture(const std::string
     // if the texture is in the cache returns it
     location = textures.find(name);
     if (location != textures.end()) {
-        // puts the used texture at the end of the list
-        // the last used texture will be the first element of the list
-        texture_cache.remove(name);
+        // puts the used texture at the end of the vector
+        // the last used texture will be the first element of the vector
+        texture_cache.erase(std::find(texture_cache.begin(), texture_cache.end(), name));
         texture_cache.push_back(name);
         
         return location->second;
@@ -58,7 +58,7 @@ const ResourceManager::TexturePtr& ResourceManager::getTexture(const std::string
     if (textures.size() > SIZE_OF_CACHE) {
         // if the cache is full deletes the last used element
         textures.erase(texture_cache.front());
-        texture_cache.pop_front();
+        texture_cache.erase(texture_cache.begin());
     }
     
     return textures[name];
@@ -73,9 +73,9 @@ const ResourceManager::ConstAiScenePtr& ResourceManager::getModel(const std::str
     // if the model is in the cache returns it
     location = models.find(name);
     if (location != models.end()) {
-        // puts the used model at the end of the list
-        // the last used model will be the first element of the list
-        model_cache.remove(name);
+        // puts the used model at the end of the vetor
+        // the last used model will be the first element of the vector
+        model_cache.erase(std::find(model_cache.begin(), model_cache.end(), name));
         model_cache.push_back(name);
         
         return location->second;
@@ -97,7 +97,7 @@ const ResourceManager::ConstAiScenePtr& ResourceManager::getModel(const std::str
     if (models.size() > SIZE_OF_CACHE) {
         // if the cache is full deletes the last used element
         models.erase(model_cache.front());
-        model_cache.pop_front();
+        model_cache.erase(model_cache.begin());
     }
     
     return models[name];

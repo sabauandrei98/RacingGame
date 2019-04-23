@@ -8,7 +8,7 @@
 #pragma once
 
 #include <list>
-#include <map>
+#include <unordered_map>
 #include <functional>
 
 #include <assimp/Importer.hpp>
@@ -23,12 +23,12 @@
 class ResourceManager {
 public:
     // typedefs
-    typedef std::shared_ptr<IvTexture>              TexturePtr;
-    typedef std::shared_ptr<const aiScene>          ConstAiScenePtr;
-    typedef std::map<std::string, TexturePtr>       StringToTexture;
-    typedef std::map<std::string, ConstAiScenePtr>  StringToAiScene;
-    typedef std::list<std::string>                  CacheHelper;
-    typedef std::function<void(IvTexture*)>         Lambda;
+    typedef std::shared_ptr<IvTexture>                          TexturePtr;
+    typedef std::shared_ptr<const aiScene>                      ConstAiScenePtr;
+    typedef std::unordered_map<std::string, TexturePtr>         StringToTexture;
+    typedef std::unordered_map<std::string, ConstAiScenePtr>    StringToAiScene;
+    typedef std::vector<std::string>                            CacheHelper;
+    typedef std::function<void(IvTexture*)>                     Lambda;
     
     // static function(s)
     static ResourceManager& getResourceManager();

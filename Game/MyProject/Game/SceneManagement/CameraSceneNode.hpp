@@ -10,7 +10,7 @@
 #include "SceneNode.hpp"
 #include "../Camera.hpp"
 
-class CameraSceneNode : std::enable_shared_from_this<CameraSceneNode>, public SceneNode {
+class CameraSceneNode : public SceneNode {
 public:
     // constructor(s) and destructor
     CameraSceneNode(const std::string&);
