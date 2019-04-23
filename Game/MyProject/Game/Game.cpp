@@ -9,36 +9,30 @@ IvGame::Create()
 
 Game::Game() : IvGame()
 {
-    test=new TestRT(); 
+   
 }
 
 Game::~Game()
 {
-    delete test;
-    delete cameraTest;
+    delete testBezier;
 }
 
 
 bool 
 Game::PostRendererInitialize()
 {
-    test->Create();
-    
     IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
     IvRendererOGL::mRenderer->SetDepthWrite(true);
     IvRendererOGL::mRenderer->SetDepthTest(kLessEqualDepthTest);
- 
-    test->Setup();
 
     // Set up base class 
     if ( !IvGame::PostRendererInitialize() )
         return false;
     
-    cameraTest = new CameraTestControler();
-    if (!cameraTest)
-        return false;
 
     ::IvSetDefaultLighting();
+    
+    testBezier = new TestBezier();
 
     return true;
 }
@@ -46,11 +40,11 @@ Game::PostRendererInitialize()
 void
 Game::UpdateObjects( float dt )
 {
-    cameraTest->Update( dt );
+    testBezier->Update( dt );
 }
 void
 Game::Render()
 {
-    cameraTest->Render();
+    testBezier->Render();
 }
 

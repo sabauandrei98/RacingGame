@@ -12,7 +12,8 @@
 #include<IvVector3.h>
 #include<IvVertexFormats.h>
 #include<IvRendererOGL.h>
-#include "CameraTestControler.hpp"
+#include "Test/TestBezier/TestBezier.hpp"
+
 
 
 class CameraTestControler;
@@ -25,7 +26,7 @@ public:
     bool PostRendererInitialize();
     
     TestRT *test;
-    CameraTestControler*         cameraTest;
+    TestBezier* testBezier;
 
 protected:
     virtual void UpdateObjects(float dt);

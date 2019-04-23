@@ -12,6 +12,10 @@
 // -----------------------------
 
 NodeTransform::NodeTransform() {
+    _transform_matrix.Identity();
+    _position = {0., 0., 0.};
+    _rotation = {0., 0., 0.};
+    _scale = {1., 1., 1.};
 }
 
 // --------------------------------
@@ -24,23 +28,18 @@ void NodeTransform::set(const IvVector3& position, const IvVector3& rotation, co
     _rotation = rotation;
     _scale = scale;
     
-    _is_dirty = true;
+    calculate();
 }
 
 // sets the position
 void NodeTransform::set(const IvVector3& position) {
     _position = position;
     
-    _is_dirty = true;
+    calculate();
 }
 
 // returns the transform matrix
 const IvMatrix44& NodeTransform::getMatrix() {
-    if (_is_dirty) {
-        calculate();
-        _is_dirty = false;
-    }
-    
     return _transform_matrix;
 }
 
@@ -55,14 +54,10 @@ void NodeTransform::calculate() {
     IvMatrix44 scale;
     
     _transform_matrix.Identity();
-    position.Identity();
-    rotation.Identity();
-    scale.Identity();
-    
     position.Translation(_position);
-    rotation.Rotation(_rotation[2], _rotation[1], _rotation[0]);
+    rotation.Rotation(_rotation[2], rotation[1], rotation[0]);
     scale.Scaling(_scale);
     
-    _transform_matrix = position * _transform_matrix;
+    _transform_matrix = position * rotation * scale * _transform_matrix;
 }
 

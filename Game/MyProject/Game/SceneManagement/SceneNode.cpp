@@ -40,10 +40,19 @@ SceneNode* SceneNode::findFirstNodeWithName(const std::string& name) const {
 }
 
 // finds all the nodes with the given name
-void SceneNode::findAllNodesWithName(const std::string& name, std::vector<SceneNode*>& scene_nodes) const {
+void SceneNode::findAllNodesWithName(const std::string& name, std::vector<std::shared_ptr<SceneNode>>& scene_nodes) const {
     for (auto& i : _children)
         if (i->_name == name)
-            scene_nodes.push_back(i.get());
+            scene_nodes.push_back(i);
+    
+    for (auto& i : _children)
+        i->findAllNodesWithName(name, scene_nodes);
+}
+
+void SceneNode::findAllNodesContainingName(const std::string& name, std::vector<std::shared_ptr<SceneNode>>& scene_nodes) const {
+    for (auto& i : _children)
+        if (i->_name.find(name) != std::string::npos)
+            scene_nodes.push_back(i);
     
     for (auto& i : _children)
         i->findAllNodesWithName(name, scene_nodes);
@@ -54,6 +63,7 @@ void SceneNode::addChild(const std::shared_ptr<SceneNode>& child) {
     child->_parent = this;
     _children.push_back(child);
 }
+
 
 // removes this node and all its children from the graph
 void SceneNode::remove()
@@ -79,6 +89,10 @@ void SceneNode::setLocalPosition(const IvVector3& position) {
 // returns the absolute transformation of the node
 const IvMatrix44& SceneNode::getAbsoluteTransform() const {
     return _absolute_transform;
+}
+
+const IvVector3& SceneNode::getLocalPosition() const{
+    return _transform._position;
 }
 
 // returns the absolute position of the node
@@ -119,7 +133,7 @@ void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<Ren
     if (_rendarable) {
         RenderPacket packet;
         packet._mesh_instance = _rendarable.get();
-        packet._world_view_projection_matrix = _absolute_transform * camera->getView() * camera->getProjection();
+        packet._world_view_projection_matrix =  camera->getProjectionMatrix() * camera->getViewMatrix() * _absolute_transform;
         
         render_packets.push_back(packet);
     }

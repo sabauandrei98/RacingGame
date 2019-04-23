@@ -17,10 +17,10 @@ public:
     // public variable(s)
     MeshInstance*   _mesh_instance;
     IvMatrix44      _world_view_projection_matrix;
-    IvPrimType      _prim_type = kTriangleListPrim;
+    IvPrimType      _prim_type = kTriangleStripPrim;
     
-    bool            _use_depth = false;
-    bool            _use_blend = false;
+    bool            _use_depth = true;
+    bool            _use_blend = true;
     
     // public function(s) and method(s)
     void draw() const;

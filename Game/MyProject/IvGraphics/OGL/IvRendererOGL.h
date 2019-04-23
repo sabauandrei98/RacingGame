@@ -55,7 +55,7 @@ public:
     void SetStencilFunc(IvStencilFunc stencilFunc);
     void SetStencilMask(uint32_t mask);
     
-    void SetWVPMat(IvMatrix44& matrix);
+    void SetWVPMat(const IvMatrix44& matrix);
 
     void SetDepthTest(IvDepthTestFunc func) final;
     IvDepthTestFunc GetDepthTest() final;
