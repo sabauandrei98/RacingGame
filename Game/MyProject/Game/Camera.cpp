@@ -159,22 +159,27 @@ IvVector3
 Camera::screenToWorld(unsigned int mouseX, unsigned int mouseY)
 {
     // normalise the coordinates
-    float x=(2.0*mouseX)/getWidth()-1.0f;
-    float y=1.0f-(2.0*mouseY)/getHeight();
+    float x=mouseX/getWidth()-1.0f;
+    float y=1.0f-mouseY/getHeight();
     IvVector2 normalisedCoordinates(x,y);
-    
+
     // clip space
-    IvVector4 clipCoordinates=IvVector4(normalisedCoordinates.x,normalisedCoordinates.y,-1.0,0.0);
+    IvVector4 clipCoordinates=IvVector4(normalisedCoordinates.x,normalisedCoordinates.y,-1.0,1.0);
     
     // eye space
     IvVector4 eyeCoordinates=AffineInverse(getProjectionMatrix())*clipCoordinates;
-    eyeCoordinates=IvVector4(eyeCoordinates.x,eyeCoordinates.y,-1.0,0.0);
-    
+    eyeCoordinates=IvVector4(eyeCoordinates.x,eyeCoordinates.y,-1.0,0.1);
+
     // world space
     IvVector4 worldCoordinatesNeeded=AffineInverse(getViewMatrix())*eyeCoordinates;
-    IvVector3 worldCoordinates(worldCoordinatesNeeded.x,worldCoordinatesNeeded.y,worldCoordinatesNeeded.z);
-    //worldCoordinates.Normalize();
     
+    worldCoordinatesNeeded.w=1.0/worldCoordinatesNeeded.w;
+    
+    worldCoordinatesNeeded.x*=worldCoordinatesNeeded.w;
+    worldCoordinatesNeeded.y*=worldCoordinatesNeeded.w;
+    worldCoordinatesNeeded.z*=worldCoordinatesNeeded.w;
+    
+    IvVector3 worldCoordinates(worldCoordinatesNeeded.x,worldCoordinatesNeeded.y,worldCoordinatesNeeded.z);
     return worldCoordinates;
 }
 

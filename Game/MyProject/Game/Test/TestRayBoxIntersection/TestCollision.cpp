@@ -27,15 +27,13 @@ TestCollision::TestRayBox()
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",m_camera);
     box->getRoot()->addChild(cameraSceneNode);
     box->setCamera(cameraSceneNode);
-
-    //IvSetWorldIdentity();
     
     boundingBox.center=IvVector3(0.5,0.5,0.5);
     boundingBox.max=IvVector3(1,1,1);
     boundingBox.min=IvVector3(0.,0.,0.);
     
     cameraPosition=IvVector3(-1,-0.1,-1);
-    cameraLookAt=IvVector3(2.2,1.1,1.5);
+    cameraLookAt=IvVector3(1.2,1.1,1.5);
     IvRay3 ray2(cameraPosition,cameraLookAt);
     
     ray=IvRay3(ray2);
@@ -46,18 +44,6 @@ TestCollision::TestRayBox()
 void TestCollision::Update(float t)
 {
     box->updateScene(t);
-    unsigned int x,y;
-    Camera m_camera(45.0, 0.1, 35.0, 1280, 720);
-    m_camera.setPosition({-5.f, 0.0f, 5.0f });
-    m_camera.setLookAt({0.0f, 0.0f, 0.0f});
-    m_camera.setRotation({0.0f, 0.0f, 1.0f});
-    
-    if(IvGame::mGame->mEventHandler->IsMousePressed(x, y))
-    {
-        std::cout<<x <<" "<<y<< std::endl;
-        mouseCoordinates=m_camera.screenToWorld(x,y);
-        std::cout<<mouseCoordinates.x<<" "<<mouseCoordinates.y<<" "<<mouseCoordinates.z<<std::endl;
-    }
     
 }
 void TestCollision::Render()
@@ -69,7 +55,5 @@ void TestCollision::Render()
     RayBoxIntersection raybox;
     if(raybox.IsRayIntersectingBox(ray, boundingBox))
         IvDrawLine(ray.GetOrigin(), ray.GetDirection(),kRed);
-//    if(raybox.IsCollision(mouseCoordinates, boundingBox))
-//        IvDrawLine(ray.GetOrigin(), ray.GetDirection(),kRed);
 
 }

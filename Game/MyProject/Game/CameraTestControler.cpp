@@ -3,7 +3,7 @@
 CameraTestControler::CameraTestControler() : camera(45.0, 0.1, 35.0, 1280, 720)
 {
     //SETTING CAMERA
-    camera.setPosition({-5.f, 0.0f, 5.0f });
+    camera.setPosition({-10.f, 0.0f, 5.0f });
     camera.setLookAt({0.0f, 0.0f, 0.0f});
     camera.setRotation({0.0f, 0.0f, 1.0f});
     
@@ -73,8 +73,6 @@ CameraTestControler::Update( float dt )
         camera.rotate({x, y, z});
     }
     
-  
-    
     // set up scaling
     float scalingSpeed = 1.0f;
     if (IvGame::mGame->mEventHandler->IsKeyDown('q'))
@@ -127,17 +125,14 @@ CameraTestControler::Update( float dt )
     unsigned int mouseX,mouseY;
     if(IvGame::mGame->mEventHandler->IsMousePressed(mouseX, mouseY))
     {
-        std::cout<<mouseX <<" "<<mouseY<< std::endl;
         mouseCoordinates=camera.screenToWorld(mouseX,mouseY);
-        
-
-        std::cout<<mouseCoordinates.x<<" "<<mouseCoordinates.y<<" "<<mouseCoordinates.z<<std::endl;
-        
+    
         mousePicker=true;
+        
+        boxGraph->getRoot()->setLocalPosition(mouseCoordinates);
         boxGraph->updateScene(dt);
     }
    
-    
 }
 
 
@@ -152,10 +147,7 @@ CameraTestControler::Render()
     
     if(mousePicker)
     {
-        boxGraph->getRoot()->setLocalPosition(mouseCoordinates);
-        
         boxGraph->setCamera(std::make_shared<CameraSceneNode>("camera",camera));
-        
         boxGraph->drawScene();
     }
     //DRAW AN OBJECT
