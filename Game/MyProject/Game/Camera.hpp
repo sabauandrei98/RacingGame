@@ -8,7 +8,7 @@
 #include <IvMath.h>
 #include <iostream>
 
-class Camera{
+class Camera : std::enable_shared_from_this<Camera> {
 
 private:
     
@@ -80,8 +80,8 @@ public:
         return transform;
     }
     
-    IvMatrix44 getViewMatrix();
-    IvMatrix44 getProjectionMatrix();
+    IvMatrix44 getViewMatrix() const;
+    IvMatrix44 getProjectionMatrix() const;
     
     
 ///-------------------------------------------------------------------------------

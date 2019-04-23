@@ -12,6 +12,8 @@
 #include "RenderPacket.hpp"
 #include "NodeTransform.hpp"
 #include "NodeAnimator.hpp"
+#include "BoundingBox.hpp"
+#include "../Camera.hpp"
 
 class NodeAnimator;
 class CameraSceneNode;
@@ -26,19 +28,21 @@ public:
     void findAllNodesWithName(const std::string&, std::vector<SceneNode*>&) const;
     
     void addChild(const std::shared_ptr<SceneNode>&);
+    SceneNode* getChild(unsigned int);
     void remove();
     
     void setLocalTransform(const IvVector3&, const IvVector3&, const IvVector3&);
     void setLocalPosition(const IvVector3&);
     const IvMatrix44& getAbsoluteTransform() const;
     IvVector3 getAbsolutePosition() const;
+    const BoundingBox& getBoundingBox() const;
     
     void setAnimator(const std::shared_ptr<NodeAnimator>&);
     void setRenderable(const std::shared_ptr<MeshInstance>&);
     
     virtual void updateAbsoluteTransform();
     virtual void updateNode(float);
-    virtual void collectRenderingPackets(CameraSceneNode*, std::vector<RenderPacket>&);
+    virtual void collectRenderingPackets(const Camera*, std::vector<RenderPacket>&);
     
 protected:
     // protected variable(s)
@@ -50,6 +54,7 @@ protected:
     
     NodeTransform                           _transform;
     IvMatrix44                              _absolute_transform;
+    BoundingBox                             _bounding_box;
     
     std::shared_ptr<NodeAnimator>           _animator;
     std::shared_ptr<MeshInstance>           _rendarable;
