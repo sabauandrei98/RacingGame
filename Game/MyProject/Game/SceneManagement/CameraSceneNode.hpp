@@ -13,7 +13,7 @@
 #include "SceneNode.hpp"
 #include "../Camera.hpp"
 
-class CameraSceneNode : std::enable_shared_from_this<CameraSceneNode>, public SceneNode {
+class CameraSceneNode : public SceneNode {
 public:
     // typedef(s)
     typedef std::shared_ptr<Camera> CameraPtr;

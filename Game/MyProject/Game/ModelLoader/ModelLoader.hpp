@@ -5,29 +5,21 @@
 //  Created by Tamas Both - (p) on 09/04/2019.
 //
 
+#pragma once
+
 #include <iostream>
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include <IvImage.h>
 
 #include "SceneNode.hpp"
+#include "../ResourceManager/ResourceManager.hpp"
 
-#pragma once
-
-class ModelLoader {
-public:
-    // public function(s) and method(s)
-    static void loadModel(const std::string&, const std::string&, const std::string&, SceneNode*);
+namespace ModelLoader {
+    std::shared_ptr<SceneNode> loadModel(const std::string&, const std::string&);
     
-private:
-    // private variable(s)
-    static std::string  directory;
-    static IvTexture*   texture;
-    
-    // private function(s) and method(s)
-    static void processNode(aiNode*, const aiScene*, SceneNode*, const std::string&);
-    static std::shared_ptr<SceneNode> makeSceneNode(const aiMesh*, const aiScene*, const aiNode*, const std::string&);
-    static void loadTexture(const char*);
+    void processNode(aiNode*, const aiScene*, SceneNode*, const std::string&);
+    std::shared_ptr<SceneNode> makeSceneNode(const aiMesh*, const aiScene*, const aiNode*, const std::string&);
+    void loadTexture(const std::string&);
 };

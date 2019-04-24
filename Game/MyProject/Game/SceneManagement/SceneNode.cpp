@@ -14,7 +14,6 @@
 
 SceneNode::SceneNode(const std::string& name) :
     _parent(nullptr), _name(name) {
-        _absolute_transform.Identity();
     }
 
 SceneNode::~SceneNode() {

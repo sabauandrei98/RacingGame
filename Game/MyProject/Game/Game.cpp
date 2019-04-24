@@ -21,7 +21,7 @@ bool
 Game::PostRendererInitialize()
 {
     // Set up base class
-    if ( !IvGame::PostRendererInitialize())
+    if ( !IvGame::PostRendererInitialize() )
         return false;
     
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
