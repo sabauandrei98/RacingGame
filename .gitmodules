@@ -1,0 +1,3 @@
+[submodule "Game/assimp"]
+	path = Game/assimp
+	url = https://github.com/assimp/assimp

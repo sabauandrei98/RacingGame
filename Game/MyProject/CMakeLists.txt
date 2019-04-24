@@ -112,6 +112,7 @@ file(GLOB_RECURSE GLSLF_FILES ${PROJECT_SOURCE_DIR}/Game/*.glslf)
 # INCLUDE PATHS
 include_directories(
     ${PROJECT_SOURCE_DIR}/../glfw-3.1.1/include/
+    ${PROJECT_SOURCE_DIR}/../assimp/build/include/
     ${PROJECT_SOURCE_DIR}/../assimp/include/
 
     ${PROJECT_SOURCE_DIR}/IvCollision/
@@ -140,7 +141,8 @@ include_directories(
 # LINK PATHS
 link_directories(
     ${PROJECT_SOURCE_DIR}/../glfw-3.1.1/lib-MacOS-10.8/
-    ${PROJECT_SOURCE_DIR}/../assimp/lib/
+    ${PROJECT_SOURCE_DIR}/../assimp/build/code/
+    ${PROJECT_SOURCE_DIR}/../assimp/build/contrib/irrXML/
 )
 
 POPULATE_SOURCE_FOLDER_RECURSIVE(ALL_ENGINE_SOURCE_FILES "${PROJECT_SOURCE_DIR}" "Source Files")
@@ -185,6 +187,6 @@ target_link_libraries(RacingGame
     "-framework IOKit"
     "-framework AppKit"
     libglfw3.a
-    libIrrXML.a
+    libIrrXML.dylib
     libassimp.4.1.0.dylib
 )
