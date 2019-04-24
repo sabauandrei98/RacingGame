@@ -14,7 +14,7 @@
 //-------------------------------------------------------------------------------
 //-- Typedefs, Structs ----------------------------------------------------------
 //-------------------------------------------------------------------------------
-struct BoundingBox
+struct mBoundingBox
 {
     IvVector3 min;
     IvVector3 max;
@@ -32,12 +32,12 @@ public:
     RayBoxIntersection(){}
     ~RayBoxIntersection(){}
     
-    bool IsRayIntersectingBox(const IvRay3& ray,const BoundingBox& boundingBox);
-    bool IsCollision(const IvVector3&,const BoundingBox&);
+    bool IsRayIntersectingBox(const IvRay3& ray,const mBoundingBox& boundingBox);
+    bool IsCollision(const IvVector3&,const mBoundingBox&);
 private:
     IvRay3 ray;
     
     float Distance(const IvVector3& point1,const IvVector3& point2);
-    bool  IsPointInsideBoundingBox(const IvVector3& point,const BoundingBox& boundingBox);
+    bool  IsPointInsideBoundingBox(const IvVector3& point,const mBoundingBox& boundingBox);
     
 };

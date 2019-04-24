@@ -45,11 +45,15 @@ public:
     IvVertexBuffer* getVertexBuffer();
     IvIndexBuffer* getIndexBuffer();
     const unsigned int& getBufferSize() const;
+    const IvVector3& getMinVertices() const;
+    const IvVector3& getMaxVertices() const;
     
 private:
     // private variable(s)
     IvVertexBuffer* _vertex_buffer;
     IvIndexBuffer*  _index_buffer;
+    IvVector3       _min_vertices;
+    IvVector3       _max_vertices;
     unsigned int    _buffer_size;
     
     // private function(s) and method(s)

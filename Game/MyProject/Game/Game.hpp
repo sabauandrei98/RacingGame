@@ -28,6 +28,14 @@ public:
     
     TestCollision*               testCollision;
     CameraTestControler*         cameraTest;
+    
+    std::unique_ptr<SceneGraph>         _scene_graph;
+    std::shared_ptr<SceneNode>          _root;
+    std::shared_ptr<SceneNode>          _child1;
+    std::shared_ptr<SceneNode>          _child2;
+    std::shared_ptr<SceneNode>          _child3;
+    std::shared_ptr<Camera>             _camera;
+    std::shared_ptr<CameraSceneNode>    _camera_scene_node;
 
 protected:
     virtual void UpdateObjects(float dt);

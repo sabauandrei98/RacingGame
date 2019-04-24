@@ -10,7 +10,7 @@
 //  @RayBoxIntersection::IsRayIntersectingBox()
 //-------------------------------------------------------------------------------
 bool
-RayBoxIntersection::IsRayIntersectingBox(const IvRay3 &ray, const BoundingBox &boundingBox)
+RayBoxIntersection::IsRayIntersectingBox(const IvRay3 &ray, const mBoundingBox &boundingBox)
 {
     float minX=boundingBox.min.x;
     float minY=boundingBox.min.y;
@@ -92,7 +92,7 @@ RayBoxIntersection::IsRayIntersectingBox(const IvRay3 &ray, const BoundingBox &b
 //  @RayBoxIntersection::IsPointInsideBoundingBox()
 //-------------------------------------------------------------------------------
 bool
-RayBoxIntersection::IsPointInsideBoundingBox(const IvVector3 &point, const BoundingBox &boundingBox)
+RayBoxIntersection::IsPointInsideBoundingBox(const IvVector3 &point, const mBoundingBox &boundingBox)
 {
     float minX=boundingBox.min.x;
     float minY=boundingBox.min.y;
@@ -117,7 +117,7 @@ RayBoxIntersection::Distance(const IvVector3& point1,const IvVector3& point2)
 //  @RayBoxIntersection::I()
 //-------------------------------------------------------------------------------
 bool
-RayBoxIntersection::IsCollision(const IvVector3& mouseCoordinates,const BoundingBox &boundingBox)
+RayBoxIntersection::IsCollision(const IvVector3& mouseCoordinates,const mBoundingBox &boundingBox)
 {
     
     IvVector3 cameraPosition=IvVector3(-1,-0.1,-1);

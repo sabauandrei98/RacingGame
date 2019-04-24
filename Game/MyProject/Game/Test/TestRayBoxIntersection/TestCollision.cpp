@@ -21,6 +21,8 @@ TestCollision::TestRayBox()
     m_camera.setLookAt({0.0f, 0.0f, 0.0f});
     m_camera.setRotation({0.0f, 0.0f, 1.0f});
     
+    BoundingBox boound=boxNode->getBoundingBox();
+    
     boxNode->setLocalTransform(IvVector3(0.5,0.5,0.5),IvVector3(0,0,0),IvVector3(1,1,1));
     
     box->setRoot(boxNode);

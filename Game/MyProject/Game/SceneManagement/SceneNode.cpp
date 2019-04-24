@@ -91,6 +91,11 @@ IvVector3 SceneNode::getAbsolutePosition() const {
     return IvVector3(_absolute_transform(0, 3), _absolute_transform(1, 3), _absolute_transform(2, 3));
 }
 
+// returns the bounding box
+const BoundingBox& SceneNode::getBoundingBox() const {
+    return _bounding_box;
+}
+
 // updates the absolute transform matrix
 void SceneNode::updateAbsoluteTransform() {
     _absolute_transform = _transform.getMatrix();
@@ -111,7 +116,16 @@ void SceneNode::updateNode(float dt) {
     for (auto& i : _children)
         i->updateNode(dt);
     
-    //TODO: update the bounding box of this node
+    //updates the bounding box of this node
+    if (_rendarable->getMesh())
+        _bounding_box.calculate(_rendarable->getMesh()->getMinVertices(), _rendarable->getMesh()->getMaxVertices(), _absolute_transform);
+    else
+        _bounding_box.invalidate();
+    
+    for (const auto& i : _children) {
+        _bounding_box.expand(i->_bounding_box.getMin());
+        _bounding_box.expand(i->_bounding_box.getMax());
+    }
 }
 
 // collects the rendering packets
