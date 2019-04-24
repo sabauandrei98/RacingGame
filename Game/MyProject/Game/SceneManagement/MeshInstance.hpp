@@ -28,6 +28,7 @@ public:
     
     // TODO: implement different uniform setters
     void setUniformValue(unsigned int, const IvVector4&);
+    void setUniformValue(unsigned int, IvTexture*);
     
     const std::shared_ptr<Mesh>& getMesh() const;
     const std::vector<IvUniform*>& getShaderUniforms() const;

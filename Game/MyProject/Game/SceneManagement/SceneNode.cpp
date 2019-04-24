@@ -13,7 +13,7 @@
 // -----------------------------
 
 SceneNode::SceneNode(const std::string& name) :
-    _name(name), _parent(nullptr) {
+    _parent(nullptr), _name(name) {
         _absolute_transform.Identity();
     }
 
@@ -55,6 +55,11 @@ void SceneNode::addChild(const std::shared_ptr<SceneNode>& child) {
     _children.push_back(child);
 }
 
+// returns a pointer to the child
+SceneNode* SceneNode::getChild(unsigned int index) {
+    return _children[index].get();
+}
+
 // removes this node and all its children from the graph
 void SceneNode::remove()
 {
@@ -86,6 +91,11 @@ IvVector3 SceneNode::getAbsolutePosition() const {
     return IvVector3(_absolute_transform(0, 3), _absolute_transform(1, 3), _absolute_transform(2, 3));
 }
 
+// returns the bounding box
+const BoundingBox& SceneNode::getBoundingBox() const {
+    return _bounding_box;
+}
+
 // updates the absolute transform matrix
 void SceneNode::updateAbsoluteTransform() {
     _absolute_transform = _transform.getMatrix();
@@ -106,11 +116,20 @@ void SceneNode::updateNode(float dt) {
     for (auto& i : _children)
         i->updateNode(dt);
     
-    //TODO: update the bounding box of this node
+    //updates the bounding box of this node
+    if (_rendarable->getMesh())
+        _bounding_box.calculate(_rendarable->getMesh()->getMinVertices(), _rendarable->getMesh()->getMaxVertices(), _absolute_transform);
+    else
+        _bounding_box.invalidate();
+    
+    for (const auto& i : _children) {
+        _bounding_box.expand(i->_bounding_box.getMin());
+        _bounding_box.expand(i->_bounding_box.getMax());
+    }
 }
 
 // collects the rendering packets
-void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<RenderPacket>& render_packets) {
+void SceneNode::collectRenderingPackets(const Camera* camera, std::vector<RenderPacket>& render_packets) {
     if (!_enabled)
         return;
     
@@ -120,11 +139,16 @@ void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<Ren
     if (_rendarable) {
         RenderPacket packet;
         packet._mesh_instance = _rendarable.get();
+<<<<<<< HEAD
         packet._world_view_projection_matrix = _absolute_transform * camera->getView() * camera->getProjection();
         packet._use_blend = true;
         packet._use_depth = true;
         
         packet._prim_type=kTriangleStripPrim;
+=======
+        packet._use_depth = true;
+        packet._world_view_projection_matrix = camera->getProjectionMatrix() * camera->getViewMatrix() * _absolute_transform;
+>>>>>>> master
         
         render_packets.push_back(packet);
     }

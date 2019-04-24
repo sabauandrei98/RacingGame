@@ -1,9 +1,7 @@
 #version 150
 
-out vec4 fragColor;
-
-uniform vec4 color;
+in vec4 col;
 
 void main() {
-    fragColor = color;
+    fragColor = col;
 }

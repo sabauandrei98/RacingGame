@@ -42,12 +42,17 @@ void MeshInstance::addShaderUniforms(const std::vector<std::string>& shader_unif
 
 // sets the world view projection matrix
 void MeshInstance::setWorldViewProjectionMatrix(const IvMatrix44& matrix) {
-    IvRenderer::mRenderer->SetWorldMatrix(matrix);
+    IvRenderer::mRenderer->SetWVPMat(matrix);
 }
 
-// sets the shader uniform values
+// sets the shader uniform values with vec4
 void MeshInstance::setUniformValue(unsigned int index, const IvVector4& value) {
     _shader_uniforms[index]->SetValue(value, 0);
+}
+
+// sets the shader uniform values with texture
+void MeshInstance::setUniformValue(unsigned int index, IvTexture* value) {
+    _shader_uniforms[index]->SetValue(value);
 }
 
 // returns the mesh
