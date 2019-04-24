@@ -8,6 +8,7 @@
 #pragma once
 
 #include "SceneNode.hpp"
+#include "../Camera.hpp"
 
 class CameraSceneNode;
 
@@ -20,12 +21,12 @@ public:
     void setRoot(const std::shared_ptr<SceneNode>&);
     const std::shared_ptr<SceneNode>& getRoot() const;
     
-    void setCamera(const std::shared_ptr<CameraSceneNode>&);
+    void setCamera(const std::shared_ptr<Camera>&);
     
 private:
     // private variable(s)
     std::shared_ptr<SceneNode>          _root;
     std::vector<RenderPacket>           _render_cache;
     
-    std::shared_ptr<CameraSceneNode>    _camera;
+    std::shared_ptr<Camera>             _camera;
 };

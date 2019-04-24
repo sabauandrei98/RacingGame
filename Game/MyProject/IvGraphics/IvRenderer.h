@@ -186,7 +186,7 @@ public:
     const IvMatrix44& GetProjectionMatrix();
     virtual void SetProjectionMatrix(const IvMatrix44& matrix);
     
-    void SetWVPMat(IvMatrix44& matrix);
+    void SetWVPMat(const IvMatrix44& matrix);
 
     void SetDefaultDiffuseColor(float red, float green, float blue, float alpha);
     void SetDefaultLightAmbient(float red, float green, float blue, float alpha);

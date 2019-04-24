@@ -1,14 +1,11 @@
 uniform mat4 IvModelViewProjectionMatrix;
 
 layout(location = POSITION) in vec4 position;
-layout(location = COLOR) in vec4 inColor;
-layout(location = TEXCOORD0) in vec2 texCoord0;
+layout(location = COLOR) in vec4 color;
 
-out vec2 uv;
-out vec4 color;
+out vec4 col;
 
 void main() {
     gl_Position = IvModelViewProjectionMatrix * position;
-    color = inColor;
-    uv = texCoord0;
+    col = color;
 }
