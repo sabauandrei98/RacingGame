@@ -7,26 +7,24 @@ const IvVector3 BezierCurve::lerp(const IvVector3& a, const IvVector3& b, float 
     return {cx, 0, cz};
 }
 
-const IvVector3 BezierCurve::getPointFromLine(float t, const std::vector<IvVector3>& line)
-{
-    std::vector<IvVector3> remainingPoints;
-    for(int i = 0; i < line.size(); i++)
-        remainingPoints.push_back(line[i]);
-    
-    for(int i = 0; i < remainingPoints.size() - 1; i++)
-        for(int j = 0; j < remainingPoints.size() - i - 1; j++)
-        {
-            remainingPoints[j] = lerp(remainingPoints[j], remainingPoints[j+1], t);
-            remainingPoints[j].y = 0;
-        }
-    
-    return remainingPoints[0];
-}
 
 void BezierCurve::extractPoints(std::vector<IvVector3>& line, float tStep, std::vector<IvVector3>& middlePoints)
 {
     for(float t = 0; t <= 1; t += tStep)
-        middlePoints.push_back(getPointFromLine(t, line));
+    {
+        std::vector<IvVector3> remainingPoints;
+        for(int i = 0; i < line.size(); i++)
+            remainingPoints.push_back(line[i]);
+        
+        for(int i = 0; i < remainingPoints.size() - 1; i++)
+            for(int j = 0; j < remainingPoints.size() - i - 1; j++)
+            {
+                remainingPoints[j] = lerp(remainingPoints[j], remainingPoints[j+1], t);
+                remainingPoints[j].y = 0;
+            }
+        
+        middlePoints.push_back(remainingPoints[0]);
+    }
 }
 
 const std::vector<IvVector3> BezierCurve::buildCurve(const std::vector<IvVector3>& bezierPoints ,float tStep)

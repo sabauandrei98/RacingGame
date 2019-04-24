@@ -1,11 +1,3 @@
-
-//
-//  RoadGenerator.hpp
-//  Game
-//
-//  Created by Andrei Sabu - (p) on 4/10/19.
-//
-
 #pragma once
 
 #include <vector>
@@ -20,5 +12,4 @@ public:
     static const std::vector<std::pair<IvVector3, IvVector3>> findTrackPoints(const std::vector<IvVector3>& roadPoints);
     static const std::pair<IvVector3, IvVector3> calculateNormalOnPoint(const IvVector3& a, const IvVector3& b, const IvVector3& p);
     static void fixPoints(std::vector<std::pair<IvVector3, IvVector3>>& roadMarginPoints);
-
 };

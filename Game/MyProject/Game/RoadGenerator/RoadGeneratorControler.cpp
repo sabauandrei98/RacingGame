@@ -27,15 +27,11 @@ void RoadGeneratorControler::mergeHeadTail()
 void
 RoadGeneratorControler::Update( float dt )
 {
-    bool hasInput = false;
-    
     //go to next point
     if (IvGame::mGame->mEventHandler->IsKeyReleased('.'))
     {
         if (editIndex + 1 <= bezierPoints.size() - 1)
             editIndex ++;
-        
-        hasInput = true;
     }
 
     //go to prev point
@@ -43,8 +39,6 @@ RoadGeneratorControler::Update( float dt )
     {
         if (editIndex - 1 >= 0)
             editIndex --;
-        
-        hasInput = true;
     }
     
     if (IvGame::mGame->mEventHandler->IsKeyReleased('r'))
@@ -69,7 +63,6 @@ RoadGeneratorControler::Update( float dt )
         }
         
         editIndex += 3;
-        hasInput = true;
     }
         
     if (IvGame::mGame->mEventHandler->IsKeyReleased('f'))
@@ -91,15 +84,12 @@ RoadGeneratorControler::Update( float dt )
             bezierPoints.erase(bezierPoints.begin() + editIndex - 2);
             editIndex = bezierPoints.size() - 1;
         }
-        
-        hasInput = true;
     }
 
     static unsigned char input[4] = {'w','a','s','d'};
     for(int i = 0; i < 4; i++)
         if (IvGame::mGame->mEventHandler->IsKeyDown(input[i]))
         {
-            hasInput = true;
             
             IvVector3 offset = {0, 0, 0};
             if (input[i] == 'w')

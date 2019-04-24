@@ -1,11 +1,3 @@
-
-//
-//  RoadMargins.cpp
-//  Game
-//
-//  Created by Andrei Sabu - (p) on 4/10/19.
-//
-
 #include "RoadMargins.hpp"
 
 const std::pair<IvVector3, IvVector3> RoadMargins::calculateNormalOnPoint(const IvVector3& a, const IvVector3& b, const IvVector3& p)
@@ -68,10 +60,10 @@ const std::pair<IvVector3, IvVector3> RoadMargins::calculateNormalOnPoint(const 
     final0.y = 0;
     final1.y = 0;
 
-    
     return std::make_pair(final0, final1);
 }
 
+//swap margin(normal) points in case they are reversed
 void RoadMargins::fixPoints(std::vector<std::pair<IvVector3, IvVector3>>& roadMarginPoints)
 {
     for(int i = 1; i < roadMarginPoints.size(); i++)

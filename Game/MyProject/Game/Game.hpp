@@ -13,6 +13,7 @@
 #include<IvVertexFormats.h>
 #include<IvRendererOGL.h>
 #include "Test/TestBezier/TestBezier.hpp"
+#include "RoadGenerator/RoadEditor.hpp"
 
 
 
@@ -26,7 +27,8 @@ public:
     bool PostRendererInitialize();
     
     TestRT *test;
-    TestBezier* testBezier;
+    RoadEditor* roadEditor;
+    SceneGraph* sceneGraph;
 
 protected:
     virtual void UpdateObjects(float dt);

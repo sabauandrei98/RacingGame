@@ -4,11 +4,11 @@
 
 RoadEditor::RoadEditor(SceneGraph* sGraph) : sceneGraph(sGraph)
 {
+    setupMeshes();
     setupPoints();
     getPointsFromScene();
     roadGenerator = new RoadGeneratorControler(bezierPoints, rMiddlePoints, rMarginPoints);
 }
-
 
 void RoadEditor::setupPoints()
 {
@@ -120,85 +120,6 @@ void RoadEditor::buildRoadEditor()
         bezierMarginPoints[i].first->setLocalPosition(rMarginPoints[i].first);
         bezierMarginPoints[i].second->setLocalPosition(rMarginPoints[i].second);
     }
-}
-
-RoadEditor::~RoadEditor()
-{
-    delete roadGenerator;
-}
-
-void RoadEditor::generateRoadEditorWithTexture()
-{
-    
-    std::shared_ptr<SceneNode> root = sceneGraph->getRoot();
-    std::shared_ptr<SceneNode> p = std::make_shared<SceneNode>("roadTextured");
-    root->addChild(p);
-    
-    std::shared_ptr<Mesh> meshTexture = std::make_shared<Mesh>();
-    
-    IvTCPVertex point;
-    IvVertexFormat format = IvVertexFormat::kTCPFormat;
-    std::vector<IvTCPVertex> pointPosition;
-    std::vector<unsigned int> indexBuffer;
-    
-    point.color.Set(255, 255, 255, 255);
-    for(int i = 0; i < rMarginPoints.size(); i++)
-    {
-        point.position = rMarginPoints[i].first;
-        pointPosition.push_back(point);
-        point.position = rMarginPoints[i].second;
-        pointPosition.push_back(point);
-    }
-    
-    
-    for(int i = 0; i < rMarginPoints.size() * 2; i += 4)
-    {
-        pointPosition[i].texturecoord = {1,0};
-        pointPosition[i+1].texturecoord = {1,1};
-        pointPosition[i+2].texturecoord = {0,0};
-        pointPosition[i+3].texturecoord = {0,1};
-    }
-    
-    for(int i = 0; i < rMarginPoints.size() * 2; i++)
-    {
-        indexBuffer.push_back(i);
-    }
-    
-    meshTexture->setVertexBuffer(pointPosition, format);
-    meshTexture->setIndexBuffer(indexBuffer);
-    
-    
-    const char* shader = "roadShader";
-    std::shared_ptr<MeshInstance> meshTextureInstance = std::make_shared<MeshInstance>();
-    meshTextureInstance->setMesh(meshTexture);
-    meshTextureInstance->setShader(shader);
-    std::vector<std::string> uniforms;
-    uniforms.push_back("roadTexture");
-    meshTextureInstance->addShaderUniforms(uniforms);
-    
-    IvImage* image = IvImage::CreateFromFile("roadTexture.tga");
-    IvTexture* quadTexture;
-    
-    if (image)
-    {
-        quadTexture = IvRenderer::mRenderer->GetResourceManager()->CreateTexture((image->GetBytesPerPixel() == 4) ? kRGBA32TexFmt : kRGB24TexFmt, image->GetWidth(), image->GetHeight(), image->GetPixels(), kImmutableUsage);
-        delete image;
-        image = 0;
-    }
-    
-    IvUniform* unif = meshTextureInstance->getShaderUniforms()[0];
-    if (unif)
-        unif->SetValue(quadTexture);
-    
-    root->findFirstNodeWithName("roadTextured")->setRenderable(meshTextureInstance);
-    
-}
-
-void RoadEditor::Update(float dt)
-{
-    sceneGraph->updateScene(dt);
-    roadGenerator->Update(dt);
-    buildRoadEditor();
     
     //coloring stuff
     for(int i = 0; i < bezierScenePoints.size(); i++)
@@ -211,11 +132,88 @@ void RoadEditor::Update(float dt)
     
     //set yellow the editable point
     bezierScenePoints[roadGenerator->getEditIndex()]->setRenderable(meshInstanceYellow);
-    
+}
+
+RoadEditor::~RoadEditor()
+{
+    delete roadGenerator;
+}
+
+void RoadEditor::generateTexturedRoad()
+{
+    RoadNode* roadNode = new RoadNode("roadNode", rMarginPoints, sceneGraph->getRoot());
+}
+
+void RoadEditor::Update(float dt)
+{
+    sceneGraph->updateScene(dt);
+    roadGenerator->Update(dt);
+    buildRoadEditor();
     
     if (IvGame::mGame->mEventHandler->IsKeyReleased('g'))
     {
-        generateRoadEditorWithTexture();
+        generateTexturedRoad();
     }
+}
+
+void RoadEditor::setupMeshes()
+{
+    //mesh
+    std::shared_ptr<Mesh> meshRed = std::make_shared<Mesh>();
+    std::shared_ptr<Mesh> meshBlue = std::make_shared<Mesh>();
+    std::shared_ptr<Mesh> meshGreen = std::make_shared<Mesh>();
+    std::shared_ptr<Mesh> meshYellow = std::make_shared<Mesh>();
+    
+    IvCPVertex point;
+    IvVertexFormat format = IvVertexFormat::kCPFormat;
+    point.position = {0,0,0};
+    std::vector<IvCPVertex> pointPosition;
+    std::vector<unsigned int> indexBuffer;
+    indexBuffer.push_back(0);
+    
+    //red
+    point.color.Set(255,0, 0, 1);
+    pointPosition.push_back(point);
+    meshRed->setVertexBuffer(pointPosition, format);
+    meshRed->setIndexBuffer(indexBuffer);
+    
+    //blue
+    pointPosition.clear();
+    point.color.Set(0,0, 255, 1);
+    pointPosition.push_back(point);
+    meshBlue->setVertexBuffer(pointPosition, format);
+    meshBlue->setIndexBuffer(indexBuffer);
+    
+    //green
+    pointPosition.clear();
+    point.color.Set(0, 255, 0, 1);
+    pointPosition.push_back(point);
+    meshGreen->setVertexBuffer(pointPosition, format);
+    meshGreen->setIndexBuffer(indexBuffer);
+    
+    //yellow
+    pointPosition.clear();
+    point.color.Set(255, 255, 0, 1);
+    pointPosition.push_back(point);
+    meshYellow->setVertexBuffer(pointPosition, format);
+    meshYellow->setIndexBuffer(indexBuffer);
+    
+    //mesh instance
+    const char* shader = "testShader";
+    meshInstanceRed = std::make_shared<MeshInstance>();
+    meshInstanceRed->setMesh(meshRed);
+    meshInstanceRed->setShader(shader);
+    
+    meshInstanceBlue = std::make_shared<MeshInstance>();
+    meshInstanceBlue->setMesh(meshBlue);
+    meshInstanceBlue->setShader(shader);
+    
+    meshInstanceGreen = std::make_shared<MeshInstance>();
+    meshInstanceGreen->setMesh(meshGreen);
+    meshInstanceGreen->setShader(shader);
+    
+    meshInstanceYellow = std::make_shared<MeshInstance>();
+    meshInstanceYellow->setMesh(meshYellow);
+    meshInstanceYellow->setShader(shader);
 }
 

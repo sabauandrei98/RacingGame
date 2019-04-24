@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../../SceneManagement/SceneGraph.hpp"
-#include "../../SceneManagement/CameraSceneNode.hpp"
+#include "../SceneManagement/SceneGraph.hpp"
+#include "../SceneManagement/CameraSceneNode.hpp"
+#include "../SceneManagement/RoadNode.hpp"
 #include "RoadGeneratorControler.hpp"
 #include <IvImage.h>
 
@@ -24,6 +25,7 @@ private:
     std::vector<std::shared_ptr<SceneNode>> bezierMiddlePoints;
     std::vector<std::pair<std::shared_ptr<SceneNode>, std::shared_ptr<SceneNode>>> bezierMarginPoints;
     
+    //only for editing details
     std::shared_ptr<MeshInstance> meshInstanceRed;
     std::shared_ptr<MeshInstance> meshInstanceBlue;
     std::shared_ptr<MeshInstance> meshInstanceGreen;
@@ -39,5 +41,5 @@ private:
     void buildRoadEditor();
     void resizeRoadEditor();
     
-    void generateRoadEditorWithTexture();
+    void generateTexturedRoad();
 };
