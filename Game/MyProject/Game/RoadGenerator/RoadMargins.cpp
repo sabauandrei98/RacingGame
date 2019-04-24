@@ -1,14 +1,14 @@
 
 //
-//  RoadGenerator.cpp
+//  RoadMargins.cpp
 //  Game
 //
 //  Created by Andrei Sabu - (p) on 4/10/19.
 //
 
-#include "RoadGenerator.hpp"
+#include "RoadMargins.hpp"
 
-const std::pair<IvVector3, IvVector3> RoadGenerator::calculateNormalOnPoint(const IvVector3& a, const IvVector3& b, const IvVector3& p)
+const std::pair<IvVector3, IvVector3> RoadMargins::calculateNormalOnPoint(const IvVector3& a, const IvVector3& b, const IvVector3& p)
 {
     float x0, y0;
     float x1, y1;
@@ -17,24 +17,24 @@ const std::pair<IvVector3, IvVector3> RoadGenerator::calculateNormalOnPoint(cons
     y0 = a.z;
     x1 = b.x;
     y1 = b.z;
-    
+
     //parallel points with axes
-    if (y0 == y1)
+    if (abs(y0-y1) < error)
     {
         IvVector3 final0, final1;
         final0 = {p.x, 0, p.z + roadWidth};
         final1 = {p.x, 0, p.z - roadWidth};
-        
+
         return std::make_pair(final0, final1);
     }
-    
+
     //parallel points with axes
-    if (x0 == x1)
+    if (abs(x0-x1) < error)
     {
         IvVector3 final0, final1;
         final0 = {p.x + roadWidth, 0, p.z};
         final1 = {p.x - roadWidth, 0, p.z};
-        
+
         return std::make_pair(final0, final1);
     }
     
@@ -72,7 +72,26 @@ const std::pair<IvVector3, IvVector3> RoadGenerator::calculateNormalOnPoint(cons
     return std::make_pair(final0, final1);
 }
 
-const std::vector<std::pair<IvVector3, IvVector3>> RoadGenerator::findTrackPoints(const std::vector<IvVector3>& roadPoints)
+void RoadMargins::fixPoints(std::vector<std::pair<IvVector3, IvVector3>>& roadMarginPoints)
+{
+    for(int i = 1; i < roadMarginPoints.size(); i++)
+    {
+        float p0x = roadMarginPoints[i].first.x;
+        float p0y = roadMarginPoints[i].first.z;
+        
+        float p1x = roadMarginPoints[i-1].first.x;
+        float p1y = roadMarginPoints[i-1].first.z;
+        float p2x = roadMarginPoints[i-1].second.x;
+        float p2y = roadMarginPoints[i-1].second.z;
+        
+        float dist1 = sqrt((p0x-p1x)*(p0x-p1x) + (p0y-p1y)*(p0y-p1y));
+        float dist2 = sqrt((p0x-p2x)*(p0x-p2x) + (p0y-p2y)*(p0y-p2y));
+        if(dist1 > dist2)
+            std::swap(roadMarginPoints[i].first, roadMarginPoints[i].second);
+    }
+}
+
+const std::vector<std::pair<IvVector3, IvVector3>> RoadMargins::findTrackPoints(const std::vector<IvVector3>& roadPoints)
 {
     std::vector<std::pair<IvVector3, IvVector3>> roadMarginPoints;
 
@@ -87,23 +106,7 @@ const std::vector<std::pair<IvVector3, IvVector3>> RoadGenerator::findTrackPoint
     const std::pair<IvVector3, IvVector3>& normal = calculateNormalOnPoint(roadPoints[roadSize], roadPoints[roadSize + 1], roadPoints[roadSize + 1]);
     roadMarginPoints.push_back(normal);
     
-    int changed = 0;
-    for(int i = 1; i < roadMarginPoints.size(); i++)
-    {
-        float p0x = roadMarginPoints[i].first.x;
-        float p0y = roadMarginPoints[i].first.z;
-        
-        float p1x = roadMarginPoints[i-1].first.x;
-        float p1y = roadMarginPoints[i-1].first.z;
-        float p2x = roadMarginPoints[i-1].second.x;
-        float p2y = roadMarginPoints[i-1].second.z;
-        
-        if(sqrt((p0x-p1x)*(p0x+p1x) + (p0y-p1y)*(p0y+p1y)) > sqrt((p0x-p2x)*(p0x+p2x) + (p0y-p2y)*(p0y+p2y)))
-        {
-            std::swap(roadMarginPoints[i].first, roadMarginPoints[i].second);
-            changed++;
-        }
-    }
+    fixPoints(roadMarginPoints);
     
     return roadMarginPoints;
 }

@@ -177,14 +177,13 @@ RoadGeneratorControler::Update( float dt )
             }
         }
 
-    if(hasInput)
-    {
-        rMiddlePoints = BezierCurve::buildCurve(bezierPoints, tStep);
-        rMarginPoints =  RoadGenerator::findTrackPoints(rMiddlePoints);
-        mergeHeadTail();
-        
-        for(int i = 2; i < bezierPoints.size() - 2; i++)
-            if (i % 3 != 0)
-                updateControlPointsPosition(i);
-    }
+    
+    rMiddlePoints = BezierCurve::buildCurve(bezierPoints, tStep);
+    rMarginPoints =  RoadMargins::findTrackPoints(rMiddlePoints);
+    mergeHeadTail();
+    
+    for(int i = 2; i < bezierPoints.size() - 2; i++)
+        if (i % 3 != 0)
+            updateControlPointsPosition(i);
+    
 }

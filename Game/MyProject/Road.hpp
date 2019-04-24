@@ -2,15 +2,14 @@
 
 #include "../../SceneManagement/SceneGraph.hpp"
 #include "../../SceneManagement/CameraSceneNode.hpp"
-#include "../../RoadGenerator/RoadGeneratorControler.hpp"
-#include <iostream>
+#include ""
 #include <IvImage.h>
 
-class TestBezier{
+class Road{
     
 public:
-    TestBezier();
-    ~TestBezier();
+    Road();
+    ~Road();
     
     void Update(float dt);
     void Render();

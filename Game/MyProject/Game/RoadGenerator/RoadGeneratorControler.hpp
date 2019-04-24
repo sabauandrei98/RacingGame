@@ -6,7 +6,7 @@
 #include <vector>
 #include <IvGame.h>
 #include "BezierCurve.hpp"
-#include "RoadGenerator.hpp"
+#include "RoadMargins.hpp"
 #include "../SceneManagement/SceneGraph.hpp"
 #include <iostream>
 
@@ -26,7 +26,7 @@ public:
     
 private:
     const float editSpeed = 4.0f;
-    const float tStep = 0.05f;
+    const float tStep = 0.10f;
     int editIndex = 0;
     
     std::vector<IvVector3>& bezierPoints;

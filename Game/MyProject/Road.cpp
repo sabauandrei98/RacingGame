@@ -1,5 +1,5 @@
 
-#include "TestBezier.hpp"
+#include "Road.hpp"
 
 
 TestBezier::TestBezier()
@@ -91,7 +91,7 @@ void TestBezier::setupPoints()
 {
     std::shared_ptr<SceneNode> root = sceneGraph->getRoot();
     std::vector<IvVector3> positions = {{-5, 0, -5}, {-10, 0, 2}, {-5, 0, 7}, {-2, 0, 5}, {1, 0, 1},
-                                        {-3, 0, -5}, {0, 0, -5},  {4, 0, -3}, {3, 0, 4}, {-5, 0, -5}};
+        {-3, 0, -5}, {0, 0, -5},  {4, 0, -3}, {3, 0, 4}, {-5, 0, -5}};
     
     for(int i = 0; i < positions.size(); i++)
     {
@@ -226,7 +226,7 @@ void TestBezier::generateRoadWithTexture()
         point.position = rMarginPoints[i].second;
         pointPosition.push_back(point);
     }
-
+    
     
     for(int i = 0; i < rMarginPoints.size() * 2; i += 4)
     {
@@ -266,7 +266,7 @@ void TestBezier::generateRoadWithTexture()
     IvUniform* unif = meshTextureInstance->getShaderUniforms()[0];
     if (unif)
         unif->SetValue(quadTexture);
-
+    
     root->findFirstNodeWithName("roadTextured")->setRenderable(meshTextureInstance);
     
 }
@@ -294,11 +294,11 @@ void TestBezier::Update(float dt)
         generateRoadWithTexture();
     }
     
-   
+    
 }
 
 void TestBezier::Render()
 {
-     sceneGraph->drawScene();
+    sceneGraph->drawScene();
 }
 

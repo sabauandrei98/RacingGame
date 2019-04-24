@@ -1,97 +1,20 @@
 
-#include "TestBezier.hpp"
+#include "RoadEditor.hpp"
 
 
-TestBezier::TestBezier()
+RoadEditor::RoadEditor(SceneGraph* sGraph) : sceneGraph(sGraph)
 {
-    setupGraph();
-    setupMeshes();
     setupPoints();
     getPointsFromScene();
     roadGenerator = new RoadGeneratorControler(bezierPoints, rMiddlePoints, rMarginPoints);
 }
 
-void TestBezier::setupMeshes()
-{
-    //mesh
-    std::shared_ptr<Mesh> meshRed = std::make_shared<Mesh>();
-    std::shared_ptr<Mesh> meshBlue = std::make_shared<Mesh>();
-    std::shared_ptr<Mesh> meshGreen = std::make_shared<Mesh>();
-    std::shared_ptr<Mesh> meshYellow = std::make_shared<Mesh>();
-    
-    IvCPVertex point;
-    IvVertexFormat format = IvVertexFormat::kCPFormat;
-    point.position = {0,0,0};
-    std::vector<IvCPVertex> pointPosition;
-    std::vector<unsigned int> indexBuffer;
-    indexBuffer.push_back(0);
-    
-    //red
-    point.color.Set(255,0, 0, 1);
-    pointPosition.push_back(point);
-    meshRed->setVertexBuffer(pointPosition, format);
-    meshRed->setIndexBuffer(indexBuffer);
-    
-    //blue
-    pointPosition.clear();
-    point.color.Set(0,0, 255, 1);
-    pointPosition.push_back(point);
-    meshBlue->setVertexBuffer(pointPosition, format);
-    meshBlue->setIndexBuffer(indexBuffer);
-    
-    //green
-    pointPosition.clear();
-    point.color.Set(0, 255, 0, 1);
-    pointPosition.push_back(point);
-    meshGreen->setVertexBuffer(pointPosition, format);
-    meshGreen->setIndexBuffer(indexBuffer);
-    
-    //yellow
-    pointPosition.clear();
-    point.color.Set(255, 255, 0, 1);
-    pointPosition.push_back(point);
-    meshYellow->setVertexBuffer(pointPosition, format);
-    meshYellow->setIndexBuffer(indexBuffer);
-    
-    //mesh instance
-    const char* shader = "testShader";
-    meshInstanceRed = std::make_shared<MeshInstance>();
-    meshInstanceRed->setMesh(meshRed);
-    meshInstanceRed->setShader(shader);
-    
-    meshInstanceBlue = std::make_shared<MeshInstance>();
-    meshInstanceBlue->setMesh(meshBlue);
-    meshInstanceBlue->setShader(shader);
-    
-    meshInstanceGreen = std::make_shared<MeshInstance>();
-    meshInstanceGreen->setMesh(meshGreen);
-    meshInstanceGreen->setShader(shader);
-    
-    meshInstanceYellow = std::make_shared<MeshInstance>();
-    meshInstanceYellow->setMesh(meshYellow);
-    meshInstanceYellow->setShader(shader);
-}
 
-void TestBezier::setupGraph()
-{
-    sceneGraph = new SceneGraph();
-    
-    std::shared_ptr<SceneNode> root = std::make_shared<SceneNode>("root");
-    std::shared_ptr<CameraSceneNode> camera = std::make_shared<CameraSceneNode>("camera", 45.0, 0.1, 35.0, 1280, 720);
-    camera->setPosition({0.f, -25.0f, 0.0f });
-    camera->setRotation({0,0,1});
-    camera->setLookAt({0.0f, 0.0f, 0.0f});
-    
-    sceneGraph->setRoot(root);
-    sceneGraph->setCamera(camera);
-}
-
-
-void TestBezier::setupPoints()
+void RoadEditor::setupPoints()
 {
     std::shared_ptr<SceneNode> root = sceneGraph->getRoot();
     std::vector<IvVector3> positions = {{-5, 0, -5}, {-10, 0, 2}, {-5, 0, 7}, {-2, 0, 5}, {1, 0, 1},
-                                        {-3, 0, -5}, {0, 0, -5},  {4, 0, -3}, {3, 0, 4}, {-5, 0, -5}};
+        {-3, 0, -5}, {0, 0, -5},  {4, 0, -3}, {3, 0, 4}, {-5, 0, -5}};
     
     for(int i = 0; i < positions.size(); i++)
     {
@@ -107,7 +30,7 @@ void TestBezier::setupPoints()
 }
 
 
-void TestBezier::getPointsFromScene()
+void RoadEditor::getPointsFromScene()
 {
     sceneGraph->getRoot()->findAllNodesContainingName("bezierPoint", bezierScenePoints);
     
@@ -115,7 +38,7 @@ void TestBezier::getPointsFromScene()
         bezierPoints.push_back(bezierScenePoints[i]->getLocalPosition());
 }
 
-void TestBezier::resizeRoad()
+void RoadEditor::resizeRoadEditor()
 {
     if(bezierPoints.size() != bezierScenePoints.size() || bezierMiddlePoints.size() == 0)
     {
@@ -182,9 +105,9 @@ void TestBezier::resizeRoad()
     }
 }
 
-void TestBezier::buildRoad()
+void RoadEditor::buildRoadEditor()
 {
-    resizeRoad();
+    resizeRoadEditor();
     
     for(int i = 0; i < bezierPoints.size(); i++)
         bezierScenePoints[i]->setLocalPosition(bezierPoints[i]);
@@ -199,12 +122,12 @@ void TestBezier::buildRoad()
     }
 }
 
-TestBezier::~TestBezier()
+RoadEditor::~RoadEditor()
 {
-    delete sceneGraph;
+    delete roadGenerator;
 }
 
-void TestBezier::generateRoadWithTexture()
+void RoadEditor::generateRoadEditorWithTexture()
 {
     
     std::shared_ptr<SceneNode> root = sceneGraph->getRoot();
@@ -226,7 +149,7 @@ void TestBezier::generateRoadWithTexture()
         point.position = rMarginPoints[i].second;
         pointPosition.push_back(point);
     }
-
+    
     
     for(int i = 0; i < rMarginPoints.size() * 2; i += 4)
     {
@@ -266,16 +189,16 @@ void TestBezier::generateRoadWithTexture()
     IvUniform* unif = meshTextureInstance->getShaderUniforms()[0];
     if (unif)
         unif->SetValue(quadTexture);
-
+    
     root->findFirstNodeWithName("roadTextured")->setRenderable(meshTextureInstance);
     
 }
 
-void TestBezier::Update(float dt)
+void RoadEditor::Update(float dt)
 {
     sceneGraph->updateScene(dt);
     roadGenerator->Update(dt);
-    buildRoad();
+    buildRoadEditor();
     
     //coloring stuff
     for(int i = 0; i < bezierScenePoints.size(); i++)
@@ -289,16 +212,10 @@ void TestBezier::Update(float dt)
     //set yellow the editable point
     bezierScenePoints[roadGenerator->getEditIndex()]->setRenderable(meshInstanceYellow);
     
+    
     if (IvGame::mGame->mEventHandler->IsKeyReleased('g'))
     {
-        generateRoadWithTexture();
+        generateRoadEditorWithTexture();
     }
-    
-   
-}
-
-void TestBezier::Render()
-{
-     sceneGraph->drawScene();
 }
 

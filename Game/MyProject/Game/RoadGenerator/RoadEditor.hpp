@@ -2,18 +2,16 @@
 
 #include "../../SceneManagement/SceneGraph.hpp"
 #include "../../SceneManagement/CameraSceneNode.hpp"
-#include "../../RoadGenerator/RoadGeneratorControler.hpp"
-#include <iostream>
+#include "RoadGeneratorControler.hpp"
 #include <IvImage.h>
 
-class TestBezier{
+class RoadEditor{
     
 public:
-    TestBezier();
-    ~TestBezier();
+    RoadEditor(SceneGraph* sGraph);
+    ~RoadEditor();
     
     void Update(float dt);
-    void Render();
     
 private:
     //information
@@ -36,11 +34,10 @@ private:
     
     void setupPoints();
     void setupMeshes();
-    void setupGraph();
     
     void getPointsFromScene();
-    void buildRoad();
-    void resizeRoad();
+    void buildRoadEditor();
+    void resizeRoadEditor();
     
-    void generateRoadWithTexture();
+    void generateRoadEditorWithTexture();
 };
