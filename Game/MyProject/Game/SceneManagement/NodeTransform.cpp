@@ -60,4 +60,3 @@ void NodeTransform::calculate() {
     
     _transform_matrix = position * rotation * scale * _transform_matrix;
 }
-

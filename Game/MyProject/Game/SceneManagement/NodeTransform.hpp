@@ -27,7 +27,6 @@ public:
     IvVector3   _scale;
     
     IvMatrix44  _transform_matrix;
-    bool        _is_dirty = true;
     
     void calculate();
 };

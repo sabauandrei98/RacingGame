@@ -25,6 +25,7 @@
 
 #include "IvDebugger.h"
 
+#include "../Game/ResourceManager/ResourceManager.hpp"
 
 //-------------------------------------------------------------------------------
 //-- Static Members -------------------------------------------------------------
@@ -66,8 +67,9 @@ IvGame::~IvGame()
         mEventHandler = 0;
     }
 
+    ResourceManager::resetResourceManager();
+    
     IvCleanUpRendererHelpData();
-    IvRenderer::Destroy();
 
     if (mClock)
     {
@@ -80,7 +82,8 @@ IvGame::~IvGame()
         delete IvStackAllocator::mScratchAllocator;
         IvStackAllocator::mScratchAllocator = 0;
     }
-
+    
+    IvRenderer::Destroy();
 }   // End of IvGame::~IvGame() 
 
 //-------------------------------------------------------------------------------

@@ -117,7 +117,6 @@ CameraTestControler::Update( float dt )
     
     if (camera.getNearPlane() > camera.getFarPlane())
         throw "NEAR > FAR";
-    
 }
 
 
@@ -129,7 +128,7 @@ CameraTestControler::Render()
     IvDrawAxes();
     
     //IvDrawFloor();
-    
+
     //DRAW AN OBJECT
     //IvDrawTeapot();
     

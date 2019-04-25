@@ -136,7 +136,11 @@ void IvRenderer::SetWorldMatrix(const IvMatrix44& matrix)
     mNormalMat.Rotation(Transpose(Inverse(worldMat3x3)));
 }
 
+<<<<<<< HEAD
 void IvRenderer::SetWVPMat(const IvMatrix44& matrix) {
+=======
+void IvRenderer::SetWVPMat(const IvMatrix44& matrix){
+>>>>>>> master
     mWVPMat = matrix;
 }
 

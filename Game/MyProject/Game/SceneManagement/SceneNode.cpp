@@ -13,8 +13,7 @@
 // -----------------------------
 
 SceneNode::SceneNode(const std::string& name) :
-    _name(name), _parent(nullptr) {
-        _absolute_transform.Identity();
+    _parent(nullptr), _name(name) {
     }
 
 SceneNode::~SceneNode() {
@@ -60,8 +59,14 @@ void SceneNode::findAllNodesContainingName(const std::string& name, std::vector<
 
 // adds a child
 void SceneNode::addChild(const std::shared_ptr<SceneNode>& child) {
-    child->_parent = this;
+     child->_parent = this;
     _children.push_back(child);
+}
+
+
+// returns a pointer to the child
+SceneNode* SceneNode::getChild(unsigned int index) {
+    return _children[index].get();
 }
 
 
@@ -100,6 +105,11 @@ IvVector3 SceneNode::getAbsolutePosition() const {
     return IvVector3(_absolute_transform(0, 3), _absolute_transform(1, 3), _absolute_transform(2, 3));
 }
 
+// returns the bounding box
+const BoundingBox& SceneNode::getBoundingBox() const {
+    return _bounding_box;
+}
+
 // updates the absolute transform matrix
 void SceneNode::updateAbsoluteTransform() {
     _absolute_transform = _transform.getMatrix();
@@ -120,20 +130,32 @@ void SceneNode::updateNode(float dt) {
     for (auto& i : _children)
         i->updateNode(dt);
     
-    //TODO: update the bounding box of this node
+    //updates the bounding box of this node
+    if (_rendarable->getMesh())
+        _bounding_box.calculate(_rendarable->getMesh()->getMinVertices(), _rendarable->getMesh()->getMaxVertices(), _absolute_transform);
+    else
+        _bounding_box.invalidate();
+    
+    for (const auto& i : _children) {
+        _bounding_box.expand(i->_bounding_box.getMin());
+        _bounding_box.expand(i->_bounding_box.getMax());
+    }
 }
 
 // collects the rendering packets
-void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<RenderPacket>& render_packets) {
+void SceneNode::collectRenderingPackets(const Camera* camera, std::vector<RenderPacket>& render_packets) {
     if (!_enabled)
         return;
     
     //TODO: perform visibility testing here
+    //if not visible return;
     
     if (_rendarable) {
         RenderPacket packet;
         packet._mesh_instance = _rendarable.get();
-        packet._world_view_projection_matrix =  camera->getProjectionMatrix() * camera->getViewMatrix() * _absolute_transform;
+
+        packet._use_depth = true;
+        packet._world_view_projection_matrix = camera->getProjectionMatrix() * camera->getViewMatrix() * _absolute_transform;
         
         render_packets.push_back(packet);
     }

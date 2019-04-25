@@ -1,94 +1,25 @@
 
 #pragma once
 
-#include <IvMatrix33.h>
-#include <IvMath.h>
+#include <IvGame.h>
+#include <IvEventHandler.h>
 #include "SceneNode.hpp"
+#include "../Camera.hpp"
 
-class CameraSceneNode : std::enable_shared_from_this<CameraSceneNode>, public SceneNode {
+
+class CameraSceneNode : public SceneNode {
+public:
+    // typedef(s)
+    typedef std::shared_ptr<Camera> CameraPtr;
+    
+    // constructor(s) and destructor
+    CameraSceneNode(const std::string&, const CameraPtr&);
+    
+    // public function(s) and method(s)
+    void updateNode(float);
     
 private:
-    
-    IvMatrix44 transform;
-    IvMatrix44 rotMatrix;
-    
-    IvVector3 position;
-    IvVector3 lookAt;
-    IvVector3 rotation;
-    IvVector3 rotOffsets;
-    
-    float fieldOfView;
-    float nearPlane;
-    float farPlane;
-    int screenWidth;
-    int screenHeight;
-    
-    const IvMatrix44 rotateX(const float angle) const;
-    const IvMatrix44 rotateY(const float angle) const;
-    const IvMatrix44 rotateZ(const float angle) const;
-    
-public:
-    CameraSceneNode(const std::string& name) : SceneNode(name){};
-    CameraSceneNode(const std::string& name, const float fieldOfView, const float nearPlane, const float farPlane, const int screenWidth, const int screenHeight) :
-    SceneNode(name),
-    rotOffsets(0.0f, 0.0f, 0.0f),
-    fieldOfView(fieldOfView),
-    nearPlane(nearPlane),
-    farPlane(farPlane),
-    screenWidth(screenWidth),
-    screenHeight(screenHeight)
-    {};
-    
-    ~CameraSceneNode();
-    
-    void setPosition(const IvVector3& newPos);
-    void setLookAt(const IvVector3& newLookAt);
-    void setRotation(const IvVector3& newRotation);
-    void setFieldOfView(float newFOV);
-    void setNear(float newNear);
-    void setFar(float newFar);
-    void setScreenWidth(float newWidth);
-    void setScreenHeight(float newHeight);
-    
-    const float getFieldOfView() const {
-        return fieldOfView;
-    }
-    const float getNearPlane() const {
-        return nearPlane;
-    }
-    const float getFarPlane() const {
-        return farPlane;
-    }
-    const float getHeight() const {
-        return screenHeight;
-    }
-    const float getWidth() const {
-        return screenWidth;
-    }
-    const IvVector3& getPosition() const {
-        return position;
-    }
-    const IvVector3& getLookAt() const {
-        return lookAt;
-    }
-    const IvVector3& getRotation() const {
-        return rotation;
-    }
-    const IvMatrix44& getTransformMatrix() const {
-        return transform;
-    }
-    
-    const IvMatrix44 getViewMatrix() const;
-    const IvMatrix44 getProjectionMatrix() const;
-    
-    
-    ///-------------------------------------------------------------------------------
-    //--FUNCTIONALITIES---------------------------------------------------------------
-    //--------------------------------------------------------------------------------
-    
-    void zoom(float step);
-    void pan(const IvVector2& offset);
-    void rotate(const IvVector3& offset);
+    CameraPtr  _camera;
 };
 
 
