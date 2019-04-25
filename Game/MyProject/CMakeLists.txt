@@ -136,6 +136,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/Game/Test/TestCustomAttributes/Shader/
     ${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/
     ${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/Shader/
+    ${PROJECT_SOURCE_DIR}/Game/Test/TestHelper/
 )
 
 # LINK PATHS

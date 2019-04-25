@@ -52,6 +52,7 @@ void NodeTransform::calculate() {
     IvMatrix44 rotation;
     IvMatrix44 scale;
     
+    _transform_matrix.Identity();
     position.Identity();
     rotation.Identity();
     scale.Identity();
@@ -60,5 +61,5 @@ void NodeTransform::calculate() {
     rotation.Rotation(_rotation[2], _rotation[1], _rotation[0]);
     scale.Scaling(_scale);
     
-    _transform_matrix = position * rotation * scale;
+    _transform_matrix = position * rotation * scale * _transform_matrix;
 }

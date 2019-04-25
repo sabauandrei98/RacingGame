@@ -125,7 +125,7 @@ CameraTestControler::Render()
 {
     
     //DRAW AXES
-    //IvDrawAxes();
+    IvDrawAxes();
     
     //IvDrawFloor();
 

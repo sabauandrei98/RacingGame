@@ -28,6 +28,11 @@ void RenderPacket::draw() const {
     else
         IvRendererOGL::mRenderer->SetBlendFunc(kOneBlendFunc, kZeroBlendFunc, kAddBlendOp);
     
+    if(_use_wireframe)
+        IvRenderer::mRenderer->SetFillMode(kWireframeFill);
+    else
+        IvRenderer::mRenderer->SetFillMode(kSolidFill);
+    
     // drawing
     if (_mesh_instance->getMesh()->getIndexBuffer())
         IvRenderer::mRenderer->Draw(_prim_type, _mesh_instance->getMesh()->getVertexBuffer(), _mesh_instance->getMesh()->getIndexBuffer());

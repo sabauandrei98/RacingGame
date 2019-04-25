@@ -19,8 +19,9 @@ public:
     IvMatrix44      _world_view_projection_matrix;
     IvPrimType      _prim_type = kTriangleListPrim;
     
-    bool            _use_depth = false;
-    bool            _use_blend = false;
+    bool            _use_depth = true;
+    bool            _use_blend = true;
+    bool            _use_wireframe=false;
     
     // public function(s) and method(s)
     void draw() const;

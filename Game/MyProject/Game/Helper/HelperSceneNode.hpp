@@ -1,17 +1,12 @@
-//
-//  IvFrameBuffer.h
-//  IvGraphics
-//
-//  Created by Monica Olanescu - (p) on 4/4/19.
-//
+//-------------------------------------------------------------------------------
+//-- HelperSceneNode.h --------------------------------------------------------
+//-------------------------------------------------------------------------------
 #pragma once
 //-------------------------------------------------------------------------------
 //-- Dependencies ---------------------------------------------------------------
 //-------------------------------------------------------------------------------
-#include"IvRenderTarget.h"
-
-#include<iostream>
-#include<vector>
+#include "SceneNode.hpp"
+#include "CameraSceneNode.hpp"
 //-------------------------------------------------------------------------------
 //-- Typedefs, Structs ----------------------------------------------------------
 //-------------------------------------------------------------------------------
@@ -19,21 +14,18 @@
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
-class IvFrameBuffer
+
+class HelperSceneNode:public SceneNode
 {
 public:
-    //constructor/destructor
-    IvFrameBuffer(){}
-    virtual ~IvFrameBuffer(){}
-    virtual void Destroy()=0;
     
-    virtual void Create(uint32_t width,uint32_t height)=0;
-    virtual void Bind()=0;
-    virtual bool BindToDefault()=0;
-    virtual const std::vector<IvRenderTarget*>& GetTextures() const =0  ;
+    HelperSceneNode(const std::string& name,RenderPacket renderPacket);
+    virtual ~HelperSceneNode(){}
     
-protected:
-
+    void collectRenderingPackets(const Camera*,std::vector<RenderPacket>&);
+    
 private:
-
+    
+    RenderPacket       m_renderPacket;
 };
+
