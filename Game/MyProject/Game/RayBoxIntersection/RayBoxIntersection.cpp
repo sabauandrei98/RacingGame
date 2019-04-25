@@ -10,15 +10,15 @@
 //  @RayBoxIntersection::IsRayIntersectingBox()
 //-------------------------------------------------------------------------------
 bool
-RayBoxIntersection::IsRayIntersectingBox(const IvRay3 &ray, const mBoundingBox &boundingBox)
+RayBoxIntersection::IsRayIntersectingBox(const IvRay3 &ray, const BoundingBox &boundingBox)
 {
-    float minX=boundingBox.min.x;
-    float minY=boundingBox.min.y;
-    float minZ=boundingBox.min.z;
+    float minX=boundingBox.getMin().x;
+    float minY=boundingBox.getMin().y;
+    float minZ=boundingBox.getMin().z;
     
-    float maxX=boundingBox.max.x;
-    float maxY=boundingBox.max.y;
-    float maxZ=boundingBox.max.z;
+    float maxX=boundingBox.getMax().x;
+    float maxY=boundingBox.getMax().y;
+    float maxZ=boundingBox.getMax().z;
     
     IvVector3 origin=ray.GetOrigin();
     IvVector3 direction=ray.GetDirection();
@@ -38,9 +38,9 @@ RayBoxIntersection::IsRayIntersectingBox(const IvRay3 &ray, const mBoundingBox &
     }
     else
     {
-     mintx=(minX-origin.x)/direction.x;
-     minty=(minY-origin.y)/direction.y;
-     mintz=(minZ-origin.z)/direction.z;
+        mintx=(minX-origin.x)/direction.x;
+        minty=(minY-origin.y)/direction.y;
+        mintz=(minZ-origin.z)/direction.z;
     }
     float tmin;
     if(mintx>minty)
@@ -92,15 +92,15 @@ RayBoxIntersection::IsRayIntersectingBox(const IvRay3 &ray, const mBoundingBox &
 //  @RayBoxIntersection::IsPointInsideBoundingBox()
 //-------------------------------------------------------------------------------
 bool
-RayBoxIntersection::IsPointInsideBoundingBox(const IvVector3 &point, const mBoundingBox &boundingBox)
+RayBoxIntersection::IsPointInsideBoundingBox(const IvVector3 &point, const BoundingBox &boundingBox)
 {
-    float minX=boundingBox.min.x;
-    float minY=boundingBox.min.y;
-    float minZ=boundingBox.min.z;
+    float minX=boundingBox.getMin().x;
+    float minY=boundingBox.getMin().y;
+    float minZ=boundingBox.getMin().z;
     
-    float maxX=boundingBox.max.x;
-    float maxY=boundingBox.max.y;
-    float maxZ=boundingBox.max.z;
+    float maxX=boundingBox.getMax().x;
+    float maxY=boundingBox.getMax().y;
+    float maxZ=boundingBox.getMax().z;
     
     return (point.x>=minX && point.x<=maxX) && (point.y>=minY && point.y<=maxY) && (point.z>=minZ && point.z<=maxZ);
 }
@@ -117,7 +117,7 @@ RayBoxIntersection::Distance(const IvVector3& point1,const IvVector3& point2)
 //  @RayBoxIntersection::I()
 //-------------------------------------------------------------------------------
 bool
-RayBoxIntersection::IsCollision(const IvVector3& mouseCoordinates,const mBoundingBox &boundingBox)
+RayBoxIntersection::IsCollision(const IvVector3& mouseCoordinates,const BoundingBox &boundingBox)
 {
     
     IvVector3 cameraPosition=IvVector3(-1,-0.1,-1);

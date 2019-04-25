@@ -13,42 +13,37 @@ Game::Game() : IvGame()
 
 Game::~Game()
 {
-    delete testCollision;
 }
 
 bool 
 Game::PostRendererInitialize()
 {
+    IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
+    IvRendererOGL::mRenderer->SetDepthWrite(true);
+    IvRendererOGL::mRenderer->SetDepthTest(kLessEqualDepthTest);
+    
     // Set up base class
     if ( !IvGame::PostRendererInitialize() )
         return false;
     
     testCollision=new TestCollision();
     testCollision->TestRayBox();
-
-    test=new TestHelper();
     
     ::IvSetDefaultLighting();
    
+  
     return true;
 }
 
 void
 Game::UpdateObjects( float dt )
 {
-
-    cameraTest->Update( dt );
     testCollision->Update(dt);
-  
-    test->Update(dt);
 }
 void
 Game::Render()
 {
-    cameraTest->Render();
-   
     testCollision->Render();
-    
 }
 
  

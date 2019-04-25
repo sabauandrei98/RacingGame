@@ -8,9 +8,11 @@
 #include "IvRay3.h"
 #include "IvVector3.h"
 #include "IvRendererHelp.h"
+#include "BoundingBox.hpp"
 #include<iostream>
 #include<IvGame.h>
 #include<IvEventHandler.h>
+
 //-------------------------------------------------------------------------------
 //-- Typedefs, Structs ----------------------------------------------------------
 //-------------------------------------------------------------------------------
@@ -32,12 +34,12 @@ public:
     RayBoxIntersection(){}
     ~RayBoxIntersection(){}
     
-    bool IsRayIntersectingBox(const IvRay3& ray,const mBoundingBox& boundingBox);
-    bool IsCollision(const IvVector3&,const mBoundingBox&);
+    bool IsRayIntersectingBox(const IvRay3& ray,const BoundingBox& boundingBox);
+    bool IsCollision(const IvVector3&,const BoundingBox&);
 private:
     IvRay3 ray;
     
     float Distance(const IvVector3& point1,const IvVector3& point2);
-    bool  IsPointInsideBoundingBox(const IvVector3& point,const mBoundingBox& boundingBox);
+    bool  IsPointInsideBoundingBox(const IvVector3& point,const BoundingBox& boundingBox);
     
 };

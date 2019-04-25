@@ -19,9 +19,10 @@ public:
     void Render();
 private:
     std::shared_ptr<SceneGraph> box;
-    mBoundingBox boundingBox;
-    IvVector3 cameraPosition;
-    IvVector3 cameraLookAt;
+    std::shared_ptr<SceneGraph> sphere;
+    std::shared_ptr<Camera> camera;
+    std::shared_ptr<CameraSceneNode> cameraSceneNode;
+    
     IvRay3 ray;
     IvVector3 mouseCoordinates;
 };
