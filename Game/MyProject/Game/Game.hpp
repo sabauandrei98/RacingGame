@@ -1,15 +1,11 @@
 #pragma once
 
-<<<<<<< HEAD
 #include"Player/Player.hpp"
 #include"Test/TestCustomAttributes/Test.hpp"
 #include"Test/TestRenderTargets/TestRT.hpp"
 #include"Test/TestHelper/TestHelper.hpp"
-=======
 #include "Player/Player.hpp"
-#include "Test/TestCustomAttributes/Test.hpp"
-#include "Test/TestRenderTargets/TestRT.hpp"
->>>>>>> master
+
 
 #include <stdio.h>
 #include <iostream>
@@ -33,7 +29,6 @@ public:
     bool PostRendererInitialize();
     
     TestHelper*                  test;
-    CameraTestControler*         cameraTest;
 
     std::unique_ptr<SceneGraph>         _scene_graph;
     std::shared_ptr<SceneNode>          _root;

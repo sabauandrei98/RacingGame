@@ -111,39 +111,39 @@ file(GLOB_RECURSE GLSLF_FILES ${PROJECT_SOURCE_DIR}/Game/*.glslf)
 
 # INCLUDE PATHS
 include_directories(
-	${PROJECT_SOURCE_DIR}/../glfw-3.1.1/include/
+    ${PROJECT_SOURCE_DIR}/../glfw-3.1.1/include/
+    ${PROJECT_SOURCE_DIR}/../assimp/build/include/
+    ${PROJECT_SOURCE_DIR}/../assimp/include/
 
-	${PROJECT_SOURCE_DIR}/IvCollision/
-	${PROJECT_SOURCE_DIR}/IvCurves/
-	${PROJECT_SOURCE_DIR}/IvEngine/
-	${PROJECT_SOURCE_DIR}/IvEngine/OGL/
-	${PROJECT_SOURCE_DIR}/IvGraphics/
-	${PROJECT_SOURCE_DIR}/IvGraphics/OGL/
-	${PROJECT_SOURCE_DIR}/IvMath/
-	${PROJECT_SOURCE_DIR}/IvRandom/
-	${PROJECT_SOURCE_DIR}/IvScene/
-	${PROJECT_SOURCE_DIR}/IvUtility/
+    ${PROJECT_SOURCE_DIR}/IvCollision/
+    ${PROJECT_SOURCE_DIR}/IvCurves/
+    ${PROJECT_SOURCE_DIR}/IvEngine/
+    ${PROJECT_SOURCE_DIR}/IvEngine/OGL/
+    ${PROJECT_SOURCE_DIR}/IvGraphics/
+    ${PROJECT_SOURCE_DIR}/IvGraphics/OGL/
+    ${PROJECT_SOURCE_DIR}/IvMath/
+    ${PROJECT_SOURCE_DIR}/IvRandom/
+    ${PROJECT_SOURCE_DIR}/IvScene/
+    ${PROJECT_SOURCE_DIR}/IvUtility/
 
-	${PROJECT_SOURCE_DIR}/Game/
-	${PROJECT_SOURCE_DIR}/Game/Player/
-	${PROJECT_SOURCE_DIR}/Game/SceneManagement/
-	${PROJECT_SOURCE_DIR}/Game/shaders/
-	${PROJECT_SOURCE_DIR}/Game/Test/
-	${PROJECT_SOURCE_DIR}/Game/Test/Resources/
-	${PROJECT_SOURCE_DIR}/Game/Test/TestCustomAttributes/
-	${PROJECT_SOURCE_DIR}/Game/Test/TestCustomAttributes/Shader/
-	${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/
-	${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/Shader/
-    ${PROJECT_SOURCE_DIR}/Game/MyProject/Game/Helper/
-    ${PROJECT_SOURCE_DIR}/Game/MyProject/Game/Helper/Shaders/
-    ${PROJECT_SOURCE_DIR}/Game/MyProject/Game/Helper/Resources/
+    ${PROJECT_SOURCE_DIR}/Game/
+    ${PROJECT_SOURCE_DIR}/Game/Player/
+    ${PROJECT_SOURCE_DIR}/Game/SceneManagement/
+    ${PROJECT_SOURCE_DIR}/Game/shaders/
+    ${PROJECT_SOURCE_DIR}/Game/Test/
+    ${PROJECT_SOURCE_DIR}/Game/Test/Resources/
+    ${PROJECT_SOURCE_DIR}/Game/Test/TestCustomAttributes/
+    ${PROJECT_SOURCE_DIR}/Game/Test/TestCustomAttributes/Shader/
+    ${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/
+    ${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/Shader/
     ${PROJECT_SOURCE_DIR}/Game/Test/TestHelper/
 )
 
 # LINK PATHS
 link_directories(
     ${PROJECT_SOURCE_DIR}/../glfw-3.1.1/lib-MacOS-10.8/
-    ${PROJECT_SOURCE_DIR}/../assimp/lib/
+    ${PROJECT_SOURCE_DIR}/../assimp/build/code/
+    ${PROJECT_SOURCE_DIR}/../assimp/build/contrib/irrXML/
 )
 
 POPULATE_SOURCE_FOLDER_RECURSIVE(ALL_ENGINE_SOURCE_FILES "${PROJECT_SOURCE_DIR}" "Source Files")
@@ -188,6 +188,6 @@ target_link_libraries(RacingGame
     "-framework IOKit"
     "-framework AppKit"
     libglfw3.a
-    libIrrXML.a
+    libIrrXML.dylib
     libassimp.4.1.0.dylib
 )

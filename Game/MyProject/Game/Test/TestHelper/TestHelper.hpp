@@ -8,6 +8,7 @@
 #include "SceneGraph.hpp"
 #include "Helper/HelperManager.hpp"
 #include "Helper/MeshManager.hpp"
+#include "IvRendererHelp.h"
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
@@ -20,13 +21,19 @@ public:
     void DrawQuad();
     void DrawSphere();
     
+    void Update(float dt);
+    
 private:
-    std::shared_ptr<SceneNode> box;
-    std::vector<bool>    createdBoxes;
-    std::vector<bool>    createdQuads;
-    std::vector<bool>    createdSphere;
+    bool                                boxCreated;
+    bool                                quadCreated;
+    bool                                sphereCreated;
     
-    std::vector<std::shared_ptr<SceneGraph>> toBeRendered;
+    std::shared_ptr<SceneGraph>         box;
+    std::shared_ptr<SceneGraph>         quad;
+    std::shared_ptr<SceneGraph>         sphere;
     
-    MeshManager*         meshManager;
+    MeshManager*                        meshManager;
+    
+    std::shared_ptr<Camera>             camera;
+    std::shared_ptr<CameraSceneNode>    cameraSceneNode;
 };

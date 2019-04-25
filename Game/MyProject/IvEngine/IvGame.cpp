@@ -25,6 +25,7 @@
 
 #include "IvDebugger.h"
 
+#include "../Game/ResourceManager/ResourceManager.hpp"
 
 //-------------------------------------------------------------------------------
 //-- Static Members -------------------------------------------------------------
@@ -66,6 +67,8 @@ IvGame::~IvGame()
         mEventHandler = 0;
     }
 
+    ResourceManager::resetResourceManager();
+    
     IvCleanUpRendererHelpData();
 
     if (mClock)
