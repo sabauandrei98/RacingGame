@@ -11,26 +11,29 @@ function(POPULATE_SOURCE_FOLDER allSources projectSourceDir sourceFolder virtual
 
     ## get all the headers from the folder
     file (GLOB LOCAL_HEADERS_FILES "${projectSourceDir}/${sourceFolder}/*.h" "${projectSourceDir}/${sourceFolder}/*.hpp")
-    file (GLOB LOCAL_GLSL_FILES "${projectSourceDir}/${sourceFolder}/*.glsl" "${projectSourceDir}/${sourceFolder}/*.glslf""${projectSourceDir}/${sourceFolder}/*.glslv")
+    file (GLOB LOCAL_GLSL_FILES "${projectSourceDir}/${sourceFolder}/*.glsl" "${projectSourceDir}/${sourceFolder}/*.glslf"
+        "${projectSourceDir}/${sourceFolder}/*.glslv")
 
     ## add the files to the source tree
     set(${allSources}
             ${${allSources}}
             ${LOCAL_SOURCES_FILES}
             ${LOCAL_HEADERS_FILES}
+            ${LOCAL_GLSL_FILES}
             PARENT_SCOPE)
 
     ## create the source group for the files
     if (NOT "${virtualFolder}" STREQUAL "")
         SET(SOURCE_GROUP_PATH "${virtualFolder}\\\\${SOURCE_GROUP_PATH}")
     endif(NOT "${virtualFolder}" STREQUAL "")
-    source_group(${SOURCE_GROUP_PATH} FILES ${LOCAL_SOURCES_FILES} ${LOCAL_HEADERS_FILES})
+    source_group(${SOURCE_GROUP_PATH} FILES ${LOCAL_SOURCES_FILES} ${LOCAL_HEADERS_FILES} ${LOCAL_GLSL_FILES})
 endfunction(POPULATE_SOURCE_FOLDER)
 
 function(POPULATE_SOURCE_FOLDER_RECURSIVE allSources projectSourceDir virtualFolder)
     ## recursive get all files
     set(ALL_LOCAL_FILES "")
-    file (GLOB_RECURSE ALL_LOCAL_FILES "${projectSourceDir}/*.h" "${projectSourceDir}/*.hpp" "${projectSourceDir}/*.cpp" "${projectSourceDir}/*.c")
+    file (GLOB_RECURSE ALL_LOCAL_FILES "${projectSourceDir}/*.h" "${projectSourceDir}/*.hpp" "${projectSourceDir}/*.cpp" "${projectSourceDir}/*.c"
+        "${projectSourceDir}/*.glsl" "${projectSourceDir}/*.glslf" "${projectSourceDir}/*.glslv")
 
     SET(DIR_LIST "")
     foreach (CURRENT_FILE ${ALL_LOCAL_FILES})
@@ -68,7 +71,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if (CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR)
-	message(FATAL_ERROR "Please select another build directory!")
+    message(FATAL_ERROR "Please select another build directory!")
 endif()
 
 # SRC FILES
@@ -100,11 +103,18 @@ file(GLOB UTILITY_HDR_FILES ${PROJECT_SOURCE_DIR}/IvUtility/*.h)
 file(GLOB_RECURSE H_FILES ${PROJECT_SOURCE_DIR}/Game/*.h)
 file(GLOB_RECURSE HPP_FILES ${PROJECT_SOURCE_DIR}/Game/*.hpp)
 
+# GLSL FILES
+file(GLOB_RECURSE GLSL_FILES  ${PROJECT_SOURCE_DIR}/Game/*.glsl)
+file(GLOB_RECURSE GLSLV_FILES ${PROJECT_SOURCE_DIR}/Game/*.glslv)
+file(GLOB_RECURSE GLSLF_FILES ${PROJECT_SOURCE_DIR}/Game/*.glslf)
+
 # INCLUDE PATHS
 include_directories(
 	${PROJECT_SOURCE_DIR}/../glfw-3.1.1/include/
+    ${PROJECT_SOURCE_DIR}/../assimp/include/
+    ${PROJECT_SOURCE_DIR}/../assimp/build/include/
 
-	${PROJECT_SOURCE_DIR}/IvCollision/
+    ${PROJECT_SOURCE_DIR}/IvCollision/
 	${PROJECT_SOURCE_DIR}/IvCurves/
 	${PROJECT_SOURCE_DIR}/IvEngine/
 	${PROJECT_SOURCE_DIR}/IvEngine/OGL/
@@ -131,44 +141,47 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/Game/MyProject/Game/Helper/Shaders/
     ${PROJECT_SOURCE_DIR}/Game/MyProject/Game/Helper/Resources/
     ${PROJECT_SOURCE_DIR}/Game/RayBoxIntersection/
-
-
 )
 
 # LINK PATHS
 link_directories(
-	${PROJECT_SOURCE_DIR}/../glfw-3.1.1/lib-MacOS-10.8/
+    ${PROJECT_SOURCE_DIR}/../glfw-3.1.1/lib-MacOS-10.8/
+    ${PROJECT_SOURCE_DIR}/../assimp/include/
+    ${PROJECT_SOURCE_DIR}/../assimp/build/contrib/irrXML/
 )
 
-POPULATE_SOURCE_FOLDER_RECURSIVE(ALL_ENGINE_SOURCE_FILES "${PROJECT_SOURCE_DIR}/" "Source Files")
-POPULATE_SOURCE_FOLDER_RECURSIVE(ALL_ENGINE_SOURCE_FILES "${PROJECT_SOURCE_DIR}/" "Header Files")
+POPULATE_SOURCE_FOLDER_RECURSIVE(ALL_ENGINE_SOURCE_FILES "${PROJECT_SOURCE_DIR}" "Source Files")
 
 # EXECUTABLE
 add_executable(RacingGame
-	${COLLISION_SRC_FILES}
-	${CURVES_SRC_FILES}
-	${ENGINE_SRC_FILES}
-	${ENGINE_OGL_SRC_FILES}
-	${GRAPHICS_SRC_FILES}
-	${GRAPHICS_OGL_SRC_FILES}
-	${MATH_SRC_FILES}
-	${RANDOM_SRC_FILES}
-	${SCENE_SRC_FILES}
-	${UTILITY_SRC_FILES}
-	${SRC_FILES}
+    ${COLLISION_SRC_FILES}
+    ${CURVES_SRC_FILES}
+    ${ENGINE_SRC_FILES}
+    ${ENGINE_OGL_SRC_FILES}
+    ${GRAPHICS_SRC_FILES}
+    ${GRAPHICS_OGL_SRC_FILES}
+    ${MATH_SRC_FILES}
+    ${RANDOM_SRC_FILES}
+    ${SCENE_SRC_FILES}
+    ${UTILITY_SRC_FILES}
+    ${SRC_FILES}
 
-	${COLLISION_HDR_FILES}
-	${CURVES_HDR_FILES}
-	${ENGINE_HDR_FILES}
-	${ENGINE_OGL_HDR_FILES}
-	${GRAPHICS_HDR_FILES}
-	${GRAPHICS_OGL_HDR_FILES}
-	${MATH_HDR_FILES}
-	${RANDOM_HDR_FILES}
-	${SCENE_HDR_FILES}
-	${UTILITY_HDR_FILES}
+    ${COLLISION_HDR_FILES}
+    ${CURVES_HDR_FILES}
+    ${ENGINE_HDR_FILES}
+    ${ENGINE_OGL_HDR_FILES}
+    ${GRAPHICS_HDR_FILES}
+    ${GRAPHICS_OGL_HDR_FILES}
+    ${MATH_HDR_FILES}
+    ${RANDOM_HDR_FILES}
+    ${SCENE_HDR_FILES}
+    ${UTILITY_HDR_FILES}
     ${H_FILES}
     ${HPP_FILES}
+
+    ${GLSL_FILES}
+    ${GLSLF_FILES}
+    ${GLSLV_FILES}
 )
 
 # LINK LIBS
@@ -179,4 +192,6 @@ target_link_libraries(RacingGame
     "-framework IOKit"
     "-framework AppKit"
     libglfw3.a
+    libIrrXML.dylib
+    libassimp.4.1.0.dylib
 )

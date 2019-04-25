@@ -13,8 +13,7 @@
 // -----------------------------
 
 SceneNode::SceneNode(const std::string& name) :
-    _name(name), _parent(nullptr) {
-        _absolute_transform.Identity();
+    _parent(nullptr), _name(name) {
     }
 
 SceneNode::~SceneNode() {
@@ -129,7 +128,7 @@ void SceneNode::updateNode(float dt) {
 }
 
 // collects the rendering packets
-void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<RenderPacket>& render_packets) {
+void SceneNode::collectRenderingPackets(const Camera* camera, std::vector<RenderPacket>& render_packets) {
     if (!_enabled)
         return;
     
@@ -138,6 +137,9 @@ void SceneNode::collectRenderingPackets(CameraSceneNode* camera, std::vector<Ren
     if (_rendarable) {
         RenderPacket packet;
         packet._mesh_instance = _rendarable.get();
+
+        packet._use_depth = true;
+
         packet._world_view_projection_matrix = camera->getProjectionMatrix() * camera->getViewMatrix() * _absolute_transform;
         
         render_packets.push_back(packet);

@@ -185,6 +185,7 @@ namespace HelperManager{
         
         
         // 12 vertices
+        // 3 quads for every axis
         vertex1.position=points[0];
         vertex2.position=points[1];
         vertex3.position=points[2];
@@ -215,7 +216,7 @@ namespace HelperManager{
         vertices.push_back(vertex3);
         vertices.push_back(vertex4);
         
-        
+        //5 triangle around point on the top left
         indices.push_back(0);
         indices.push_back(11);
         indices.push_back(5);
@@ -236,7 +237,7 @@ namespace HelperManager{
         indices.push_back(10);
         indices.push_back(11);
         
-        
+        //5 adjacent faces for that point on the top left
         indices.push_back(1);
         indices.push_back(5);
         indices.push_back(9);
@@ -257,7 +258,7 @@ namespace HelperManager{
         indices.push_back(1);
         indices.push_back(8);
         
-        
+        // 5 triangle around the opposite point
         indices.push_back(3);
         indices.push_back(9);
         indices.push_back(4);
@@ -278,7 +279,7 @@ namespace HelperManager{
         indices.push_back(8);
         indices.push_back(9);
         
-        
+        // 5 adjacent faces for the opposite point
         indices.push_back(4);
         indices.push_back(9);
         indices.push_back(5);
@@ -299,12 +300,7 @@ namespace HelperManager{
         indices.push_back(8);
         indices.push_back(1);
         
-        indices.push_back(10);
-        indices.push_back(11);
-        indices.push_back(5);
-        
-        
-        RefineTriangles(vertices,indices,4);
+        Utils::RefineTriangles(vertices,indices,4);
         
         sphereMesh->setVertexBuffer(vertices, format);
         sphereMesh->setIndexBuffer(indices);
@@ -342,11 +338,11 @@ namespace HelperManager{
     // @HelperManager::BuildSphere()
     //---------------------------------------------------------------------------
     std::shared_ptr<SceneNode>
-    BuildSphere(const std::shared_ptr<MeshInstance>&meshInstance,bool wireframeValue)
+    BuildSphere(const std::shared_ptr<MeshInstance>&meshInstance,bool depth,bool blend,bool wireframeValue)
     {
         RenderPacket m_renderPacket;
-        m_renderPacket._use_blend = true;
-        m_renderPacket._use_depth = true;
+        m_renderPacket._use_blend = depth;
+        m_renderPacket._use_depth = blend;
         m_renderPacket._use_wireframe = wireframeValue;
         m_renderPacket._prim_type = kTriangleListPrim;
         
@@ -360,14 +356,14 @@ namespace HelperManager{
     // @HelperManager::BuildBox()
     //---------------------------------------------------------------------------
     std::shared_ptr<SceneNode>
-    BuildBox(const std::shared_ptr<MeshInstance>&meshInstance,bool wireframeValue)
+    BuildBox(const std::shared_ptr<MeshInstance>&meshInstance,bool depth,bool blend,bool wireframeValue)
     {
         RenderPacket m_renderPacket;
-        m_renderPacket._use_blend = true;
-        m_renderPacket._use_depth = true;
+        m_renderPacket._use_blend = depth;
+        m_renderPacket._use_depth = blend;
         m_renderPacket._use_wireframe = wireframeValue;
         m_renderPacket._prim_type = kTriangleStripPrim;
-        
+
         std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", m_renderPacket);
         node->setRenderable(meshInstance);
         
@@ -377,14 +373,14 @@ namespace HelperManager{
     // @HelperManager::BuildQuad()
     //---------------------------------------------------------------------------
     std::shared_ptr<SceneNode>
-    BuildQuad(const std::shared_ptr<MeshInstance>&meshInstance,IvVector3 axis,bool wireframeValue)
+    BuildQuad(const std::shared_ptr<MeshInstance>&meshInstance,IvVector3 axis,bool depth,bool blend,bool wireframeValue)
     {
         RenderPacket m_renderPacket;
-        m_renderPacket._use_blend = true;
-        m_renderPacket._use_depth = true;
+        m_renderPacket._use_blend = depth;
+        m_renderPacket._use_depth = blend;
         m_renderPacket._use_wireframe = wireframeValue;
         m_renderPacket._prim_type = kTriangleStripPrim;
-        
+     
         std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", m_renderPacket);
         node->setRenderable(meshInstance);
         
@@ -405,11 +401,11 @@ namespace HelperManager{
     // @HelperManager::BuildTexturedQuad()
     //---------------------------------------------------------------------------
     std::shared_ptr<SceneNode>
-    BuildTexturedQuad(const std::shared_ptr<MeshInstance>&meshInstance,const char* textureName,const char* shaderName,IvVector3 axis,bool wireframeValue)
+    BuildTexturedQuad(const std::shared_ptr<MeshInstance>&meshInstance,const char* textureName,const char* shaderName,IvVector3 axis,bool depth,bool blend,bool wireframeValue)
     {
         RenderPacket m_renderPacket;
-        m_renderPacket._use_blend = true;
-        m_renderPacket._use_depth = true;
+        m_renderPacket._use_blend = depth;
+        m_renderPacket._use_depth = blend;
         m_renderPacket._use_wireframe = wireframeValue;
         m_renderPacket._prim_type = kTriangleStripPrim;
         
@@ -432,7 +428,10 @@ namespace HelperManager{
         
         if (image)
         {
-            quadTexture = IvRenderer::mRenderer->GetResourceManager()->CreateTexture((image->GetBytesPerPixel() == 4) ? kRGBA32TexFmt : kRGB24TexFmt, image->GetWidth(), image->GetHeight(), image->GetPixels(), kImmutableUsage);
+            IvTextureFormat textureFormat=(image->GetBytesPerPixel() == 4) ? kRGBA32TexFmt : kRGB24TexFmt;
+
+            quadTexture = IvRenderer::mRenderer->GetResourceManager()->CreateTexture(textureFormat, image->GetWidth(), image->GetHeight(), image->GetPixels(), kImmutableUsage);
+
             delete image;
             image = 0;
         }
@@ -443,17 +442,9 @@ namespace HelperManager{
         
         return node;
     }
-    //---------------------------------------------------------------------------
-    // @HelperManager::GetMiddlePoint()
-    //---------------------------------------------------------------------------
-    IvVector3 GetMiddlePoint(const IvVector3& point1,const IvVector3& point2)
-    {
-        IvVector3 mid=IvVector3(    (point1.x+point2.x)/2.0,
-                                    (point1.y+point2.y)/2.0,
-                                    (point1.z+point2.z)/2.0);
-        
-        return mid;
-    }
+    
+}
+namespace Utils {
     //---------------------------------------------------------------------------
     // @HelperManager::RefineTriangles()
     //---------------------------------------------------------------------------
@@ -542,6 +533,17 @@ namespace HelperManager{
             indices=newIndices;
         }
         
+    }
+    //---------------------------------------------------------------------------
+    // @HelperManager::GetMiddlePoint()
+    //---------------------------------------------------------------------------
+    IvVector3 GetMiddlePoint(const IvVector3& point1,const IvVector3& point2)
+    {
+        IvVector3 mid=IvVector3(    (point1.x+point2.x)/2.0,
+                                (point1.y+point2.y)/2.0,
+                                (point1.z+point2.z)/2.0);
+        
+        return mid;
     }
     //---------------------------------------------------------------------------
     // @HelperManager:: CalculateLength()

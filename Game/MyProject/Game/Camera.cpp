@@ -1,7 +1,7 @@
 #include "Camera.hpp"
 
 
-IvMatrix44 Camera::getViewMatrix()
+IvMatrix44 Camera::getViewMatrix() const
 {
     IvVector3 view = lookAt - position;
     view.Normalize();
@@ -22,7 +22,7 @@ IvMatrix44 Camera::getViewMatrix()
     return matrix;
 }
 
-IvMatrix44 Camera::getProjectionMatrix()
+IvMatrix44 Camera::getProjectionMatrix() const
 {
     IvMatrix44 perspective;
     float aspectRatio = (float) screenWidth / screenHeight;

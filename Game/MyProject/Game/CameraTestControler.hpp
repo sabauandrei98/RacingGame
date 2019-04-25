@@ -19,7 +19,8 @@ public:
     void Update( float dt );
     void Render();
     
-    Camera camera;
+    std::shared_ptr<Camera> camera;
+    std::shared_ptr<CameraSceneNode> cameraSceneNode;
     
     IvVector3 mouseCoordinates;
     bool mousePicker;

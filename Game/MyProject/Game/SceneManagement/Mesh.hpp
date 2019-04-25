@@ -11,12 +11,14 @@
 
 #include <memory>
 #include <vector>
+#include <limits>
 
 #include <IvVertexBuffer.h>
 #include <IvIndexBuffer.h>
 #include <IvStackAllocator.h>
 #include <IvRenderer.h>
 #include <IvResourceManager.h>
+#include <IvVector3.h>
 
 class Mesh : std::enable_shared_from_this<Mesh> {
 public:
@@ -38,6 +40,24 @@ public:
         _vertex_buffer = IvRenderer::mRenderer->GetResourceManager()->CreateVertexBuffer(vertex_format, (unsigned int)vertices.size(), (void*)vertices.data(), kImmutableUsage);
         
         IvStackAllocator::mScratchAllocator->Reset(current_offset);
+        
+        _min_vertices = IvVector3(std::numeric_limits<float>::infinity(),
+                                  std::numeric_limits<float>::infinity(),
+                                  std::numeric_limits<float>::infinity());
+        _max_vertices = IvVector3(-std::numeric_limits<float>::infinity(),
+                                  -std::numeric_limits<float>::infinity(),
+                                  -std::numeric_limits<float>::infinity());
+        
+        for (const auto& vertex : vertices) {
+            _min_vertices = IvVector3(std::min(_min_vertices.x, vertex.position.x),
+                                      std::min(_min_vertices.y, vertex.position.y),
+                                      std::min(_min_vertices.z, vertex.position.z));
+            
+            _max_vertices = IvVector3(std::max(_max_vertices.x, vertex.position.x),
+                                      std::max(_max_vertices.y, vertex.position.y),
+                                      std::max(_max_vertices.z, vertex.position.z));
+        }
+
     }
     
     void setIndexBuffer(const std::vector<unsigned int>&);
