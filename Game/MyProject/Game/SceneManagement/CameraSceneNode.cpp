@@ -13,6 +13,7 @@
 
 CameraSceneNode::CameraSceneNode(const std::string& name, const CameraSceneNode::CameraPtr& camera) :
     SceneNode(name), _camera(camera) {
+        _needs_bounding_box = false;
     }
 
 // --------------------------------

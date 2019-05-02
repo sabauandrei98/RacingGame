@@ -28,8 +28,6 @@ public:
     ~Game();
     bool PostRendererInitialize();
     
-    TestHelper*                  test;
-
     std::unique_ptr<SceneGraph>         _scene_graph;
     std::shared_ptr<SceneNode>          _root;
     std::shared_ptr<SceneNode>          _child1;
