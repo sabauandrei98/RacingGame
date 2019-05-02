@@ -89,7 +89,9 @@ Game::PostRendererInitialize()
 void
 Game::UpdateObjects( float dt )
 {
-     _scene_graph->updateScene(dt);
+    _state_controller.update();
+    
+    _scene_graph->updateScene(dt);
      test->Update(dt);
 }
 void

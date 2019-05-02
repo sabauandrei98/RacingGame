@@ -20,6 +20,7 @@
 #include "SceneManagement/CameraSceneNode.hpp"
 
 class CameraTestControler;
+class StateController;
 
 class Game : public IvGame
 {
@@ -37,7 +38,8 @@ public:
     std::shared_ptr<SceneNode>          _child3;
     std::shared_ptr<Camera>             _camera;
     std::shared_ptr<CameraSceneNode>    _camera_scene_node;
-
+    
+    StateController                     _state_controller;
 
 protected:
     virtual void UpdateObjects(float dt);

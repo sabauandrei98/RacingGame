@@ -129,6 +129,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/Game/
     ${PROJECT_SOURCE_DIR}/Game/Player/
     ${PROJECT_SOURCE_DIR}/Game/SceneManagement/
+    ${PROJECT_SOURCE_DIR}/Game/GameStates/
     ${PROJECT_SOURCE_DIR}/Game/shaders/
     ${PROJECT_SOURCE_DIR}/Game/Test/
     ${PROJECT_SOURCE_DIR}/Game/Test/Resources/
