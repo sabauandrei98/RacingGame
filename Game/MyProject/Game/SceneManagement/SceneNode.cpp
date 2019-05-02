@@ -50,7 +50,7 @@ void SceneNode::findAllNodesWithName(const std::string& name, std::vector<SceneN
 
 // adds a child
 void SceneNode::addChild(const std::shared_ptr<SceneNode>& child) {
-     child->_parent = this;
+    child->_parent = this;
     _children.push_back(child);
 }
 
@@ -133,13 +133,13 @@ void SceneNode::collectRenderingPackets(const Camera* camera, std::vector<Render
         return;
     
     //TODO: perform visibility testing here
-    //if not visible return;
     
     if (_rendarable) {
         RenderPacket packet;
         packet._mesh_instance = _rendarable.get();
 
         packet._use_depth = true;
+
         packet._world_view_projection_matrix = camera->getProjectionMatrix() * camera->getViewMatrix() * _absolute_transform;
         
         render_packets.push_back(packet);

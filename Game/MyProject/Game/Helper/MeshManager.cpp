@@ -34,7 +34,6 @@ MeshManager::GetMesh(const std::string& name)
     }
 
     std::map<std::string,std::shared_ptr<Mesh>>::iterator it;
-
     it=meshes.find(name);
 
     if(it!=meshes.end())

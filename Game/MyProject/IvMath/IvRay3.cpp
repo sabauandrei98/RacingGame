@@ -51,7 +51,7 @@ IvRay3::IvRay3( const IvVector3& origin, const IvVector3& direction ) :
     mOrigin( origin ),
     mDirection( direction )
 {
-    mDirection.Normalize();
+    //mDirection.Normalize();
 
 }   // End of IvRay3::IvRay3()
 
@@ -65,7 +65,7 @@ IvRay3::IvRay3( const IvRay3& other ) :
     mOrigin( other.mOrigin ),
     mDirection( other.mDirection )
 {
-    mDirection.Normalize();
+   // mDirection.Normalize();
 
 }   // End of IvRay3::IvRay3()
 
@@ -84,7 +84,7 @@ IvRay3::operator=( const IvRay3& other )
         
     mOrigin = other.mOrigin;
     mDirection = other.mDirection;
-    mDirection.Normalize();
+    //mDirection.Normalize();
 
     return *this;
 
