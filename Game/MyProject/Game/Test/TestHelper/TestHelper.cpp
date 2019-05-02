@@ -33,12 +33,16 @@ TestHelper::Update(float dt)
     if(sphereCreated)
         sphere->updateScene(dt);
 }
+TestHelper::~TestHelper()
+{
+    delete meshManager;
+}
 void
 TestHelper::DrawBox()
 {
     if(!boxCreated)
     {
-        std::shared_ptr<SceneNode> boxNode=HelperManager::BuildBox(HelperManager::CreateMeshInstance(meshManager->GetMesh("box")),true);
+        std::shared_ptr<SceneNode> boxNode=HelperManager::BuildBox(HelperManager::CreateMeshInstance(meshManager->GetMesh("box")),true,true ,true);
         box=std::make_shared<SceneGraph>();
         
         boxCreated=true;
@@ -55,7 +59,7 @@ TestHelper::DrawBox()
         box->getRoot()->addChild(boxNode2);
         
     }
-     box->drawScene() ;
+    box->drawScene() ;
 }
 
 void
@@ -64,6 +68,7 @@ TestHelper::DrawQuad()
     if(!quadCreated)
     {
         std::shared_ptr<SceneNode> quadNode=HelperManager::BuildQuad(HelperManager::CreateMeshInstance(meshManager->GetMesh("quad")));
+
         quad=std::make_shared<SceneGraph>();
         quad->setRoot(quadNode);
         quad->setCamera(camera);
@@ -72,9 +77,9 @@ TestHelper::DrawQuad()
         quad->getRoot()->addChild(cameraSceneNode);
         
         quadCreated=true;
-        
+
         std::vector<std::string > uniforms;
-        uniforms.push_back("myTexture");
+        uniforms.push_back("mTexture");
         std::shared_ptr<SceneNode> quadNode2=HelperManager::BuildTexturedQuad(HelperManager::CreateMeshInstance(meshManager->GetMesh("quad"),uniforms),"cross.tga");
     
         quad->getRoot()->addChild(quadNode2);
@@ -92,7 +97,8 @@ void TestHelper::DrawSphere()
         IvVector3 rotation=IvVector3(0,0,0);
         IvVector3 position=IvVector3(0,0,0);
         IvVector3 scale=IvVector3(1,1,1);
-        
+
+    
         sphereNode->setLocalTransform(position, rotation, scale);
         
         sphere=std::make_shared<SceneGraph>();
@@ -102,9 +108,9 @@ void TestHelper::DrawSphere()
         
         sphereCreated=true;
         
-        std::shared_ptr<SceneNode> sphereNode2=HelperManager::BuildSphere(HelperManager::CreateMeshInstance(meshManager->GetMesh("sphere")),true);
+        std::shared_ptr<SceneNode> sphereNode2=HelperManager::BuildSphere(HelperManager::CreateMeshInstance(meshManager->GetMesh("sphere")),true,true,true);
         sphereNode2->setLocalTransform(IvVector3(1,1,1), IvVector3(0,0,0), IvVector3(2,2,2));
-    
+
         sphere->getRoot()->addChild(cameraSceneNode);
         sphere->getRoot()->addChild(sphereNode2);
         

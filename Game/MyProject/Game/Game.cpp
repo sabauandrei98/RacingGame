@@ -20,7 +20,7 @@ Game::PostRendererInitialize()
     IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
     IvRendererOGL::mRenderer->SetDepthWrite(true);
     IvRendererOGL::mRenderer->SetDepthTest(kLessEqualDepthTest);
-
+    
     // Set up base class
     if ( !IvGame::PostRendererInitialize() )
         return false;
@@ -76,9 +76,13 @@ Game::PostRendererInitialize()
     _camera->setPosition({0.f, 20.0f, -10.0f });
     _camera->setLookAt({0.0f, 0.0f, 0.0f});
     _camera->setRotation({0.0f, 0.0f, 1.0f});
+  
+    testCollision=new TestCollision();
+    testCollision->TestRayBox();
     
     ::IvSetDefaultLighting();
    
+  
     return true;
 }
 
@@ -86,6 +90,7 @@ void
 Game::UpdateObjects( float dt )
 {
      _scene_graph->updateScene(dt);
+    testCollision->Update(dt);
 }
 void
 Game::Render()
@@ -146,5 +151,8 @@ Game::Render()
 
 
     delete mesh;
+  
+    testCollision->Render();
 }
 
+ 

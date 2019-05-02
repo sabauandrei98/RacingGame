@@ -16,7 +16,7 @@ class TestHelper
 {
 public:
     TestHelper();
-   
+    ~TestHelper();
     void DrawBox();
     void DrawQuad();
     void DrawSphere();

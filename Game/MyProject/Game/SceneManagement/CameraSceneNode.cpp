@@ -122,4 +122,15 @@ void CameraSceneNode::updateNode(float dt) {
     
     if (_camera->getNearPlane() > _camera->getFarPlane())
         throw "NEAR > FAR";
+    
+}
+
+IvVector3 CameraSceneNode::screenToWorld(unsigned int mouseX, unsigned int mouseY)
+{
+    return _camera->screenToWorld(mouseX, mouseY);
+}
+
+IvRay3 CameraSceneNode::getRay(unsigned int mouseX, unsigned int mouseY)
+{
+    return _camera->getRay(mouseX, mouseY);
 }

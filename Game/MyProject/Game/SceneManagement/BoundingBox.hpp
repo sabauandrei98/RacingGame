@@ -8,9 +8,7 @@
 #pragma once
 
 #include <array>
-
 #include <IvVector3.h>
-
 #include "Mesh.hpp"
 
 class BoundingBox {
