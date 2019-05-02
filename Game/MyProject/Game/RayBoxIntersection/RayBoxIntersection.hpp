@@ -14,15 +14,6 @@
 #include<IvEventHandler.h>
 
 //-------------------------------------------------------------------------------
-//-- Typedefs, Structs ----------------------------------------------------------
-//-------------------------------------------------------------------------------
-struct mBoundingBox
-{
-    IvVector3 min;
-    IvVector3 max;
-    IvVector3 center;
-};
-//-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
 
@@ -31,15 +22,12 @@ class RayBoxIntersection
 {
 public:
     //constructor/destructor
-    RayBoxIntersection(){}
+    RayBoxIntersection(const IvRay3& ray);
     ~RayBoxIntersection(){}
+    IvRay3 GetRay();
     
-    bool IsRayIntersectingBox(const IvRay3& ray,const BoundingBox& boundingBox);
-    bool IsCollision(const IvVector3&,const BoundingBox&);
+    bool IsRayIntersectingBox(const BoundingBox& boundingBox);
+    
 private:
-    IvRay3 ray;
-    
-    float Distance(const IvVector3& point1,const IvVector3& point2);
-    bool  IsPointInsideBoundingBox(const IvVector3& point,const BoundingBox& boundingBox);
-    
+    IvRay3 _ray;    
 };

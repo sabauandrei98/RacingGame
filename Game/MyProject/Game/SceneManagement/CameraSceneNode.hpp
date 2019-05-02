@@ -25,11 +25,10 @@ public:
     // public function(s) and method(s)
     void updateNode(float);
     
-    IvVector3 getMouseCoordinates() const;
-    bool getMousePressed() const;
+    IvVector3 screenToWorld(unsigned int mouseX,unsigned int mouseY);
+    
+    IvRay3 getRay( unsigned int mouseX,unsigned int mouseY);
     
 private:
-    CameraPtr           _camera;
-    IvVector3           _mouseCoordinates;
-    bool                _mousePressed           =   false;
+    CameraPtr           _camera;       
 };

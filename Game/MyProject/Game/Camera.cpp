@@ -183,6 +183,15 @@ Camera::screenToWorld(unsigned int mouseX, unsigned int mouseY)
     return worldCoordinates;
 }
 
+IvRay3
+Camera::getRay(unsigned int mouseX,unsigned int mouseY)
+{
+    auto direction =  screenToWorld (mouseX,mouseY) - getPosition();
+    direction.Normalize();
+    
+    return IvRay3(getPosition(),direction);
+}
+
 Camera::~Camera(){}
 
 

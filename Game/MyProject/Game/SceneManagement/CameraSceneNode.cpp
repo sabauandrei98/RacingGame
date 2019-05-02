@@ -122,24 +122,14 @@ void CameraSceneNode::updateNode(float dt) {
     if (_camera->getNearPlane() > _camera->getFarPlane())
         throw "NEAR > FAR";
     
-    //set up mouse coordinates
-   // _mousePressed=false;
-    unsigned int mouseX,mouseY;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mouseX, mouseY))
-    {
-        _mouseCoordinates=_camera->screenToWorld(mouseX,mouseY);
-        _mousePressed=true;
-    }
 }
 
-IvVector3
-CameraSceneNode::getMouseCoordinates() const
+IvVector3 CameraSceneNode::screenToWorld(unsigned int mouseX, unsigned int mouseY)
 {
-    return _mouseCoordinates;
+    return _camera->screenToWorld(mouseX, mouseY);
 }
 
-bool
-CameraSceneNode::getMousePressed() const
+IvRay3 CameraSceneNode::getRay(unsigned int mouseX, unsigned int mouseY)
 {
-    return _mousePressed;
+    return _camera->getRay(mouseX, mouseY);
 }

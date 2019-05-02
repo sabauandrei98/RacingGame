@@ -7,6 +7,8 @@
 #include <IvMatrix33.h>
 #include <IvMath.h>
 #include <iostream>
+#include <IvRay3.h>
+#include "BoundingBox.hpp"
 
 class Camera : std::enable_shared_from_this<Camera> {
 
@@ -53,6 +55,8 @@ public:
     void setScreenHeight(float newHeight);
     
     IvVector3 screenToWorld(unsigned int x,unsigned int y);
+    
+    IvRay3 getRay(unsigned int mouseX,unsigned int mouseY);
     
     const float getFieldOfView() const {
         return fieldOfView;

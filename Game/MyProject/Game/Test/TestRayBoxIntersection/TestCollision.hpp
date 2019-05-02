@@ -18,11 +18,12 @@ public:
     void Update(float t);
     void Render();
 private:
-    std::shared_ptr<SceneGraph> box;
-    std::shared_ptr<SceneGraph> sphere;
-    std::shared_ptr<Camera> camera;
-    std::shared_ptr<CameraSceneNode> cameraSceneNode;
+    std::shared_ptr<SceneGraph>         box;
+    std::shared_ptr<SceneGraph>         sphere;
+    std::shared_ptr<Camera>             camera;
+    std::shared_ptr<CameraSceneNode>    cameraSceneNode;
     
-    IvRay3 ray;
-    IvVector3 mouseCoordinates;
+    bool            is_mouse_released;
+    unsigned int    mouseX;
+    unsigned int    mouseY;
 };

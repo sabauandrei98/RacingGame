@@ -6,10 +6,9 @@
 void 
 TestCollision::TestRayBox()
 {
-    
-    camera=std::make_shared<Camera>(45.0, 0.1, 35.0, 1280, 720);
+    camera=std::make_shared<Camera>(45.0, 0.1, 100.0, 1280, 720);
     camera->setLookAt({0.f, 0.f, 0.f });
-    camera->setPosition({0,-25,0});
+    camera->setPosition({5,-35,15});
     camera->setRotation({0,0,1});
     
     MeshManager meshManager;
@@ -22,75 +21,27 @@ TestCollision::TestRayBox()
     cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     box->getRoot()->addChild(cameraSceneNode);
     box->setCamera(camera);
-    
-    
-//    //testing boundingg box for a sphere
-//    std::shared_ptr<SceneNode> sphereNode=HelperManager::BuildSphere(HelperManager::CreateMeshInstance(meshManager.GetMesh("sphere")));
-//    sphere=std::make_shared<SceneGraph>();
-//
-//    sphereNode->setLocalTransform({0,0,0},{0,0,0},{4,4,4});
-//    sphere->setRoot(sphereNode);
-//    sphere->getRoot()->addChild(cameraSceneNode);
-//    sphere->setCamera(camera);
-    
-   
+
 }
 
 void TestCollision::Update(float dt)
 {
     box->updateScene(dt);
-  //  sphere->updateScene(dt);
     
+    is_mouse_released = (IvGame::mGame->mEventHandler->IsMousePressed(mouseX, mouseY));
+        
 }
 void TestCollision::Render()
 {
     box->drawScene();
     static int index=0;
-    
-    if(cameraSceneNode->getMousePressed())
+    if(is_mouse_released)
     {
-        IvRay3 ray2(camera->getPosition(),cameraSceneNode->getMouseCoordinates());
-        
-        ray=IvRay3(ray2);
-        RayBoxIntersection raybox;
-        if(raybox.IsRayIntersectingBox(ray, box->getRoot()->getBoundingBox()))
+        RayBoxIntersection raybox(cameraSceneNode->getRay(mouseX,mouseY));
+        if(raybox.IsRayIntersectingBox(box->getRoot()->getBoundingBox()))
         {
-            IvVector3 auxOrigin;
-            auxOrigin.x=ray.GetOrigin().x;
-            auxOrigin.x=ray.GetOrigin().y;
-            auxOrigin.x=ray.GetOrigin().z;
-            
-            IvDrawLine(auxOrigin, ray.GetDirection(),kRed);
-            
-            std::cout<<index++<<":"<<cameraSceneNode->getMouseCoordinates().x<<" "<<cameraSceneNode->getMouseCoordinates().y<<" "<<cameraSceneNode->getMouseCoordinates().z<<std::endl;
+            std::cout<<"ok "<<index++<<std::endl;
         }
     }
     
-    // //testing bounding box for sphere
-    //sphere->drawScene();
-//    IvSetWorldIdentity();
-//    IvSetViewMatrix(camera->getViewMatrix());
-//    IvSetProjectionMatrix(camera->getProjectionMatrix());
-//
-//    BoundingBox boundingBox;
-//    Mesh* mesh = new Mesh();
-//    std::vector<IvTCPVertex> vertices;
-//
-//    boundingBox =sphere->getRoot()->getBoundingBox();
-//    vertices.resize(8);
-//    for (int i = 0; i < 8; i++) {
-//        vertices[i].position = boundingBox.getPoints()[i];
-//        vertices[i].color = {255, 255, 255, 255};
-//    }
-//
-//    mesh->setVertexBuffer(vertices, kTCPFormat);
-//    mesh->setIndexBuffer({0, 1, 1, 3, 3, 2, 2, 0, 4, 5, 5, 7, 7, 6, 6, 4, 0, 4, 1, 5, 2, 6, 3, 7});
-//
-//    IvRenderer::mRenderer->Draw(kLineListPrim, mesh->getVertexBuffer(), mesh->getIndexBuffer());
-//
-//    delete mesh;
-    
-    //IvDrawLine(boundingBox.min, boundingBox.center,kGreen);
-
-   
 }
