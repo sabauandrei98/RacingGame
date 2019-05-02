@@ -123,6 +123,9 @@ void SceneNode::updateNode(float dt) {
             _bounding_box.invalidate();
         
         for (const auto& i : _children) {
+            if (!i->_needs_bounding_box)
+                continue;
+            
             _bounding_box.expand(i->_bounding_box.getMin());
             _bounding_box.expand(i->_bounding_box.getMax());
         }
