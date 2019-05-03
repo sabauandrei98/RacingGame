@@ -30,4 +30,6 @@ private:
     // private variable(s)
     std::vector<std::unique_ptr<GameState>> _states;
     State                                   _current_state;
+    State                                   _old_state;
+    bool                                    _state_changed = false;
 };

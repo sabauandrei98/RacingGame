@@ -30,13 +30,17 @@ StateController::StateController() {
 // --------------------------------
 
 void StateController::update() {
+    if (_state_changed) {
+        _states[_old_state]->onExit();
+        _states[_current_state]->onEnter();
+        _state_changed = false;
+    }
+    
     _states[_current_state]->Update();
 }
 
 void StateController::requestChange(State state) {
-    if (state != _current_state) {
-        _states[_current_state]->onExit();
-        _states[state]->onEnter();
-        _current_state = state;
-    }
+    _old_state = _current_state;
+    _current_state = state;
+    _state_changed = true;
 }
