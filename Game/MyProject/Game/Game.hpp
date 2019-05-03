@@ -18,8 +18,10 @@
 #include "CameraTestControler.hpp"
 #include "SceneManagement/SceneGraph.hpp"
 #include "SceneManagement/CameraSceneNode.hpp"
+#include "GameStates/StateController.hpp"
 
 class CameraTestControler;
+class StateController;
 
 class Game : public IvGame
 {
@@ -35,6 +37,7 @@ public:
     std::shared_ptr<SceneNode>          _child3;
     std::shared_ptr<Camera>             _camera;
     std::shared_ptr<CameraSceneNode>    _camera_scene_node;
+    std::unique_ptr<StateController>    _state_controller;
 
     TestCollision*               testCollision;
     CameraTestControler*         cameraTest;

@@ -129,6 +129,7 @@ ${PROJECT_SOURCE_DIR}/IvUtility/
 ${PROJECT_SOURCE_DIR}/Game/
 ${PROJECT_SOURCE_DIR}/Game/Player/
 ${PROJECT_SOURCE_DIR}/Game/SceneManagement/
+${PROJECT_SOURCE_DIR}/Game/GameStates/
 ${PROJECT_SOURCE_DIR}/Game/shaders/
 ${PROJECT_SOURCE_DIR}/Game/RayBoxIntersection/
 ${PROJECT_SOURCE_DIR}/Game/ModelLoader/
@@ -144,7 +145,6 @@ ${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/
 ${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/Shader/
 ${PROJECT_SOURCE_DIR}/Game/Test/TestHelper/
 ${PROJECT_SOURCE_DIR}/Game/Test/TestRayBoxIntersection/
-
 )
 
 # LINK PATHS
