@@ -1,0 +1,65 @@
+//-------------------------------------------------------------------------------
+//-- ChooseTrack.cpp ------------------------------------------------------------
+//-------------------------------------------------------------------------------
+#include "ChooseTrack.hpp"
+//-------------------------------------------------------------------------------
+//  PUBLIC METHODS
+//-------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+// @ChooseTrack::ChooseTrack()
+//---------------------------------------------------------------------------
+ChooseTrack::ChooseTrack()
+{
+    MeshManager meshManager;
+    
+    std::shared_ptr<Camera> camera=std::make_shared<Camera>(45.0, 0.1, 100.0, 1280, 720);
+    camera->setLookAt({0.f, 0.f, 0.f });
+    camera->setPosition({0,-25,0});
+    camera->setRotation({0,0,1});
+    
+    chooseTrack=std::make_shared<SceneGraph>();
+    std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("root");
+    
+    std::vector<std::string> uniforms;
+    uniforms.push_back("mTexture");
+    std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad(HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_back.tga");
+    
+    
+    std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
+    
+    backQuad->setLocalTransform(IvVector3{10,0,-4}, IvVector3{0,4.72,1}, IvVector3{4,4,4});
+    
+    chooseTrack->setRoot(root);
+    chooseTrack->getRoot()->addChild(backQuad);
+    chooseTrack->getRoot()->addChild(cameraSceneNode);
+    chooseTrack->setCamera(camera);
+    
+}
+//---------------------------------------------------------------------------
+// @ChooseTrack::~ChooseTrack()
+//---------------------------------------------------------------------------
+ChooseTrack::~ChooseTrack()
+{
+    
+}
+//---------------------------------------------------------------------------
+// @ChooseTrack::Update()
+//---------------------------------------------------------------------------
+void
+ChooseTrack::Update(float dt)
+{
+    chooseTrack->updateScene(dt);
+}
+//---------------------------------------------------------------------------
+// @ChooseTrack::Render()
+//---------------------------------------------------------------------------
+void
+ChooseTrack::Render()
+{
+    chooseTrack->drawScene();
+}
+
+//-------------------------------------------------------------------------------
+//  PRIVATE METHODS
+//-------------------------------------------------------------------------------
+

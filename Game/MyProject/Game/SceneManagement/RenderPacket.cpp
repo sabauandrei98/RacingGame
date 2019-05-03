@@ -28,10 +28,10 @@ void RenderPacket::draw() const {
     else
         IvRendererOGL::mRenderer->SetBlendFunc(kOneBlendFunc, kZeroBlendFunc, kAddBlendOp);
     
-//    if(_use_wireframe)
-//        IvRenderer::mRenderer->SetFillMode(kWireframeFill);
-//    else
-//        IvRenderer::mRenderer->SetFillMode(kSolidFill);
+    if(_use_wireframe)
+        IvRenderer::mRenderer->SetFillMode(kWireframeFill);
+    else
+        IvRenderer::mRenderer->SetFillMode(kSolidFill);
     
     // drawing
     if (_mesh_instance->getMesh()->getIndexBuffer())

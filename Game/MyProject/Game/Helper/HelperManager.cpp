@@ -401,7 +401,7 @@ namespace HelperManager{
     // @HelperManager::BuildTexturedQuad()
     //---------------------------------------------------------------------------
     std::shared_ptr<SceneNode>
-    BuildTexturedQuad(const std::shared_ptr<MeshInstance>&meshInstance,const char* textureName,const char* shaderName,IvVector3 axis,bool depth,bool blend,bool wireframeValue)
+    BuildTexturedQuad(const std::shared_ptr<MeshInstance>&meshInstance,const char* textureName,IvVector3 axis,bool depth,bool blend,bool wireframeValue)
     {
         RenderPacket m_renderPacket;
         m_renderPacket._use_blend = depth;
@@ -424,7 +424,7 @@ namespace HelperManager{
         node->setLocalTransform(position, rotation, scale);
         
         IvImage* image = IvImage::CreateFromFile(textureName);
-        IvTexture* quadTexture;
+        IvTexture* quadTexture=nullptr;
         
         if (image)
         {
@@ -435,10 +435,8 @@ namespace HelperManager{
             delete image;
             image = 0;
         }
-        
-        IvUniform* unif = meshInstance->getShaderUniforms()[0];
-        if (unif)
-            unif->SetValue(quadTexture);
+        if(quadTexture)
+            meshInstance->setUniformValue(0,quadTexture);
         
         return node;
     }

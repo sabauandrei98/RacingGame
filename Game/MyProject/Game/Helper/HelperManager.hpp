@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------
-//-- HelperManager.h ------------------------------------------------------------
+//-- HelperManager.hpp ------------------------------------------------------------
 //-------------------------------------------------------------------------------
 #pragma once
 //-------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ namespace HelperManager
     std::shared_ptr<SceneNode> BuildBox(const std::shared_ptr<MeshInstance>&,bool depth=true,bool blend=true,bool wireframeValue=false);
     std::shared_ptr<SceneNode> BuildSphere(const std::shared_ptr<MeshInstance>&,bool depth=true,bool blend=true,bool wireframeValue=false);
     std::shared_ptr<SceneNode> BuildQuad(const std::shared_ptr<MeshInstance>&,IvVector3 axis=IvVector3::zAxis,bool depth=true,bool blend=true, bool wireframeValue=false);
-    std::shared_ptr<SceneNode> BuildTexturedQuad(const std::shared_ptr<MeshInstance>&,const char* textureName,const char* shaderName="../../Game/Helper/Shaders/TextureShader",IvVector3 axis=IvVector3::zAxis,bool depth=true,bool blend=true, bool wireframeValue=false);
+    std::shared_ptr<SceneNode> BuildTexturedQuad(const std::shared_ptr<MeshInstance>&,const char* textureName,IvVector3 axis=IvVector3::zAxis,bool depth=true,bool blend=true, bool wireframeValue=false);
     
 };
 
