@@ -28,6 +28,8 @@ Game::PostRendererInitialize()
     startMenu=std::make_shared<Start>();
     //trackMenu=std::make_shared<Track>();
     
+    _state_controller = std::make_unique<StateController>();
+    
     ::IvSetDefaultLighting();
    
   
@@ -37,8 +39,11 @@ Game::PostRendererInitialize()
 void
 Game::UpdateObjects( float dt )
 {
-    startMenu->Update(dt);
+   startMenu->Update(dt);
    //trackMenu->Update(dt);
+
+    _state_controller->update();
+
 }
 void
 Game::Render()
