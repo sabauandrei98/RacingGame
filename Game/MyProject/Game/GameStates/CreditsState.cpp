@@ -7,9 +7,9 @@
 
 #include "GameStates.hpp"
 
-// -------------------
-// PRIVATE CONSTRUCTOR
-// -------------------
+// -----------
+// CONSTRUCTOR
+// -----------
 
 CreditsState::CreditsState(StateController* state_controller) :
     GameState(state_controller) {
@@ -26,6 +26,7 @@ void CreditsState::onEnter() {
 
 void CreditsState::onExit() {
     std::cout << "CreditsState exits" << std::endl;
+    std::cout << "-------------------------------" << std::endl;
 }
 
 void CreditsState::Update() {

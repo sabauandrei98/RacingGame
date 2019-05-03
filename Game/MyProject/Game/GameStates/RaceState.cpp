@@ -7,9 +7,9 @@
 
 #include "GameStates.hpp"
 
-// -------------------
-// PRIVATE CONSTRUCTOR
-// -------------------
+// -----------
+// CONSTRUCTOR
+// -----------
 
 RaceState::RaceState(StateController* state_controller) :
     GameState(state_controller) {
@@ -26,6 +26,7 @@ void RaceState::onEnter() {
 
 void RaceState::onExit() {
     std::cout << "RaceState exits" << std::endl;
+    std::cout << "-------------------------------" << std::endl;
 }
 
 void RaceState::Update() {

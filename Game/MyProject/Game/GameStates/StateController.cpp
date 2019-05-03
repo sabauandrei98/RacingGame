@@ -25,6 +25,10 @@ StateController::StateController() {
     _states[_current_state]->onEnter();
 }
 
+// --------------------------------
+// PUBLIC FUNCTION(S) AND METHOD(S)
+// --------------------------------
+
 void StateController::update() {
     _states[_current_state]->Update();
 }

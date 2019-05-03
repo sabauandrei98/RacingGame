@@ -7,9 +7,9 @@
 
 #include "GameStates.hpp"
 
-// -------------------
-// PRIVATE CONSTRUCTOR
-// -------------------
+// -----------
+// CONSTRUCTOR
+// -----------
 
 HighScoreState::HighScoreState(StateController* state_controller) :
     GameState(state_controller) {
@@ -26,6 +26,7 @@ void HighScoreState::onEnter() {
 
 void HighScoreState::onExit() {
     std::cout << "HighScoreState exits" << std::endl;
+    std::cout << "-------------------------------" << std::endl;
 }
 
 void HighScoreState::Update() {

@@ -81,6 +81,8 @@ Game::PostRendererInitialize()
 
     test=new TestHelper();
     
+    _state_controller = std::make_unique<StateController>();
+    
     ::IvSetDefaultLighting();
    
     return true;
@@ -89,7 +91,7 @@ Game::PostRendererInitialize()
 void
 Game::UpdateObjects( float dt )
 {
-    _state_controller.update();
+    _state_controller->update();
     
     _scene_graph->updateScene(dt);
      test->Update(dt);

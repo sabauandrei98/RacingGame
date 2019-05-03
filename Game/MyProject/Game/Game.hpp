@@ -18,6 +18,7 @@
 #include "CameraTestControler.hpp"
 #include "SceneManagement/SceneGraph.hpp"
 #include "SceneManagement/CameraSceneNode.hpp"
+#include "GameStates/StateController.hpp"
 
 class CameraTestControler;
 class StateController;
@@ -39,7 +40,7 @@ public:
     std::shared_ptr<Camera>             _camera;
     std::shared_ptr<CameraSceneNode>    _camera_scene_node;
     
-    StateController                     _state_controller;
+    std::unique_ptr<StateController>    _state_controller;
 
 protected:
     virtual void UpdateObjects(float dt);

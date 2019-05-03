@@ -7,9 +7,9 @@
 
 #include "GameStates.hpp"
 
-// -------------------
-// PRIVATE CONSTRUCTOR
-// -------------------
+// -----------
+// CONSTRUCTOR
+// -----------
 
 MenuState::MenuState(StateController* state_controller) :
     GameState(state_controller) {
@@ -26,6 +26,7 @@ void MenuState::onEnter() {
 
 void MenuState::onExit() {
     std::cout << "MenuState exits" << std::endl;
+    std::cout << "-------------------------------" << std::endl;
 }
 
 void MenuState::Update() {

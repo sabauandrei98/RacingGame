@@ -11,6 +11,8 @@
 
 #include "../Game.hpp"
 
+class StateController;
+
 // ----------
 // BASE CLASS
 // ----------

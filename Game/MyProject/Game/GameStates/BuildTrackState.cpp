@@ -7,9 +7,9 @@
 
 #include "GameStates.hpp"
 
-// -------------------
-// PRIVATE CONSTRUCTOR
-// -------------------
+// -----------
+// CONSTRUCTOR
+// -----------
 
 BuildTrackState::BuildTrackState(StateController* state_controller) :
     GameState(state_controller) {
@@ -26,6 +26,7 @@ void BuildTrackState::onEnter() {
 
 void BuildTrackState::onExit() {
     std::cout << "BuildTrackState exits" << std::endl;
+    std::cout << "-------------------------------" << std::endl;
 }
 
 void BuildTrackState::Update() {

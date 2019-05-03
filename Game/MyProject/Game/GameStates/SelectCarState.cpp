@@ -7,9 +7,9 @@
 
 #include "GameStates.hpp"
 
-// -------------------
-// PRIVATE CONSTRUCTOR
-// -------------------
+// -----------
+// CONSTRUCTOR
+// -----------
 
 SelectCarState::SelectCarState(StateController* state_controller) :
 GameState(state_controller) {
@@ -26,6 +26,7 @@ void SelectCarState::onEnter() {
 
 void SelectCarState::onExit() {
     std::cout << "SelectCarState exits" << std::endl;
+    std::cout << "-------------------------------" << std::endl;
 }
 
 void SelectCarState::Update() {
