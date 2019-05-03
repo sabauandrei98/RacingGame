@@ -52,7 +52,6 @@ void MeshInstance::setUniformValue(unsigned int index, const IvVector4& value) {
 
 // sets the shader uniform values with texture
 void MeshInstance::setUniformValue(unsigned int index, IvTexture* value) {
-    // this function needs non const IvTexture
     _shader_uniforms[index]->SetValue(value);
 }
 

@@ -8,8 +8,6 @@ IvGame::Create()
 
 Game::Game() : IvGame()
 {
-    
-    
 }
 
 Game::~Game()
@@ -22,7 +20,7 @@ Game::PostRendererInitialize()
     IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
     IvRendererOGL::mRenderer->SetDepthWrite(true);
     IvRendererOGL::mRenderer->SetDepthTest(kLessEqualDepthTest);
-
+    
     // Set up base class
     if ( !IvGame::PostRendererInitialize() )
         return false;
@@ -78,13 +76,15 @@ Game::PostRendererInitialize()
     _camera->setPosition({0.f, 20.0f, -10.0f });
     _camera->setLookAt({0.0f, 0.0f, 0.0f});
     _camera->setRotation({0.0f, 0.0f, 1.0f});
-
-    test=new TestHelper();
+  
+    testCollision=new TestCollision();
+    testCollision->TestRayBox();
     
     _state_controller = std::make_unique<StateController>();
     
     ::IvSetDefaultLighting();
    
+  
     return true;
 }
 
@@ -92,15 +92,13 @@ void
 Game::UpdateObjects( float dt )
 {
     _state_controller->update();
-    
     _scene_graph->updateScene(dt);
-     test->Update(dt);
+    test->Update(dt);
+    testCollision->Update(dt);
 }
 void
 Game::Render()
 {
-    test->DrawBox();
-    
    _scene_graph->drawScene();
 
    //  it's ugly but is only for testing
@@ -111,9 +109,10 @@ Game::Render()
     BoundingBox box;
     Mesh* mesh = new Mesh();
     std::vector<IvTCPVertex> vertices;
+    
+    vertices.resize(8);
 
     box = _root->getBoundingBox();
-    vertices.resize(8);
     for (int i = 0; i < 8; i++) {
         vertices[i].position = box.getPoints()[i];
         vertices[i].color = {255, 255, 255, 255};
@@ -156,5 +155,8 @@ Game::Render()
 
 
     delete mesh;
+  
+    testCollision->Render();
 }
 
+ 
