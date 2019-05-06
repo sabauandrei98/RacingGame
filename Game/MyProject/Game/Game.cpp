@@ -34,7 +34,7 @@ Game::PostRendererInitialize()
     _child1 = std::make_shared<SceneNode>("child1");
     _child2 = std::make_shared<SceneNode>("child2");
     _child3 = std::make_shared<SceneNode>("child3");
-    _camera = std::make_shared<Camera>(45.0, 0.1, 35.0, 1280, 720);
+    _camera = std::make_shared<Camera>(45.0, 0.1, 65.0, 1280, 720);
     _camera_scene_node = std::make_shared<CameraSceneNode>("camera", _camera);
 
     vertices.resize(5);
@@ -58,7 +58,7 @@ Game::PostRendererInitialize()
     mesh_instance->setShader("../../Game/shaders/example_shader");
 
     std::shared_ptr<SceneNode> model1=ModelLoader::loadModel("jeep.fbx", "example_shader");
-    model1->setLocalTransform(IvVector3{0,0,0}, IvVector3{1,1.5,1}, IvVector3{4,4,4});
+    model1->setLocalTransform(IvVector3{0,0,0}, IvVector3{1.53f,0,0}, IvVector3{4,4,4});
     
     _scene_graph->setRoot(_root);
     _scene_graph->setCamera(_camera);
@@ -77,7 +77,7 @@ Game::PostRendererInitialize()
     _child2->setLocalTransform({0., 5., 0.}, {2., 1., 1.}, {1., 1., 1.});
     _child3->setLocalTransform({0., 2., -4.}, {0., 0., 1.5}, {2., 0.5, 1.});
 
-    _camera->setPosition({0.f, 20.0f, -10.0f });
+    _camera->setPosition({0.f, 40.0f, 20.0f });
     _camera->setLookAt({0.0f, 0.0f, 0.0f});
     _camera->setRotation({0.0f, 0.0f, 1.0f});
   

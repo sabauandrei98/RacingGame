@@ -135,7 +135,8 @@ ${PROJECT_SOURCE_DIR}/Game/RayBoxIntersection/
 ${PROJECT_SOURCE_DIR}/Game/ModelLoader/
 ${PROJECT_SOURCE_DIR}/Game/ResourceManager/
 ${PROJECT_SOURCE_DIR}/Game/Helper/
-${PROJECT_SOURCE_DIR}/Game/Helper/Shaders
+${PROJECT_SOURCE_DIR}/Game/Helper/Shaders/
+${PROJECT_SOURCE_DIR}/Game/Car/
 
 ${PROJECT_SOURCE_DIR}/Game/Test/
 ${PROJECT_SOURCE_DIR}/Game/Test/Resources/
