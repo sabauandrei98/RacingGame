@@ -1,32 +1,26 @@
 //-------------------------------------------------------------------------------
-//-- Menu.hpp -------------------------------------------------------------------
+//-- GameOver.hpp ---------------------------------------------------------------
 //-------------------------------------------------------------------------------
 #pragma once
 //-------------------------------------------------------------------------------
 //-- Dependencies ---------------------------------------------------------------
 //-------------------------------------------------------------------------------
-#include "SceneManagement/SceneGraph.hpp"
+#include "Menu.hpp"
+#include "HelperManager.hpp"
+#include "MeshManager.hpp"
 #include <stdio.h>
 #include <map>
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
-class Menu
+class GameOver:public Menu
 {
 public:
     //constructor/destructor
-    Menu();
-    ~Menu();
+    GameOver();
+    ~GameOver();
     
-    virtual std::shared_ptr<SceneGraph> GetScene()
-    {
-        return menu;
-    }
-   std::pair<float,float> getRowCol(const char c);
+private:
     
-protected:
-    std::shared_ptr<SceneGraph> menu;
-    std::map<char,std::pair<uint32_t,uint32_t>> characters;
-    
-   
 };
+

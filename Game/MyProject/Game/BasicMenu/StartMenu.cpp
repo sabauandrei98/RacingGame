@@ -22,15 +22,15 @@ StartMenu::StartMenu()
     
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");
-    std::shared_ptr<SceneNode> playQuad=HelperManager::BuildTexturedQuad(HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"roadTexture.tga");
+    std::shared_ptr<SceneNode> playQuad=HelperManager::BuildTexturedQuad("playStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"roadTexture.tga");
     
-    std::shared_ptr<SceneNode> highscoresQuad=HelperManager::BuildTexturedQuad(HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"highscore.tga");
+    std::shared_ptr<SceneNode> highscoresQuad=HelperManager::BuildTexturedQuad("highscoreStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"highscore.tga");
     
-    std::shared_ptr<SceneNode> creditsQuad=HelperManager::BuildTexturedQuad(HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"credits.tga");
+    std::shared_ptr<SceneNode> creditsQuad=HelperManager::BuildTexturedQuad("creditsStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"credits.tga");
     
-    std::shared_ptr<SceneNode> exitQuad=HelperManager::BuildTexturedQuad(HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"exit.tga");
+    std::shared_ptr<SceneNode> exitQuad=HelperManager::BuildTexturedQuad("exitStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"exit.tga");
     
-    
+
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     
     playQuad->setLocalTransform(IvVector3{-7,0,0}, IvVector3{0,4.75,1}, IvVector3{4,4,5});
@@ -43,6 +43,7 @@ StartMenu::StartMenu()
     menu->getRoot()->addChild(highscoresQuad);
     menu->getRoot()->addChild(creditsQuad);
     menu->getRoot()->addChild(exitQuad);
+    
     menu->getRoot()->addChild(cameraSceneNode);
     menu->setCamera(camera);
     

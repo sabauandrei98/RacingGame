@@ -1,16 +1,16 @@
 //-------------------------------------------------------------------------------
-//-- RaceMenu.cpp ---------------------------------------------------------------
+//-- GameOver.cpp ---------------------------------------------------------------
 //-------------------------------------------------------------------------------
-#include "RaceMenu.hpp"
+#include "GameOver.hpp"
 //-------------------------------------------------------------------------------
 //  PUBLIC METHODS
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
-// @RaceMenu::RaceMenu()
+// @GameOver::GameOver()
 //-------------------------------------------------------------------------------
-RaceMenu::RaceMenu()
+GameOver::GameOver()
 {
-    meshManager=MeshManager();
+    MeshManager meshManager;
     
     std::shared_ptr<Camera> camera=std::make_shared<Camera>(45.0, 0.1, 100.0, 1280, 720);
     camera->setLookAt({0.f, 0.f, 0.f });
@@ -22,35 +22,29 @@ RaceMenu::RaceMenu()
     
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");
-    uniforms.push_back("row");
-    uniforms.push_back("column");
+    std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backGameOver",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_back.tga");
     
-    std::shared_ptr<SceneNode> countRoot=std::make_shared<SceneNode>("countRoot");
-    
-    std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad("count1",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"font.tga");
-    
-    countScoreQuad->setLocalTransform(IvVector3{4,0,7}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
     
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     
-    countRoot->addChild(countScoreQuad);
+    backQuad->setLocalTransform(IvVector3{14,0,-8}, IvVector3{0,4.72,1}, IvVector3{4,4,4});
     
     menu->setRoot(root);
-    menu->getRoot()->addChild(countRoot);
-    
+    menu->getRoot()->addChild(backQuad);
     menu->getRoot()->addChild(cameraSceneNode);
     menu->setCamera(camera);
     
 }
 //-------------------------------------------------------------------------------
-// @RaceMenu::~RaceMenu()
+// @GameOver::~GameOver()
 //-------------------------------------------------------------------------------
-RaceMenu::~RaceMenu()
+GameOver::~GameOver()
 {
     
 }
 //-------------------------------------------------------------------------------
 //  PRIVATE METHODS
 //-------------------------------------------------------------------------------
+
 
 

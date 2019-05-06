@@ -22,8 +22,8 @@ PauseMenu::PauseMenu()
     
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");
-    std::shared_ptr<SceneNode> resumeQuad=HelperManager::BuildTexturedQuad(HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"race_resume.tga");
-    std::shared_ptr<SceneNode> quitQuad=HelperManager::BuildTexturedQuad(HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"race_quit.tga");
+    std::shared_ptr<SceneNode> resumeQuad=HelperManager::BuildTexturedQuad("resumePause",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"race_resume.tga");
+    std::shared_ptr<SceneNode> quitQuad=HelperManager::BuildTexturedQuad("quitPause",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"race_quit.tga");
     
     resumeQuad->setLocalTransform(IvVector3{-4,0,0}, IvVector3{0,4.75,1}, IvVector3{4,4,5});
     quitQuad->setLocalTransform(IvVector3{4,0,0}, IvVector3{0,4.75,1}, IvVector3{4,4,5});

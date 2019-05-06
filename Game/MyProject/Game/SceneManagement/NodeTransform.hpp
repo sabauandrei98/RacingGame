@@ -21,6 +21,7 @@ public:
     void set(const IvVector3&);
     
     const IvMatrix44& getMatrix();
+    const IvVector3& getPosition() const;
     
 private:
     // private variable(s)

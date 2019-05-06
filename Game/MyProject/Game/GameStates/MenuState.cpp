@@ -24,6 +24,7 @@ void MenuState::onEnter() {
     
     std::shared_ptr<StartMenu> startScene=std::make_shared<StartMenu>();
     state_controller->_main_scene=startScene->GetScene();
+    
 }
 
 void MenuState::onExit() {

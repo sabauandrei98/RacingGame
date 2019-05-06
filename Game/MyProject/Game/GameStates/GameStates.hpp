@@ -49,6 +49,7 @@ public:
 protected:
     // protected variable(s)
     StateController*    state_controller;
+    
 };
 
 // ---------------
@@ -155,9 +156,19 @@ public:
 private:
     // private function(s)
     bool isPauseTriggered();
+    unsigned int noDigits(uint32_t number);
+    void addNewDigit();
+    bool checkNeedChangeDigit();
+    int firstDigit(int no);
     
+    
+    bool     changed                =   false;
+    bool     changed2               =   false;
+    uint32_t score                  =   0;
+    uint32_t seconds                =   0;
     
     std::shared_ptr<RaceMenu>           raceMenu;
+    MeshManager                         meshManager;
 };
 
 class HighScoreState : public GameState {

@@ -42,6 +42,11 @@ const IvMatrix44& NodeTransform::getMatrix() {
     return _transform_matrix;
 }
 
+const IvVector3& NodeTransform::getPosition() const{
+    return _position;
+    
+}
+
 // ---------------------------------
 // PRIVATE FUNCTION(S) AND METHOD(S)
 // ---------------------------------
