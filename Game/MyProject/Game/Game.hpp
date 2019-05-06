@@ -19,7 +19,7 @@
 #include "SceneManagement/SceneGraph.hpp"
 #include "SceneManagement/CameraSceneNode.hpp"
 #include "GameStates/StateController.hpp"
-
+#include "ModelLoader/ModelLoader.hpp"
 class CameraTestControler;
 class StateController;
 

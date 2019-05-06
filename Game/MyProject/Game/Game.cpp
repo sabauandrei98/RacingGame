@@ -57,12 +57,16 @@ Game::PostRendererInitialize()
     mesh_instance->setMesh(mesh);
     mesh_instance->setShader("../../Game/shaders/example_shader");
 
+    std::shared_ptr<SceneNode> model1=ModelLoader::loadModel("jeep.fbx", "example_shader");
+    model1->setLocalTransform(IvVector3{0,0,0}, IvVector3{1,1.5,1}, IvVector3{4,4,4});
+    
     _scene_graph->setRoot(_root);
     _scene_graph->setCamera(_camera);
 
     _root->addChild(_camera_scene_node);
     _root->addChild(_child1);
     _root->addChild(_child2);
+    _root->addChild(model1);
     _root->setRenderable(mesh_instance);
 
     _child1->setRenderable(mesh_instance);
@@ -93,7 +97,6 @@ Game::UpdateObjects( float dt )
 {
     _state_controller->update();
     _scene_graph->updateScene(dt);
-    test->Update(dt);
     testCollision->Update(dt);
 }
 void
