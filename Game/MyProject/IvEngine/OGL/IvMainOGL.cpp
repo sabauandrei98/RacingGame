@@ -22,6 +22,7 @@
 #endif
 #include <GLFW/glfw3.h>
 
+#include "../../Game/ResourceManager/ResourceManager.hpp"
 #include <IvGame.h>
 #include <IvDebugger.h>
 #include <IvEventHandler.h>
@@ -169,6 +170,8 @@ int main(int argc, char *argv[])
         glfwPollEvents();
     }
 
+    ResourceManager::resetResourceManager();
+    
     IvGame::Destroy();
 
     glfwDestroyWindow(window);

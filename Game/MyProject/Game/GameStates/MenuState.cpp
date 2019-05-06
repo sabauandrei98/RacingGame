@@ -21,7 +21,9 @@ MenuState::MenuState(StateController* state_controller) :
 
 void MenuState::onEnter() {
     std::cout << "MenuState enters" << std::endl;
-    std::cout << "Play: p\nHighScore: h\nCredits: c\nExit: e" << std::endl;
+    
+    std::shared_ptr<StartMenu> startScene=std::make_shared<StartMenu>();
+    state_controller->_main_scene=startScene->GetScene();
 }
 
 void MenuState::onExit() {
@@ -30,6 +32,7 @@ void MenuState::onExit() {
 }
 
 void MenuState::Update() {
+    
     if (isPlayTriggered())
         state_controller->requestChange(Track);
     
@@ -44,17 +47,45 @@ void MenuState::Update() {
 }
 
 bool MenuState::isPlayTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('p');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
+    {
+        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(0)->getBoundingBox()))
+            return true;
+    }
+    return false;
 }
 
 bool MenuState::isHighScoreTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('h');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
+    {
+        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(1)->getBoundingBox()))
+            return true;
+    }
+    return false;
 }
 
 bool MenuState::isCreditsTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('c');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
+    {
+        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(2)->getBoundingBox()))
+            return true;
+    }
+    return false;
 }
 
 bool MenuState::isExitTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('e');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
+    {
+        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(3)->getBoundingBox()))
+            return true;
+    }
+    return false;
 }

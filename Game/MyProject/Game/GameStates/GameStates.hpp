@@ -10,6 +10,17 @@
 #include <iostream>
 
 #include "../Game.hpp"
+#include "../RayBoxIntersection/RayBoxIntersection.hpp"
+#include "../BasicMenu/Menu.hpp"
+#include "../BasicMenu/StartMenu.hpp"
+#include "../BasicMenu/TrackMenu.hpp"
+#include "../BasicMenu/ChooseTrackMenu.hpp"
+#include "../BasicMenu/BuildTrackMenu.hpp"
+#include "../BasicMenu/CreditsMenu.hpp"
+#include "../BasicMenu/RaceMenu.hpp"
+#include "../BasicMenu/CarMenu.hpp"
+#include "../BasicMenu/HighscoresMenu.hpp"
+#include "../BasicMenu/PauseMenu.hpp"
 
 class StateController;
 
@@ -24,10 +35,16 @@ public:
     virtual void onExit() = 0;
     virtual void Update() = 0;
     
+    virtual void Render(SceneGraph* main_scene)
+    {
+        main_scene->drawScene();
+    }
+    
     // constructor
     GameState(StateController* state_controller) :
         state_controller(state_controller) {
         }
+    virtual ~GameState(){}
     
 protected:
     // protected variable(s)
@@ -47,6 +64,7 @@ public:
     void onEnter();
     void onExit();
     void Update();
+    
     
 private:
     // private function(s)
@@ -101,7 +119,10 @@ public:
     
 private:
     // private function(s)
-    bool isNextTriggered();
+    bool isAddTriggered();
+    bool isRemoveTriggered();
+    bool isPlayTriggered();
+    bool isSaveTriggered();
     bool isBackTriggered();
 };
 
@@ -133,7 +154,10 @@ public:
     
 private:
     // private function(s)
-    bool isQuitTriggered();
+    bool isPauseTriggered();
+    
+    
+    std::shared_ptr<RaceMenu>           raceMenu;
 };
 
 class HighScoreState : public GameState {
@@ -165,3 +189,21 @@ private:
     // private function(s)
     bool isBackTriggered();
 };
+
+
+class PauseState : public GameState{
+public:
+    // constructor
+    PauseState(StateController*);
+    
+    // public function(s) and method(s)
+    void onEnter();
+    void onExit();
+    void Update();
+    
+private:
+    // private function(s)
+    bool isResumeTriggered();
+    bool isQuitTriggered();
+};
+

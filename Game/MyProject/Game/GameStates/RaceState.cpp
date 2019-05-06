@@ -21,7 +21,10 @@ RaceState::RaceState(StateController* state_controller) :
 
 void RaceState::onEnter() {
     std::cout << "RaceState enters" << std::endl;
-    std::cout << "Quit: q" << std::endl;
+    std::cout << "Pause: x" << std::endl;
+    
+    raceMenu=std::make_shared<RaceMenu>();
+    state_controller->_main_scene=raceMenu->GetScene();
 }
 
 void RaceState::onExit() {
@@ -30,10 +33,15 @@ void RaceState::onExit() {
 }
 
 void RaceState::Update() {
-    if (isQuitTriggered())
-        state_controller->requestChange(Menu);
+    if(isPauseTriggered())
+        state_controller->requestChange(Pause);
+    
 }
 
-bool RaceState::isQuitTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('q');
+
+bool RaceState::isPauseTriggered()
+{
+    return IvGame::mGame->mEventHandler->IsKeyPressed('x');
+    //return IvGame::mGame->mEventHandler->IsKeyDown(27);
+    
 }

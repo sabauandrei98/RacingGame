@@ -41,3 +41,8 @@ const std::shared_ptr<SceneNode>& SceneGraph::getRoot() const {
 void SceneGraph::setCamera(const std::shared_ptr<Camera>& camera) {
     _camera = camera;
 }
+
+// return the camera
+const std::shared_ptr<Camera>& SceneGraph::getCamera() {
+    return _camera;
+}

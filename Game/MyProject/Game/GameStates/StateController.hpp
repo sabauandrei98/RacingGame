@@ -13,7 +13,7 @@ class GameState;
 
 // enumeration for states
 enum State {
-    Menu, Track, SelectTrack, BuildTrack, SelectCar, Race, HighScore, Credits
+    Menu, Track, SelectTrack, BuildTrack, SelectCar, Race, HighScore, Credits,Pause
 };
 
 // state controller class
@@ -24,7 +24,18 @@ public:
     
     // public function(s) and method(s)
     void requestChange(State);
-    void update();
+    void update(float dt);
+    void render();
+    
+    friend class MenuState;
+    friend class TrackState;
+    friend class SelectTrackState;
+    friend class BuildTrackState;
+    friend class CreditsState;
+    friend class HighScoreState;
+    friend class SelectCarState;
+    friend class RaceState;
+    friend class PauseState;
     
 private:
     // private variable(s)
@@ -32,4 +43,7 @@ private:
     State                                   _current_state;
     State                                   _old_state;
     bool                                    _state_changed = false;
+    
+protected:
+     std::shared_ptr<SceneGraph>             _main_scene;
 };

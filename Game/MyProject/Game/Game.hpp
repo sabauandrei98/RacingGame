@@ -1,8 +1,7 @@
 #pragma once
 
-#include "BasicMenu/Menu.hpp"
-#include "BasicMenu/Start.hpp"
-#include "BasicMenu/Track.hpp"
+#include "BasicMenu/StartMenu.hpp"
+#include "BasicMenu/TrackMenu.hpp"
 #include "Player/Player.hpp"
 #include "Test/TestRayBoxIntersection/TestCollision.hpp"
 #include "GameStates/StateController.hpp"
@@ -17,9 +16,10 @@ public:
     ~Game();
     bool PostRendererInitialize();
 
-    std::shared_ptr<Start>          startMenu;
-    std::shared_ptr<Track>          trackMenu;
+    std::shared_ptr<StartMenu>          startMenu;
+    //std::shared_ptr<TrackMenu>          trackMenu;
 
+    std::unique_ptr<StateController>    _state_controller;
 
 protected:
     virtual void UpdateObjects(float dt);

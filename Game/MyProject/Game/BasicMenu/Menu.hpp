@@ -5,8 +5,7 @@
 //-------------------------------------------------------------------------------
 //-- Dependencies ---------------------------------------------------------------
 //-------------------------------------------------------------------------------
-#include "HelperManager.hpp"
-#include "MeshManager.hpp"
+#include "SceneManagement/SceneGraph.hpp"
 #include <stdio.h>
 #include <map>
 //-------------------------------------------------------------------------------
@@ -19,9 +18,11 @@ public:
     Menu();
     ~Menu();
     
-    void Update(float dt);
-    void Render();
+    virtual std::shared_ptr<SceneGraph> GetScene()
+    {
+        return menu;
+    }
     
-private:
+protected:
     std::shared_ptr<SceneGraph> menu;
 };

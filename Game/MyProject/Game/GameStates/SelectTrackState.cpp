@@ -21,7 +21,9 @@ SelectTrackState::SelectTrackState(StateController* state_controller) :
 
 void SelectTrackState::onEnter() {
     std::cout << "SelectTrackState enters" << std::endl;
-    std::cout << "Next: n\nBack: x" << std::endl;
+    
+    std::shared_ptr<ChooseTrackMenu> selectTrackMenu=std::make_shared<ChooseTrackMenu>();
+    state_controller->_main_scene=selectTrackMenu->GetScene();
 }
 
 void SelectTrackState::onExit() {
@@ -42,5 +44,12 @@ bool SelectTrackState::isNextTriggered() {
 }
 
 bool SelectTrackState::isBackTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('x');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
+    {
+        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(0)->getBoundingBox()))
+            return true;
+    }
+    return false;
 }
