@@ -8,7 +8,7 @@ TestBezier::TestBezier()
     setupMeshes();
     setupPoints();
     getPointsFromScene();
-    roadGenerator = new RoadGeneratorControler(bezierPoints, rMiddlePoints, rMarginPoints);
+    roadGenerator = new RoadGeneratorControler(bezierPoints, rMiddlePoints, rMarginPoints, 4.0f, 0.1f);
 }
 
 void TestBezier::setupMeshes()
@@ -74,16 +74,16 @@ void TestBezier::setupMeshes()
 
 void TestBezier::setupGraph()
 {
-    sceneGraph = new SceneGraph();
-    
-    std::shared_ptr<SceneNode> root = std::make_shared<SceneNode>("root");
-    std::shared_ptr<CameraSceneNode> camera = std::make_shared<CameraSceneNode>("camera", 45.0, 0.1, 35.0, 1280, 720);
-    camera->setPosition({0.f, -25.0f, 0.0f });
-    camera->setRotation({0,0,1});
-    camera->setLookAt({0.0f, 0.0f, 0.0f});
-    
-    sceneGraph->setRoot(root);
-    sceneGraph->setCamera(camera);
+//    sceneGraph = new SceneGraph();
+//
+//    std::shared_ptr<SceneNode> root = std::make_shared<SceneNode>("root");
+//    std::shared_ptr<CameraSceneNode> camera = std::make_shared<CameraSceneNode>("camera", 45.0, 0.1, 35.0, 1280, 720);
+//    camera->setPosition({0.f, -25.0f, 0.0f });
+//    camera->setRotation({0,0,1});
+//    camera->setLookAt({0.0f, 0.0f, 0.0f});
+//
+//    sceneGraph->setRoot(root);
+//    sceneGraph->setCamera(camera);
 }
 
 

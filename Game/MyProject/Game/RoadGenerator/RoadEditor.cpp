@@ -4,41 +4,33 @@
 
 RoadEditor::RoadEditor(SceneGraph* sGraph) : sceneGraph(sGraph)
 {
+    //setting up a simple environment for the editor
     setupMeshes();
     setupPoints();
-    getPointsFromScene();
-    roadGenerator = new RoadGeneratorControler(bezierPoints, rMiddlePoints, rMarginPoints);
+    roadGenerator = std::make_shared<RoadGeneratorControler>(bezierPoints, rMiddlePoints, rMarginPoints, 4.0f, 0.1f);
 }
 
 void RoadEditor::setupPoints()
 {
     std::shared_ptr<SceneNode> root = sceneGraph->getRoot();
+    
+    //setting up some points
     std::vector<IvVector3> positions = {{-5, 0, -5}, {-10, 0, 2}, {-5, 0, 7}, {-2, 0, 5}, {1, 0, 1},
         {-3, 0, -5}, {0, 0, -5},  {4, 0, -3}, {3, 0, 4}, {-5, 0, -5}};
     
+    //add points to scene graph
     for(int i = 0; i < positions.size(); i++)
     {
         std::shared_ptr<SceneNode> point = std::make_shared<SceneNode>("bezierPoint" + std::to_string(i));
         root->addChild(point);
         point->setLocalPosition(positions[i]);
-        
-        if (i % 3 == 0)
-            point->setRenderable(meshInstanceRed);
-        else
-            point->setRenderable(meshInstanceRed);
+        bezierPoints.push_back(point->getLocalPosition());
+        bezierScenePoints.push_back(point);
     }
 }
 
 
-void RoadEditor::getPointsFromScene()
-{
-    sceneGraph->getRoot()->findAllNodesContainingName("bezierPoint", bezierScenePoints);
-    
-    for(int i = 0; i < bezierScenePoints.size(); i++)
-        bezierPoints.push_back(bezierScenePoints[i]->getLocalPosition());
-}
-
-void RoadEditor::resizeRoadEditor()
+void RoadEditor::updateSceneRoadSize()
 {
     if(bezierPoints.size() != bezierScenePoints.size() || bezierMiddlePoints.size() == 0)
     {
@@ -105,10 +97,8 @@ void RoadEditor::resizeRoadEditor()
     }
 }
 
-void RoadEditor::buildRoadEditor()
+void RoadEditor::updateSceneRoadPositions()
 {
-    resizeRoadEditor();
-    
     for(int i = 0; i < bezierPoints.size(); i++)
         bezierScenePoints[i]->setLocalPosition(bezierPoints[i]);
     
@@ -120,8 +110,11 @@ void RoadEditor::buildRoadEditor()
         bezierMarginPoints[i].first->setLocalPosition(rMarginPoints[i].first);
         bezierMarginPoints[i].second->setLocalPosition(rMarginPoints[i].second);
     }
-    
-    //coloring stuff
+}
+
+void RoadEditor::updateSceneRoadMeshColors()
+{
+    //reset color points
     for(int i = 0; i < bezierScenePoints.size(); i++)
     {
         if(i % 3 == 0)
@@ -134,26 +127,33 @@ void RoadEditor::buildRoadEditor()
     bezierScenePoints[roadGenerator->getEditIndex()]->setRenderable(meshInstanceYellow);
 }
 
-RoadEditor::~RoadEditor()
-{
-    delete roadGenerator;
-}
-
 void RoadEditor::generateTexturedRoad()
 {
-    RoadNode* roadNode = new RoadNode("roadNode", rMarginPoints, sceneGraph->getRoot());
+    std::shared_ptr<RoadNode> roadNode =  std::make_shared<RoadNode>("roadNode", rMarginPoints);
+    this->sceneGraph->getRoot()->addChild(roadNode);
 }
 
 void RoadEditor::Update(float dt)
 {
-    sceneGraph->updateScene(dt);
-    roadGenerator->Update(dt);
-    buildRoadEditor();
+    //check if the track is modified on the current frame
+    if(roadGenerator->Update(dt)){
+        //resize road if needed
+        updateSceneRoadSize();
     
+        //update positions
+        updateSceneRoadPositions();
+        
+        //update mesh colors
+        updateSceneRoadMeshColors();
+    }
+    
+    //apply the texture on the road if 'g' was pressed
     if (IvGame::mGame->mEventHandler->IsKeyReleased('g'))
     {
         generateTexturedRoad();
     }
+    
+    sceneGraph->updateScene(dt);
 }
 
 void RoadEditor::setupMeshes()

@@ -89,13 +89,13 @@ const std::vector<std::pair<IvVector3, IvVector3>> RoadMargins::findTrackPoints(
 
     for(int i = 0; i < roadPoints.size() - 1; i++)
     {
-        const std::pair<IvVector3, IvVector3>& normal = calculateNormalOnPoint(roadPoints[i], roadPoints[i+1], roadPoints[i]);
+        const std::pair<IvVector3, IvVector3> normal = calculateNormalOnPoint(roadPoints[i], roadPoints[i+1], roadPoints[i]);
         roadMarginPoints.push_back(normal);
     }
 
     //last point
     int roadSize = (int)roadPoints.size() - 2;
-    const std::pair<IvVector3, IvVector3>& normal = calculateNormalOnPoint(roadPoints[roadSize], roadPoints[roadSize + 1], roadPoints[roadSize + 1]);
+    const std::pair<IvVector3, IvVector3> normal = calculateNormalOnPoint(roadPoints[roadSize], roadPoints[roadSize + 1], roadPoints[roadSize + 1]);
     roadMarginPoints.push_back(normal);
     
     fixPoints(roadMarginPoints);

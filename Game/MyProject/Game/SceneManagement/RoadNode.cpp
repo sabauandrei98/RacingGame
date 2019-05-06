@@ -1,14 +1,12 @@
 
 #include "RoadNode.hpp"
 
-RoadNode::RoadNode(const std::string& name, std::vector<std::pair<IvVector3,IvVector3>> rMarginPoints, std::shared_ptr<SceneNode> graphRoot) :  SceneNode(name),roadPoints(rMarginPoints)
+RoadNode::RoadNode(const std::string& name, std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints) :  SceneNode(name)
 {
-    root = graphRoot;
-    root->addChild(std::make_shared<SceneNode>(name));
-    setMesh();
+    buildMesh(rMarginPoints);
 }
 
-void RoadNode::setMesh()
+void RoadNode::buildMesh(std::vector<std::pair<IvVector3,IvVector3>>& roadPoints)
 {
     std::shared_ptr<Mesh> meshTexture = std::make_shared<Mesh>();
     
@@ -68,7 +66,7 @@ void RoadNode::setMesh()
     if (unif)
         unif->SetValue(quadTexture);
     
-    root->findFirstNodeWithName(this->_name)->setRenderable(meshTextureInstance);
+    this->setRenderable(meshTextureInstance);
 }
 
 

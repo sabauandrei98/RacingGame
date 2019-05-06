@@ -10,7 +10,7 @@ class RoadEditor{
     
 public:
     RoadEditor(SceneGraph* sGraph);
-    ~RoadEditor();
+    ~RoadEditor() {};
     
     void Update(float dt);
     
@@ -31,15 +31,15 @@ private:
     std::shared_ptr<MeshInstance> meshInstanceGreen;
     std::shared_ptr<MeshInstance> meshInstanceYellow;
     
-    RoadGeneratorControler* roadGenerator;
+    std::shared_ptr<RoadGeneratorControler> roadGenerator;
     SceneGraph* sceneGraph;
     
     void setupPoints();
     void setupMeshes();
     
-    void getPointsFromScene();
-    void buildRoadEditor();
-    void resizeRoadEditor();
+    void updateSceneRoadMeshColors();
+    void updateSceneRoadPositions();
+    void updateSceneRoadSize();
     
     void generateTexturedRoad();
 };

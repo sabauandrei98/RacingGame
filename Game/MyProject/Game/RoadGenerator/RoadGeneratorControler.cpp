@@ -24,14 +24,18 @@ void RoadGeneratorControler::mergeHeadTail()
     rMarginPoints[rMarginPoints.size() - 1].second = rMarginPoints[0].second;
 }
 
-void
+//returns true if the track was updated on the current frame
+bool
 RoadGeneratorControler::Update( float dt )
 {
+    bool isUpdated = false;
+    
     //go to next point
     if (IvGame::mGame->mEventHandler->IsKeyReleased('.'))
     {
         if (editIndex + 1 <= bezierPoints.size() - 1)
             editIndex ++;
+        isUpdated = true;
     }
 
     //go to prev point
@@ -39,6 +43,7 @@ RoadGeneratorControler::Update( float dt )
     {
         if (editIndex - 1 >= 0)
             editIndex --;
+        isUpdated = true;
     }
     
     if (IvGame::mGame->mEventHandler->IsKeyReleased('r'))
@@ -63,13 +68,14 @@ RoadGeneratorControler::Update( float dt )
         }
         
         editIndex += 3;
+        isUpdated = true;
     }
         
     if (IvGame::mGame->mEventHandler->IsKeyReleased('f'))
     {
         //works only on fixed points
         if(editIndex % 3 != 0 || bezierPoints.size() == 4)
-            return;
+            return false;
     
         if(editIndex != bezierPoints.size() - 1)
         {
@@ -84,6 +90,7 @@ RoadGeneratorControler::Update( float dt )
             bezierPoints.erase(bezierPoints.begin() + editIndex - 2);
             editIndex = bezierPoints.size() - 1;
         }
+        isUpdated = true;
     }
 
     static unsigned char input[4] = {'w','a','s','d'};
@@ -165,6 +172,7 @@ RoadGeneratorControler::Update( float dt )
 
                 }
             }
+            isUpdated = true;
         }
 
     
@@ -176,4 +184,5 @@ RoadGeneratorControler::Update( float dt )
         if (i % 3 != 0)
             updateControlPointsPosition(i);
     
+    return isUpdated;
 }

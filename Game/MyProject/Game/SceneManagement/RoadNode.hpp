@@ -9,11 +9,8 @@
 class RoadNode : std::enable_shared_from_this<RoadNode>, public SceneNode {
 
 public:
-    RoadNode(const std::string& name, std::vector<std::pair<IvVector3,IvVector3>> rMarginPoints, std::shared_ptr<SceneNode> graphRoot);
+    RoadNode(const std::string& name, std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints);
     
 private:
-    std::shared_ptr<SceneNode> root;
-    std::vector<std::pair<IvVector3,IvVector3>> roadPoints;
-    
-    void setMesh();
+    void buildMesh(std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints);
 };
