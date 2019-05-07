@@ -6,23 +6,33 @@ void CarController::animateNode(float dt, SceneNode* car)
     if (IvGame::mGame->mEventHandler->IsKeyDown('w'))
     {
         length += carSpeedIncrement;
+        
+        if (length < 0)
+            length += carSpeedIncrement;
+        
         hasAcceleration = true;
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('s'))
     {
         length -= carSpeedIncrement;
+        
+        if (length > 0)
+            length -= carSpeedIncrement;
+        
         hasAcceleration = true;
     }
     
+    
+    float coef = abs(length/maxSpeed);
     if (IvGame::mGame->mEventHandler->IsKeyDown('w'))
     {
         if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
         {
-            angle += angleSpeedIncrement;
+            angle += angleSpeedIncrement * coef;
         }
         if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
         {
-            angle -= angleSpeedIncrement;
+            angle -= angleSpeedIncrement * coef;
         }
     }
     else
@@ -30,11 +40,11 @@ void CarController::animateNode(float dt, SceneNode* car)
     {
         if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
         {
-            angle -= angleSpeedIncrement;
+            angle -= angleSpeedIncrement * coef;
         }
         if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
         {
-            angle += angleSpeedIncrement;
+            angle += angleSpeedIncrement * coef;
         }
     }
     else
@@ -42,11 +52,11 @@ void CarController::animateNode(float dt, SceneNode* car)
     {
         if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
         {
-            angle -= angleSpeedIncrement;
+            angle -= angleSpeedIncrement * coef;
         }
         if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
         {
-            angle += angleSpeedIncrement;
+            angle += angleSpeedIncrement * coef;
         }
     }
     else
@@ -54,11 +64,11 @@ void CarController::animateNode(float dt, SceneNode* car)
     {
         if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
         {
-            angle += angleSpeedIncrement;
+            angle += angleSpeedIncrement * coef;
         }
         if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
         {
-            angle -= angleSpeedIncrement;
+            angle -= angleSpeedIncrement * coef;
         }
     }
     
@@ -76,9 +86,11 @@ void CarController::animateNode(float dt, SceneNode* car)
             length += fricitonCoefficient;
     }
     
+    
+    
     IvVector2 carVelocity;
-    carVelocity.x = length * (sin(angle));
-    carVelocity.y = length * (cos(angle));
+    carVelocity.x = length * (sin(angle)) * coef;
+    carVelocity.y = length * (cos(angle)) * coef;
     
     
     IvVector2 carPosition;

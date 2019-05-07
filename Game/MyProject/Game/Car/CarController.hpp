@@ -14,10 +14,10 @@ public:
     
     std::shared_ptr<SceneNode> car;
     
-    float carSpeedIncrement = 0.025f;
-    float angleSpeedIncrement = 0.002f;
+    float carSpeedIncrement = 0.045f;
+    float angleSpeedIncrement = 0.005f;
     float fricitonCoefficient = 0.008f;
-    float maxSpeed = 10.0f;
+    float maxSpeed = 20.0f;
     float length = 0;
     float angle = 0;
     
