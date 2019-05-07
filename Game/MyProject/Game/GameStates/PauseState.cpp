@@ -30,9 +30,6 @@ void PauseState::onExit() {
 void PauseState::Update() {
     if(isResumeTriggered())
         state_controller->requestChange(Race);
-    
-    if (isQuitTriggered())
-        state_controller->requestChange(Menu);
 }
 
 bool PauseState::isResumeTriggered() {
@@ -46,14 +43,4 @@ bool PauseState::isResumeTriggered() {
     return false;
 }
 
-bool PauseState::isQuitTriggered() {
-    unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("quitPause")->getBoundingBox()))
-            return true;
-    }
-    return false;
-}
 

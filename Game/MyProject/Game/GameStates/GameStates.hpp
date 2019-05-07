@@ -52,7 +52,6 @@ public:
 protected:
     // protected variable(s)
     StateController*    state_controller;
-    
 };
 
 // ---------------
@@ -164,6 +163,7 @@ private:
     bool isPauseTriggered();
     bool isGameOverTriggered();
 
+    void renderScore();
     unsigned int noDigits(uint32_t number);
     void addNewDigit();
     void checkNeedChangeDigit();
@@ -222,7 +222,6 @@ public:
 private:
     // private function(s)
     bool isResumeTriggered();
-    bool isQuitTriggered();
 };
 
 class GameOverState:public GameState{
