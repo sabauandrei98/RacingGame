@@ -43,11 +43,9 @@ void RaceState::Update() {
     else
         if(isGameOverTriggered())
         {
-            changed=false;
             frames=0;
             score=0;
             state_controller->requestChange(GOver);
-            
         }
         else
         {
@@ -55,9 +53,7 @@ void RaceState::Update() {
             if(frames==10)
             {
                 frames=0;
-                
-                if(!changed)
-                {
+             
                     auto val=raceMenu->getRowCol(score%10 +'0');
         
                     std::string name="count"+std::to_string(noDigits(score%10));
@@ -90,14 +86,9 @@ void RaceState::Update() {
                        raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(2, val.second);
                    }
                 
-                }
-        
-                changed=false;
+                
                 if(noDigits(score)>noDigits(score-1))
-                {
                     addNewDigit();
-                    changed=true;
-                }
                 
                 checkNeedChangeDigit();
     

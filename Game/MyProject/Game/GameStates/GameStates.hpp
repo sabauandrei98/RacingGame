@@ -169,8 +169,6 @@ private:
     void checkNeedChangeDigit();
     int firstDigit(int no);
     
-    
-    bool     changed                =   false;
     uint32_t score                  =   0;
     uint32_t frames                 =   0;
     
