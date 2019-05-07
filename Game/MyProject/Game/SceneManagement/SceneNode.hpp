@@ -36,6 +36,8 @@ public:
     const IvMatrix44& getAbsoluteTransform() const;
     IvVector3 getAbsolutePosition() const;
     const BoundingBox& getBoundingBox() const;
+    const IvVector3& getLocalPosition() const;
+    void setParent(const std::shared_ptr<SceneNode>& parent);
     
     void setAnimator(const std::shared_ptr<NodeAnimator>&);
     void setRenderable(const std::shared_ptr<MeshInstance>&);

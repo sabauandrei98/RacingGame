@@ -23,22 +23,22 @@ CameraSceneNode::CameraSceneNode(const std::string& name, const CameraSceneNode:
 void CameraSceneNode::updateNode(float dt) {
     float translationSpeed = 3.0f;
     
-    if (IvGame::mGame->mEventHandler->IsKeyDown('w'))
-    {
-        _camera->pan({0, dt * translationSpeed});
-    }
-    if (IvGame::mGame->mEventHandler->IsKeyDown('s'))
-    {
-        _camera->pan({0, -dt * translationSpeed});
-    }
-    if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
-    {
-        _camera->pan({-dt * translationSpeed, 0});
-    }
-    if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
-    {
-        _camera->pan({dt * translationSpeed, 0});
-    }
+//    if (IvGame::mGame->mEventHandler->IsKeyDown('w'))
+//    {
+//        _camera->pan({0, dt * translationSpeed});
+//    }
+//    if (IvGame::mGame->mEventHandler->IsKeyDown('s'))
+//    {
+//        _camera->pan({0, -dt * translationSpeed});
+//    }
+//    if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
+//    {
+//        _camera->pan({-dt * translationSpeed, 0});
+//    }
+//    if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
+//    {
+//        _camera->pan({dt * translationSpeed, 0});
+//    }
     
     // set up rotation
     IvVector3 point = {0, 0, 0};

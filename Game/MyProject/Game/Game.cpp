@@ -58,7 +58,9 @@ Game::PostRendererInitialize()
     mesh_instance->setShader("../../Game/shaders/example_shader");
 
     std::shared_ptr<SceneNode> model1=ModelLoader::loadModel("jeep.fbx", "example_shader");
-    model1->setLocalTransform(IvVector3{0,0,0}, IvVector3{1.53f,0,0}, IvVector3{4,4,4});
+    model1->setLocalTransform(IvVector3{2,0,10}, IvVector3{0,2,0}, IvVector3{4,4,4});
+    carController = std::make_shared<CarController>(model1);
+    model1->setAnimator(carController);
     
     _scene_graph->setRoot(_root);
     _scene_graph->setCamera(_camera);
@@ -77,9 +79,9 @@ Game::PostRendererInitialize()
     _child2->setLocalTransform({0., 5., 0.}, {2., 1., 1.}, {1., 1., 1.});
     _child3->setLocalTransform({0., 2., -4.}, {0., 0., 1.5}, {2., 0.5, 1.});
 
-    _camera->setPosition({0.f, 40.0f, 20.0f });
+    _camera->setPosition({0.f, 50.0f, 0.0f });
     _camera->setLookAt({0.0f, 0.0f, 0.0f});
-    _camera->setRotation({0.0f, 0.0f, 1.0f});
+    _camera->setRotation({0, 0.0, 1.0f});
   
     testCollision=new TestCollision();
     testCollision->TestRayBox();

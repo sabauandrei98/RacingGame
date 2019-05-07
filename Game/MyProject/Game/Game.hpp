@@ -20,6 +20,8 @@
 #include "SceneManagement/CameraSceneNode.hpp"
 #include "GameStates/StateController.hpp"
 #include "ModelLoader/ModelLoader.hpp"
+#include "Car/CarController.hpp"
+
 class CameraTestControler;
 class StateController;
 
@@ -38,9 +40,11 @@ public:
     std::shared_ptr<Camera>             _camera;
     std::shared_ptr<CameraSceneNode>    _camera_scene_node;
     std::unique_ptr<StateController>    _state_controller;
+    std::shared_ptr<NodeAnimator>               carController;
 
     TestCollision*               testCollision;
     CameraTestControler*         cameraTest;
+    
     
     TestHelper*                  test;
 
