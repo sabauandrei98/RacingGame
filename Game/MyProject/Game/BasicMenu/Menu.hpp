@@ -18,7 +18,7 @@ public:
     Menu();
     ~Menu();
     
-    virtual std::shared_ptr<SceneGraph> GetScene()
+    virtual std::shared_ptr<SceneGraph> getScene()
     {
         return menu;
     }

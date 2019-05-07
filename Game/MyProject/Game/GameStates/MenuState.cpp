@@ -23,7 +23,7 @@ void MenuState::onEnter() {
     std::cout << "MenuState enters" << std::endl;
     
     std::shared_ptr<StartMenu> startScene=std::make_shared<StartMenu>();
-    state_controller->_main_scene=startScene->GetScene();
+    state_controller->_main_scene=startScene->getScene();
     
 }
 
@@ -43,8 +43,16 @@ void MenuState::Update() {
     if (isCreditsTriggered())
         state_controller->requestChange(Credits);
     
+    if(isBackTriggered())
+        state_controller->requestChange(First);
+    
     if (isExitTriggered())
+    {
+        ResourceManager::resetResourceManager();
         IvGame::mGame->Quit();
+    }
+    
+   
 }
 
 bool MenuState::isPlayTriggered() {
@@ -52,7 +60,7 @@ bool MenuState::isPlayTriggered() {
     if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
     {
         RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(0)->getBoundingBox()))
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("playStart")->getBoundingBox()))
             return true;
     }
     return false;
@@ -63,7 +71,7 @@ bool MenuState::isHighScoreTriggered() {
     if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
     {
         RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(1)->getBoundingBox()))
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("highscoreStart")->getBoundingBox()))
             return true;
     }
     return false;
@@ -74,7 +82,7 @@ bool MenuState::isCreditsTriggered() {
     if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
     {
         RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(2)->getBoundingBox()))
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("creditsStart")->getBoundingBox()))
             return true;
     }
     return false;
@@ -85,7 +93,18 @@ bool MenuState::isExitTriggered() {
     if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
     {
         RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(3)->getBoundingBox()))
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("exitStart")->getBoundingBox()))
+            return true;
+    }
+    return false;
+}
+
+bool MenuState::isBackTriggered() {
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
+    {
+        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("backStart")->getBoundingBox()))
             return true;
     }
     return false;

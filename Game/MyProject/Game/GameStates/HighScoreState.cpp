@@ -23,7 +23,7 @@ void HighScoreState::onEnter() {
     std::cout << "HighScoreState enters" << std::endl;
     
     std::shared_ptr<HighscoresMenu> highscoresMenu=std::make_shared<HighscoresMenu>();
-    state_controller->_main_scene=highscoresMenu->GetScene();
+    state_controller->_main_scene=highscoresMenu->getScene();
 }
 
 void HighScoreState::onExit() {

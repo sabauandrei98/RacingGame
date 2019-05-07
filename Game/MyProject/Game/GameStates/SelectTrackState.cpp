@@ -23,7 +23,7 @@ void SelectTrackState::onEnter() {
     std::cout << "SelectTrackState enters" << std::endl;
     
     std::shared_ptr<ChooseTrackMenu> selectTrackMenu=std::make_shared<ChooseTrackMenu>();
-    state_controller->_main_scene=selectTrackMenu->GetScene();
+    state_controller->_main_scene=selectTrackMenu->getScene();
 }
 
 void SelectTrackState::onExit() {
@@ -48,7 +48,7 @@ bool SelectTrackState::isBackTriggered() {
     if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
     {
         RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(0)->getBoundingBox()))
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("backCar")->getBoundingBox()))
             return true;
     }
     return false;

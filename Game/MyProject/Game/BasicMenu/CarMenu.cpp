@@ -18,7 +18,7 @@ CarMenu::CarMenu()
     camera->setRotation({0,0,1});
     
     menu=std::make_shared<SceneGraph>();
-    std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("root");
+    std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootCar");
     
     std::shared_ptr<SceneNode> model1=ModelLoader::loadModel("jeep.fbx", "example_shader");
     

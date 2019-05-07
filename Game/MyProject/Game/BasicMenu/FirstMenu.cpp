@@ -1,14 +1,14 @@
 //-------------------------------------------------------------------------------
-//-- TrackMenu.cpp --------------------------------------------------------------
+//-- FirstMenu.cpp --------------------------------------------------------------
 //-------------------------------------------------------------------------------
-#include "TrackMenu.hpp"
+#include "FirstMenu.hpp"
 //-------------------------------------------------------------------------------
 //  PUBLIC METHODS
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
-// @TrackMenu::TrackMenu()
+// @FirstMenu::FirstMenu()
 //-------------------------------------------------------------------------------
-TrackMenu::TrackMenu()
+FirstMenu::FirstMenu()
 {
     MeshManager meshManager;
     
@@ -18,39 +18,40 @@ TrackMenu::TrackMenu()
     camera->setRotation({0,0,1});
     
     menu=std::make_shared<SceneGraph>();
-    std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootTrack");
-
+    std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootFirstMenu");
+    
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");
+    std::shared_ptr<SceneNode> testQuad=HelperManager::BuildTexturedQuad("test",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"test.tga");
+    std::shared_ptr<SceneNode> gameQuad=HelperManager::BuildTexturedQuad("game",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"game.tga");
+    std::shared_ptr<SceneNode> exitQuad=HelperManager::BuildTexturedQuad("exitFirst",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"exit.tga");
     
-    std::shared_ptr<SceneNode> chooseQuad=HelperManager::BuildTexturedQuad("chooseTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_choose.tga");
-    
-    std::shared_ptr<SceneNode> buildQuad=HelperManager::BuildTexturedQuad("buildTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_build.tga");
-    
-    std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_back.tga");
+    testQuad->setLocalTransform(IvVector3{-4,0,0}, IvVector3{0,4.72,1}, IvVector3{4,4,5});
+    gameQuad->setLocalTransform(IvVector3{4,0,0}, IvVector3{0,4.72,1}, IvVector3{4,4,5});
+    exitQuad->setLocalTransform(IvVector3{14,0,-5}, IvVector3{0,4.72,1}, IvVector3{4,5,4});
     
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     
-    chooseQuad->setLocalTransform(IvVector3{0,0,4}, IvVector3{0,4.72,1}, IvVector3{4,4,4});
-    buildQuad->setLocalTransform(IvVector3{0,0,0}, IvVector3{0,4.72,1}, IvVector3{4,4,4});
-    backQuad->setLocalTransform(IvVector3{14,0,-8}, IvVector3{0,4.72,1}, IvVector3{4,4,4});
-    
     menu->setRoot(root);
-    menu->getRoot()->addChild(chooseQuad);
-    menu->getRoot()->addChild(buildQuad);
-    menu->getRoot()->addChild(backQuad);
+    
+    menu->getRoot()->addChild(testQuad);
+    menu->getRoot()->addChild(gameQuad);
+    menu->getRoot()->addChild(exitQuad);
+    
     menu->getRoot()->addChild(cameraSceneNode);
     menu->setCamera(camera);
     
 }
 //-------------------------------------------------------------------------------
-// @TrackMenu::~TrackMenu()
+// @FirstMenu::~FirstMenu()
 //-------------------------------------------------------------------------------
-TrackMenu::~TrackMenu()
+FirstMenu::~FirstMenu()
 {
     
 }
-
 //-------------------------------------------------------------------------------
 //  PRIVATE METHODS
 //-------------------------------------------------------------------------------
+
+
+

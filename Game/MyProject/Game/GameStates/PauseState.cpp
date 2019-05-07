@@ -19,7 +19,7 @@ void PauseState::onEnter() {
     std::cout << "PauseState enters" << std::endl;
     
     std::shared_ptr<PauseMenu> pauseMenu=std::make_shared<PauseMenu>();
-    state_controller->_main_scene=pauseMenu->GetScene();
+    state_controller->_main_scene=pauseMenu->getScene();
 }
 
 void PauseState::onExit() {
@@ -40,7 +40,7 @@ bool PauseState::isResumeTriggered() {
     if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
     {
         RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(0)->getBoundingBox()))
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("resumePause")->getBoundingBox()))
             return true;
     }
     return false;
@@ -51,7 +51,7 @@ bool PauseState::isQuitTriggered() {
     if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
     {
         RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(1)->getBoundingBox()))
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("quitPause")->getBoundingBox()))
             return true;
     }
     return false;

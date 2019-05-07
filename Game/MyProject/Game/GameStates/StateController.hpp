@@ -13,7 +13,7 @@ class GameState;
 
 // enumeration for states
 enum State {
-    Menu, Track, SelectTrack, BuildTrack, SelectCar, Race, HighScore, Credits,Pause
+    Menu, Track, SelectTrack, BuildTrack, SelectCar, Race, HighScore, Credits,Pause,GOver,Tests,First
 };
 
 // state controller class
@@ -36,6 +36,9 @@ public:
     friend class SelectCarState;
     friend class RaceState;
     friend class PauseState;
+    friend class GameOverState;
+    friend class TestState;
+    friend class FirstState;
     
 private:
     // private variable(s)

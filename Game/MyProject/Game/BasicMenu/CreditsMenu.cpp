@@ -18,7 +18,7 @@ CreditsMenu::CreditsMenu()
     camera->setRotation({0,0,1});
     
     menu=std::make_shared<SceneGraph>();
-    std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("root");
+    std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootCredits");
     
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");

@@ -23,7 +23,7 @@ void SelectCarState::onEnter() {
     std::cout << "SelectCarState enters" << std::endl;
     
     std::shared_ptr<CarMenu> carMenu=std::make_shared<CarMenu>();
-    state_controller->_main_scene=carMenu->GetScene();
+    state_controller->_main_scene=carMenu->getScene();
 }
 
 void SelectCarState::onExit() {
@@ -55,7 +55,7 @@ bool SelectCarState::isBackTriggered() {
     if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
     {
         RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(1)->getBoundingBox()))
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("backCar")->getBoundingBox()))
             return true;
     }
     return false;

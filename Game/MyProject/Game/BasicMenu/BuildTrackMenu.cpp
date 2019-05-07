@@ -18,10 +18,14 @@ BuildTrackMenu::BuildTrackMenu()
     camera->setRotation({0,0,1});
     
     menu=std::make_shared<SceneGraph>();
-    std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("root");
+    std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootBuildTrack");
     
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");
+    
+    std::shared_ptr<SceneNode> previousQuad=HelperManager::BuildTexturedQuad("previousTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_previous.tga");
+
+    std::shared_ptr<SceneNode> nextQuad=HelperManager::BuildTexturedQuad("nextTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_next.tga");
     
     std::shared_ptr<SceneNode> addQuad=HelperManager::BuildTexturedQuad("addTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_add.tga");
     
@@ -34,12 +38,16 @@ BuildTrackMenu::BuildTrackMenu()
     
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     
+    previousQuad->setLocalTransform(IvVector3{-10,0,-8}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
+    nextQuad->setLocalTransform(IvVector3{-5,0,-8}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
     addQuad->setLocalTransform(IvVector3{14,0,6}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
     removeQuad->setLocalTransform(IvVector3{14,0,3}, IvVector3{0,4.72,1}, IvVector3{2,2,4});
     playQuad->setLocalTransform(IvVector3{14,0,0}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
     backQuad->setLocalTransform(IvVector3{14,0,-8}, IvVector3{0,4.72,1}, IvVector3{4,4,4});
     
     menu->setRoot(root);
+    menu->getRoot()->addChild(previousQuad);
+    menu->getRoot()->addChild(nextQuad);
     menu->getRoot()->addChild(addQuad);
     menu->getRoot()->addChild(removeQuad);
     menu->getRoot()->addChild(playQuad);

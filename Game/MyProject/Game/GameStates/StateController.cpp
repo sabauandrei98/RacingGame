@@ -21,8 +21,11 @@ StateController::StateController() {
     _states.push_back(std::make_unique<HighScoreState>(this));
     _states.push_back(std::make_unique<CreditsState>(this));
     _states.push_back(std::make_unique<PauseState>(this));
+    _states.push_back(std::make_unique<GameOverState>(this));
+    _states.push_back(std::make_unique<TestState>(this));
+    _states.push_back(std::make_unique<FirstState>(this));
     
-    _current_state = Menu;
+    _current_state = First;
     _states[_current_state]->onEnter();
 }
 
@@ -40,6 +43,7 @@ void StateController::update(float dt) {
     _main_scene->updateScene(dt);
     _states[_current_state]->Update();
 }
+
 void StateController::render()
 {
     _states[_current_state]->Render(_main_scene.get());

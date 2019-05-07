@@ -23,7 +23,7 @@ void TrackState::onEnter() {
     std::cout << "TrackState enters" << std::endl;
    
     std::shared_ptr<TrackMenu> trackScene=std::make_shared<TrackMenu>();
-    state_controller->_main_scene=trackScene->GetScene();
+    state_controller->_main_scene=trackScene->getScene();
 }
 
 void TrackState::onExit() {
@@ -47,7 +47,7 @@ bool TrackState::isSelectTriggered() {
     if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
     {
         RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(0)->getBoundingBox()))
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("chooseTrack")->getBoundingBox()))
             return true;
     }
     return false;
@@ -58,7 +58,7 @@ bool TrackState::isBuildTriggered() {
     if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
     {
         RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(1)->getBoundingBox()))
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("buildTrack")->getBoundingBox()))
             return true;
     }
     return false;
@@ -69,7 +69,7 @@ bool TrackState::isBackTriggered() {
     if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
     {
         RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(2)->getBoundingBox()))
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("backTrack")->getBoundingBox()))
             return true;
     }
     return false;

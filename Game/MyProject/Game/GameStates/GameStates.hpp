@@ -21,6 +21,9 @@
 #include "../BasicMenu/CarMenu.hpp"
 #include "../BasicMenu/HighscoresMenu.hpp"
 #include "../BasicMenu/PauseMenu.hpp"
+#include "../BasicMenu/GameOver.hpp"
+#include "../BasicMenu/FirstMenu.hpp"
+#include "../BasicMenu/TestMenu.hpp"
 
 class StateController;
 
@@ -73,6 +76,7 @@ private:
     bool isHighScoreTriggered();
     bool isCreditsTriggered();
     bool isExitTriggered();
+    bool isBackTriggered();
 };
 
 class TrackState : public GameState {
@@ -120,6 +124,8 @@ public:
     
 private:
     // private function(s)
+    bool isPreviousTriggered();
+    bool isNextTriggered();
     bool isAddTriggered();
     bool isRemoveTriggered();
     bool isPlayTriggered();
@@ -156,16 +162,17 @@ public:
 private:
     // private function(s)
     bool isPauseTriggered();
+    bool isGameOverTriggered();
+
     unsigned int noDigits(uint32_t number);
     void addNewDigit();
-    bool checkNeedChangeDigit();
+    void checkNeedChangeDigit();
     int firstDigit(int no);
     
     
     bool     changed                =   false;
-    bool     changed2               =   false;
     uint32_t score                  =   0;
-    uint32_t seconds                =   0;
+    uint32_t frames                 =   0;
     
     std::shared_ptr<RaceMenu>           raceMenu;
     MeshManager                         meshManager;
@@ -216,5 +223,58 @@ private:
     // private function(s)
     bool isResumeTriggered();
     bool isQuitTriggered();
+};
+
+class GameOverState:public GameState{
+  
+public:
+    //constructor
+    GameOverState(StateController*);
+    
+    //public functio(s) and method(s)
+    void onEnter();
+    void onExit();
+    void Update();
+    
+private:
+    //private function(s)
+    bool isRetryTriggered();
+    bool isQuitTriggered();
+    
+};
+
+class FirstState:public GameState{
+    
+public:
+    //constructor
+    FirstState(StateController*);
+    
+    //public functio(s) and method(s)
+    void onEnter();
+    void onExit();
+    void Update();
+    
+private:
+    //private function(s)
+    bool isTestTriggered();
+    bool isGameTriggered();
+    bool isExitTriggered();
+    
+};
+
+class TestState:public GameState{
+    
+public:
+    //constructor
+    TestState(StateController*);
+    
+    //public functio(s) and method(s)
+    void onEnter();
+    void onExit();
+    void Update();
+    
+private:
+    //private function(s)
+    bool isBackTriggered();
 };
 

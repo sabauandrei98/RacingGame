@@ -4,6 +4,7 @@
 #include "BasicMenu/TrackMenu.hpp"
 #include "Player/Player.hpp"
 #include "Test/TestRayBoxIntersection/TestCollision.hpp"
+#include "Test/TestHelper/TestHelper.hpp"
 #include "GameStates/StateController.hpp"
 
 class CameraTestControler;
@@ -15,9 +16,6 @@ public:
     Game();
     ~Game();
     bool PostRendererInitialize();
-
-    std::shared_ptr<StartMenu>          startMenu;
-    //std::shared_ptr<TrackMenu>          trackMenu;
 
     std::unique_ptr<StateController>    _state_controller;
 

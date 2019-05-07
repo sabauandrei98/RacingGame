@@ -23,7 +23,7 @@ void CreditsState::onEnter() {
     std::cout << "CreditsState enters" << std::endl;
     
     std::shared_ptr<CreditsMenu> creditsMenu=std::make_shared<CreditsMenu>();
-    state_controller->_main_scene=creditsMenu->GetScene();
+    state_controller->_main_scene=creditsMenu->getScene();
 }
 
 void CreditsState::onExit() {
