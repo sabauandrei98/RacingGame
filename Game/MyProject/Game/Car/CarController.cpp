@@ -37,8 +37,30 @@ void CarController::animateNode(float dt, SceneNode* car)
             angle += angleSpeedIncrement;
         }
     }
-   
-        
+    else
+    if (length < 0)
+    {
+        if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
+        {
+            angle -= angleSpeedIncrement;
+        }
+        if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
+        {
+            angle += angleSpeedIncrement;
+        }
+    }
+    else
+    if (length > 0)
+    {
+        if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
+        {
+            angle += angleSpeedIncrement;
+        }
+        if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
+        {
+            angle -= angleSpeedIncrement;
+        }
+    }
     
     if (length > maxSpeed)
         length = maxSpeed;
