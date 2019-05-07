@@ -139,6 +139,9 @@ ${PROJECT_SOURCE_DIR}/Game/Helper/Shaders
 ${PROJECT_SOURCE_DIR}/Game/BasicMenu/
 ${PROJECT_SOURCE_DIR}/Game/BasicMenu/Resources/
 ${PROJECT_SOURCE_DIR}/Game/BasicMenu/Shaders/
+${PROJECT_SOURCE_DIR}/Game/Environment/
+${PROJECT_SOURCE_DIR}/Game/Environment/Resources/
+${PROJECT_SOURCE_DIR}/Game/Environment/Shaders/
 
 ${PROJECT_SOURCE_DIR}/Game/Test/
 ${PROJECT_SOURCE_DIR}/Game/Test/Resources/
@@ -148,6 +151,7 @@ ${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/
 ${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/Shader/
 ${PROJECT_SOURCE_DIR}/Game/Test/TestHelper/
 ${PROJECT_SOURCE_DIR}/Game/Test/TestRayBoxIntersection/
+
 )
 
 # LINK PATHS

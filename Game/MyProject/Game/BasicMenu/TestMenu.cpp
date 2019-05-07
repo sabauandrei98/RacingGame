@@ -11,6 +11,7 @@
 TestMenu::TestMenu()
 {
     MeshManager meshManager;
+    SkyBox skyBox;
     
     std::shared_ptr<Camera> camera=std::make_shared<Camera>(45.0, 0.1, 100.0, 1280, 720);
     camera->setLookAt({0.f, 0.f, 0.f });
@@ -29,7 +30,10 @@ TestMenu::TestMenu()
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     
     menu->setRoot(root);
+    
     menu->getRoot()->addChild(backQuad);
+    menu->getRoot()->addChild(skyBox.getSky());
+    
     menu->getRoot()->addChild(cameraSceneNode);
     menu->setCamera(camera);
     

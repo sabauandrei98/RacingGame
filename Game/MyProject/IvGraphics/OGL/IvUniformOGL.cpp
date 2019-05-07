@@ -281,7 +281,7 @@ void IvUniformOGL::Update()
 
     if ( mType == kTextureUniform )
     {
-        mValue.mTexture->MakeActive(mTextureStage);
+       mValue.mTexture->MakeActive(mTextureStage);
     }
 
     if (!mNeedsUpdate)
