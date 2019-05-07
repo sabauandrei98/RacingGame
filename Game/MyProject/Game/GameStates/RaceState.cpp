@@ -96,7 +96,6 @@ void RaceState::Update() {
         }
 }   
     
-
 bool RaceState::isPauseTriggered()
 {
     return IvGame::mGame->mEventHandler->IsKeyPressed('x');
@@ -161,7 +160,6 @@ void RaceState::addNewDigit()
     
 }
 
-
 void RaceState::checkNeedChangeDigit()
 {
     auto aux =  score-1;
@@ -206,7 +204,6 @@ int RaceState::firstDigit(int no)
         
     return no;
 }
-
 
 void RaceState::renderScore()
 {
