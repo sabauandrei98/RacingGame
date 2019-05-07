@@ -43,34 +43,22 @@ void FirstState::Update() {
 
 bool FirstState::isTestTriggered() {
     unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("test")->getBoundingBox()))
-            return true;
-    }
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("test", mousex, mousey, state_controller->_main_scene))
+        return true;
     return false;
 }
 
 bool FirstState::isGameTriggered() {
     unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("game")->getBoundingBox()))
-            return true;
-    }
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("game", mousex, mousey, state_controller->_main_scene))
+        return true;
     return false;
 }
 
 bool FirstState::isExitTriggered() {
     unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("exitFirst")->getBoundingBox()))
-            return true;
-    }
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("exitFirst", mousex, mousey, state_controller->_main_scene))
+        return true;
     return false;
 }
 

@@ -24,7 +24,7 @@ public:
     const std::shared_ptr<SceneNode>& getRoot() const;
     
     void setCamera(const std::shared_ptr<Camera>&);
-    const std::shared_ptr<Camera>& getCamera();
+    const std::shared_ptr<Camera>& getCamera() const;
     
 private:
     // private variable(s)

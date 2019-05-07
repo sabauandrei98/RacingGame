@@ -169,7 +169,7 @@ void SceneNode::setRenderable(const std::shared_ptr<MeshInstance>& renderable) {
     _rendarable = renderable;
 }
 
-std::shared_ptr<MeshInstance> SceneNode::getRenderable()
+const std::shared_ptr<MeshInstance>& SceneNode::getRenderable() const
 {
     return _rendarable;
 }

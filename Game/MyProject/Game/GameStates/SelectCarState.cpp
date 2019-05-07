@@ -52,11 +52,7 @@ bool SelectCarState::isPlayTriggered() {
 
 bool SelectCarState::isBackTriggered() {
     unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("backCar")->getBoundingBox()))
-            return true;
-    }
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("backCar", mousex, mousey, state_controller->_main_scene))
+        return true;
     return false;
 }

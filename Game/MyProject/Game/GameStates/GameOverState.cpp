@@ -37,23 +37,15 @@ void GameOverState::Update() {
 
 bool GameOverState::isRetryTriggered() {
     unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(0)->getBoundingBox()))
-            return true;
-    }
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("retryGameOver", mousex, mousey, state_controller->_main_scene))
+        return true;
     return false;
 }
 
 bool GameOverState::isQuitTriggered() {
     unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(1)->getBoundingBox()))
-            return true;
-    }
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("backGameOver", mousex, mousey, state_controller->_main_scene))
+        return true;
     return false;
 }
 

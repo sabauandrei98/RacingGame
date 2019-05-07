@@ -65,73 +65,46 @@ void BuildTrackState::Update() {
 
 bool BuildTrackState::isNextTriggered() {
     unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("nextTrack")->getBoundingBox()))
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("nextTrack", mousex, mousey, state_controller->_main_scene))
             return true;
-    }
     return false;
 }
 
 bool BuildTrackState::isPreviousTriggered() {
     unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("previousTrack")->getBoundingBox()))
-            return true;
-    }
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("previousTrack", mousex, mousey, state_controller->_main_scene))
+        return true;
     return false;
 }
 
 bool BuildTrackState::isAddTriggered() {
     unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("addTrack")->getBoundingBox()))
-            return true;
-    }
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("addTrack", mousex, mousey, state_controller->_main_scene))
+        return true;
     return false;
 }
 
-bool BuildTrackState::isRemoveTriggered()
-{
+bool BuildTrackState::isRemoveTriggered(){
     unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("removeTrack")->getBoundingBox()))
-            return true;
-    }
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("removeTrack", mousex, mousey, state_controller->_main_scene))
+        return true;
     return false;
 }
 
-bool BuildTrackState::isPlayTriggered()
-{
+bool BuildTrackState::isPlayTriggered(){
     unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("playTrack")->getBoundingBox()))
-            return true;
-    }
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("playTrack", mousex, mousey, state_controller->_main_scene))
+        return true;
     return false;
 }
 
-bool BuildTrackState::isSaveTriggered()
-{
+bool BuildTrackState::isSaveTriggered(){
     return false;
 }
 
 bool BuildTrackState::isBackTriggered() {
     unsigned int mousex,mousey;
-    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
-    {
-        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->findFirstNodeWithName("backTrack")->getBoundingBox()))
-            return true;
-    }
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("backTrack", mousex, mousey, state_controller->_main_scene))
+        return true;
     return false;
 }

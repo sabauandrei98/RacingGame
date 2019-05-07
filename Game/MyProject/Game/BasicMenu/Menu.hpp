@@ -7,7 +7,7 @@
 //-------------------------------------------------------------------------------
 #include "SceneManagement/SceneGraph.hpp"
 #include <stdio.h>
-#include <map>
+#include <unordered_map>
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
@@ -22,11 +22,11 @@ public:
     {
         return menu;
     }
-   std::pair<float,float> getRowCol(const char c);
+    std::pair<float,float> getRowCol(const char c) const;
     
 protected:
     std::shared_ptr<SceneGraph> menu;
-    std::map<char,std::pair<uint32_t,uint32_t>> characters;
+    std::unordered_map<char,std::pair<uint32_t,uint32_t>> characters;
     
    
 };

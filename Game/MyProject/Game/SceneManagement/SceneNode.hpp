@@ -41,7 +41,7 @@ public:
     
     void setAnimator(const std::shared_ptr<NodeAnimator>&);
     void setRenderable(const std::shared_ptr<MeshInstance>&);
-    std::shared_ptr<MeshInstance> getRenderable();
+    const std::shared_ptr<MeshInstance>& getRenderable() const;
     
     virtual void updateAbsoluteTransform();
     virtual void updateNode(float);

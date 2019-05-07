@@ -39,6 +39,7 @@ public:
     friend class GameOverState;
     friend class TestState;
     friend class FirstState;
+    friend class GameState;
     
 private:
     // private variable(s)
