@@ -67,7 +67,7 @@ IvGame::~IvGame()
         mEventHandler = 0;
     }
 
-    ResourceManager::resetResourceManager();
+    //ResourceManager::resetResourceManager();
     
     IvCleanUpRendererHelpData();
 

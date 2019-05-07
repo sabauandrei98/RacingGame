@@ -1,30 +1,33 @@
 //-------------------------------------------------------------------------------
-//-- HelperSceneNode.h --------------------------------------------------------
+//-- RayBoxIntersection.h -------------------------------------------------------
 //-------------------------------------------------------------------------------
 #pragma once
 //-------------------------------------------------------------------------------
 //-- Dependencies ---------------------------------------------------------------
 //-------------------------------------------------------------------------------
-#include "SceneNode.hpp"
-#include "CameraSceneNode.hpp"
-//-------------------------------------------------------------------------------
-//-- Typedefs, Structs ----------------------------------------------------------
-//-------------------------------------------------------------------------------
+#include "IvRay3.h"
+#include "IvVector3.h"
+#include "IvRendererHelp.h"
+#include "BoundingBox.hpp"
+#include<iostream>
+#include<IvGame.h>
+#include<IvEventHandler.h>
 
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
 
-class HelperSceneNode:public SceneNode
+
+class RayBoxIntersection
 {
 public:
+    //constructor/destructor
+    RayBoxIntersection(const IvRay3& ray);
+    ~RayBoxIntersection(){}
+    IvRay3 GetRay();
     
-    HelperSceneNode(const std::string& name,RenderPacket renderPacket);
-    virtual ~HelperSceneNode(){}
-    
-    void collectRenderingPackets(const Camera*,std::vector<RenderPacket>&);
+    bool IsRayIntersectingBox(const BoundingBox& boundingBox);
     
 private:
-    RenderPacket       m_renderPacket;
+    IvRay3 _ray;    
 };
-

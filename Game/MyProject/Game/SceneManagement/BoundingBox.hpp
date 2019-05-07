@@ -8,16 +8,14 @@
 #pragma once
 
 #include <array>
-
 #include <IvVector3.h>
-
 #include "Mesh.hpp"
 
 class BoundingBox {
 public:
     // typedefs
-    typedef std::shared_ptr<Mesh>       MeshPtr;
-    typedef std::array<IvVector3, 8>    Bounds;
+    typedef std::shared_ptr<Mesh>                   MeshPtr;
+    typedef std::array<IvVector3, 8>                Bounds;
     
     // public function(s) and method(s)
     void calculate(const IvVector3&, const IvVector3&, const IvMatrix44&);

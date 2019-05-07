@@ -59,7 +59,7 @@ void SceneNode::findAllNodesContainingName(const std::string& name, std::vector<
 
 // adds a child
 void SceneNode::addChild(const std::shared_ptr<SceneNode>& child) {
-     child->_parent = this;
+    child->_parent = this;
     _children.push_back(child);
 }
 
@@ -131,14 +131,19 @@ void SceneNode::updateNode(float dt) {
         i->updateNode(dt);
     
     //updates the bounding box of this node
-    if (_rendarable->getMesh())
-        _bounding_box.calculate(_rendarable->getMesh()->getMinVertices(), _rendarable->getMesh()->getMaxVertices(), _absolute_transform);
-    else
-        _bounding_box.invalidate();
-    
-    for (const auto& i : _children) {
-        _bounding_box.expand(i->_bounding_box.getMin());
-        _bounding_box.expand(i->_bounding_box.getMax());
+    if (_needs_bounding_box) {
+        if (_rendarable && _rendarable->getMesh())
+            _bounding_box.calculate(_rendarable->getMesh()->getMinVertices(), _rendarable->getMesh()->getMaxVertices(), _absolute_transform);
+        else
+            _bounding_box.invalidate();
+        
+        for (const auto& i : _children) {
+            if (!i->_needs_bounding_box)
+                continue;
+            
+            _bounding_box.expand(i->_bounding_box.getMin());
+            _bounding_box.expand(i->_bounding_box.getMax());
+        }
     }
 }
 
@@ -148,13 +153,13 @@ void SceneNode::collectRenderingPackets(const Camera* camera, std::vector<Render
         return;
     
     //TODO: perform visibility testing here
-    //if not visible return;
     
     if (_rendarable) {
         RenderPacket packet;
         packet._mesh_instance = _rendarable.get();
 
         packet._use_depth = true;
+
         packet._world_view_projection_matrix = camera->getProjectionMatrix() * camera->getViewMatrix() * _absolute_transform;
         
         render_packets.push_back(packet);

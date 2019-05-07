@@ -36,9 +36,9 @@ public:
     
 private:
     // private variable(s)
-    std::shared_ptr<Mesh>                               _mesh;
-    std::vector<IvUniform*>                             _shader_uniforms;
-    IvShaderProgram*                                    _shader;
+    std::shared_ptr<Mesh>       _mesh;
+    std::vector<IvUniform*>     _shader_uniforms;
+    IvShaderProgram*            _shader;
     
     // private function(s) and method(s)
     void destroyShader();

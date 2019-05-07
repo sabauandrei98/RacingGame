@@ -52,6 +52,7 @@ protected:
     std::vector<std::shared_ptr<SceneNode>> _children;
     
     bool                                    _enabled = true;
+    bool                                    _needs_bounding_box = true;
     std::string                             _name;
     
     NodeTransform                           _transform;

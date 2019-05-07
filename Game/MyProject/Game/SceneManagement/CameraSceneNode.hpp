@@ -18,8 +18,12 @@ public:
     // public function(s) and method(s)
     void updateNode(float);
     
+    IvVector3 screenToWorld(unsigned int mouseX,unsigned int mouseY);
+    
+    IvRay3 getRay( unsigned int mouseX,unsigned int mouseY);
+    
 private:
-    CameraPtr  _camera;
+    CameraPtr           _camera;       
 };
 
 

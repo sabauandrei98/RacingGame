@@ -13,14 +13,28 @@
 
 // calculates the bounding box with given mesh and trasform matrix
 void BoundingBox::calculate(const IvVector3& min, const IvVector3& max, const IvMatrix44& transform) {
-    // sets the points absolute positions
+    IvVector3   new_min;
+    IvVector3   new_max;
+
     calculatePoints(min, max);
     
-    for (IvVector3& i : _points) {
+    new_min = {std::numeric_limits<float>::infinity(), std::numeric_limits<float>::infinity(), std::numeric_limits<float>::infinity()};
+    new_max = {-std::numeric_limits<float>::infinity(), -std::numeric_limits<float>::infinity(), -std::numeric_limits<float>::infinity()};
+    
+    for (const IvVector3& i : _points) {
         IvVector4 vector = {i.x, i.y, i.z, 1.};
         vector = transform * vector;
-        i = {vector.x, vector.y, vector.z};
+    
+        new_min = IvVector3(std::min(new_min.x, vector.x),
+                            std::min(new_min.y, vector.y),
+                            std::min(new_min.z, vector.z));
+        
+        new_max = IvVector3(std::max(new_max.x, vector.x),
+                            std::max(new_max.y, vector.y),
+                            std::max(new_max.z, vector.z));
     }
+    
+    calculatePoints(new_min, new_max);
     
     _min = _points[0];
     _max = _points[7];
