@@ -12,13 +12,14 @@ public:
     CarController(std::shared_ptr<SceneNode> car);
     ~CarController(){};
     
+private:
     std::shared_ptr<SceneNode> car;
-    
     float carSpeedIncrement = 0.045f;
     float angleSpeedIncrement = 0.005f;
     float fricitonCoefficient = 0.008f;
+    float brakeCoefficient = 0.060f;
     float maxSpeed = 20.0f;
-    float length = 0;
+    float velocity = 0;
     float angle = 0;
     
     void animateNode(float dt, SceneNode* car) override;

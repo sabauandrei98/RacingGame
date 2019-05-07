@@ -5,25 +5,25 @@ void CarController::animateNode(float dt, SceneNode* car)
     bool hasAcceleration = false;
     if (IvGame::mGame->mEventHandler->IsKeyDown('w'))
     {
-        length += carSpeedIncrement;
+        velocity += carSpeedIncrement;
         
-        if (length < 0)
-            length += carSpeedIncrement;
+        if (velocity < 0)
+            velocity += carSpeedIncrement;
         
         hasAcceleration = true;
     }
     if (IvGame::mGame->mEventHandler->IsKeyDown('s'))
     {
-        length -= carSpeedIncrement;
+        velocity -= carSpeedIncrement;
         
-        if (length > 0)
-            length -= carSpeedIncrement;
+        if (velocity > 0)
+            velocity -= carSpeedIncrement;
         
         hasAcceleration = true;
     }
     
     
-    float coef = abs(length/maxSpeed);
+    float coef = abs(velocity/maxSpeed);
     if (IvGame::mGame->mEventHandler->IsKeyDown('w'))
     {
         if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
@@ -48,7 +48,7 @@ void CarController::animateNode(float dt, SceneNode* car)
         }
     }
     else
-    if (length < 0)
+    if (velocity < 0)
     {
         if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
         {
@@ -60,7 +60,7 @@ void CarController::animateNode(float dt, SceneNode* car)
         }
     }
     else
-    if (length > 0)
+    if (velocity > 0)
     {
         if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
         {
@@ -72,25 +72,40 @@ void CarController::animateNode(float dt, SceneNode* car)
         }
     }
     
-    if (length > maxSpeed)
-        length = maxSpeed;
+ 
+    if (IvGame::mGame->mEventHandler->IsKeyDown(' '))
+    {
+        if (velocity < 0)
+        {
+            velocity += brakeCoefficient;
+        }
+        else
+            if (velocity > 0)
+            {
+                velocity -= brakeCoefficient;
+            }
+    }
+        
     
-    if (length < -maxSpeed)
-        length = -maxSpeed;
+    if (velocity > maxSpeed)
+        velocity = maxSpeed;
+    
+    if (velocity < -maxSpeed)
+        velocity = -maxSpeed;
     
     if (!hasAcceleration)
     {
-        if(length > 0)
-            length -= fricitonCoefficient;
+        if(velocity > 0)
+            velocity -= fricitonCoefficient;
         else
-            length += fricitonCoefficient;
+            velocity += fricitonCoefficient;
     }
     
     
     
     IvVector2 carVelocity;
-    carVelocity.x = length * (sin(angle)) * coef;
-    carVelocity.y = length * (cos(angle)) * coef;
+    carVelocity.x = velocity * (sin(angle)) * coef;
+    carVelocity.y = velocity * (cos(angle)) * coef;
     
     
     IvVector2 carPosition;
