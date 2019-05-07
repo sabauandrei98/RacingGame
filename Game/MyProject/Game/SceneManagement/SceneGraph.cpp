@@ -43,6 +43,6 @@ void SceneGraph::setCamera(const std::shared_ptr<Camera>& camera) {
 }
 
 // return the camera
-const std::shared_ptr<Camera>& SceneGraph::getCamera() {
+const std::shared_ptr<Camera>& SceneGraph::getCamera() const {
     return _camera;
 }

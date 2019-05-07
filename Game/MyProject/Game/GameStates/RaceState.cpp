@@ -183,10 +183,11 @@ void RaceState::checkNeedChangeDigit()
             char ch=(aux/10%10+1)%10 +'0';
         
             auto val=raceMenu->getRowCol(ch );
-            if(raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)!=nullptr)
+            auto node=raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName);
+            if(node!=nullptr)
             {
-                raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(1, val.first);
-                raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(2, val.second);
+                node->getRenderable()->setUniformValue(1, val.first);
+                node->getRenderable()->setUniformValue(2, val.second);
             }
         }
 
@@ -238,9 +239,10 @@ void RaceState::renderScore()
         raceMenu->getScene()->getRoot()->findFirstNodeWithName("countRoot")->addChild(countScoreQuad);
         
         auto val=raceMenu->getRowCol(auxScore%10 + '0');
+        auto renderable=raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable();
         
-        raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(1, val.first);
-        raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(2, val.second);
+        renderable->setUniformValue(1, val.first);
+        renderable->setUniformValue(2, val.second);
         
         auxScore/=10;
         noDig--;

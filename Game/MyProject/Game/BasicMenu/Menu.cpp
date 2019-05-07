@@ -126,15 +126,13 @@ Menu::~Menu()
 //  PROTECTED METHODS
 //-------------------------------------------------------------------------------
 std::pair<float,float>
-Menu::getRowCol(const char c)
+Menu::getRowCol(const char c) const
 {
-    
-    std::pair<float,float> result;
+    std::pair<float,float> result=std::make_pair(-1,-1);
     auto it=characters.find(c);
     if(it!=characters.end())
     {
         result= it->second;
-    
     }
     return result;
 }

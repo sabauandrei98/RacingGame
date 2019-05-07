@@ -38,11 +38,18 @@ public:
     virtual void onExit() = 0;
     virtual void Update() = 0;
     
-    virtual void Render(SceneGraph* main_scene)
+    virtual void Render(SceneGraph* mainScene)
     {
-        main_scene->drawScene();
+        mainScene->drawScene();
     }
     
+    bool rayIntersectsSceneNode(const char* name,unsigned int mousex,unsigned int mousey,const std::shared_ptr<SceneGraph>& mainScene)
+    {
+        RayBoxIntersection raybox(mainScene->getCamera()->getRay(mousex,mousey));
+        if(raybox.IsRayIntersectingBox(mainScene->getRoot()->findFirstNodeWithName(name)->getBoundingBox()))
+            return true;
+        return false;
+    }
     // constructor
     GameState(StateController* state_controller) :
         state_controller(state_controller) {
