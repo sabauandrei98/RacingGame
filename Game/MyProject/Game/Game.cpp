@@ -12,6 +12,7 @@ Game::Game() : IvGame()
 
 Game::~Game()
 {
+
 }
 
 bool 
@@ -25,6 +26,7 @@ Game::PostRendererInitialize()
     if ( !IvGame::PostRendererInitialize() )
         return false;
     
+
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
     std::shared_ptr<MeshInstance> mesh_instance = std::make_shared<MeshInstance>();
     std::vector<IvTCPVertex> vertices;
@@ -93,7 +95,7 @@ Game::UpdateObjects( float dt )
 {
     _state_controller->update();
     _scene_graph->updateScene(dt);
-    test->Update(dt);
+
     testCollision->Update(dt);
 }
 void

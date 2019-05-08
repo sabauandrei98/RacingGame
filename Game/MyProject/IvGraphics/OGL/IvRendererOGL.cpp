@@ -495,7 +495,7 @@ IvShaderProgram* IvRendererOGL::GetShaderProgram()
     return mShader;
 }
 
-void IvRendererOGL::SetWVPMat(IvMatrix44& matrix)
+void IvRendererOGL::SetWVPMat(const IvMatrix44& matrix)
 {
     mWVPMat = matrix;
 }

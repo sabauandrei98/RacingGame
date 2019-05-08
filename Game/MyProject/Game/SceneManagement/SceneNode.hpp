@@ -25,7 +25,8 @@ public:
     virtual ~SceneNode();
     
     SceneNode* findFirstNodeWithName(const std::string&) const;
-    void findAllNodesWithName(const std::string&, std::vector<SceneNode*>&) const;
+    void findAllNodesWithName(const std::string&, std::vector<std::shared_ptr<SceneNode>>&) const;
+    void findAllNodesContainingName(const std::string& name, std::vector<std::shared_ptr<SceneNode>>& scene_nodes) const;
     
     void addChild(const std::shared_ptr<SceneNode>&);
     SceneNode* getChild(unsigned int);
@@ -35,6 +36,7 @@ public:
     void setLocalPosition(const IvVector3&);
     const IvMatrix44& getAbsoluteTransform() const;
     IvVector3 getAbsolutePosition() const;
+    const IvVector3& getLocalPosition() const;
     const BoundingBox& getBoundingBox() const;
     
     void setAnimator(const std::shared_ptr<NodeAnimator>&);

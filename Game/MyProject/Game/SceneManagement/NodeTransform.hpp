@@ -22,8 +22,6 @@ public:
     
     const IvMatrix44& getMatrix();
     
-private:
-    // private variable(s)
     IvVector3   _position;
     IvVector3   _rotation;
     IvVector3   _scale;
