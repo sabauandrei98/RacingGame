@@ -38,7 +38,6 @@ public:
     const IvVector3& getLocalPosition() const;
     const IvMatrix44& getAbsoluteTransform() const;
     IvVector3 getAbsolutePosition() const;
-    const IvVector3& getLocalPosition() const;
     const BoundingBox& getBoundingBox() const;
     
     void setAnimator(const std::shared_ptr<NodeAnimator>&);

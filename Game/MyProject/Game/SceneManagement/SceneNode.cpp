@@ -92,17 +92,13 @@ void SceneNode::setLocalPosition(const IvVector3& position) {
 }
 
 //gets local position
-const  IvVector3& SceneNode::getLocalPosition() const {
-    return _transform.getPosition();
+const IvVector3& SceneNode::getLocalPosition() const{
+    return _transform._position;
 }
 
 // returns the absolute transformation of the node
 const IvMatrix44& SceneNode::getAbsoluteTransform() const {
     return _absolute_transform;
-}
-
-const IvVector3& SceneNode::getLocalPosition() const{
-    return _transform._position;
 }
 
 // returns the absolute position of the node
