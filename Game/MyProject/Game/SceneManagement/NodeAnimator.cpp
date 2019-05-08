@@ -19,5 +19,5 @@ NodeAnimator::NodeAnimator() {
 NodeAnimator::~NodeAnimator() {
 }
 
-void NodeAnimator::animateNode(float dt, SceneNode* target_node){
+void NodeAnimator::animateNode(float dt, SceneNode* target_node) {
 }

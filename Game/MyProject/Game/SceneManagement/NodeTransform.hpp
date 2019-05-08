@@ -20,7 +20,7 @@ public:
     void set(const IvVector3&, const IvVector3&, const IvVector3&);
     void set(const IvVector3&);
     
-    const IvMatrix44& getMatrix();
+    const IvMatrix44& getMatrix() const;
     
 private:
     // private variable(s)

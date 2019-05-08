@@ -27,6 +27,8 @@
 #include <IvEventHandler.h>
 #include <OGL/IvRendererOGL.h>
 
+#include "../../Game/ResourceManager/ResourceManager.hpp"
+
 static void visibilityCallback(GLFWwindow* window, int vis);
 static void reshapeCallback(GLFWwindow* window, int w, int h);
 
@@ -169,6 +171,8 @@ int main(int argc, char *argv[])
         glfwPollEvents();
     }
 
+    ResourceManager::resetResourceManager();
+    
     IvGame::Destroy();
 
     glfwDestroyWindow(window);

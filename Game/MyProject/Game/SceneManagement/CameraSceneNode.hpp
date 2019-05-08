@@ -7,6 +7,10 @@
 
 #pragma once
 
+#include <cmath>
+#include <ctime>
+#include <chrono>
+
 #include <IvGame.h>
 #include <IvEventHandler.h>
 
@@ -23,12 +27,20 @@ public:
     CameraSceneNode(const std::string&, const CameraPtr&);
     
     // public function(s) and method(s)
-    void updateNode(float);
+    void setTarget(SceneNode*);
+    SceneNode* getTarget() const;
     
     IvVector3 screenToWorld(unsigned int mouseX,unsigned int mouseY);
-    
     IvRay3 getRay( unsigned int mouseX,unsigned int mouseY);
     
+    // this derived function is not needed, because the camera is used only in absolute space
+    void updateAbsoluteTransform() {}
+    
+    ~CameraSceneNode() {}
+    
+    friend class CameraFollowAnimator;
+    
 private:
-    CameraPtr           _camera;       
+    // private variable(s)
+    CameraPtr   _camera;
 };

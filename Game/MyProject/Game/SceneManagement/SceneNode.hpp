@@ -35,10 +35,17 @@ public:
     void setLocalPosition(const IvVector3&);
     const IvMatrix44& getAbsoluteTransform() const;
     IvVector3 getAbsolutePosition() const;
+    void setAbsolutePosition(const IvVector3&);
     const BoundingBox& getBoundingBox() const;
+    IvVector3 getLocalPositon() const;
     
     void setAnimator(const std::shared_ptr<NodeAnimator>&);
     void setRenderable(const std::shared_ptr<MeshInstance>&);
+    
+    const NodeAnimator* getAnimator() const;
+    
+    void setIsMoving(bool);
+    bool getIsMoving();
     
     virtual void updateAbsoluteTransform();
     virtual void updateNode(float);
@@ -51,6 +58,7 @@ protected:
     
     bool                                    _enabled = true;
     bool                                    _needs_bounding_box = true;
+    bool                                    _is_moving;
     std::string                             _name;
     
     NodeTransform                           _transform;

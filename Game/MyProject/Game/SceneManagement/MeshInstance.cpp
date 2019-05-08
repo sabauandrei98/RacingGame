@@ -55,6 +55,12 @@ void MeshInstance::setUniformValue(unsigned int index, IvTexture* value) {
     _shader_uniforms[index]->SetValue(value);
 }
 
+// sets the shader uniform values with float
+void MeshInstance::setUniformValue(unsigned int index, float value) {
+    _shader_uniforms[index]->SetValue(value, 0);
+}
+
+
 // returns the mesh
 const std::shared_ptr<Mesh>& MeshInstance::getMesh() const {
     return _mesh;
