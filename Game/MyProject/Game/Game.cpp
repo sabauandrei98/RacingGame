@@ -12,6 +12,7 @@ Game::Game() : IvGame()
 
 Game::~Game()
 {
+
 }
 
 bool 

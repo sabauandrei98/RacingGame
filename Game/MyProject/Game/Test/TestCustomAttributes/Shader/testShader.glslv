@@ -8,6 +8,6 @@ out vec3 color;
 void main()
 {
     color=IvColor;
-    gl_Position =  vec4(IvPos,1.0);
+    gl_Position =  IvModelViewProjectionMatrix * vec4(1.0);
 }
 

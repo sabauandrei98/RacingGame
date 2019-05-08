@@ -5,6 +5,17 @@
 #include "Player/Player.hpp"
 #include "Test/TestRayBoxIntersection/TestCollision.hpp"
 #include "Test/TestHelper/TestHelper.hpp"
+#include <stdio.h>
+#include <iostream>
+#include <IvGame.h>
+#include <IvRendererHelp.h>
+#include <IvBezier.h>
+#include <IvVector3.h>
+#include <IvVertexFormats.h>
+#include <IvRendererOGL.h>
+#include "CameraTestControler.hpp"
+#include "SceneManagement/SceneGraph.hpp"
+#include "SceneManagement/CameraSceneNode.hpp"
 #include "GameStates/StateController.hpp"
 
 class CameraTestControler;
