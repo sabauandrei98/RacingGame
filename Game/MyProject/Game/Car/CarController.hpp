@@ -17,8 +17,8 @@ private:
     
     //increments
     float carSpeedIncrement = 0.045f;
-    float angleSpeedIncrement = 0.005f;
-    float nitroIncrement = 30.0f;
+    float angleSpeedIncrement = 0.0075f;
+    float nitroIncrement = 0.20f;
     float turbineBoostIncrement = 0.25f;
     float directionChangeIncrement = 0.25f;
     
@@ -30,7 +30,8 @@ private:
     //velocity
     float velocity = 0;
     float turbineBoostSpeedLimit = 50.0f;
-    float maxSpeed = 100.0f;
+    float forwardMaxSpeed = 150.0f;
+    float backwardMaxSpeed = 50.0f;
     
     //angle
     float wheelAngle = 0;

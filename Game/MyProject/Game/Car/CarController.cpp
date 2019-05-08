@@ -52,7 +52,7 @@ void CarController::animateNode(float dt, SceneNode* car)
     }
     
     //NITRO
-    if (IvGame::mGame->mEventHandler->IsKeyPressed('n'))
+    if (IvGame::mGame->mEventHandler->IsKeyDown('n'))
     {
         if (velocity > 0)
             velocity += nitroIncrement;
@@ -64,11 +64,11 @@ void CarController::animateNode(float dt, SceneNode* car)
     }
     
     //LIMIT THE VELOCITY
-    if (velocity > maxSpeed)
-        velocity = maxSpeed;
+    if (velocity > forwardMaxSpeed)
+        velocity = forwardMaxSpeed;
     
-    if (velocity < -maxSpeed)
-        velocity = -maxSpeed;
+    if (velocity < -backwardMaxSpeed)
+        velocity = -backwardMaxSpeed;
     
     //APPLY SOME FRICTION
     if (!hasAcceleration)
@@ -80,7 +80,7 @@ void CarController::animateNode(float dt, SceneNode* car)
     }
     
     //APPLY A STEERING COEFFICIENT CONSIDERING THE CURRENT VELOCITY
-    float coef = abs(velocity/maxSpeed);
+    float coef = abs(velocity / forwardMaxSpeed);
     
     //LEFT & RIGHT STEERING CONSIDERING THE CURRENT VELOCITY
     //IF WE WANT TO MOVE FORWARD, IGNORING CURRENT VELOCITY
@@ -148,7 +148,6 @@ void CarController::animateNode(float dt, SceneNode* car)
     IvVector3 carPos = car->getLocalPosition();
     carPos.x += carPosition.x;
     carPos.z += carPosition.y;
-    
     
     car->setLocalTransform(carPos, {0, wheelAngle, 0}, car->getLocalScale());
 }
