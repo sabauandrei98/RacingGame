@@ -435,6 +435,7 @@ namespace HelperManager{
             delete image;
             image = 0;
         }
+        
         if(quadTexture)
             meshInstance->setUniformValue(0,quadTexture);
         
