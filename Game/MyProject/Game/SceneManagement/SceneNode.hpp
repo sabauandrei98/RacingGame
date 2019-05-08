@@ -25,7 +25,8 @@ public:
     virtual ~SceneNode();
     
     SceneNode* findFirstNodeWithName(const std::string&) const;
-    void findAllNodesWithName(const std::string&, std::vector<SceneNode*>&) const;
+    void findAllNodesWithName(const std::string&, std::vector<std::shared_ptr<SceneNode>>&) const;
+    void findAllNodesContainingName(const std::string& name, std::vector<std::shared_ptr<SceneNode>>& scene_nodes) const;
     
     void addChild(const std::shared_ptr<SceneNode>&);
     SceneNode* getChild(unsigned int);

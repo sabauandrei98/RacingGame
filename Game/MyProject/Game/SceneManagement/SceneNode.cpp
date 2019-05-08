@@ -39,10 +39,19 @@ SceneNode* SceneNode::findFirstNodeWithName(const std::string& name) const {
 }
 
 // finds all the nodes with the given name
-void SceneNode::findAllNodesWithName(const std::string& name, std::vector<SceneNode*>& scene_nodes) const {
+void SceneNode::findAllNodesWithName(const std::string& name, std::vector<std::shared_ptr<SceneNode>>& scene_nodes) const {
     for (auto& i : _children)
         if (i->_name == name)
-            scene_nodes.push_back(i.get());
+            scene_nodes.push_back(i);
+    
+    for (auto& i : _children)
+        i->findAllNodesWithName(name, scene_nodes);
+}
+
+void SceneNode::findAllNodesContainingName(const std::string& name, std::vector<std::shared_ptr<SceneNode>>& scene_nodes) const {
+    for (auto& i : _children)
+        if (i->_name.find(name) != std::string::npos)
+            scene_nodes.push_back(i);
     
     for (auto& i : _children)
         i->findAllNodesWithName(name, scene_nodes);
@@ -54,10 +63,12 @@ void SceneNode::addChild(const std::shared_ptr<SceneNode>& child) {
     _children.push_back(child);
 }
 
+
 // returns a pointer to the child
 SceneNode* SceneNode::getChild(unsigned int index) {
     return _children[index].get();
 }
+
 
 // removes this node and all its children from the graph
 void SceneNode::remove()
@@ -81,8 +92,8 @@ void SceneNode::setLocalPosition(const IvVector3& position) {
 }
 
 //gets local position
-const  IvVector3& SceneNode::getLocalPosition() const {
-    return _transform.getPosition();
+const IvVector3& SceneNode::getLocalPosition() const{
+    return _transform._position;
 }
 
 // returns the absolute transformation of the node
