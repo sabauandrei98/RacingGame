@@ -75,6 +75,8 @@ void SceneNode::setLocalTransform(const IvVector3& position, const IvVector3& ro
     _transform.set(position, rotation, scale);
 }
 
+
+
 // sets the local transforms position
 void SceneNode::setLocalPosition(const IvVector3& position) {
     _transform.set(position);
@@ -82,6 +84,10 @@ void SceneNode::setLocalPosition(const IvVector3& position) {
 
 const  IvVector3& SceneNode::getLocalPosition() const {
     return _transform.getPosition();
+}
+
+const  IvVector3& SceneNode::getLocalScale() const {
+    return _transform.getScale();
 }
 
 void SceneNode::setParent(const std::shared_ptr<SceneNode>& parent){

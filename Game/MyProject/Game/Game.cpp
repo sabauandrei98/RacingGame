@@ -34,7 +34,7 @@ Game::PostRendererInitialize()
     _child1 = std::make_shared<SceneNode>("child1");
     _child2 = std::make_shared<SceneNode>("child2");
     _child3 = std::make_shared<SceneNode>("child3");
-    _camera = std::make_shared<Camera>(45.0, 0.1, 65.0, 1280, 720);
+    _camera = std::make_shared<Camera>(45.0, 0.1, 200.0, 1280, 720);
     _camera_scene_node = std::make_shared<CameraSceneNode>("camera", _camera);
 
     vertices.resize(5);
@@ -68,6 +68,7 @@ Game::PostRendererInitialize()
     _root->addChild(_camera_scene_node);
     _root->addChild(_child1);
     _root->addChild(_child2);
+  
     _root->addChild(model1);
     _root->setRenderable(mesh_instance);
 
@@ -79,7 +80,7 @@ Game::PostRendererInitialize()
     _child2->setLocalTransform({0., 5., 0.}, {2., 1., 1.}, {1., 1., 1.});
     _child3->setLocalTransform({0., 2., -4.}, {0., 0., 1.5}, {2., 0.5, 1.});
 
-    _camera->setPosition({0.f, 50.0f, 0.0f });
+    _camera->setPosition({0.f, 150.0f, 0.0f });
     _camera->setLookAt({0.0f, 0.0f, 0.0f});
     _camera->setRotation({0, 0.0, 1.0f});
   
@@ -110,7 +111,8 @@ Game::Render()
     IvSetWorldIdentity();
     IvSetViewMatrix(_camera->getViewMatrix());
     IvSetProjectionMatrix(_camera->getProjectionMatrix());
-
+    
+    
     BoundingBox box;
     Mesh* mesh = new Mesh();
     std::vector<IvTCPVertex> vertices;
@@ -138,6 +140,7 @@ Game::Render()
 
     IvRenderer::mRenderer->Draw(kLineListPrim, mesh->getVertexBuffer(), mesh->getIndexBuffer());
 
+
     box = _child2->getBoundingBox();
     for (int i = 0; i < 8; i++) {
         vertices[i].position = box.getPoints()[i];
@@ -153,7 +156,7 @@ Game::Render()
         vertices[i].position = box.getPoints()[i];
         vertices[i].color = {255, 255, 255, 255};
     }
-
+    
     mesh->setVertexBuffer(vertices, kTCPFormat);
 
     IvRenderer::mRenderer->Draw(kLineListPrim, mesh->getVertexBuffer(), mesh->getIndexBuffer());
@@ -161,7 +164,8 @@ Game::Render()
 
     delete mesh;
   
-    testCollision->Render();
+    //testCollision->Render();
+    
 }
 
  

@@ -23,6 +23,7 @@ public:
     const IvMatrix44& getMatrix();
     
     const IvVector3& getPosition() const { return _position;}
+    const IvVector3& getScale() const { return _scale;}
     
 private:
     // private variable(s)

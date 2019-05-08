@@ -14,13 +14,27 @@ public:
     
 private:
     std::shared_ptr<SceneNode> car;
+    
+    //increments
     float carSpeedIncrement = 0.045f;
     float angleSpeedIncrement = 0.005f;
-    float fricitonCoefficient = 0.008f;
+    float nitroIncrement = 30.0f;
+    float turbineBoostIncrement = 0.25f;
+    float directionChangeIncrement = 0.25f;
+    
+    //coef
+    float frictionCoefficient = 0.05f;
     float brakeCoefficient = 0.060f;
-    float maxSpeed = 20.0f;
+    
+    
+    //velocity
     float velocity = 0;
-    float angle = 0;
+    float turbineBoostSpeedLimit = 50.0f;
+    float maxSpeed = 100.0f;
+    
+    //angle
+    float wheelAngle = 0;
+
     
     void animateNode(float dt, SceneNode* car) override;
 };

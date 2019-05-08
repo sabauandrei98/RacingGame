@@ -37,6 +37,7 @@ public:
     IvVector3 getAbsolutePosition() const;
     const BoundingBox& getBoundingBox() const;
     const IvVector3& getLocalPosition() const;
+    const IvVector3& getLocalScale() const;
     void setParent(const std::shared_ptr<SceneNode>& parent);
     
     void setAnimator(const std::shared_ptr<NodeAnimator>&);
