@@ -14,8 +14,8 @@ TestMenu::TestMenu()
     SkyBox skyBox;
     
     std::shared_ptr<Camera> camera=std::make_shared<Camera>(45.0, 0.1, 100.0, 1280, 720);
-    camera->setLookAt({0.,0.,0.});
-    camera->setPosition({0,-20,0});
+    camera->setLookAt({0,0,0.});
+    camera->setPosition({0,-15,0});
     camera->setRotation({0,0,1});
     
     menu=std::make_shared<SceneGraph>();
