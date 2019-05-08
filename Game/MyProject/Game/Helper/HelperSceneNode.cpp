@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------
-//-- MySceneNodeHelper.cpp ------------------------------------------------------
+//-- HelperSceneNode.cpp  -------------------------------------------------------
 //-------------------------------------------------------------------------------
 #include "HelperSceneNode.hpp"
 //-------------------------------------------------------------------------------
@@ -7,14 +7,14 @@
 //-------------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------
-// @ MySceneNodeHelper::MySceneNodeHelper()
+// @ HelperSceneNode::HelperSceneNode()
 //-------------------------------------------------------------------------------
 HelperSceneNode::HelperSceneNode(const std::string& name,RenderPacket renderPacket):SceneNode(name)
 {
     m_renderPacket=renderPacket;
 }
 //-------------------------------------------------------------------------------
-// @ MySceneNodeHelper::collectRenderPacket()
+// @ HelperSceneNode::collectRenderPacket()
 //-------------------------------------------------------------------------------
 void
 HelperSceneNode::collectRenderingPackets(const Camera* camera, std::vector<RenderPacket> & renderPackets)

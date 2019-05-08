@@ -21,7 +21,10 @@ MenuState::MenuState(StateController* state_controller) :
 
 void MenuState::onEnter() {
     std::cout << "MenuState enters" << std::endl;
-    std::cout << "Play: p\nHighScore: h\nCredits: c\nExit: e" << std::endl;
+    
+    std::shared_ptr<StartMenu> startScene=std::make_shared<StartMenu>();
+    state_controller->_main_scene=startScene->getScene();
+    
 }
 
 void MenuState::onExit() {
@@ -39,22 +42,47 @@ void MenuState::Update() {
     if (isCreditsTriggered())
         state_controller->requestChange(Credits);
     
+    if(isBackTriggered())
+        state_controller->requestChange(First);
+    
     if (isExitTriggered())
+    {
+        ResourceManager::resetResourceManager();
         IvGame::mGame->Quit();
+    }
 }
 
 bool MenuState::isPlayTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('p');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("playStart", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
 }
 
 bool MenuState::isHighScoreTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('h');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("highscoreStart", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
 }
 
 bool MenuState::isCreditsTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('c');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("creditsStart", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
 }
 
 bool MenuState::isExitTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('e');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("exitStart", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
+}
+
+bool MenuState::isBackTriggered() {
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("backStart", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
 }

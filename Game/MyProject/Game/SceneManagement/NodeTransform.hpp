@@ -21,6 +21,7 @@ public:
     void set(const IvVector3&);
     
     const IvMatrix44& getMatrix();
+    const IvVector3& getPosition() const;
     
     IvVector3   _position;
     IvVector3   _rotation;

@@ -17,7 +17,7 @@ public:
     // public variable(s)
     MeshInstance*   _mesh_instance;
     IvMatrix44      _world_view_projection_matrix;
-    IvPrimType      _prim_type = kPointListPrim;
+    IvPrimType      _prim_type = kTriangleListPrim;
     
     bool            _use_depth = true;
     bool            _use_blend = true;

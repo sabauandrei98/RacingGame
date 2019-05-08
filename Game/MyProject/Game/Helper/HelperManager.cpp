@@ -338,7 +338,7 @@ namespace HelperManager{
     // @HelperManager::BuildSphere()
     //---------------------------------------------------------------------------
     std::shared_ptr<SceneNode>
-    BuildSphere(const std::shared_ptr<MeshInstance>&meshInstance,bool depth,bool blend,bool wireframeValue)
+    BuildSphere(const char* name,const std::shared_ptr<MeshInstance>&meshInstance,bool depth,bool blend,bool wireframeValue)
     {
         RenderPacket m_renderPacket;
         m_renderPacket._use_blend = depth;
@@ -346,7 +346,7 @@ namespace HelperManager{
         m_renderPacket._use_wireframe = wireframeValue;
         m_renderPacket._prim_type = kTriangleListPrim;
         
-        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", m_renderPacket);
+        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>(name, m_renderPacket);
         node->setRenderable(meshInstance);
         
         return node;
@@ -356,7 +356,7 @@ namespace HelperManager{
     // @HelperManager::BuildBox()
     //---------------------------------------------------------------------------
     std::shared_ptr<SceneNode>
-    BuildBox(const std::shared_ptr<MeshInstance>&meshInstance,bool depth,bool blend,bool wireframeValue)
+    BuildBox(const char* name,const std::shared_ptr<MeshInstance>&meshInstance,bool depth,bool blend,bool wireframeValue)
     {
         RenderPacket m_renderPacket;
         m_renderPacket._use_blend = depth;
@@ -364,7 +364,7 @@ namespace HelperManager{
         m_renderPacket._use_wireframe = wireframeValue;
         m_renderPacket._prim_type = kTriangleStripPrim;
 
-        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", m_renderPacket);
+        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>(name, m_renderPacket);
         node->setRenderable(meshInstance);
         
         return node;
@@ -373,7 +373,7 @@ namespace HelperManager{
     // @HelperManager::BuildQuad()
     //---------------------------------------------------------------------------
     std::shared_ptr<SceneNode>
-    BuildQuad(const std::shared_ptr<MeshInstance>&meshInstance,IvVector3 axis,bool depth,bool blend,bool wireframeValue)
+    BuildQuad(const char* name,const std::shared_ptr<MeshInstance>&meshInstance,IvVector3 axis,bool depth,bool blend,bool wireframeValue)
     {
         RenderPacket m_renderPacket;
         m_renderPacket._use_blend = depth;
@@ -381,7 +381,7 @@ namespace HelperManager{
         m_renderPacket._use_wireframe = wireframeValue;
         m_renderPacket._prim_type = kTriangleStripPrim;
      
-        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", m_renderPacket);
+        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>(name, m_renderPacket);
         node->setRenderable(meshInstance);
         
         IvVector3 position=IvVector3(0,0,0);
@@ -401,7 +401,7 @@ namespace HelperManager{
     // @HelperManager::BuildTexturedQuad()
     //---------------------------------------------------------------------------
     std::shared_ptr<SceneNode>
-    BuildTexturedQuad(const std::shared_ptr<MeshInstance>&meshInstance,const char* textureName,const char* shaderName,IvVector3 axis,bool depth,bool blend,bool wireframeValue)
+    BuildTexturedQuad(const char* name,const std::shared_ptr<MeshInstance>&meshInstance,const char* textureName,IvVector3 axis,bool depth,bool blend,bool wireframeValue)
     {
         RenderPacket m_renderPacket;
         m_renderPacket._use_blend = depth;
@@ -409,7 +409,7 @@ namespace HelperManager{
         m_renderPacket._use_wireframe = wireframeValue;
         m_renderPacket._prim_type = kTriangleStripPrim;
         
-        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>("node", m_renderPacket);
+        std::shared_ptr<HelperSceneNode> node = std::make_shared<HelperSceneNode>(name, m_renderPacket);
         node->setRenderable(meshInstance);
         
         IvVector3 position=IvVector3(0,0,0);
@@ -424,7 +424,7 @@ namespace HelperManager{
         node->setLocalTransform(position, rotation, scale);
         
         IvImage* image = IvImage::CreateFromFile(textureName);
-        IvTexture* quadTexture;
+        IvTexture* quadTexture=nullptr;
         
         if (image)
         {
@@ -435,10 +435,8 @@ namespace HelperManager{
             delete image;
             image = 0;
         }
-        
-        IvUniform* unif = meshInstance->getShaderUniforms()[0];
-        if (unif)
-            unif->SetValue(quadTexture);
+        if(quadTexture)
+            meshInstance->setUniformValue(0,quadTexture);
         
         return node;
     }

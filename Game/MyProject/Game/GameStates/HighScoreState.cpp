@@ -21,7 +21,9 @@ HighScoreState::HighScoreState(StateController* state_controller) :
 
 void HighScoreState::onEnter() {
     std::cout << "HighScoreState enters" << std::endl;
-    std::cout << "Back: x" << std::endl;
+    
+    std::shared_ptr<HighscoresMenu> highscoresMenu=std::make_shared<HighscoresMenu>();
+    state_controller->_main_scene=highscoresMenu->getScene();
 }
 
 void HighScoreState::onExit() {
@@ -35,5 +37,8 @@ void HighScoreState::Update() {
 }
 
 bool HighScoreState::isBackTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('x');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("backHighscores", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
 }
