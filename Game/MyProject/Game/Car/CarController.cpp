@@ -9,7 +9,7 @@ void CarController::animateNode(float dt, SceneNode* car)
     {
         velocity += carSpeedIncrement;
         
-        //APPLY SOME INITIAL TURBINE BOOST
+        //APPLY SOME INITIAL BOOST TO MAKE CAR FASTER
         if (velocity > 0 && velocity < turbineBoostSpeedLimit)
             velocity += turbineBoostIncrement;
         
@@ -25,7 +25,7 @@ void CarController::animateNode(float dt, SceneNode* car)
     {
         velocity -= carSpeedIncrement;
         
-        //APPLY SOME INITIAL TURBINE BOOST
+        //APPLY SOME INITIAL BOOST TO MAKE CAR FASTER
         if (velocity < 0 && velocity > -turbineBoostSpeedLimit)
             velocity -= turbineBoostIncrement;
         
@@ -135,7 +135,6 @@ void CarController::animateNode(float dt, SceneNode* car)
         }
     }
     
-    
     IvVector2 carVelocity;
     carVelocity.x = velocity * (sin(wheelAngle)) * coef;
     carVelocity.y = velocity * (cos(wheelAngle)) * coef;
@@ -151,8 +150,3 @@ void CarController::animateNode(float dt, SceneNode* car)
     
     car->setLocalTransform(carPos, {0, wheelAngle, 0}, car->getLocalScale());
 }
-
-CarController::CarController(std::shared_ptr<SceneNode> car) : car(car) {
-    
-}
-

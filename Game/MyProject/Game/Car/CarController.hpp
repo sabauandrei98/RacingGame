@@ -5,11 +5,30 @@
 #include <IvVector2.h>
 #include <IvVector3.h>
 #include "../SceneManagement/SceneNode.hpp"
+#include <iostream>
+
+//INPUT:
+//W, A, S, D - directions
+//SPACE - brake
+//N - nitro
+
+//disable other key bindings
 
 class CarController : public NodeAnimator{
+
+//TODO:
+
+//after more types of cars are added
+//constructor parameters:
+//forwardMaxSpeed  (necessary)
+//carSpeedIncrement (necessary)
+//nitroIncrement    (necessary)
+//angleSpeedIncrement  (not necessary)
+//turbineBoostSpeedLimit (not necessary)
+    
     
 public:
-    CarController(std::shared_ptr<SceneNode> car);
+    CarController(std::shared_ptr<SceneNode> car) : car(car) {};
     ~CarController(){};
     
 private:
@@ -26,7 +45,6 @@ private:
     float frictionCoefficient = 0.05f;
     float brakeCoefficient = 0.060f;
     
-    
     //velocity
     float velocity = 0;
     float turbineBoostSpeedLimit = 50.0f;
@@ -36,6 +54,5 @@ private:
     //angle
     float wheelAngle = 0;
 
-    
     void animateNode(float dt, SceneNode* car) override;
 };
