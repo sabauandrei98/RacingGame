@@ -21,7 +21,9 @@ GameState(state_controller) {
 
 void SelectCarState::onEnter() {
     std::cout << "SelectCarState enters" << std::endl;
-    std::cout << "Play: p\nBack: x" << std::endl;
+    
+    std::shared_ptr<CarMenu> carMenu=std::make_shared<CarMenu>();
+    state_controller->_main_scene=carMenu->getScene();
 }
 
 void SelectCarState::onExit() {
@@ -37,10 +39,20 @@ void SelectCarState::Update() {
         state_controller->requestChange(Menu);
 }
 
-bool SelectCarState::isPlayTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('p');
+bool SelectCarState::isPlayTriggered() {    
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey))
+    {
+        RayBoxIntersection raybox(state_controller->_main_scene->getCamera()->getRay(mousex,mousey));
+        if(raybox.IsRayIntersectingBox(state_controller->_main_scene->getRoot()->getChild(0)->getBoundingBox()))
+            return true;
+    }
+    return false;
 }
 
 bool SelectCarState::isBackTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('x');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("backCar", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
 }

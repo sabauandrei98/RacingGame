@@ -19,7 +19,6 @@ public:
     void Render();
 private:
     std::shared_ptr<SceneGraph>         box;
-    std::shared_ptr<SceneGraph>         sphere;
     std::shared_ptr<Camera>             camera;
     std::shared_ptr<CameraSceneNode>    cameraSceneNode;
     

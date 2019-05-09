@@ -21,7 +21,9 @@ BuildTrackState::BuildTrackState(StateController* state_controller) :
 
 void BuildTrackState::onEnter() {
     std::cout << "BuildTrackState enters" << std::endl;
-    std::cout << "Next: n\nBack: x" << std::endl;
+    
+    std::shared_ptr<BuildTrackMenu> buildTrack=std::make_shared<BuildTrackMenu>();
+    state_controller->_main_scene=buildTrack->getScene();
 }
 
 void BuildTrackState::onExit() {
@@ -30,17 +32,79 @@ void BuildTrackState::onExit() {
 }
 
 void BuildTrackState::Update() {
-    if (isNextTriggered())
+    if (isPlayTriggered())
         state_controller->requestChange(SelectCar);
     
+    if (isAddTriggered())
+    {
+        //update the road
+    }
+    
+    if(isRemoveTriggered())
+    {
+        //update the road
+    }
+    
+    if(isSaveTriggered())
+    {
+        //save the road
+    }
+    
+    if(isPreviousTriggered())
+    {
+        //update the road
+    }
+    
+    if(isNextTriggered())
+    {
+        //update the road
+    }
     if (isBackTriggered())
         state_controller->requestChange(Track);
 }
 
 bool BuildTrackState::isNextTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('n');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("nextTrack", mousex, mousey, state_controller->_main_scene))
+            return true;
+    return false;
+}
+
+bool BuildTrackState::isPreviousTriggered() {
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("previousTrack", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
+}
+
+bool BuildTrackState::isAddTriggered() {
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("addTrack", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
+}
+
+bool BuildTrackState::isRemoveTriggered(){
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("removeTrack", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
+}
+
+bool BuildTrackState::isPlayTriggered(){
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("playTrack", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
+}
+
+bool BuildTrackState::isSaveTriggered(){
+    return false;
 }
 
 bool BuildTrackState::isBackTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('x');
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("backTrack", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
 }

@@ -12,7 +12,7 @@ CameraTestControler::CameraTestControler()
     cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     
     MeshManager* meshManager=new MeshManager();
-    std::shared_ptr<SceneNode> boxNode=HelperManager::BuildBox(HelperManager::CreateMeshInstance(meshManager->GetMesh("box")));
+    std::shared_ptr<SceneNode> boxNode=HelperManager::BuildBox("boxNode",HelperManager::CreateMeshInstance(meshManager->GetMesh("box")));
     boxGraph=std::make_shared<SceneGraph>();
     boxGraph->setRoot(boxNode);
     boxGraph->setCamera(camera);

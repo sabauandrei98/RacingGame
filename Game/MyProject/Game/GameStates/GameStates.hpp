@@ -10,6 +10,20 @@
 #include <iostream>
 
 #include "../Game.hpp"
+#include "../RayBoxIntersection/RayBoxIntersection.hpp"
+#include "../BasicMenu/Menu.hpp"
+#include "../BasicMenu/StartMenu.hpp"
+#include "../BasicMenu/TrackMenu.hpp"
+#include "../BasicMenu/ChooseTrackMenu.hpp"
+#include "../BasicMenu/BuildTrackMenu.hpp"
+#include "../BasicMenu/CreditsMenu.hpp"
+#include "../BasicMenu/RaceMenu.hpp"
+#include "../BasicMenu/CarMenu.hpp"
+#include "../BasicMenu/HighscoresMenu.hpp"
+#include "../BasicMenu/PauseMenu.hpp"
+#include "../BasicMenu/GameOver.hpp"
+#include "../BasicMenu/FirstMenu.hpp"
+#include "../BasicMenu/TestMenu.hpp"
 
 class StateController;
 
@@ -24,10 +38,23 @@ public:
     virtual void onExit() = 0;
     virtual void Update() = 0;
     
+    virtual void Render(SceneGraph* mainScene)
+    {
+        mainScene->drawScene();
+    }
+    
+    bool rayIntersectsSceneNode(const char* name,unsigned int mousex,unsigned int mousey,const std::shared_ptr<SceneGraph>& mainScene)
+    {
+        RayBoxIntersection raybox(mainScene->getCamera()->getRay(mousex,mousey));
+        if(raybox.IsRayIntersectingBox(mainScene->getRoot()->findFirstNodeWithName(name)->getBoundingBox()))
+            return true;
+        return false;
+    }
     // constructor
     GameState(StateController* state_controller) :
         state_controller(state_controller) {
         }
+    virtual ~GameState(){}
     
 protected:
     // protected variable(s)
@@ -48,12 +75,14 @@ public:
     void onExit();
     void Update();
     
+    
 private:
     // private function(s)
     bool isPlayTriggered();
     bool isHighScoreTriggered();
     bool isCreditsTriggered();
     bool isExitTriggered();
+    bool isBackTriggered();
 };
 
 class TrackState : public GameState {
@@ -101,7 +130,12 @@ public:
     
 private:
     // private function(s)
+    bool isPreviousTriggered();
     bool isNextTriggered();
+    bool isAddTriggered();
+    bool isRemoveTriggered();
+    bool isPlayTriggered();
+    bool isSaveTriggered();
     bool isBackTriggered();
 };
 
@@ -133,7 +167,20 @@ public:
     
 private:
     // private function(s)
-    bool isQuitTriggered();
+    bool isPauseTriggered();
+    bool isGameOverTriggered();
+
+    void renderScore();
+    unsigned int noDigits(uint32_t number);
+    void addNewDigit();
+    void checkNeedChangeDigit();
+    int firstDigit(int no);
+    
+    uint32_t score                  =   0;
+    uint32_t frames                 =   0;
+    
+    std::shared_ptr<RaceMenu>           raceMenu;
+    MeshManager                         meshManager;
 };
 
 class HighScoreState : public GameState {
@@ -165,3 +212,73 @@ private:
     // private function(s)
     bool isBackTriggered();
 };
+
+
+class PauseState : public GameState{
+public:
+    // constructor
+    PauseState(StateController*);
+    
+    // public function(s) and method(s)
+    void onEnter();
+    void onExit();
+    void Update();
+    
+private:
+    // private function(s)
+    bool isResumeTriggered();
+};
+
+class GameOverState:public GameState{
+  
+public:
+    //constructor
+    GameOverState(StateController*);
+    
+    //public functio(s) and method(s)
+    void onEnter();
+    void onExit();
+    void Update();
+    
+private:
+    //private function(s)
+    bool isRetryTriggered();
+    bool isQuitTriggered();
+    
+};
+
+class FirstState:public GameState{
+    
+public:
+    //constructor
+    FirstState(StateController*);
+    
+    //public functio(s) and method(s)
+    void onEnter();
+    void onExit();
+    void Update();
+    
+private:
+    //private function(s)
+    bool isTestTriggered();
+    bool isGameTriggered();
+    bool isExitTriggered();
+    
+};
+
+class TestState:public GameState{
+    
+public:
+    //constructor
+    TestState(StateController*);
+    
+    //public functio(s) and method(s)
+    void onEnter();
+    void onExit();
+    void Update();
+    
+private:
+    //private function(s)
+    bool isBackTriggered();
+};
+

@@ -12,7 +12,7 @@ TestCollision::TestRayBox()
     camera->setRotation({0,0,1});
     
     MeshManager meshManager;
-    std::shared_ptr<SceneNode> boxNode=HelperManager::BuildBox(HelperManager::CreateMeshInstance(meshManager.GetMesh("box")),true,true,true);
+    std::shared_ptr<SceneNode> boxNode=HelperManager::BuildBox("boxNode",HelperManager::CreateMeshInstance(meshManager.GetMesh("box")),true,true,true);
     box=std::make_shared<SceneGraph>();
     
     boxNode->setLocalTransform({0,0,0},{0,0,0},{4,4,4});

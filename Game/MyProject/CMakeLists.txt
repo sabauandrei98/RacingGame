@@ -136,7 +136,11 @@ ${PROJECT_SOURCE_DIR}/Game/ModelLoader/
 ${PROJECT_SOURCE_DIR}/Game/ResourceManager/
 ${PROJECT_SOURCE_DIR}/Game/Helper/
 ${PROJECT_SOURCE_DIR}/Game/Helper/Shaders/
+${PROJECT_SOURCE_DIR}/Game/BasicMenu/
 ${PROJECT_SOURCE_DIR}/Game/Car/
+${PROJECT_SOURCE_DIR}/Game/BasicMenu/Resources/
+${PROJECT_SOURCE_DIR}/Game/BasicMenu/Shaders/
+${PROJECT_SOURCE_DIR}/Game/RoadGeneration/
 
 ${PROJECT_SOURCE_DIR}/Game/Test/
 ${PROJECT_SOURCE_DIR}/Game/Test/Resources/
@@ -146,6 +150,7 @@ ${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/
 ${PROJECT_SOURCE_DIR}/Game/Test/TestRenderTargets/Shader/
 ${PROJECT_SOURCE_DIR}/Game/Test/TestHelper/
 ${PROJECT_SOURCE_DIR}/Game/Test/TestRayBoxIntersection/
+${PROJECT_SOURCE_DIR}/Game/Test/TestBezier/
 )
 
 # LINK PATHS
