@@ -31,7 +31,6 @@ public:
     bool PostRendererInitialize();
 
     std::unique_ptr<StateController>    _state_controller;
-    std::shared_ptr<NodeAnimator>               carController;
 
 protected:
     virtual void UpdateObjects(float dt);

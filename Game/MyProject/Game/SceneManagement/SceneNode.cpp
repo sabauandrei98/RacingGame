@@ -102,9 +102,6 @@ const  IvVector3& SceneNode::getLocalScale() const {
     return _transform.getScale();
 }
 
-void SceneNode::setParent(const std::shared_ptr<SceneNode>& parent){
-    this->_parent = parent.get();
-}
 
 // returns the absolute transformation of the node
 const IvMatrix44& SceneNode::getAbsoluteTransform() const {
