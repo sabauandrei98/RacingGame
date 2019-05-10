@@ -25,8 +25,4 @@ private:
     const bool          _needs_smoothing;   // defines if the camera needs smoothing during follow
     
     float               _smoothing_speed;
-    
-    // distances between the camera and the target if the camera needs smoothing
-    float               _min_distance;
-    float               _max_distance;
 };

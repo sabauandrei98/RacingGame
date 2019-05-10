@@ -1,9 +1,3 @@
-//
-//  CameraSceneNode.hpp
-//  Game
-//
-//  Created by Tamas Both - (p) on 05/04/2019.
-//
 
 #pragma once
 
@@ -13,7 +7,6 @@
 
 #include <IvGame.h>
 #include <IvEventHandler.h>
-
 #include "SceneNode.hpp"
 #include "../Camera.hpp"
 
@@ -44,3 +37,6 @@ private:
     // private variable(s)
     CameraPtr   _camera;
 };
+
+
+

@@ -9,11 +9,9 @@
 
 // hardcoded now for simple car driving
 void CarAnimator::animateNode(float dt, SceneNode* scene_node) {
-    scene_node->setIsMoving(false);
     velocity = {0., 0., 0.};
     
     if (IvGame::mGame->mEventHandler->IsKeyDown('w')) {
-        scene_node->setIsMoving(true);
         velocity = {0., 0., 25.};
         
         if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
@@ -24,7 +22,6 @@ void CarAnimator::animateNode(float dt, SceneNode* scene_node) {
     }
     
     else if (IvGame::mGame->mEventHandler->IsKeyDown('s')) {
-        scene_node->setIsMoving(true);
         velocity = {0., 0., -15.};
         
         if (IvGame::mGame->mEventHandler->IsKeyDown('d'))

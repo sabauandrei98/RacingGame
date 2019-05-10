@@ -22,6 +22,7 @@
 #endif
 #include <GLFW/glfw3.h>
 
+#include "../../Game/ResourceManager/ResourceManager.hpp"
 #include <IvGame.h>
 #include <IvDebugger.h>
 #include <IvEventHandler.h>
@@ -130,7 +131,7 @@ int main(int argc, char *argv[])
     }
 
     // Set the background dark blue
-    IvRenderer::mRenderer->SetClearColor( 0.0f, 0.0f, 0.10f, 1.0f );
+    IvRenderer::mRenderer->SetClearColor( 255.0f, 255.f, 255.0f, 1.0f );
 
     // Do post-renderer creation initialization
     if (!IvGame::mGame->PostRendererInitialize())

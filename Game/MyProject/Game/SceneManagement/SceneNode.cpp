@@ -39,10 +39,19 @@ SceneNode* SceneNode::findFirstNodeWithName(const std::string& name) const {
 }
 
 // finds all the nodes with the given name
-void SceneNode::findAllNodesWithName(const std::string& name, std::vector<SceneNode*>& scene_nodes) const {
+void SceneNode::findAllNodesWithName(const std::string& name, std::vector<std::shared_ptr<SceneNode>>& scene_nodes) const {
     for (auto& i : _children)
         if (i->_name == name)
-            scene_nodes.push_back(i.get());
+            scene_nodes.push_back(i);
+    
+    for (auto& i : _children)
+        i->findAllNodesWithName(name, scene_nodes);
+}
+
+void SceneNode::findAllNodesContainingName(const std::string& name, std::vector<std::shared_ptr<SceneNode>>& scene_nodes) const {
+    for (auto& i : _children)
+        if (i->_name.find(name) != std::string::npos)
+            scene_nodes.push_back(i);
     
     for (auto& i : _children)
         i->findAllNodesWithName(name, scene_nodes);
@@ -54,10 +63,12 @@ void SceneNode::addChild(const std::shared_ptr<SceneNode>& child) {
     _children.push_back(child);
 }
 
+
 // returns a pointer to the child
 SceneNode* SceneNode::getChild(unsigned int index) {
     return _children[index].get();
 }
+
 
 // removes this node and all its children from the graph
 void SceneNode::remove()
@@ -80,6 +91,11 @@ void SceneNode::setLocalPosition(const IvVector3& position) {
     _transform.set(position);
 }
 
+//gets local position
+const IvVector3& SceneNode::getLocalPosition() const{
+    return _transform._position;
+}
+
 // returns the absolute transformation of the node
 const IvMatrix44& SceneNode::getAbsoluteTransform() const {
     return _absolute_transform;
@@ -95,6 +111,10 @@ IvVector3 SceneNode::getLocalPositon() const {
     IvMatrix44 transform = _transform.getMatrix();
     
     return IvVector3(transform(0, 3), transform(1, 3), transform(2, 3));
+}
+
+IvVector3 SceneNode::getLocalScale() const {
+    return _transform.getScale();
 }
 
 // returns the bounding box
@@ -183,13 +203,7 @@ void SceneNode::setRenderable(const std::shared_ptr<MeshInstance>& renderable) {
     _rendarable = renderable;
 }
 
-void SceneNode::setIsMoving(bool value) {
-    _is_moving = value;
+const std::shared_ptr<MeshInstance>& SceneNode::getRenderable() const
+{
+    return _rendarable;
 }
-
-// returns true is the node is moving
-bool SceneNode::getIsMoving() {
-    return _is_moving;
-}
-
-

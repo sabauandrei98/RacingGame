@@ -25,7 +25,8 @@ public:
     virtual ~SceneNode();
     
     SceneNode* findFirstNodeWithName(const std::string&) const;
-    void findAllNodesWithName(const std::string&, std::vector<SceneNode*>&) const;
+    void findAllNodesWithName(const std::string&, std::vector<std::shared_ptr<SceneNode>>&) const;
+    void findAllNodesContainingName(const std::string& name, std::vector<std::shared_ptr<SceneNode>>& scene_nodes) const;
     
     void addChild(const std::shared_ptr<SceneNode>&);
     SceneNode* getChild(unsigned int);
@@ -33,19 +34,20 @@ public:
     
     void setLocalTransform(const IvVector3&, const IvVector3&, const IvVector3&);
     void setLocalPosition(const IvVector3&);
+    
+    const IvVector3& getLocalPosition() const;
     const IvMatrix44& getAbsoluteTransform() const;
     IvVector3 getAbsolutePosition() const;
     void setAbsolutePosition(const IvVector3&);
     const BoundingBox& getBoundingBox() const;
     IvVector3 getLocalPositon() const;
+    IvVector3 getLocalScale() const;
     
     void setAnimator(const std::shared_ptr<NodeAnimator>&);
     void setRenderable(const std::shared_ptr<MeshInstance>&);
+    const std::shared_ptr<MeshInstance>& getRenderable() const;
     
     const NodeAnimator* getAnimator() const;
-    
-    void setIsMoving(bool);
-    bool getIsMoving();
     
     virtual void updateAbsoluteTransform();
     virtual void updateNode(float);
@@ -58,7 +60,6 @@ protected:
     
     bool                                    _enabled = true;
     bool                                    _needs_bounding_box = true;
-    bool                                    _is_moving;
     std::string                             _name;
     
     NodeTransform                           _transform;

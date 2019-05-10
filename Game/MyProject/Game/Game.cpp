@@ -12,6 +12,7 @@ Game::Game() : IvGame()
 
 Game::~Game()
 {
+    
 }
 
 bool 
@@ -25,13 +26,11 @@ Game::PostRendererInitialize()
     
     _scene_graph = std::make_unique<SceneGraph>();
     _root = std::make_shared<SceneNode>("root");
-    _child1 = HelperManager::BuildSphere(HelperManager::CreateMeshInstance(meshManager.GetMesh("sphere")));
-    _child3 = HelperManager::BuildQuad(HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"), "../../Game/Helper/Shaders/BasicShader1"));
+    _child1 = HelperManager::BuildSphere("sphere", HelperManager::CreateMeshInstance( meshManager.GetMesh("sphere")));
+    _child3 = HelperManager::BuildTexturedQuad("quad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"), "../../Game/Helper/Shaders/TextureShader"), "../../Textures/large.tga");
     _child2 = ModelLoader::loadModel("jeep.fbx", "example_shader");
     
-    //_child2->setLocalTransform({-3., 0., 15.}, {-1.57, 0., 0.}, {0.0005, 0.0005, 0.0005});
-    
-    _camera = std::make_shared<Camera>(45.0, 0.1, 35.0, 1280, 720);
+    _camera = std::make_shared<Camera>(45.0, 0.1, 100.0, 1280, 720);
     _camera_scene_node = std::make_shared<CameraSceneNode>("camera", _camera);
     
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
@@ -41,17 +40,17 @@ Game::PostRendererInitialize()
     _scene_graph->setRoot(_root);
     _scene_graph->setCamera(_camera);
     
-    _root->addChild(_child1);
+    _controller = std::make_shared<CarController>(_child2);
+    _child2->setAnimator(_controller);
+    
     _root->addChild(_child2);
     _root->addChild(_child3);
     _root->addChild(_camera_scene_node);
-    _child1->setAnimator(std::make_shared<CarAnimator>());
-    _camera_scene_node->setAnimator(std::make_shared<CameraFollowAnimator>(_child1.get(), IvVector2(3.f, 15.f), true));
+    _camera_scene_node->setAnimator(std::make_shared<CameraFollowAnimator>(_child2.get(), IvVector2(3.f, 10.f), true));
     _camera_scene_node->setAbsolutePosition(IvVector3(0.f, 3.f, -15.f));
-    _child2->setLocalPosition({3., 0., 15.});
-    _child3->setLocalTransform({0., 0., 0.}, {0., 0., kPI/2.}, {100., 100., 100.});
-
-    _camera->setRotation({0.0f, 1.0f, 0.0f});
+    _child3->setLocalTransform({0., 0., 0.}, {0., 0., -kPI/2.}, {1000., 1000., 1000.});
+    
+    _camera->setRotation({0., 1., 0.});
     
     ::IvSetDefaultLighting();
   
@@ -67,7 +66,6 @@ void
 Game::Render()
 {
     _scene_graph->drawScene();
-    //IvDrawFloor();
 }
 
  

@@ -1,12 +1,10 @@
 #pragma once
 
-#include"Player/Player.hpp"
-#include"Test/TestCustomAttributes/Test.hpp"
-#include"Test/TestRenderTargets/TestRT.hpp"
-#include"Test/TestHelper/TestHelper.hpp"
-#include"Test/TestRayBoxIntersection/TestCollision.hpp"
+#include "BasicMenu/StartMenu.hpp"
+#include "BasicMenu/TrackMenu.hpp"
 #include "Player/Player.hpp"
-
+#include "Test/TestRayBoxIntersection/TestCollision.hpp"
+#include "Test/TestHelper/TestHelper.hpp"
 #include <stdio.h>
 #include <iostream>
 #include <IvGame.h>
@@ -21,8 +19,12 @@
 #include "ModelLoader/ModelLoader.hpp"
 #include "SceneManagement/CarAnimator.hpp"
 #include "SceneManagement/CameraFollowAnimator.hpp"
+#include "GameStates/StateController.hpp"
+#include "RoadGenerator/RoadEditor.hpp"
+#include "SceneManagement/CarController.hpp"
 
 class CameraTestControler;
+class StateController;
 
 class Game : public IvGame
 {
@@ -46,4 +48,5 @@ private:
     std::shared_ptr<SceneNode>          _child3;
     std::shared_ptr<Camera>             _camera;
     std::shared_ptr<CameraSceneNode>    _camera_scene_node;
+    std::shared_ptr<NodeAnimator>       _controller;
 };
