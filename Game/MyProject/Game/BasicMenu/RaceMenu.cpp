@@ -24,6 +24,8 @@ RaceMenu::RaceMenu()
     uniforms.push_back("mTexture");
     uniforms.push_back("row");
     uniforms.push_back("column");
+    uniforms.push_back("noRows");
+    uniforms.push_back("noColumns");
     
     std::shared_ptr<SceneNode> countRoot=std::make_shared<SceneNode>("countRoot");
     

@@ -28,7 +28,7 @@ void RaceState::onEnter() {
     
     raceMenu=std::make_shared<RaceMenu>();
     state_controller->_main_scene=raceMenu->getScene();
-
+    
 }
 
 void RaceState::onExit() {
@@ -59,7 +59,10 @@ void RaceState::Update() {
                 std::string name="count"+std::to_string(noDigits(score%10));
                 const char* quadName=name.c_str();
                 
-                if(raceMenu->getScene()->getRoot()->findFirstNodeWithName("countRoot")->findFirstNodeWithName("count1")==nullptr && score==0)
+                auto root=raceMenu->getScene()->getRoot();
+                auto first=root->findFirstNodeWithName("countRoot");
+                auto count1=first->findFirstNodeWithName("count1");
+                if(count1==nullptr && score==0)
                 {
                     //rendering first quad
                     std::vector<std::string> uniforms;
@@ -70,20 +73,22 @@ void RaceState::Update() {
                      std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"font.tga");
                     
                     countScoreQuad->setLocalTransform(IvVector3{17,0,9}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
-                    raceMenu->getScene()->getRoot()->findFirstNodeWithName("countRoot")->addChild(countScoreQuad);
+                    first->addChild(countScoreQuad);
                     
-                    raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(1, val.first);
-                    raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(2, val.second);
+                    auto quad=root->findFirstNodeWithName(quadName);
+                    quad->getRenderable()->setUniformValue(1, val.first);
+                    quad->getRenderable()->setUniformValue(2, val.second);
                 }
-                else if(raceMenu->getScene()->getRoot()->findFirstNodeWithName("countRoot")->findFirstNodeWithName("count1")==nullptr)
+                else if(count1==nullptr)
                 {
                    //after pause state
                    renderScore();
                 }
                 else
                 {
-                   raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(1, val.first);
-                   raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(2, val.second);
+                    auto renderable=root->findFirstNodeWithName(quadName)->getRenderable();
+                    renderable->setUniformValue(1, val.first);
+                    renderable->setUniformValue(2, val.second);
                 }
                 
                 if(noDigits(score)>noDigits(score-1))
@@ -131,11 +136,12 @@ void RaceState::addNewDigit()
         const char* previousQuadName=preName.c_str();
         
         std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"font.tga");
-        
-        auto previousPos=raceMenu->getScene()->getRoot()->findFirstNodeWithName(previousQuadName)->getLocalPosition();
+    
+        auto root=raceMenu->getScene()->getRoot();
+        auto previousPos=root->findFirstNodeWithName(previousQuadName)->getLocalPosition();
         countScoreQuad->setLocalTransform(IvVector3{previousPos.x-1,previousPos.y,previousPos.z}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
-        
-        raceMenu->getScene()->getRoot()->findFirstNodeWithName("countRoot")->addChild(countScoreQuad);
+    
+        root->findFirstNodeWithName("countRoot")->addChild(countScoreQuad);
     
         auto val=raceMenu->getRowCol(score%10 +'0');
     
@@ -143,8 +149,9 @@ void RaceState::addNewDigit()
     
         quadName=name.c_str();
     
-        raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(1, val.first);
-        raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(2, val.second);
+        auto valueRenderable=root->findFirstNodeWithName(quadName)->getRenderable();
+        valueRenderable->setUniformValue(1, val.first);
+        valueRenderable->setUniformValue(2, val.second);
     
         if(score>=10)
         {
@@ -154,8 +161,9 @@ void RaceState::addNewDigit()
     
             quadName=name.c_str();
     
-            raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(1, val.first);
-            raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable()->setUniformValue(2, val.second);
+            valueRenderable=root->findFirstNodeWithName(quadName)->getRenderable();
+            valueRenderable->setUniformValue(1, val.first);
+            valueRenderable->setUniformValue(2, val.second);
         }
     
 }
@@ -225,7 +233,9 @@ void RaceState::renderScore()
         std::string n="count"+std::to_string(noDigits(score)-noDig );
         const char* prevName=n.c_str();
         
-        if(raceMenu->getScene()->getRoot()->findFirstNodeWithName("countRoot")->findFirstNodeWithName(prevName)==nullptr)
+        auto root=raceMenu->getScene()->getRoot();
+        
+        if(root->findFirstNodeWithName("countRoot")->findFirstNodeWithName(prevName)==nullptr)
             countScoreQuad->setLocalTransform(IvVector3{17,0,9}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
         else
         {
@@ -233,10 +243,10 @@ void RaceState::renderScore()
             countScoreQuad->setLocalTransform(IvVector3{previousPos.x-1,previousPos.y,previousPos.z}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
         };
         
-        raceMenu->getScene()->getRoot()->findFirstNodeWithName("countRoot")->addChild(countScoreQuad);
+        root->findFirstNodeWithName("countRoot")->addChild(countScoreQuad);
         
         auto val=raceMenu->getRowCol(auxScore%10 + '0');
-        auto renderable=raceMenu->getScene()->getRoot()->findFirstNodeWithName(quadName)->getRenderable();
+        auto renderable=root->findFirstNodeWithName(quadName)->getRenderable();
         
         renderable->setUniformValue(1, val.first);
         renderable->setUniformValue(2, val.second);
