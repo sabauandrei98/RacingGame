@@ -29,6 +29,7 @@
 #include <OGL/IvRendererOGL.h>
 #include "../../Game/ResourceManager/ResourceManager.hpp"
 
+
 static void visibilityCallback(GLFWwindow* window, int vis);
 static void reshapeCallback(GLFWwindow* window, int w, int h);
 

@@ -14,7 +14,7 @@
 
 //disable other key bindings
 
-class CarController : public NodeAnimator{
+class CarController :  public NodeAnimator{
 
 //TODO:
 
@@ -30,6 +30,8 @@ class CarController : public NodeAnimator{
 public:
     CarController(){};
     ~CarController(){};
+    
+    const IvVector3& getVelocity() const;
     
 private:
     
@@ -52,6 +54,6 @@ private:
     
     //angle
     float wheelAngle = 0;
-
+    IvVector3 velocity_vector;
     void animateNode(float dt, SceneNode* car) override;
 };

@@ -139,6 +139,7 @@ void CarController::animateNode(float dt, SceneNode* car)
     carVelocity.x = velocity * (sin(wheelAngle)) * coef;
     carVelocity.y = velocity * (cos(wheelAngle)) * coef;
     
+    velocity_vector = {carVelocity.x, 0., carVelocity.y};
     
     IvVector2 carPosition;
     carPosition.x += carVelocity.x * dt;
@@ -149,4 +150,8 @@ void CarController::animateNode(float dt, SceneNode* car)
     carPos.z += carPosition.y;
     
     car->setLocalTransform(carPos, {0, wheelAngle, 0}, car->getLocalScale());
+}
+
+const IvVector3& CarController::getVelocity() const{
+    return velocity_vector;
 }

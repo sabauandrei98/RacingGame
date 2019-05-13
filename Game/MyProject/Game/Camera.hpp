@@ -14,7 +14,6 @@ class Camera : std::enable_shared_from_this<Camera> {
 
 private:
     
-    IvMatrix44 transform;
     IvMatrix44 rotMatrix;
     
     IvVector3 position;
@@ -81,9 +80,6 @@ public:
     }
     const IvVector3& getRotation() const {
         return rotation;
-    }
-    const IvMatrix44& getTransformMatrix() const {
-        return transform;
     }
     
     IvMatrix44 getViewMatrix() const;
