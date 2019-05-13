@@ -27,11 +27,11 @@ SkyBox::SkyBox()
 
 
     frontQuad->setLocalTransform({0,4.97,0},    {0,4.72,6.3/4},            {10,10,10});
-    backQuad->setLocalTransform({0,-4.97,0},    {4.72*2,4.71*3,6.29/4},    {10,10,10});
+    backQuad->setLocalTransform({0,-4.97,0},    {4.71*2,4.71*3,6.29/4},    {10,10,10});
     upQuad->setLocalTransform(  {0,0,4.97},     {0,4.72,6.28},             {10,10,10});
     downQuad->setLocalTransform({0,0,-4.97},    {0,4.72,6.28/2},           {10,10,10});
-    rightQuad->setLocalTransform({4.97,0,0},    {-7.855,0,6.29},           {10,10,10});
-    leftQuad->setLocalTransform({-4.97,0,0},    {7.855,0,6.26855/2},       {10,10,10});
+    rightQuad->setLocalTransform({4.97,0,0},    {-7.855,0,6.28},           {10,10,10});
+    leftQuad->setLocalTransform({-4.97,0,0},    {7.855,0,6.268/2},         {10,10,10});
 
     sky->addChild(frontQuad);
     sky->addChild(backQuad);
@@ -39,6 +39,8 @@ SkyBox::SkyBox()
     sky->addChild(downQuad);
     sky->addChild(rightQuad);
     sky->addChild(leftQuad);
+    
+   
 
 }
 
