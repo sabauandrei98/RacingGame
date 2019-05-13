@@ -55,14 +55,13 @@ void MeshInstance::setUniformValue(unsigned int index, IvTexture* value) {
     _shader_uniforms[index]->SetValue(value);
 }
 
-// sets the shader uniform values with vec3
-void MeshInstance::setUniformValue(unsigned int index, const IvVector3 &value)
-{
-    _shader_uniforms[index]->SetValue(value,0);
+// sets the shader uniform values with float
+void MeshInstance::setUniformValue(unsigned int index, float value) {
+    _shader_uniforms[index]->SetValue(value, 0);
 }
 
-// sets the shader uniform values with float
-void MeshInstance::setUniformValue(unsigned int index,float value)
+// sets the shader uniform values with vec3
+void MeshInstance::setUniformValue(unsigned int index, const IvVector3 &value)
 {
     _shader_uniforms[index]->SetValue(value,0);
 }

@@ -39,13 +39,17 @@ void NodeTransform::set(const IvVector3& position) {
 }
 
 // returns the transform matrix
-const IvMatrix44& NodeTransform::getMatrix() {
+const IvMatrix44& NodeTransform::getMatrix() const {
     return _transform_matrix;
 }
 
 const IvVector3& NodeTransform::getPosition() const{
     return _position;
     
+}
+
+const IvVector3& NodeTransform::getScale() const {
+    return _scale;
 }
 
 // ---------------------------------
@@ -57,7 +61,7 @@ void NodeTransform::calculate() {
     IvMatrix44 position;
     IvMatrix44 rotation;
     IvMatrix44 scale;
-    
+
     position.Translation(_position);
     rotation.Rotation(_rotation[2], _rotation[1], _rotation[0]);
     scale.Scaling(_scale);

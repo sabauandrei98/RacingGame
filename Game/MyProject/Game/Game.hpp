@@ -16,7 +16,12 @@
 #include "CameraTestControler.hpp"
 #include "SceneManagement/SceneGraph.hpp"
 #include "SceneManagement/CameraSceneNode.hpp"
+#include "ModelLoader/ModelLoader.hpp"
+#include "SceneManagement/CarAnimator.hpp"
+#include "SceneManagement/CameraFollowAnimator.hpp"
 #include "GameStates/StateController.hpp"
+#include "RoadGenerator/RoadEditor.hpp"
+#include "SceneManagement/CarController.hpp"
 
 class CameraTestControler;
 class StateController;
@@ -28,8 +33,6 @@ public:
     ~Game();
     bool PostRendererInitialize();
 
-    std::unique_ptr<StateController>    _state_controller;
-
 protected:
     virtual void UpdateObjects(float dt);
     virtual void Render();
@@ -37,5 +40,13 @@ protected:
 private:
     Game( const Game& other );
     Game& operator=( const Game& other );
-
+    
+    std::unique_ptr<SceneGraph>         _scene_graph;
+    std::shared_ptr<SceneNode>          _root;
+    std::shared_ptr<SceneNode>          _child1;
+    std::shared_ptr<SceneNode>          _child2;
+    std::shared_ptr<SceneNode>          _child3;
+    std::shared_ptr<Camera>             _camera;
+    std::shared_ptr<CameraSceneNode>    _camera_scene_node;
+    std::shared_ptr<NodeAnimator>       _controller;
 };

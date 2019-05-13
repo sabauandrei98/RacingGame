@@ -106,9 +106,27 @@ IvVector3 SceneNode::getAbsolutePosition() const {
     return IvVector3(_absolute_transform(0, 3), _absolute_transform(1, 3), _absolute_transform(2, 3));
 }
 
+// returns the local postion of the node
+IvVector3 SceneNode::getLocalPositon() const {
+    IvMatrix44 transform = _transform.getMatrix();
+    
+    return IvVector3(transform(0, 3), transform(1, 3), transform(2, 3));
+}
+
+IvVector3 SceneNode::getLocalScale() const {
+    return _transform.getScale();
+}
+
 // returns the bounding box
 const BoundingBox& SceneNode::getBoundingBox() const {
     return _bounding_box;
+}
+
+// sets the absolute position
+void SceneNode::setAbsolutePosition(const IvVector3& position) {
+    _absolute_transform(0, 3) = position.x;
+    _absolute_transform(1, 3) = position.y;
+    _absolute_transform(2, 3) = position.z;
 }
 
 // updates the absolute transform matrix
@@ -173,6 +191,11 @@ void SceneNode::collectRenderingPackets(const Camera* camera, std::vector<Render
 // sets the node animator
 void SceneNode::setAnimator(const std::shared_ptr<NodeAnimator>& animator) {
     _animator = animator;
+}
+
+// returns the animator
+const NodeAnimator* SceneNode::getAnimator() const {
+    return _animator.get();
 }
 
 // sets the mesh instance

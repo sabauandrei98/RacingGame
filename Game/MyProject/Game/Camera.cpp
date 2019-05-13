@@ -6,7 +6,9 @@ IvMatrix44 Camera::getViewMatrix() const
     IvVector3 view = lookAt - position;
     view.Normalize();
     IvVector3 right =  view.Cross( rotation );
+    right.Normalize();
     IvVector3 viewUp =  right.Cross( view );
+    viewUp.Normalize();
     IvMatrix33 rotate;
     
     rotate.SetRows( right, viewUp, -view );

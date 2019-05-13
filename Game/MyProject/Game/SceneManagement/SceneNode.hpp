@@ -38,11 +38,16 @@ public:
     const IvVector3& getLocalPosition() const;
     const IvMatrix44& getAbsoluteTransform() const;
     IvVector3 getAbsolutePosition() const;
+    void setAbsolutePosition(const IvVector3&);
     const BoundingBox& getBoundingBox() const;
+    IvVector3 getLocalPositon() const;
+    IvVector3 getLocalScale() const;
     
     void setAnimator(const std::shared_ptr<NodeAnimator>&);
     void setRenderable(const std::shared_ptr<MeshInstance>&);
     const std::shared_ptr<MeshInstance>& getRenderable() const;
+    
+    const NodeAnimator* getAnimator() const;
     
     virtual void updateAbsoluteTransform();
     virtual void updateNode(float);
