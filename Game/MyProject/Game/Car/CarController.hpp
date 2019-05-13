@@ -28,11 +28,10 @@ class CarController : public NodeAnimator{
     
     
 public:
-    CarController(SceneNode* car) : car(car) {};
+    CarController(){};
     ~CarController(){};
     
 private:
-    SceneNode* car;
     
     //increments
     float carSpeedIncrement = 0.045f;
