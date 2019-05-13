@@ -27,10 +27,8 @@ Game::PostRendererInitialize()
         return false;
     
     _state_controller = std::make_unique<StateController>();
-    
     ::IvSetDefaultLighting();
-   
-  
+    
     return true;
 }
 

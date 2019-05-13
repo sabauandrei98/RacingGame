@@ -3,8 +3,6 @@
 #include "BasicMenu/StartMenu.hpp"
 #include "BasicMenu/TrackMenu.hpp"
 #include "Player/Player.hpp"
-#include "Test/TestRayBoxIntersection/TestCollision.hpp"
-#include "Test/TestHelper/TestHelper.hpp"
 #include <stdio.h>
 #include <iostream>
 #include <IvGame.h>
@@ -29,7 +27,7 @@ public:
     bool PostRendererInitialize();
     
     std::unique_ptr<StateController>    _state_controller;
-
+    
 protected:
     virtual void UpdateObjects(float dt);
     virtual void Render();

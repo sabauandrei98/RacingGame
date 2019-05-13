@@ -103,7 +103,6 @@ namespace HelperManager{
     {
         std::shared_ptr<Mesh> quad=std::make_shared<Mesh>();
         
-        
         float x=0;
         float y=0;
         float z=0;

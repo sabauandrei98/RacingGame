@@ -14,8 +14,8 @@ TestMenu::TestMenu()
     SkyBox skyBox;
     
     std::shared_ptr<Camera> camera=std::make_shared<Camera>(75.0, 0.1, 450.0, 1280, 720);
-    camera->setLookAt({0,-30,0});
-    camera->setPosition({0,0,0});
+    camera->setLookAt({0,0,0});
+    camera->setPosition({0,-30,0});
     camera->setRotation({0,0,1});
     
     menu=std::make_shared<SceneGraph>();
@@ -38,10 +38,15 @@ TestMenu::TestMenu()
 
    // menu->getRoot()->addChild(box);
    // menu->getRoot()->addChild(backQuad);
-    menu->getRoot()->addChild(sky);
+   // menu->getRoot()->addChild(sky);
+    
+    Terrain terrain(6,6,6,6);
+    menu->getRoot()->addChild(terrain.getTerrain());
     
     menu->getRoot()->addChild(cameraSceneNode);
     menu->setCamera(camera);
+    
+   
     
 }
 //-------------------------------------------------------------------------------

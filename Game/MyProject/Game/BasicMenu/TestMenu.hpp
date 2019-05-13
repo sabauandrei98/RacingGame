@@ -9,6 +9,7 @@
 #include "HelperManager.hpp"
 #include "MeshManager.hpp"
 #include "Environment/SkyBox.hpp"
+#include "Environment/Terrain.hpp"
 #include <stdio.h>
 #include <map>
 
