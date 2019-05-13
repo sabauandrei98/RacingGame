@@ -28,11 +28,11 @@ class CarController : public NodeAnimator{
     
     
 public:
-    CarController(std::shared_ptr<SceneNode> car) : car(car) {};
+    CarController(SceneNode* car) : car(car) {};
     ~CarController(){};
     
 private:
-    std::shared_ptr<SceneNode> car;
+    SceneNode* car;
     
     //increments
     float carSpeedIncrement = 0.045f;
