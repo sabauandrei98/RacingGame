@@ -27,7 +27,7 @@ public:
     Game();
     ~Game();
     bool PostRendererInitialize();
-
+    
     std::unique_ptr<StateController>    _state_controller;
 
 protected:

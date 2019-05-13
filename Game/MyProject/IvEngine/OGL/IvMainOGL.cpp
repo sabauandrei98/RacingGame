@@ -163,7 +163,6 @@ int main(int argc, char *argv[])
         {
             IvGame::mGame->Display();
         }
-
         // swap graphics buffers
         
         glfwSwapBuffers(window);

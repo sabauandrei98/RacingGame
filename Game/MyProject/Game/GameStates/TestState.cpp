@@ -18,8 +18,8 @@ GameState(state_controller) {
 void TestState::onEnter() {
     std::cout << "TestState enters" << std::endl;
     
-    std::shared_ptr<TestMenu> gameover=std::make_shared<TestMenu>();
-    state_controller->_main_scene=gameover->getScene();
+    std::shared_ptr<TestMenu> test=std::make_shared<TestMenu>();
+    state_controller->_main_scene=test->getScene();
 }
 
 void TestState::onExit() {
