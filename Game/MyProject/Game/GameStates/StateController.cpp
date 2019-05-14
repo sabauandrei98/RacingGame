@@ -49,7 +49,6 @@ void StateController::render()
     _states[_current_state]->Render(_main_scene.get());
 }
 
-
 void StateController::requestChange(State state) {
     _old_state = _current_state;
     _current_state = state;

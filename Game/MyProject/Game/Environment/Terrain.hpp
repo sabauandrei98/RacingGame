@@ -6,6 +6,7 @@
 //-- Dependencies ---------------------------------------------------------------
 //-------------------------------------------------------------------------------
 #include "Mesh.hpp"
+#include <IvRendererHelp.h>
 #include "HelperManager.hpp"
 #include "MeshManager.hpp"
 #include "PerlinNoise.hpp"
@@ -23,18 +24,21 @@ class Terrain
     uint32_t columns;
     std::shared_ptr<SceneNode> terrain;
     std::vector<std::vector<float>> elevation;
+    std::vector<IvVector3> normals;
     
 public:
-    Terrain(uint32_t width,uint32_t height,uint32_t rows,uint32_t columns);
+    Terrain(uint32_t width,uint32_t height);
     ~Terrain(){}
     
     std::shared_ptr<SceneNode> getTerrain(){return terrain;}
+    std::vector<IvVector3> getNormal(){return normals;}
     void build();
     
 private:
     double noise1(double nx,double ny);
     double noise2(double nx,double ny);
    
+    IvVector3 calculateNormalAverage(std::vector<std::pair<IvVector3,IvVector3>> normalFaces,unsigned int index);
 };
 
 

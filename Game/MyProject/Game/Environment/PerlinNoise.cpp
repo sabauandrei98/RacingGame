@@ -17,7 +17,7 @@ PerlinNoise::PerlinNoise(unsigned int seed)
 double
 PerlinNoise::lerp(double t, double a, double b)
 {
-    return a+t * (b-a);
+    return a + t * (b - a);
 }
 
 double

@@ -41,6 +41,7 @@ void
 Game::Render()
 {
     _state_controller->render();
+
 }
 
  
