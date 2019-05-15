@@ -13,6 +13,13 @@ InfoManager::InfoManager(SceneNode* root) : root(root) {
         setCheckpoint(scene_nodes[i]->getName(), 0);
         setScore(scene_nodes[i]->getName(), 0);
     }
+    
+    //get the list of middle points
+    root->findAllNodesContainingName("bezierMiddlePoint", scene_nodes);
+    for(int i = 0; i < scene_nodes.size(); i++)
+    {
+        roadMiddlePoints.push_back(scene_nodes[i]->getLocalPosition());
+    }
 }
 
 const IvVector3& InfoManager::getCarSpeed(const std::string& carName) const{
