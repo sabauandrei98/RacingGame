@@ -22,6 +22,7 @@
 #include "GameStates/StateController.hpp"
 #include "RoadGenerator/RoadEditor.hpp"
 #include "SceneManagement/CarController.hpp"
+#include "DeferredRendering/DeferredRenderer.hpp"
 
 class CameraTestControler;
 class StateController;
@@ -49,4 +50,6 @@ private:
     std::shared_ptr<Camera>             _camera;
     std::shared_ptr<CameraSceneNode>    _camera_scene_node;
     std::shared_ptr<NodeAnimator>       _controller;
+    
+    std::unique_ptr<DeferredRenderer>   _deferred_renderer;
 };

@@ -69,6 +69,7 @@ void
 IvFrameBufferOGL::Create(uint32_t width,uint32_t height)
 {
     unsigned int colorIndex = 0;
+    std::vector<unsigned int> attachments;
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
     for(int i=0;i<renderTargets.size();i++)
@@ -77,10 +78,13 @@ IvFrameBufferOGL::Create(uint32_t width,uint32_t height)
         if(renderTargets[i]->GetRenderTargetType()==RenderTargetType::COLOR)
         {
             glFramebufferTexture2D(GL_FRAMEBUFFER,
-                                   GL_COLOR_ATTACHMENT0 + colorIndex++,
+                                   GL_COLOR_ATTACHMENT0 + colorIndex,
                                    GL_TEXTURE_2D,
                                    renderTargets[i]->GetReference(),
                                    0);
+            
+            attachments.push_back(GL_COLOR_ATTACHMENT0 + colorIndex);
+            colorIndex++;
         }
         else if(renderTargets[i]->GetRenderTargetType()==RenderTargetType::DEPTH)
         {
@@ -90,6 +94,8 @@ IvFrameBufferOGL::Create(uint32_t width,uint32_t height)
                                       renderTargets[i]->GetReference());
         }
     }
+    
+    glDrawBuffers(colorIndex, attachments.data());
     
     glBindFramebuffer(GL_FRAMEBUFFER,0);
 }
