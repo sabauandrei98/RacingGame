@@ -12,7 +12,7 @@ Game::Game() : IvGame()
 
 Game::~Game()
 {
-    
+    delete _infoManager;
 }
 
 bool 
@@ -30,6 +30,7 @@ Game::PostRendererInitialize()
     _child1 = HelperManager::BuildSphere("sphere", HelperManager::CreateMeshInstance( meshManager.GetMesh("sphere")));
     _child3 = HelperManager::BuildTexturedQuad("quad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"), "../../Game/Helper/Shaders/TextureShader"), "../../Textures/large.tga");
     _child2 = ModelLoader::loadModel("jeep.fbx", "example_shader");
+    _child2->setName("Car");
     
     _camera = std::make_shared<Camera>(45.0, 0.1, 400.0, 1280, 720);
     _camera_scene_node = std::make_shared<CameraSceneNode>("camera", _camera);
@@ -53,6 +54,7 @@ Game::PostRendererInitialize()
     
     _camera->setRotation({0., 1., 0.});
 
+    _infoManager = new InfoManager(_root.get());
     
     ::IvSetDefaultLighting();
   

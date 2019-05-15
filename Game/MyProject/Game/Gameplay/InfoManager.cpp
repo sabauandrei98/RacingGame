@@ -47,6 +47,7 @@ const float InfoManager::getTime() const{
     return time;
 }
 
+
 void InfoManager::Update(float dt)
 {
     time += dt;

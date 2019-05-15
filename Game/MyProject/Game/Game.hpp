@@ -23,6 +23,7 @@
 
 #include "RoadGenerator/RoadEditor.hpp"
 #include "Car/CarController.hpp"
+#include "Gameplay/InfoManager.hpp"
 
 
 class CameraTestControler;
@@ -51,4 +52,6 @@ private:
     std::shared_ptr<Camera>             _camera;
     std::shared_ptr<CameraSceneNode>    _camera_scene_node;
     std::shared_ptr<NodeAnimator>       _controller;
+    
+    InfoManager*                        _infoManager;
 };
