@@ -20,8 +20,10 @@
 #include "SceneManagement/CarAnimator.hpp"
 #include "SceneManagement/CameraFollowAnimator.hpp"
 #include "GameStates/StateController.hpp"
+
 #include "RoadGenerator/RoadEditor.hpp"
-#include "SceneManagement/CarController.hpp"
+#include "Car/CarController.hpp"
+
 
 class CameraTestControler;
 class StateController;

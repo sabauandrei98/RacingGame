@@ -22,6 +22,7 @@ Game::PostRendererInitialize()
     if ( !IvGame::PostRendererInitialize() )
         return false;
     
+
     MeshManager meshManager;
     
     _scene_graph = std::make_unique<SceneGraph>();
@@ -40,7 +41,7 @@ Game::PostRendererInitialize()
     _scene_graph->setRoot(_root);
     _scene_graph->setCamera(_camera);
     
-    _controller = std::make_shared<CarController>(_child2);
+    _controller = std::make_shared<CarController>();
     _child2->setAnimator(_controller);
     
     _root->addChild(_child2);
@@ -51,6 +52,7 @@ Game::PostRendererInitialize()
     _child3->setLocalTransform({0., 0., 0.}, {0., 0., -kPI/2.}, {1000., 1000., 1000.});
     
     _camera->setRotation({0., 1., 0.});
+
     
     ::IvSetDefaultLighting();
   
@@ -65,7 +67,9 @@ Game::UpdateObjects( float dt )
 void
 Game::Render()
 {
+
     _scene_graph->drawScene();
+
 }
 
  

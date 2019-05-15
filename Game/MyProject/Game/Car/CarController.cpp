@@ -84,7 +84,7 @@ void CarController::animateNode(float dt, SceneNode* car)
     
     //LEFT & RIGHT STEERING CONSIDERING THE CURRENT VELOCITY
     //IF WE WANT TO MOVE FORWARD, IGNORING CURRENT VELOCITY
-    if (IvGame::mGame->mEventHandler->IsKeyDown('w') && velocity > 0)
+    if (IvGame::mGame->mEventHandler->IsKeyDown('w'))
     {
         if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
         {
@@ -97,19 +97,7 @@ void CarController::animateNode(float dt, SceneNode* car)
     }
     else
     //IF WE WANT TO MOVE BACKWARD, IGNORING CURRENT VELOCITY
-    if (IvGame::mGame->mEventHandler->IsKeyDown('s') && velocity > 0)
-    {
-        if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
-        {
-            wheelAngle += angleSpeedIncrement * coef;
-        }
-        if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
-        {
-            wheelAngle -= angleSpeedIncrement * coef;
-        }
-    }
-    else
-    if (IvGame::mGame->mEventHandler->IsKeyDown('w') && velocity < 0)
+    if (IvGame::mGame->mEventHandler->IsKeyDown('s'))
     {
         if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
         {
@@ -120,19 +108,6 @@ void CarController::animateNode(float dt, SceneNode* car)
             wheelAngle += angleSpeedIncrement * coef;
         }
     }
-    else
-        //IF WE WANT TO MOVE BACKWARD, IGNORING CURRENT VELOCITY
-        if (IvGame::mGame->mEventHandler->IsKeyDown('s') && velocity < 0)
-        {
-            if (IvGame::mGame->mEventHandler->IsKeyDown('a'))
-            {
-                wheelAngle -= angleSpeedIncrement * coef;
-            }
-            if (IvGame::mGame->mEventHandler->IsKeyDown('d'))
-            {
-                wheelAngle += angleSpeedIncrement * coef;
-            }
-        }
     else
     //IF THE CAR IS MOVING BACKWARDS, CONSIDERING CURRENT VELOCITY AND NO ACCELERATION
     if (velocity < 0)
@@ -159,24 +134,24 @@ void CarController::animateNode(float dt, SceneNode* car)
             wheelAngle -= angleSpeedIncrement * coef;
         }
     }
-
-    IvVector2 carVelocity = {0,0};
+    
+    IvVector2 carVelocity;
     carVelocity.x = velocity * (sin(wheelAngle)) * coef;
     carVelocity.y = velocity * (cos(wheelAngle)) * coef;
-
+    
     velocity_vector = {carVelocity.x, 0., carVelocity.y};
-
-    IvVector2 carPosition = {0,0};
+    
+    IvVector2 carPosition;
     carPosition.x += carVelocity.x * dt;
     carPosition.y += carVelocity.y * dt;
-
+    
     IvVector3 carPos = car->getLocalPosition();
     carPos.x += carPosition.x;
     carPos.z += carPosition.y;
-
+    
     car->setLocalTransform(carPos, {0, wheelAngle, 0}, car->getLocalScale());
 }
 
-const IvVector3& CarController::getVelocity() {
+const IvVector3& CarController::getVelocity() const{
     return velocity_vector;
 }

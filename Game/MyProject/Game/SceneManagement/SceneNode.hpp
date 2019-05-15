@@ -40,8 +40,10 @@ public:
     IvVector3 getAbsolutePosition() const;
     void setAbsolutePosition(const IvVector3&);
     const BoundingBox& getBoundingBox() const;
-    IvVector3 getLocalPositon() const;
-    IvVector3 getLocalScale() const;
+
+    const IvVector3& getLocalScale() const;
+    const IvVector3& getLocalPositon() const;
+
     
     void setAnimator(const std::shared_ptr<NodeAnimator>&);
     void setRenderable(const std::shared_ptr<MeshInstance>&);

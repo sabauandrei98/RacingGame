@@ -14,7 +14,7 @@
 
 //disable other key bindings
 
-class CarController : public NodeAnimator{
+class CarController :  public NodeAnimator{
 
 //TODO:
 
@@ -28,17 +28,16 @@ class CarController : public NodeAnimator{
     
     
 public:
-    CarController(std::shared_ptr<SceneNode> car) : car(car) {};
+    CarController(){};
     ~CarController(){};
     
-    const IvVector3& getVelocity();
+    const IvVector3& getVelocity() const;
     
 private:
-    std::shared_ptr<SceneNode> car;
     
     //increments
-    float carSpeedIncrement = 0.045f * 3.;
-    float angleSpeedIncrement = 0.0075f * 5.;
+    float carSpeedIncrement = 0.045f;
+    float angleSpeedIncrement = 0.0075f;
     float nitroIncrement = 0.20f;
     float turbineBoostIncrement = 0.25f;
     float directionChangeIncrement = 0.25f;
@@ -55,8 +54,6 @@ private:
     
     //angle
     float wheelAngle = 0;
-    
     IvVector3 velocity_vector;
-
     void animateNode(float dt, SceneNode* car) override;
 };
