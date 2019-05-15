@@ -41,7 +41,7 @@ void
 Game::Render()
 {
     _state_controller->render();
-
+    //IvDrawLine({50,20,20}, {40,40,40},kRed);
 }
 
  

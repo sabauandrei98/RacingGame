@@ -15,7 +15,7 @@ TestMenu::TestMenu()
     
     std::shared_ptr<Camera> camera=std::make_shared<Camera>(75.0, 0.1, 450.0, 1280, 720);
     camera->setLookAt({20,20,20});
-    camera->setPosition({0,-50,0});
+    camera->setPosition({0,-10,0});
     camera->setRotation({0,0,1});
     
     menu=std::make_shared<SceneGraph>();
@@ -40,26 +40,36 @@ TestMenu::TestMenu()
        menu->getRoot()->addChild(backQuad);
     // menu->getRoot()->addChild(sky);
     
-    Terrain terrain(12,12);
+    //render normals
+    Terrain terrain(6,6);
     std::shared_ptr<SceneNode> normals=std::make_shared<SceneNode>("normals");
    
     std::shared_ptr<SceneNode> line;
-    for(auto val:terrain.getNormal())
+   
+    std::vector<IvTNPVertex> vert=terrain.getVertices();
+    auto indices=terrain.getIndices();
+    auto norm=terrain.getNormal();
+    for(int i=0;i<indices.size();i++)
     {
+        auto val=norm[i];
         std::shared_ptr<Mesh> mesh=std::make_shared<Mesh>();
-        
         IvVertexFormat format=IvVertexFormat::kCPFormat;
         std::vector<IvCPVertex> vertices;
-        std::vector<unsigned int> indices;
         
         IvCPVertex vertex1;
         IvCPVertex vertex2;
         
-        vertex1.position={20,20,20};
-        vertex2.position={40,40,40};//{val.x,val.y+14,val.z};
+        IvVector3 _pos=vert[indices[i]].position;
+        IvVector3 _norm=vert[indices[i]].normal;
+        float scale=5;
         
-        vertex1.color={255,0,0,255};
-        vertex2.color={255,255,0,255};
+        vertex1.position=_pos;
+        vertex2.position={_pos.x + _norm.x*scale,
+                          _pos.y + _norm.y*scale,
+                          _pos.z + _norm.z*scale};
+//        vertex2.position={_pos.x + norm[i].x*scale,
+//                          _pos.y + norm[i].y*scale,
+//                          _pos.z + norm[i].z*scale};
         
         vertices.push_back(vertex1);
         vertices.push_back(vertex2);
@@ -77,14 +87,15 @@ TestMenu::TestMenu()
         m_renderPacket._prim_type = kLineListPrim;
         
         line = std::make_shared<HelperSceneNode>("testLine", m_renderPacket);
+        line->setRenderable(meshInstance);
         
         normals->addChild(line);
     }
-   
+    normals->setLocalPosition({0,0,0});
+    
     menu->getRoot()->addChild(terrain.getTerrain());
     menu->getRoot()->addChild(normals);
 
-    normals->setLocalPosition({0,0,0});
     menu->getRoot()->addChild(cameraSceneNode);
     menu->setCamera(camera);
 }

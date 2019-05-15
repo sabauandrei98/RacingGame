@@ -56,7 +56,7 @@ Terrain::Terrain(uint32_t width,uint32_t height):width(width),height(height),row
             else
             {
                 IvTNPVertex vertex;
-                vertex.position={currentR,(float)elevation[(int)currentR][(int)currentC]*2000,currentC};
+                vertex.position={currentR,(float)(elevation[(int)currentR][(int)currentC]*2000),currentC};
                 vertices.push_back(vertex);
             }
             index+=direction;
@@ -66,13 +66,18 @@ Terrain::Terrain(uint32_t width,uint32_t height):width(width),height(height),row
         currentR=((float)height/(float)rows)*indexx;
     }
     auto val=columns*2;
+    int indexNeeded=1;
     for(int i=0;i<vertices.size()-width;i++)
     {
         if(val!=i+1)
         {
-            if(i==4)
+            if(i==5)
                 std::cout<<std::endl;
-            indices.push_back(i);
+            if(i!=columns*indexNeeded)
+                indices.push_back(i);
+            else
+                indexNeeded++;
+            
             indices.push_back(val-1);
         }
         val--;
@@ -80,40 +85,43 @@ Terrain::Terrain(uint32_t width,uint32_t height):width(width),height(height),row
             val=i+1+columns*2;
     }
     
-    //calculate the normal for the first triangle
-    std::vector<std::pair<IvVector3,IvVector3>> normalFaces; //keep the normal and the indices for the current face
+    std::vector<std::pair<IvVector3,IvVector3>> normalFaces; //keep the normals and the indices for the current face
     IvVector3 p1,p2,p3;
     int i=0;
     
-    while(i<indices.size()-3)
+    while(i<=indices.size()-3)
     {
         p1=vertices[indices[i]].position;
         p2=vertices[indices[i+1]].position;
         p3=vertices[indices[i+2]].position;
     
         auto u=p2-p1;
-        auto v=p3-p1;
+        auto v=p2-p3;
     
+        if(i%2==1)
+        {
+            u=p1-p2;
+            v=p1-p3;
+        }
         //cross product
         IvVector3 normal;
         normal.x=u.y*v.z-u.z*v.y;
         normal.y=u.z*v.x-u.x*v.z;
         normal.z=u.x*v.y-u.y*v.x;
     
-        normal.Normalize();
+        //normal.Normalize();
         normalFaces.push_back(std::make_pair(normal, IvVector3{(float)indices[i],(float)indices[i+1],(float)indices[i+2]}));
-        
+
         i++;
     }
     
-    //calculate normals only for the interior vertices of the grid
-    i=1;
+    i=0;
     while(i<indices.size())
     {
         vertices[indices[i]].normal=calculateNormalAverage(normalFaces,indices[i]);
         i++;
     }
-    
+
     for(int i=0;i<indices.size();i+=4)
     {
         std::cout<<indices[i]<<" "<<indices[i+1]<<" "<<indices[i+2]<<" "<<indices[i+3]<<std::endl<<std::endl;
@@ -128,11 +136,15 @@ Terrain::Terrain(uint32_t width,uint32_t height):width(width),height(height),row
     
     terrain->setRenderable(meshInstance);
     
-    terrain->setLocalTransform({0,0,0}, {0,0,1}, {4,4,4});
-    
+    terrain->setLocalPosition({0,0,0});
+    //terrain->setLocalTransform({0,0,0}, {0,0,1}, {4,4,4});
     
     for(auto val:normalFaces)
         normals.push_back(val.first);
+    
+    
+    this->vertices=vertices;
+    this->indices=indices;
 }
 //-------------------------------------------------------------------------------
 //  @Terrain::build()
@@ -197,9 +209,13 @@ Terrain::calculateNormalAverage(std::vector<std::pair<IvVector3,IvVector3>> norm
         }
     }
     
-    sum.x/=count;
-    sum.y/=count;
-    sum.z/=count;
+    if(count!=0)
+    {
+        sum.x/=(float)count;
+        sum.y/=(float)count;
+        sum.z/=(float)count;
+    }
     
+   // sum.Normalize();
     return sum;
 }

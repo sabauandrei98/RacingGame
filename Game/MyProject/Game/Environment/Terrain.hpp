@@ -24,14 +24,21 @@ class Terrain
     uint32_t columns;
     std::shared_ptr<SceneNode> terrain;
     std::vector<std::vector<float>> elevation;
+    
     std::vector<IvVector3> normals;
+    std::vector<IvTNPVertex> vertices;
+    std::vector<unsigned int> indices;
     
 public:
     Terrain(uint32_t width,uint32_t height);
     ~Terrain(){}
     
     std::shared_ptr<SceneNode> getTerrain(){return terrain;}
+    
     std::vector<IvVector3> getNormal(){return normals;}
+    std::vector<IvTNPVertex> getVertices(){return vertices;}
+    std::vector<unsigned int> getIndices(){return indices;}
+    
     void build();
     
 private:
