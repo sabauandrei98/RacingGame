@@ -52,31 +52,43 @@ const int InfoManager::getScore(const std::string& carName) const{
 }
 
 const float InfoManager::getTime() const{
-    return time;
+    return sinceStartTimer;
 }
 
 void InfoManager::updateCarStats(){
     for(int i = 0; i < carsList.size(); i++)
     {
+        //get distance to next checkpoint
         int nextCheckPointIndex = checkpoints[carsList[i]->getName()] + 1;
         
+        //reset the index if needed
         if (nextCheckPointIndex == roadMiddlePoints.size())
             nextCheckPointIndex = 0;
         
+        //if close enough to next checkpoint, change stats
         if (Distance(carsList[i]->getLocalPosition(), roadMiddlePoints[nextCheckPointIndex]) < maxDistanceToCheckPoint)
         {
+            //next checkpoint
             checkpoints[carsList[i]->getName()] = nextCheckPointIndex;
+            
+            //increase score
             score[carsList[i]->getName()]++;
             
+            //if last checkpoint -> next lap
             if (nextCheckPointIndex == roadMiddlePoints.size())
+            {
                 laps[carsList[i]->getName()]++;
+                
+                //mapping of form: key:CarName + lapNumber -> value: time
+                lapTime[carsList[i]->getName() + std::to_string(laps[carsList[i]->getName()])] = sinceStartTimer;
+            }
         }
     }
 }
 
 void InfoManager::Update(float dt)
 {
-    time += dt;
+    sinceStartTimer += dt;
     updateCarStats();
 }
 

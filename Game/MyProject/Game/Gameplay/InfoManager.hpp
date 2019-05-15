@@ -25,13 +25,13 @@ private:
     std::map<std::string, int> laps;
     std::map<std::string, int> checkpoints;
     std::map<std::string, int> score;
+    std::map<std::string, float> lapTime;
     
     //road middle points
     std::vector<IvVector3> roadMiddlePoints;
     
-    float time = 0.0f;
-    float maxDistanceToCheckPoint = 0.01f;
-    
+    float sinceStartTimer = 0.0f;
+    float maxDistanceToCheckPoint = 0.1f;
     
     //setters for tables
     void setLap(const std::string& carName, int lap);
