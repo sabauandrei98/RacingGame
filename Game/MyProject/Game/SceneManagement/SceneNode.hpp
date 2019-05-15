@@ -43,6 +43,7 @@ public:
 
     const IvVector3& getLocalScale() const;
     const IvVector3& getLocalPositon() const;
+    const std::string& getName() const;
 
     
     void setAnimator(const std::shared_ptr<NodeAnimator>&);
