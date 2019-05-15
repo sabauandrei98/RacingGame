@@ -23,7 +23,15 @@ public:
     const std::vector<std::pair<IvVector3,IvVector3>>& getMarginPoints() const { return rMarginPoints;};
     const int getEditIndex() const {return editIndex;};
     
+    void previousPoint();
+    void nextPoint();
+    void addPoint();
+    void removePoint();
+    void generateTrack();
+    
 private:
+    bool needsUpdate=false;
+    bool hasUpdate=false;
     float editSpeed;
     float tStep;
     int editIndex = 0;

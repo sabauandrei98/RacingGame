@@ -3,6 +3,7 @@
 #include "../SceneManagement/SceneGraph.hpp"
 #include "../SceneManagement/CameraSceneNode.hpp"
 #include "../SceneManagement/RoadNode.hpp"
+#include "../Helper/HelperSceneNode.hpp"
 #include "RoadGeneratorControler.hpp"
 #include <IvImage.h>
 
@@ -13,8 +14,13 @@ public:
     ~RoadEditor() {};
     
     void Update(float dt);
-    
+    void generateTexturedRoad();
+    std::shared_ptr<RoadGeneratorControler> getRoadGenerator(){return roadGenerator;}
+   
 private:
+    RenderPacket render;
+    std::shared_ptr<RoadNode> roadNode;
+    
     //information
     std::vector<IvVector3> bezierPoints;
     std::vector<IvVector3> rMiddlePoints;
@@ -40,6 +46,4 @@ private:
     void updateSceneRoadMeshColors();
     void updateSceneRoadPositions();
     void updateSceneRoadSize();
-    
-    void generateTexturedRoad();
 };
