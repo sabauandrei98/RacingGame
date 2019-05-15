@@ -11,7 +11,7 @@ class InfoManager{
     
 public:
     InfoManager(SceneNode* root);
-    ~InfoManager(){};
+    ~InfoManager();
     
     void Update(float dt);
     
@@ -19,6 +19,7 @@ private:
     
     //the root to search for everything
     SceneNode* root;
+    std::vector<std::shared_ptr<SceneNode>> carsList;
     
     //data tables
     std::map<std::string, int> laps;
@@ -31,6 +32,7 @@ private:
     float time = 0.0f;
     float maxDistanceToCheckPoint = 0.01f;
     
+    
     //setters for tables
     void setLap(const std::string& carName, int lap);
     void setScore(const std::string& carName, int score);
@@ -41,7 +43,8 @@ private:
     const int getCheckpoint(const std::string& carName) const;
     const int getScore(const std::string& carName) const;
     
-    
-    const IvVector3& getCarSpeed(const std::string& carName) const;
+    const float getCarSpeed(const std::string& carName) const;
     const float getTime() const;
+    
+    void updateCarStats();
 };

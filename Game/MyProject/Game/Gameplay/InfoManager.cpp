@@ -3,18 +3,18 @@
 InfoManager::InfoManager(SceneNode* root) : root(root) {
     
     //get list of all cars
-    std::vector<std::shared_ptr<SceneNode>>scene_nodes;
-    root->findAllNodesContainingName("Car", scene_nodes);
+    root->findAllNodesContainingName("Car", carsList);
     
     //set initial values
-    for(int i = 0; i < scene_nodes.size(); i++)
+    for(int i = 0; i < carsList.size(); i++)
     {
-        setLap(scene_nodes[i]->getName(), 1);
-        setCheckpoint(scene_nodes[i]->getName(), 0);
-        setScore(scene_nodes[i]->getName(), 0);
+        setLap(carsList[i]->getName(), 1);
+        setCheckpoint(carsList[i]->getName(), 0);
+        setScore(carsList[i]->getName(), 0);
     }
     
     //get the list of middle points
+    std::vector<std::shared_ptr<SceneNode>>scene_nodes;
     root->findAllNodesContainingName("bezierMiddlePoint", scene_nodes);
     for(int i = 0; i < scene_nodes.size(); i++)
     {
@@ -22,8 +22,9 @@ InfoManager::InfoManager(SceneNode* root) : root(root) {
     }
 }
 
-const IvVector3& InfoManager::getCarSpeed(const std::string& carName) const{
-    return ((CarController*)root->findFirstNodeWithName(carName)->getAnimator())->getVelocity();
+const float InfoManager::getCarSpeed(const std::string& carName) const{
+    IvVector3 velocityVector = ((CarController*)root->findFirstNodeWithName(carName)->getAnimator())->getVelocity();
+    return velocityVector.x + velocityVector.z;
 }
 
 void InfoManager::setLap(const std::string& carName, int lap){
@@ -54,8 +55,32 @@ const float InfoManager::getTime() const{
     return time;
 }
 
+void InfoManager::updateCarStats(){
+    for(int i = 0; i < carsList.size(); i++)
+    {
+        int nextCheckPointIndex = checkpoints[carsList[i]->getName()] + 1;
+        
+        if (nextCheckPointIndex == roadMiddlePoints.size())
+            nextCheckPointIndex = 0;
+        
+        if (Distance(carsList[i]->getLocalPosition(), roadMiddlePoints[nextCheckPointIndex]) < maxDistanceToCheckPoint)
+        {
+            checkpoints[carsList[i]->getName()] = nextCheckPointIndex;
+            score[carsList[i]->getName()]++;
+            
+            if (nextCheckPointIndex == roadMiddlePoints.size())
+                laps[carsList[i]->getName()]++;
+        }
+    }
+}
 
 void InfoManager::Update(float dt)
 {
     time += dt;
+    updateCarStats();
 }
+
+InfoManager::~InfoManager(){
+    
+}
+
