@@ -67,7 +67,7 @@ void RaceState::Update(float dt) {
                     uniforms.push_back("row");
                     uniforms.push_back("column");
                     
-                     std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"font.tga");
+                     std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"../../Game/BasicMenu/Resources/font.tga");
                     
                     countScoreQuad->setLocalTransform(IvVector3{17,0,9}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
                     raceMenu->getScene()->getRoot()->findFirstNodeWithName("countRoot")->addChild(countScoreQuad);
@@ -130,7 +130,7 @@ void RaceState::addNewDigit()
     
         const char* previousQuadName=preName.c_str();
         
-        std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"font.tga");
+        std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"../../Game/BasicMenu/Resources/font.tga");
         
         auto previousPos=raceMenu->getScene()->getRoot()->findFirstNodeWithName(previousQuadName)->getLocalPosition();
         countScoreQuad->setLocalTransform(IvVector3{previousPos.x-1,previousPos.y,previousPos.z}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
@@ -220,7 +220,7 @@ void RaceState::renderScore()
         uniforms.push_back("row");
         uniforms.push_back("column");
         
-        std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"font.tga");
+        std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"../../Game/BasicMenu/Resources/font.tga");
         
         std::string n="count"+std::to_string(noDigits(score)-noDig );
         const char* prevName=n.c_str();

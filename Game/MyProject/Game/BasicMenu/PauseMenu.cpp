@@ -22,7 +22,7 @@ PauseMenu::PauseMenu()
     
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");
-    std::shared_ptr<SceneNode> resumeQuad=HelperManager::BuildTexturedQuad("resumePause",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"race_resume.tga");
+    std::shared_ptr<SceneNode> resumeQuad=HelperManager::BuildTexturedQuad("resumePause",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/race_resume.tga");
     
     resumeQuad->setLocalTransform(IvVector3{0,0,0}, IvVector3{0,4.72,1}, IvVector3{4,4,5});
     
