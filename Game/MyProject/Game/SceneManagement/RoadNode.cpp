@@ -52,7 +52,8 @@ void RoadNode::buildMesh(std::vector<std::pair<IvVector3,IvVector3>>& roadPoints
     uniforms.push_back("roadTexture");
     meshTextureInstance->addShaderUniforms(uniforms);
     
-     IvImage* image = IvImage::CreateFromFile("../../Game/RoadGenerator/Resources/road.tga");
+    IvImage* image = IvImage::CreateFromFile("../../Game/RoadGenerator/Resources/road.tga");
+
     IvTexture* quadTexture;
     
     if (image)

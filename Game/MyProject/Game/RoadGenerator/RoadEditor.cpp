@@ -4,6 +4,10 @@
 
 RoadEditor::RoadEditor(SceneGraph* sGraph) : sceneGraph(sGraph)
 {
+    render._prim_type=kPointListPrim;
+    render._use_blend=false;
+    render._use_depth=false;
+    render._use_wireframe=false;
     //setting up a simple environment for the editor
     setupMeshes();
     setupPoints();
@@ -21,7 +25,7 @@ void RoadEditor::setupPoints()
     //add points to scene graph
     for(int i = 0; i < positions.size(); i++)
     {
-        std::shared_ptr<SceneNode> point = std::make_shared<SceneNode>("bezierPoint" + std::to_string(i));
+        std::shared_ptr<SceneNode> point = std::make_shared<HelperSceneNode>("bezierPoint" + std::to_string(i),render);
         root->addChild(point);
         point->setLocalPosition(positions[i]);
         bezierPoints.push_back(point->getLocalPosition());
@@ -58,7 +62,7 @@ void RoadEditor::updateSceneRoadSize()
         
         for(int i = 0; i < rMiddlePoints.size(); i++)
         {
-            std::shared_ptr<SceneNode> point = std::make_shared<SceneNode>("bezierMiddlePoint" + std::to_string(i));
+            std::shared_ptr<SceneNode> point = std::make_shared<HelperSceneNode>("bezierMiddlePoint" + std::to_string(i),render);
             sceneGraph->getRoot()->addChild(point);
             point->setLocalPosition(rMiddlePoints[i]);
             point->setRenderable(meshInstanceBlue);
@@ -67,12 +71,12 @@ void RoadEditor::updateSceneRoadSize()
         
         for(int i = 0; i < rMarginPoints.size(); i++)
         {
-            std::shared_ptr<SceneNode> pointL = std::make_shared<SceneNode>("bezierMarginLPoint" + std::to_string(i));
+            std::shared_ptr<SceneNode> pointL = std::make_shared<HelperSceneNode>("bezierMarginLPoint" + std::to_string(i),render);
             sceneGraph->getRoot()->addChild(pointL);
             pointL->setLocalPosition(rMarginPoints[i].first);
             pointL->setRenderable(meshInstanceBlue);
             
-            std::shared_ptr<SceneNode> pointR = std::make_shared<SceneNode>("bezierMarginRPoint" + std::to_string(i));
+            std::shared_ptr<SceneNode> pointR = std::make_shared<HelperSceneNode>("bezierMarginRPoint" + std::to_string(i),render);
             sceneGraph->getRoot()->addChild(pointR);
             pointR->setLocalPosition(rMarginPoints[i].second);
             pointR->setRenderable(meshInstanceBlue);
@@ -82,7 +86,7 @@ void RoadEditor::updateSceneRoadSize()
         //render bezier points at final to see the color
         for(int i = 0; i < bezierPoints.size(); i++)
         {
-            std::shared_ptr<SceneNode> point = std::make_shared<SceneNode>("bezierPoint" + std::to_string(i));
+            std::shared_ptr<SceneNode> point = std::make_shared<HelperSceneNode>("bezierPoint" + std::to_string(i),render);
             sceneGraph->getRoot()->addChild(point);
             point->setLocalPosition(bezierPoints[i]);
             
@@ -129,7 +133,13 @@ void RoadEditor::updateSceneRoadMeshColors()
 
 void RoadEditor::generateTexturedRoad()
 {
-    std::shared_ptr<RoadNode> roadNode =  std::make_shared<RoadNode>("roadNode", rMarginPoints);
+    if(roadNode)
+    {
+        this->sceneGraph->getRoot()->findFirstNodeWithName("roadNode")->remove();
+        roadNode.reset();
+    }
+
+    roadNode =  std::make_shared<RoadNode>("roadNode", rMarginPoints);
     this->sceneGraph->getRoot()->addChild(roadNode);
 }
 
@@ -145,12 +155,6 @@ void RoadEditor::Update(float dt)
         
         //update mesh colors
         updateSceneRoadMeshColors();
-    }
-    
-    //apply the texture on the road if 'g' was pressed
-    if (IvGame::mGame->mEventHandler->IsKeyReleased('g'))
-    {
-        generateTexturedRoad();
     }
     
     sceneGraph->updateScene(dt);
