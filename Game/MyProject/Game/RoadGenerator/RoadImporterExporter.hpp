@@ -21,11 +21,11 @@ public:
     void importFrom(const std::string& fileName);
     
     //can export without any import
-    void exportTo(std::vector<std::pair<IvVector3,IvVector3>>& marginPoints, const std::string& fileName);
+    void exportTo(const std::vector<std::pair<IvVector3,IvVector3>>& marginPoints, const std::string& fileName);
    
     const std::vector<std::pair<IvVector3,IvVector3>>& getMarginPoints() const { return rMarginPoints;};
     
 private:
     std::vector<std::pair<IvVector3,IvVector3>> rMarginPoints;
-    std::vector<std::string> split(const std::string& line, const char c);
+    static std::vector<std::string> split(const std::string& line, const char c);
 };

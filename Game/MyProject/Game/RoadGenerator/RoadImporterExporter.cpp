@@ -50,7 +50,7 @@ void RoadImporterExporter::importFrom(const std::string& fileName){
 }
 
 
-void RoadImporterExporter::exportTo(std::vector<std::pair<IvVector3,IvVector3>>& marginPoints, const std::string& fileName){
+void RoadImporterExporter::exportTo(const std::vector<std::pair<IvVector3,IvVector3>>& marginPoints, const std::string& fileName){
     
     std::ofstream g(fileName);
     
