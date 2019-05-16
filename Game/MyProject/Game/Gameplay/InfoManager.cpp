@@ -66,7 +66,7 @@ void InfoManager::updateCarStats(){
             nextCheckPointIndex = 0;
         
         //if close enough to next checkpoint, change stats
-        if (Distance(carsList[i]->getLocalPosition(), roadMiddlePoints[nextCheckPointIndex]) < maxDistanceToCheckPoint)
+        if (Distance(carsList[i]->getLocalPosition(), roadMiddlePoints[nextCheckPointIndex]) < checkpointTriggerDistance)
         {
             //next checkpoint
             checkpoints[carsList[i]->getName()] = nextCheckPointIndex;

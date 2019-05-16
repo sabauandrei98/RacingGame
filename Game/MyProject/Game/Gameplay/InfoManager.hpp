@@ -17,8 +17,10 @@ public:
     
 private:
     
-    //the root to search for everything
+    //the root (good to search for objects)
     SceneNode* root;
+    
+    //the list of the cars
     std::vector<std::shared_ptr<SceneNode>> carsList;
     
     //data tables
@@ -30,8 +32,11 @@ private:
     //road middle points
     std::vector<IvVector3> roadMiddlePoints;
     
+    //timer
     float sinceStartTimer = 0.0f;
-    float maxDistanceToCheckPoint = 0.1f;
+    
+    //max distance to trigger the next checkpoint
+    float checkpointTriggerDistance = 0.1f;
     
     //setters for tables
     void setLap(const std::string& carName, int lap);
