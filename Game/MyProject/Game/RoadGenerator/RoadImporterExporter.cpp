@@ -47,23 +47,22 @@ void RoadImporterExporter::importFrom(const std::string& fileName){
         float fz2 = std::stof (result[5],&sz);
         rMarginPoints.push_back(std::make_pair(IvVector3{fx1,fy1,fz1}, IvVector3{fx2,fy2,fz2}));
     }
-    
 }
 
 
-void RoadImporterExporter::exportTo(const std::string& fileName){
+void RoadImporterExporter::exportTo(std::vector<std::pair<IvVector3,IvVector3>>& marginPoints, const std::string& fileName){
     
     std::ofstream g(fileName);
     
-    g << rMarginPoints.size() << '\n';
+    g << marginPoints.size() << '\n';
     
     //print the margin points
-    for(int i = 0; i < rMarginPoints.size(); i++)
+    for(int i = 0; i < marginPoints.size(); i++)
     {
-        g << rMarginPoints[i].first.x << " " << rMarginPoints[i].first.y << " " << rMarginPoints[i].first.z << " ";
-        g << rMarginPoints[i].second.x << " " << rMarginPoints[i].second.y << " " << rMarginPoints[i].second.z;
+        g << marginPoints[i].first.x << " " << marginPoints[i].first.y << " " << marginPoints[i].first.z << " ";
+        g << marginPoints[i].second.x << " " << marginPoints[i].second.y << " " << marginPoints[i].second.z;
         
-        if (i + 1 != rMarginPoints.size())
+        if (i + 1 != marginPoints.size())
             g << '\n';
     }
     
