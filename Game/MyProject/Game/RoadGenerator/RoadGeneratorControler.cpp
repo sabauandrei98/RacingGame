@@ -29,14 +29,14 @@ RoadGeneratorControler::previousPoint()
 {
     if (editIndex - 1 >= 0)
         editIndex --;
-    hasUpdate = true;
+    needsUpdate = true;
 }
 void
 RoadGeneratorControler::nextPoint()
 {
     if (editIndex + 1 <= bezierPoints.size() - 1)
         editIndex ++;
-    hasUpdate = true;
+    needsUpdate = true;
 }
 void
 RoadGeneratorControler::addPoint()
@@ -61,7 +61,7 @@ RoadGeneratorControler::addPoint()
     }
     
     editIndex += 3;
-    hasUpdate = true;
+    needsUpdate = true;
 }
 
 void
@@ -84,20 +84,12 @@ RoadGeneratorControler::removePoint()
         bezierPoints.erase(bezierPoints.begin() + editIndex - 2);
         editIndex = bezierPoints.size() - 1;
     }
-    hasUpdate = true;
+    needsUpdate = true;
 }
 //returns true if the track was updated on the current frame
 bool
 RoadGeneratorControler::Update( float dt )
 {
-    if(hasUpdate)
-    {
-        needsUpdate = true;
-        hasUpdate = false;
-    }
-    else
-        needsUpdate = false;
-
     static unsigned char input[4] = {'w','a','s','d'};
     for(int i = 0; i < 4; i++)
         if (IvGame::mGame->mEventHandler->IsKeyDown(input[i]))
@@ -179,7 +171,7 @@ RoadGeneratorControler::Update( float dt )
             }
             needsUpdate = true;
         }
-
+    
     
     rMiddlePoints = BezierCurve::buildCurve(bezierPoints, tStep);
     rMarginPoints =  RoadMargins::findTrackPoints(rMiddlePoints);
@@ -189,5 +181,11 @@ RoadGeneratorControler::Update( float dt )
         if (i % 3 != 0)
             updateControlPointsPosition(i);
     
-    return needsUpdate;
+    if(needsUpdate)
+    {
+        needsUpdate = false;
+        return true;
+    }
+    else
+        return false;
 }

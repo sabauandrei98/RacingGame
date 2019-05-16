@@ -27,7 +27,7 @@ void FirstState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void FirstState::Update() {
+void FirstState::Update(float dt) {
     if (isTestTriggered())
         state_controller->requestChange(Tests);
     

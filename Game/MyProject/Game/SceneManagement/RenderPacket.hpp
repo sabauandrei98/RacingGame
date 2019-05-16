@@ -14,10 +14,10 @@
 
 class RenderPacket  {
 public:
-    // public variable(s)
+    // public variable(s)d
     MeshInstance*   _mesh_instance;
     IvMatrix44      _world_view_projection_matrix;
-    IvPrimType      _prim_type = kTriangleListPrim;
+    IvPrimType      _prim_type = kTriangleStripPrim;
     
     bool            _use_depth = true;
     bool            _use_blend = true;

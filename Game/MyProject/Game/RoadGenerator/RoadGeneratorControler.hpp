@@ -31,7 +31,6 @@ public:
     
 private:
     bool needsUpdate=false;
-    bool hasUpdate=false;
     float editSpeed;
     float tStep;
     int editIndex = 0;

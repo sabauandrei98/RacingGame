@@ -27,6 +27,8 @@ BuildTrackMenu::BuildTrackMenu()
 
     std::shared_ptr<SceneNode> nextQuad=HelperManager::BuildTexturedQuad("nextTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_next.tga");
     
+    std::shared_ptr<SceneNode> generateQuad=HelperManager::BuildTexturedQuad("generateTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_generate.tga");
+    
     std::shared_ptr<SceneNode> addQuad=HelperManager::BuildTexturedQuad("addTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_add.tga");
     
     std::shared_ptr<SceneNode> removeQuad=HelperManager::BuildTexturedQuad("removeTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_remove.tga");
@@ -38,16 +40,18 @@ BuildTrackMenu::BuildTrackMenu()
     
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     
-    previousQuad->setLocalTransform(IvVector3{-10,0,-8}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
-    nextQuad->setLocalTransform(IvVector3{-5,0,-8}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
-    addQuad->setLocalTransform(IvVector3{14,0,6}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
-    removeQuad->setLocalTransform(IvVector3{14,0,3}, IvVector3{0,4.72,1}, IvVector3{2,2,4});
-    playQuad->setLocalTransform(IvVector3{14,0,0}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
-    backQuad->setLocalTransform(IvVector3{14,0,-8}, IvVector3{0,4.72,1}, IvVector3{4,4,4});
+    previousQuad->setLocalTransform(IvVector3{-10,-1,-8}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
+    nextQuad->setLocalTransform(IvVector3{-5,-1,-8}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
+    generateQuad->setLocalTransform(IvVector3{0,-1,-8}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
+    addQuad->setLocalTransform(IvVector3{14,-1,6}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
+    removeQuad->setLocalTransform(IvVector3{14,-1,3}, IvVector3{0,4.72,1}, IvVector3{2,2,4});
+    playQuad->setLocalTransform(IvVector3{14,-1,0}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
+    backQuad->setLocalTransform(IvVector3{14,-1,-8}, IvVector3{0,4.72,1}, IvVector3{4,4,4});
     
     menu->setRoot(root);
     menu->getRoot()->addChild(previousQuad);
     menu->getRoot()->addChild(nextQuad);
+    menu->getRoot()->addChild(generateQuad);
     menu->getRoot()->addChild(addQuad);
     menu->getRoot()->addChild(removeQuad);
     menu->getRoot()->addChild(playQuad);

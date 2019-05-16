@@ -27,7 +27,7 @@ void PauseState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void PauseState::Update() {
+void PauseState::Update(float dt) {
     if(isResumeTriggered())
         state_controller->requestChange(Race);
 }

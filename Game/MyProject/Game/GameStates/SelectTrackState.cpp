@@ -31,7 +31,7 @@ void SelectTrackState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void SelectTrackState::Update() {
+void SelectTrackState::Update(float dt) {
     if (isNextTriggered())
         state_controller->requestChange(SelectCar);
     

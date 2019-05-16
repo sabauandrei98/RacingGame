@@ -36,7 +36,7 @@ void RaceState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void RaceState::Update() {
+void RaceState::Update(float dt) {
     
     if(isPauseTriggered())
         state_controller->requestChange(Pause);

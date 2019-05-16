@@ -157,12 +157,6 @@ void RoadEditor::Update(float dt)
         updateSceneRoadMeshColors();
     }
     
-    //apply the texture on the road if 'g' was pressed
-    if (IvGame::mGame->mEventHandler->IsKeyReleased('g'))
-    {
-        generateTexturedRoad();
-    }
-    
     sceneGraph->updateScene(dt);
 }
 
