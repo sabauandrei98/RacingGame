@@ -30,20 +30,6 @@ void RoadImporterExporter::importFrom(const std::string& fileName){
     getline(f, m);
     std::string::size_type sz;
     int midSize = std::stoi(m);
-    
-    //get the middle points
-    for(int i = 0; i < midSize; i++)
-    {
-        std::string line;
-        getline(f, line);
-        
-        std::vector<std::string> result = split(line, ' ');
-        
-        float fx = std::stof (result[0],&sz);
-        float fy = std::stof (result[1],&sz);
-        float fz = std::stof (result[2],&sz);
-        rMiddlePoints.push_back(IvVector3{fx,fy,fz});
-    }
 
     //get the margin points
     for(int i = 0; i < midSize; i++)
@@ -69,15 +55,9 @@ void RoadImporterExporter::exportTo(const std::string& fileName){
     
     std::ofstream g(fileName);
     
-    g << rMiddlePoints.size() << '\n';
+    g << rMarginPoints.size() << '\n';
     
-    //get the middle points
-    for(int i = 0; i < rMiddlePoints.size(); i++)
-    {
-        g << rMiddlePoints[i].x << " " << rMiddlePoints[i].y << " " << rMiddlePoints[i].z << '\n';
-    }
-    
-    //get the margin points
+    //print the margin points
     for(int i = 0; i < rMarginPoints.size(); i++)
     {
         g << rMarginPoints[i].first.x << " " << rMarginPoints[i].first.y << " " << rMarginPoints[i].first.z << " ";

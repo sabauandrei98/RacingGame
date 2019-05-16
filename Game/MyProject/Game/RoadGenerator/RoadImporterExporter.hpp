@@ -21,12 +21,9 @@ public:
     void importFrom(const std::string& fileName);
     void exportTo(const std::string& fileName);
    
-    const std::vector<IvVector3>& getMiddlePoints() const {return rMiddlePoints;};
     const std::vector<std::pair<IvVector3,IvVector3>>& getMarginPoints() const { return rMarginPoints;};
     
 private:
-    std::vector<IvVector3> rMiddlePoints;
     std::vector<std::pair<IvVector3,IvVector3>> rMarginPoints;
-    
     std::vector<std::string> split(const std::string& line, const char c);
 };
