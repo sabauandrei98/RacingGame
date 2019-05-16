@@ -47,7 +47,7 @@ static GLFWwindow* window = nullptr;
 // Where it all begins
 //-------------------------------------------------------------------------------
 int main(int argc, char *argv[])
-{   
+{
     gDebugger.DumpToFile( "Debug.txt" );
     glfwSetErrorCallback(error_callback);
     
@@ -129,8 +129,8 @@ int main(int argc, char *argv[])
     }
 
     // Set the background dark blue
-    IvRenderer::mRenderer->SetClearColor( 255.0f, 255.f, 255.0f, 1.0f );
-
+    IvRenderer::mRenderer->SetClearColor( 0.5, 0.5f, 0.5f, 1.0f );
+    
     // Do post-renderer creation initialization
     if (!IvGame::mGame->PostRendererInitialize())
     {

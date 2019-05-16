@@ -1,16 +1,12 @@
 #version 150
 
 in vec2 uv;
-int vec3 color;
+in vec3 normal;
 
 out vec4 fragColor;
 
 
 void main()
 {
-    fragColor= vec4(color,1.0);
+    fragColor=vec4(normal * 0.5 + 0.5,1.0);
 }
-
-
-
-

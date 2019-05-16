@@ -7,12 +7,20 @@
 //-------------------------------------------------------------------------------
 #include "Mesh.hpp"
 #include <IvRendererHelp.h>
+#include <IvRenderer.h>
 #include "HelperManager.hpp"
 #include "MeshManager.hpp"
 #include "PerlinNoise.hpp"
 #include <stdio.h>
 #include <numeric>
 #include <random>
+
+#if defined(__APPLE__) && defined(__MACH__)
+#include <OpenGL/gl3.h>
+#else
+#include <GL/glew.h>
+#include <GL/gl.h>
+#endif
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------

@@ -41,7 +41,7 @@ public:
 
     bool Initialize(unsigned int  width, unsigned int  height) final;
     void Resize(unsigned int width, unsigned int height) final;
-        
+    
     void  SetClearColor(float red, float green, float blue, float alpha) final;
     void  SetClearDepth(float depth) final;
     void  ClearBuffers(IvClearBuffer buffer) final;

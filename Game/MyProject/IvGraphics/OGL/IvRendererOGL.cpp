@@ -226,15 +226,14 @@ IvRendererOGL::InitGL()
     glEnable(GL_FRAMEBUFFER_SRGB);
     
     // turn on culling
-    //glCullFace(GL_BACK);
-    //glEnable(GL_CULL_FACE);
+//    glCullFace(GL_BACK);
+//    glEnable(GL_CULL_FACE);
 
     glPointSize( 5.0f );
 
     return true;                                        
 
 }   // End of IvRendererOGL::InitGL()
-
 
 //-------------------------------------------------------------------------------
 // @ IvRendererOGL::SetClearColor()
