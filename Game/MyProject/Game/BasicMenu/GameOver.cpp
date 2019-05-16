@@ -23,9 +23,9 @@ GameOver::GameOver()
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");
     
-    std::shared_ptr<SceneNode> retryQuad=HelperManager::BuildTexturedQuad("retryGameOver",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"race_retry.tga");
+    std::shared_ptr<SceneNode> retryQuad=HelperManager::BuildTexturedQuad("retryGameOver",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/race_retry.tga");
     
-    std::shared_ptr<SceneNode> quitQuad=HelperManager::BuildTexturedQuad("backGameOver",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"race_quit.tga");
+    std::shared_ptr<SceneNode> quitQuad=HelperManager::BuildTexturedQuad("backGameOver",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/race_quit.tga");
     
     
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);

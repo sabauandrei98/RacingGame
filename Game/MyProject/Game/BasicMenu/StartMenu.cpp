@@ -22,15 +22,15 @@ StartMenu::StartMenu()
     
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");
-    std::shared_ptr<SceneNode> playQuad=HelperManager::BuildTexturedQuad("playStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"roadTexture.tga");
+    std::shared_ptr<SceneNode> playQuad=HelperManager::BuildTexturedQuad("playStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/roadTexture.tga");
     
-    std::shared_ptr<SceneNode> highscoresQuad=HelperManager::BuildTexturedQuad("highscoreStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"highscore.tga");
+    std::shared_ptr<SceneNode> highscoresQuad=HelperManager::BuildTexturedQuad("highscoreStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/highscore.tga");
     
-    std::shared_ptr<SceneNode> creditsQuad=HelperManager::BuildTexturedQuad("creditsStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"credits.tga");
+    std::shared_ptr<SceneNode> creditsQuad=HelperManager::BuildTexturedQuad("creditsStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/credits.tga");
     
-    std::shared_ptr<SceneNode> exitQuad=HelperManager::BuildTexturedQuad("exitStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"exit.tga");
+    std::shared_ptr<SceneNode> exitQuad=HelperManager::BuildTexturedQuad("exitStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/exit.tga");
     
-    std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"tr_back.tga");
+    std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backStart",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_back.tga");
 
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     

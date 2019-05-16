@@ -22,9 +22,9 @@ FirstMenu::FirstMenu()
     
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");
-    std::shared_ptr<SceneNode> testQuad=HelperManager::BuildTexturedQuad("test",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"test.tga");
-    std::shared_ptr<SceneNode> gameQuad=HelperManager::BuildTexturedQuad("game",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"game.tga");
-    std::shared_ptr<SceneNode> exitQuad=HelperManager::BuildTexturedQuad("exitFirst",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"exit.tga");
+    std::shared_ptr<SceneNode> testQuad=HelperManager::BuildTexturedQuad("test",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/test.tga");
+    std::shared_ptr<SceneNode> gameQuad=HelperManager::BuildTexturedQuad("game",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/game.tga");
+    std::shared_ptr<SceneNode> exitQuad=HelperManager::BuildTexturedQuad("exitFirst",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/exit.tga");
     
     testQuad->setLocalTransform(IvVector3{-4,0,0}, IvVector3{0,4.72,1}, IvVector3{4,4,5});
     gameQuad->setLocalTransform(IvVector3{4,0,0}, IvVector3{0,4.72,1}, IvVector3{4,4,5});

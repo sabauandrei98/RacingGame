@@ -41,7 +41,7 @@ void StateController::update(float dt) {
     }
     //scene update
     _main_scene->updateScene(dt);
-    _states[_current_state]->Update();
+    _states[_current_state]->Update(dt);
 }
 
 void StateController::render()

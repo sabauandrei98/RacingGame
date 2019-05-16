@@ -135,13 +135,13 @@ void CarController::animateNode(float dt, SceneNode* car)
         }
     }
     
-    IvVector2 carVelocity;
+    IvVector2 carVelocity = {0,0};
     carVelocity.x = velocity * (sin(wheelAngle)) * coef;
     carVelocity.y = velocity * (cos(wheelAngle)) * coef;
     
     velocity_vector = {carVelocity.x, 0., carVelocity.y};
     
-    IvVector2 carPosition;
+    IvVector2 carPosition = {0,0};
     carPosition.x += carVelocity.x * dt;
     carPosition.y += carVelocity.y * dt;
     
