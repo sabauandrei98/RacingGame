@@ -8,7 +8,7 @@
 //-------------------------------------------------------------------------------
 //  @Terrain::Terrain()
 //-------------------------------------------------------------------------------
-Terrain::Terrain(uint32_t width,uint32_t height):width(width),height(height),rows(height),columns(width)
+Terrain::Terrain(const char* name,uint32_t width,uint32_t height):SceneNode(name),width(width),height(height),rows(height),columns(width)
 {
     elevation.resize(rows);
     for(int i=0;i<elevation.size();i++)
@@ -22,26 +22,18 @@ Terrain::Terrain(uint32_t width,uint32_t height):width(width),height(height),row
     renderPacket._use_depth=true;
     renderPacket._use_wireframe=false;
     
-    terrain=std::make_shared<HelperSceneNode>("terrain",renderPacket);
-    
     std::shared_ptr<Mesh> grid=std::make_shared<Mesh>();
-    
-    float currentR=0;
-    float currentC=0;
     
     IvVertexFormat format=IvVertexFormat::kTNPFormat;
     std::vector<IvTNPVertex> vertices;
     std::vector<unsigned int> indices;
     
-    int indexR=0;
-    float indexC=0;
-    float direction=1;
     for(int i = 0 ; i < rows;i++)
     {
         for(int j = 0 ; j < columns; j++)
         {
             IvTNPVertex vertex;
-            vertex.position={(float)i,(float)(elevation[(int)i][(int)j]*2000),(float)j};
+            vertex.position={(float)i-rows/2,(float)(elevation[(int)i][(int)j]*2000),(float)j-columns/2};
             vertices.push_back(vertex);
         }
     }
@@ -106,9 +98,7 @@ Terrain::Terrain(uint32_t width,uint32_t height):width(width),height(height),row
     meshInstance->setMesh(grid);
     meshInstance->setShader("../../Game/Environment/Shaders/BasicShader");
     
-    terrain->setRenderable(meshInstance);
-    terrain->setLocalTransform({0,0,0}, {0,1,2}, {2,2,2});
-    
+    this->setRenderable(meshInstance);    
     for(auto val:normalFaces)
         normals.push_back(val.first);
     
@@ -147,18 +137,10 @@ void Terrain::build()
 double
 Terrain::noise1(double nx,double ny)
 {
-    PerlinNoise pn(256);
+    PerlinNoise pn(rand()%500);
     return pn.noise(nx,1,ny);
 }
-//-------------------------------------------------------------------------------
-//  @Terrain::noise2()
-//-------------------------------------------------------------------------------
-double
-Terrain::noise2(double nx,double ny)
-{
-    PerlinNoise pn(100);
-    return pn.noise(nx,ny,1);
-}
+
 //-------------------------------------------------------------------------------
 //  @Terrain::calculateNormalAverage()
 //-------------------------------------------------------------------------------

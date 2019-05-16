@@ -8,8 +8,9 @@
 #include "Menu.hpp"
 #include "HelperManager.hpp"
 #include "MeshManager.hpp"
-#include "Environment/SkyBox.hpp"
-#include "Environment/Terrain.hpp"
+#include "../Environment/SkyBox.hpp"
+#include "../Environment/Terrain.hpp"
+#include "../Environment/Environment.hpp"
 #include <stdio.h>
 #include <map>
 

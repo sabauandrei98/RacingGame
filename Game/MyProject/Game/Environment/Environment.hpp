@@ -8,14 +8,16 @@
 #include "Mesh.hpp"
 #include "HelperManager.hpp"
 #include "MeshManager.hpp"
+#include "SkyBox.hpp"
+#include "Terrain.hpp"
 #include <stdio.h>
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
-class Environment
+class Environment:std::enable_shared_from_this<Environment>,public SceneNode
 {
 public:
-    Environment();
+    Environment(const char* name);
     ~Environment(){}
     
 private:

@@ -9,11 +9,9 @@
 //-------------------------------------------------------------------------------
 //  @SkyBox::SkyBox()
 //-------------------------------------------------------------------------------
-SkyBox::SkyBox()
+SkyBox::SkyBox(const char* name):SceneNode(name)
 {
     MeshManager meshManager;
-    
-    sky=std::make_shared<SceneNode>("skyRoot");
     
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");
@@ -33,22 +31,12 @@ SkyBox::SkyBox()
     rightQuad->setLocalTransform({4.97,0,0},    {-7.855,0,6.28},           {10,10,10});
     leftQuad->setLocalTransform({-4.97,0,0},    {7.855,0,6.268/2},         {10,10,10});
 
-    sky->addChild(frontQuad);
-    sky->addChild(backQuad);
-    sky->addChild(upQuad);
-    sky->addChild(downQuad);
-    sky->addChild(rightQuad);
-    sky->addChild(leftQuad);
-    
-   
+    this->addChild(frontQuad);
+    this->addChild(backQuad);
+    this->addChild(upQuad);
+    this->addChild(downQuad);
+    this->addChild(rightQuad);
+    this->addChild(leftQuad);
 
 }
 
-//-------------------------------------------------------------------------------
-//  @SkyBox::getSky()
-//-------------------------------------------------------------------------------
-std::shared_ptr<SceneNode>
-SkyBox::getSky()
-{
-    return sky;
-}

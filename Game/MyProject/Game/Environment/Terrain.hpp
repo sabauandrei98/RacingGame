@@ -11,26 +11,21 @@
 #include "HelperManager.hpp"
 #include "MeshManager.hpp"
 #include "PerlinNoise.hpp"
+#include "../SceneManagement/SceneNode.hpp"
 #include <stdio.h>
 #include <numeric>
 #include <random>
+#include <time.h>
 
-#if defined(__APPLE__) && defined(__MACH__)
-#include <OpenGL/gl3.h>
-#else
-#include <GL/glew.h>
-#include <GL/gl.h>
-#endif
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
-class Terrain
+class Terrain: std::enable_shared_from_this<Terrain>,public SceneNode
 {
     uint32_t width;
     uint32_t height;
     uint32_t rows;
     uint32_t columns;
-    std::shared_ptr<SceneNode> terrain;
     std::vector<std::vector<float>> elevation;
     
     std::vector<IvVector3> normals;
@@ -38,10 +33,8 @@ class Terrain
     std::vector<unsigned int> indices;
     
 public:
-    Terrain(uint32_t width,uint32_t height);
+    Terrain(const char*,uint32_t width,uint32_t height);
     ~Terrain(){}
-    
-    std::shared_ptr<SceneNode> getTerrain(){return terrain;}
     
     std::vector<IvVector3> getNormal(){return normals;}
     std::vector<IvTNPVertex> getVertices(){return vertices;}
@@ -51,7 +44,6 @@ public:
     
 private:
     double noise1(double nx,double ny);
-    double noise2(double nx,double ny);
    
     IvVector3 calculateNormalAverage(std::vector<std::pair<IvVector3,IvVector3>> normalFaces,unsigned int index);
 };

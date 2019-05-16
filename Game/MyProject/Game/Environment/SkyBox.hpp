@@ -8,19 +8,18 @@
 #include "Mesh.hpp"
 #include "HelperManager.hpp"
 #include "MeshManager.hpp"
+#include "../SceneManagement/SceneNode.hpp"
 #include <stdio.h>
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
-class SkyBox
+class SkyBox:std::enable_shared_from_this<SkyBox>,public SceneNode
 {
 public:
-    SkyBox();
+    SkyBox(const char *);
     ~SkyBox(){}
     
-    std::shared_ptr<SceneNode> getSky();
-    
 private:
-    std::shared_ptr<SceneNode> sky;
+
 };
 
