@@ -9,7 +9,6 @@
 //FILE FORMAT
 
 //n - size of the road
-//x y z   (n times for middle points)
 //x1 y1 z1 x2 y2 z2 (n times for pairs of margin points)
 
 class RoadImporterExporter{
