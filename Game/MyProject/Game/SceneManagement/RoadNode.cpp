@@ -1,12 +1,12 @@
 
 #include "RoadNode.hpp"
 
-RoadNode::RoadNode(const std::string& name, std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints) :  SceneNode(name)
+RoadNode::RoadNode(const std::string& name, const std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints) :  SceneNode(name)
 {
     buildMesh(rMarginPoints);
 }
 
-void RoadNode::buildMesh(std::vector<std::pair<IvVector3,IvVector3>>& roadPoints)
+void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& roadPoints)
 {
     std::shared_ptr<Mesh> meshTexture = std::make_shared<Mesh>();
     
