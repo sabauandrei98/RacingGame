@@ -34,7 +34,7 @@ RaceMenu::RaceMenu()
     std::shared_ptr<SceneNode> environment=std::make_shared<Environment>("environment");
     
     environment->setLocalTransform({0,10,0}, {0,0,0}, {2,2,2});
-    
+    te
     menu->setRoot(root);
     menu->getRoot()->addChild(countRoot);
     //menu->getRoot()->addChild(environment);
