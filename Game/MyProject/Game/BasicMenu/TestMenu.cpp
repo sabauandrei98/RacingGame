@@ -10,20 +10,20 @@
 //-------------------------------------------------------------------------------
 TestMenu::TestMenu()
 {
-    MeshManager meshManager;
-    //SkyBox skyBox;
-    
-    std::shared_ptr<Camera> camera=std::make_shared<Camera>(45.0, 0.1, 100.0, 1280, 720);
-    camera->setLookAt({0.f, 0.f, 0.f });
-    camera->setPosition({0,-25,0});
-    camera->setRotation({0,1,0});
-    
-    menu=std::make_shared<SceneGraph>();
-    std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootTestMenu");
-    
-    std::vector<std::string> uniforms;
-    uniforms.push_back("mTexture");
-    std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backTest",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_back.tga");
+//    MeshManager meshManager;
+//    //SkyBox skyBox;
+//    
+//    std::shared_ptr<Camera> camera=std::make_shared<Camera>(45.0, 0.1, 100.0, 1280, 720);
+//    camera->setLookAt({0.f, 0.f, 0.f });
+//    camera->setPosition({0,-25,0});
+//    camera->setRotation({0,1,0});
+//    
+//    menu=std::make_shared<SceneGraph>();
+//    std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootTestMenu");
+//    
+//    std::vector<std::string> uniforms;
+//    uniforms.push_back("mTexture");
+//    std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backTest",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_back.tga");
     
     // std::shared_ptr<SceneNode> box=HelperManager::BuildBox("box", HelperManager::CreateMeshInstance(meshManager.GetMesh("box")));
     // std::shared_ptr<SceneNode> sky=std::make_shared<SkyBox>("sky");
@@ -100,10 +100,25 @@ TestMenu::TestMenu()
    // menu->getRoot()->addChild(normals);
 
     
+    MeshManager meshManager;
+    
+    std::shared_ptr<Camera> camera=std::make_shared<Camera>(45.0, 0.1, 100.0, 1280, 720);
+    camera->setLookAt({0.f, 0.f, 0.f });
+    camera->setPosition({0,-25,0});
+    camera->setRotation({0,1,0});
+    
+    menu=std::make_shared<SceneGraph>();
+    std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootTestMenu");
+    
+    std::vector<std::string> uniforms;
+    uniforms.push_back("mTexture");
+    std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backTest",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_back.tga");
+    
+    
     std::shared_ptr<SceneNode> _child1 = HelperManager::BuildSphere("sphere", HelperManager::CreateMeshInstance( meshManager.GetMesh("sphere")));
     std::shared_ptr<SceneNode>  _child3 = HelperManager::BuildTexturedQuad("quad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"), "../../Game/Helper/Shaders/TextureShader"), "../../Textures/large.tga");
     std::shared_ptr<SceneNode>  _child2 = ModelLoader::loadModel("jeep.fbx", "example_shader");
-
+    
     
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
     std::shared_ptr<MeshInstance> mesh_instance = std::make_shared<MeshInstance>();

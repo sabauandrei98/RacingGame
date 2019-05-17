@@ -436,6 +436,7 @@ namespace HelperManager{
         }
 
         if(quadTexture) {
+            meshInstance->addShaderUniforms( std::vector<std::string>{"mTexture"});
             meshInstance->setUniformValue(0,quadTexture);
         }
         return node;

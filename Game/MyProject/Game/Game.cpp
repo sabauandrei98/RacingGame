@@ -37,12 +37,7 @@ Game::UpdateObjects( float dt )
 void
 Game::Render()
 {
-<<<<<<< HEAD
-    _state_controller->render();
-    //IvDrawLine({50,20,20}, {40,40,40},kRed);
-=======
     menu->render();
->>>>>>> master
 }
 
  

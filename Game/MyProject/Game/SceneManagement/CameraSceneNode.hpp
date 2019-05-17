@@ -26,6 +26,7 @@ public:
     IvVector3 screenToWorld(unsigned int mouseX,unsigned int mouseY);
     IvRay3 getRay( unsigned int mouseX,unsigned int mouseY);
     
+   // void updateNode(float dt);
     // this derived function is not needed, because the camera is used only in absolute space
     void updateAbsoluteTransform() {}
     
