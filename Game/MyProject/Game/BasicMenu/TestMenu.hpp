@@ -13,6 +13,7 @@
 #include "../SceneManagement/CameraFollowAnimator.hpp"
 #include "../RoadGenerator/RoadImporterExporter.hpp"
 #include "../SceneManagement/RoadNode.hpp"
+#include "../Gameplay/InfoManager.hpp"
 #include <stdio.h>
 #include <map>
 //-------------------------------------------------------------------------------

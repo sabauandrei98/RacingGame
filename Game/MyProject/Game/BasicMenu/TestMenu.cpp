@@ -28,7 +28,7 @@ TestMenu::TestMenu()
     
     std::shared_ptr<SceneNode> _child1 = HelperManager::BuildSphere("sphere", HelperManager::CreateMeshInstance( meshManager.GetMesh("sphere")));
     std::shared_ptr<SceneNode>  _child2 = ModelLoader::loadModel("jeep.fbx", "example_shader");
-
+    _child2->setName("Car");
     
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
     std::shared_ptr<MeshInstance> mesh_instance = std::make_shared<MeshInstance>();
@@ -46,6 +46,9 @@ TestMenu::TestMenu()
     std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadIE->getMarginPoints());
     roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{3.144,0,0}, IvVector3{12,12,12});
     menu->getRoot()->addChild(roadNode);
+    delete roadIE;
+    
+    InfoManager* infoManager = new InfoManager(menu->getRoot().get());
     
     backQuad->setLocalTransform(IvVector3{14,0,-8}, IvVector3{0,4.72,1}, IvVector3{4,4,4});
     
