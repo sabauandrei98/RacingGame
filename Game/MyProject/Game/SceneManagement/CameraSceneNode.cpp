@@ -1,4 +1,9 @@
 #include "CameraSceneNode.hpp"
+#include "CarAnimator.hpp"
+
+// -----------------------------
+// CONSTRUCTOR(S) AND DESTRUCTOR
+// -----------------------------
 
 CameraSceneNode::CameraSceneNode(const std::string& name, const CameraSceneNode::CameraPtr& camera) :
     SceneNode(name), _camera(camera) {
@@ -9,6 +14,7 @@ CameraSceneNode::CameraSceneNode(const std::string& name, const CameraSceneNode:
 // PUBLIC FUNCTION(S) AND METHOD(S)
 // --------------------------------
 
+<<<<<<< HEAD
 
 void CameraSceneNode::updateNode(float dt) {
     float translationSpeed = 3.0f;
@@ -114,6 +120,8 @@ void CameraSceneNode::updateNode(float dt) {
         throw "NEAR > FAR";
 }
 
+=======
+>>>>>>> master
 IvVector3 CameraSceneNode::screenToWorld(unsigned int mouseX, unsigned int mouseY)
 {
     return _camera->screenToWorld(mouseX, mouseY);

@@ -31,7 +31,7 @@ void CreditsState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void CreditsState::Update() {
+void CreditsState::Update(float dt) {
     if (isBackTriggered())
         state_controller->requestChange(Menu);
 }

@@ -12,36 +12,37 @@ Game::Game() : IvGame()
 
 Game::~Game()
 {
-
+    
 }
 
 bool 
 Game::PostRendererInitialize()
 {
-    IvRendererOGL::mRenderer->SetBlendFunc(kSrcAlphaBlendFunc, kOneMinusSrcAlphaBlendFunc, kAddBlendOp);
-    IvRendererOGL::mRenderer->SetDepthWrite(true);
-    IvRendererOGL::mRenderer->SetDepthTest(kLessEqualDepthTest);
-    
     // Set up base class
     if ( !IvGame::PostRendererInitialize() )
         return false;
     
-    _state_controller = std::make_unique<StateController>();
-    ::IvSetDefaultLighting();
+    menu=std::make_shared<StateController>();
     
+    ::IvSetDefaultLighting();
+  
     return true;
 }
 
 void
 Game::UpdateObjects( float dt )
 {
-    _state_controller->update(dt);
+    menu->update(dt);
 }
 void
 Game::Render()
 {
+<<<<<<< HEAD
     _state_controller->render();
     //IvDrawLine({50,20,20}, {40,40,40},kRed);
+=======
+    menu->render();
+>>>>>>> master
 }
 
  

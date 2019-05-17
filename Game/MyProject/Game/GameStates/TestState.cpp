@@ -27,7 +27,7 @@ void TestState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void TestState::Update() {
+void TestState::Update(float dt) {
     if (isBackTriggered())
         state_controller->requestChange(First);
     

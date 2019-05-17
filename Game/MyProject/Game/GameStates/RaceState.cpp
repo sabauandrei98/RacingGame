@@ -36,7 +36,7 @@ void RaceState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void RaceState::Update() {
+void RaceState::Update(float dt) {
     
     if(isPauseTriggered())
         state_controller->requestChange(Pause);
@@ -70,7 +70,7 @@ void RaceState::Update() {
                     uniforms.push_back("row");
                     uniforms.push_back("column");
                     
-                     std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"font.tga");
+                     std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"../../Game/BasicMenu/Resources/font.tga");
                     
                     countScoreQuad->setLocalTransform(IvVector3{17,0,9}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
                     first->addChild(countScoreQuad);
@@ -139,6 +139,7 @@ void RaceState::addNewDigit()
     
         auto root=raceMenu->getScene()->getRoot();
         auto previousPos=root->findFirstNodeWithName(previousQuadName)->getLocalPosition();
+
         countScoreQuad->setLocalTransform(IvVector3{previousPos.x-1,previousPos.y,previousPos.z}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
     
         root->findFirstNodeWithName("countRoot")->addChild(countScoreQuad);
@@ -228,7 +229,7 @@ void RaceState::renderScore()
         uniforms.push_back("row");
         uniforms.push_back("column");
         
-        std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"font.tga");
+        std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"../../Game/BasicMenu/Resources/font.tga");
         
         std::string n="count"+std::to_string(noDigits(score)-noDig );
         const char* prevName=n.c_str();

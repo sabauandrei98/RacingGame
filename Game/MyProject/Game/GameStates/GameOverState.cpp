@@ -27,7 +27,7 @@ void GameOverState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void GameOverState::Update() {
+void GameOverState::Update(float dt) {
     if (isQuitTriggered())
         state_controller->requestChange(Menu);
     
