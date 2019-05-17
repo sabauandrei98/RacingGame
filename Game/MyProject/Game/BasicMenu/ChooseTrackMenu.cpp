@@ -24,7 +24,6 @@ ChooseTrackMenu::ChooseTrackMenu()
     uniforms.push_back("mTexture");
     std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backChooseTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_back.tga");
     
-    
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     
     backQuad->setLocalTransform(IvVector3{14,0,-8}, IvVector3{0,4.72,1}, IvVector3{4,4,4});

@@ -28,7 +28,7 @@ public:
     
     // this derived function is not needed, because the camera is used only in absolute space
     void updateAbsoluteTransform() {}
-    
+   // void updateNode(float dt) ;
     ~CameraSceneNode() {}
     
     friend class CameraFollowAnimator;

@@ -13,7 +13,6 @@ void main()
     
     float diff = clamp(dot(normal, normalize(-lightPos)), 0.0, 1.0);
     vec3 baseColor = vec3(0.7 * height, 0.2, 0.1);
-    
-   // fragColor=vec4(normal * 0.1+vec3(0,0.5,),1.0);
+
     fragColor = vec4(baseColor * diff + vec3(0.1, 0.1, 0.1), 1.0);
 }

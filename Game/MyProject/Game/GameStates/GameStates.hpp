@@ -25,6 +25,7 @@
 #include "../BasicMenu/FirstMenu.hpp"
 #include "../BasicMenu/TestMenu.hpp"
 #include "../RoadGenerator/RoadEditor.hpp"
+#include "../RoadGenerator/RoadImporterExporter.hpp"
 
 class StateController;
 
@@ -47,7 +48,16 @@ public:
     bool rayIntersectsSceneNode(const char* name,unsigned int mousex,unsigned int mousey,const std::shared_ptr<SceneGraph>& mainScene)
     {
         RayBoxIntersection raybox(mainScene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(mainScene->getRoot()->findFirstNodeWithName(name)->getBoundingBox()))
+        auto nd = mainScene->getRoot()->findFirstNodeWithName(name);
+        if(nd != nullptr && raybox.IsRayIntersectingBox(nd->getBoundingBox()))
+            return true;
+        return false;
+    }
+    
+    bool rayIntersectsSceneNode(const std::shared_ptr<SceneNode>& node,unsigned int mousex,unsigned int mousey,const std::shared_ptr<SceneGraph>& mainScene)
+    {
+        RayBoxIntersection raybox(mainScene->getCamera()->getRay(mousex,mousey));
+        if(node != nullptr && raybox.IsRayIntersectingBox(node->getBoundingBox()))
             return true;
         return false;
     }
@@ -55,6 +65,48 @@ public:
     GameState(StateController* state_controller) :
         state_controller(state_controller) {
         }
+    
+    void saveFile(std::string configurerFile,std::string fileName)
+    {
+        std::ifstream fin(fileName);
+        int noFiles;
+        fin>>noFiles;
+        
+        std::vector<std::string> files;
+        for(int i=0;i<noFiles;i++)
+        {
+            std::string fileName;
+            fin>>fileName;
+            files.push_back(fileName);
+        }
+        fin.close();
+        
+        noFiles++;
+        std::ofstream fout(fileName);
+        fout<<noFiles<<'\n';
+        for(int i=0;i<files.size();i++)
+            fout<<files[i]<<'\n';
+        fout<<fileName<<'\n';
+        
+        fout.close();
+    }
+    std::vector<std::string> getFilesName(const std::string& configurerFile)
+    {
+        std::ifstream fin(configurerFile);
+        int noFiles;
+        fin>>noFiles;
+        
+        std::vector<std::string> files;
+        for(int i=0;i<noFiles;i++)
+        {
+            std::string fileName;
+            fin>>fileName;
+            files.push_back(fileName);
+        }
+        fin.close();
+        
+        return files;
+    }
     virtual ~GameState(){}
     
 protected:
@@ -114,9 +166,12 @@ public:
     void Update(float dt);
     
 private:
+    std::unique_ptr<RoadEditor> roadEditor;
+    
     // private function(s)
     bool isNextTriggered();
     bool isBackTriggered();
+    
 };
 
 class BuildTrackState : public GameState {

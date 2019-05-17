@@ -8,6 +8,7 @@
 #include "Menu.hpp"
 #include "HelperManager.hpp"
 #include "MeshManager.hpp"
+#include "../Environment/Environment.hpp"
 #include <stdio.h>
 #include <map>
 //-------------------------------------------------------------------------------

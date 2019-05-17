@@ -16,7 +16,10 @@ public:
     void Update(float dt);
     void generateTexturedRoad();
     std::shared_ptr<RoadGeneratorControler> getRoadGenerator(){return roadGenerator;}
-   
+    std::vector<std::pair<IvVector3,IvVector3>> getMarginPoints(){return rMarginPoints;}
+    void setMarginPoints(const std::vector<std::pair<IvVector3,IvVector3>>& marginPoints);
+    void setLocalTransform(const IvVector3& translate,const IvVector3& rotation,const IvVector3& scale);
+    
 private:
     RenderPacket render;
     std::shared_ptr<RoadNode> roadNode;

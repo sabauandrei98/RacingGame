@@ -8,20 +8,14 @@
 //-------------------------------------------------------------------------------
 //  @Terrain::Terrain()
 //-------------------------------------------------------------------------------
-Terrain::Terrain(const char* name,uint32_t width,uint32_t height):SceneNode(name),width(width),height(height),rows(height),columns(width)
+Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t height):HelperSceneNode(name,render),width(width),height(height),rows(height),columns(width)
 {
     elevation.resize(rows);
     for(int i=0;i<elevation.size();i++)
         elevation[i].resize(columns);
     
     build();
-    
-    RenderPacket renderPacket;
-    renderPacket._prim_type=kTriangleListPrim;
-    renderPacket._use_blend=true;
-    renderPacket._use_depth=true;
-    renderPacket._use_wireframe=false;
-    
+
     std::shared_ptr<Mesh> grid=std::make_shared<Mesh>();
     
     IvVertexFormat format=IvVertexFormat::kTNPFormat;
@@ -33,7 +27,7 @@ Terrain::Terrain(const char* name,uint32_t width,uint32_t height):SceneNode(name
         for(int j = 0 ; j < columns; j++)
         {
             IvTNPVertex vertex;
-            float height=elevation[(int)i][(int)j]*2000;
+            float height=elevation[(int)i][(int)j]*2000.0f;
             height=remainder(height,2);
             vertex.position={(float)i-rows/2,height,(float)j-columns/2};
             vertices.push_back(vertex);
@@ -51,8 +45,6 @@ Terrain::Terrain(const char* name,uint32_t width,uint32_t height):SceneNode(name
             indices.push_back(i * columns + j + 1);
             indices.push_back((i + 1) * columns + j + 1);
             indices.push_back((i + 1) * columns + j);
-            
-            
         }
     }
     
@@ -98,7 +90,7 @@ Terrain::Terrain(const char* name,uint32_t width,uint32_t height):SceneNode(name
     
     std::shared_ptr<MeshInstance> meshInstance=std::make_shared<MeshInstance>();
     meshInstance->setMesh(grid);
-    meshInstance->setShader("../../Game/Environment/Shaders/BasicShader");
+    meshInstance->setShader("../../Game/Environment/Shaders/TerrainShader");
     
     this->setRenderable(meshInstance);    
     for(auto val:normalFaces)
@@ -124,8 +116,8 @@ void Terrain::build()
                     0.98 * noise1( 4 * nx,  4 * ny) +
                     0.96 * noise1( 8 * nx,  8 * ny) +
                     0.90 * noise1(16 * nx, 16 * ny) +
-                    0.05 * noise1(32 * nx, 32 * ny));
-            e /= (0.94+0.86+0.98+0.96+0.90+0.05);
+                    0.98 * noise1(32 * nx, 32 * ny));
+            e /= (0.94+0.86+0.98+0.96+0.90+0.98);
             e = pow(e, 5.00);
             elevation[i][j]=e;
         }
@@ -140,7 +132,8 @@ double
 Terrain::noise1(double nx,double ny)
 {
     srand(time(0));
-    PerlinNoise pn(rand()%1000);
+    PerlinNoise pn(rand()%100);
+    //PerlinNoise pn(256);
     return pn.noise(nx,1,ny);
 }
 

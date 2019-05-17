@@ -12,7 +12,14 @@
 Environment::Environment(const char* name):SceneNode(name)
 {
     std::shared_ptr<SceneNode> sky=std::make_shared<SkyBox>("skyBox");
-    std::shared_ptr<SceneNode> terrain=std::make_shared<Terrain>("terrain",46,20);
+    
+    RenderPacket renderPacket;
+    renderPacket._prim_type=kTriangleListPrim;
+    renderPacket._use_blend=true;
+    renderPacket._use_depth=true;
+    renderPacket._use_wireframe=false;
+    
+    std::shared_ptr<HelperSceneNode> terrain=std::make_shared<Terrain>("terrain",renderPacket,36,36);
     std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootEnvironment");
 
     sky->setLocalTransform({0,0,30}, {0,0,0}, {30,30,30});

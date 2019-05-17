@@ -20,7 +20,7 @@
 //-------------------------------------------------------------------------------
 //-- Classes --------------------------------------------------------------------
 //-------------------------------------------------------------------------------
-class Terrain: std::enable_shared_from_this<Terrain>,public SceneNode
+class Terrain: std::enable_shared_from_this<Terrain>,public HelperSceneNode
 {
     uint32_t width;
     uint32_t height;
@@ -33,7 +33,7 @@ class Terrain: std::enable_shared_from_this<Terrain>,public SceneNode
     std::vector<unsigned int> indices;
     
 public:
-    Terrain(const char*,uint32_t width,uint32_t height);
+    Terrain(const char*,RenderPacket,uint32_t width,uint32_t height);
     ~Terrain(){}
     
     std::vector<IvVector3> getNormal(){return normals;}

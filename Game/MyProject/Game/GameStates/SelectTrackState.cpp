@@ -24,6 +24,22 @@ void SelectTrackState::onEnter() {
     
     std::shared_ptr<ChooseTrackMenu> selectTrackMenu=std::make_shared<ChooseTrackMenu>();
     state_controller->_main_scene=selectTrackMenu->getScene();
+    
+    RoadImporterExporter roadImpExp;
+    
+    std::vector<std::string> files=getFilesName("manageFiles.txt");
+    
+    for(int i=0;i<files.size();i++)
+    {
+        roadImpExp.importFrom(files[i]);
+        std::vector<std::pair<IvVector3,IvVector3>> marginPoints;
+        marginPoints=roadImpExp.getMarginPoints();
+        
+        roadEditor=std::make_unique<RoadEditor>(selectTrackMenu->getScene().get());
+        roadEditor->setMarginPoints(marginPoints);
+        roadEditor->generateTexturedRoad();
+        roadEditor->setLocalTransform({i*9.0f,0,i*3.0f}, {0,0,0}, {0.5,0.5,0.5});
+    }
 }
 
 void SelectTrackState::onExit() {
@@ -40,7 +56,21 @@ void SelectTrackState::Update(float dt) {
 }
 
 bool SelectTrackState::isNextTriggered() {
-    return IvGame::mGame->mEventHandler->IsKeyDown('n');
+    std::vector<std::shared_ptr<SceneNode>> nodes;
+    state_controller->_main_scene->getRoot()->findAllNodesWithName("roadNode", nodes);
+    int index=0;
+    unsigned int mousex,mousey;
+    while(index<nodes.size())
+    {
+        if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode(nodes[index], mousex,  mousey,state_controller->_main_scene))
+        {
+            RoadImporterExporter roadImpExp;
+            roadImpExp.exportTo(roadEditor->getMarginPoints(), "roadData.txt");
+            return true;
+        }
+        index++;
+    }
+    return false;
 }
 
 bool SelectTrackState::isBackTriggered() {
@@ -49,3 +79,4 @@ bool SelectTrackState::isBackTriggered() {
         return true;
     return false;
 }
+

@@ -160,6 +160,16 @@ void RoadEditor::Update(float dt)
     sceneGraph->updateScene(dt);
 }
 
+void RoadEditor::setMarginPoints(const std::vector<std::pair<IvVector3, IvVector3> > &marginPoints)
+{
+    this->rMarginPoints=marginPoints;
+}
+
+void RoadEditor::setLocalTransform(const IvVector3& translate,const IvVector3& rotation,const IvVector3& scale)
+{
+    roadNode->setLocalTransform(translate, rotation, scale);
+}
+
 void RoadEditor::setupMeshes()
 {
     //mesh
