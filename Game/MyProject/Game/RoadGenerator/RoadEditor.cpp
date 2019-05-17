@@ -11,7 +11,7 @@ RoadEditor::RoadEditor(SceneGraph* sGraph) : sceneGraph(sGraph)
     //setting up a simple environment for the editor
     setupMeshes();
     setupPoints();
-    roadGenerator = std::make_shared<RoadGeneratorControler>(bezierPoints, rMiddlePoints, rMarginPoints, 4.0f, 0.1f);
+    roadGenerator = std::make_shared<RoadGeneratorControler>(bezierPoints, rMiddlePoints, rMarginPoints, 4.0f, 0.05f);
     roadIE = new RoadImporterExporter;
 }
 
