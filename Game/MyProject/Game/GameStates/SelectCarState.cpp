@@ -31,7 +31,7 @@ void SelectCarState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void SelectCarState::Update() {
+void SelectCarState::Update(float dt) {
     if (isPlayTriggered())
         state_controller->requestChange(Race);
     

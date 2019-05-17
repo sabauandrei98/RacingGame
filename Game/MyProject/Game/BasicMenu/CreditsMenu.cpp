@@ -22,8 +22,8 @@ CreditsMenu::CreditsMenu()
     
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");
-    std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backCredits",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"t../../Game/BasicMenu/Resources/r_back.tga");
-    
+
+    std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backCredits",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_back.tga");
     
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     

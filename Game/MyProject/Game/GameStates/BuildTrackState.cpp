@@ -24,6 +24,8 @@ void BuildTrackState::onEnter() {
     
     std::shared_ptr<BuildTrackMenu> buildTrack=std::make_shared<BuildTrackMenu>();
     state_controller->_main_scene=buildTrack->getScene();
+    
+    roadEditor=std::make_unique<RoadEditor>(buildTrack->getScene().get());
 }
 
 void BuildTrackState::onExit() {
@@ -31,19 +33,17 @@ void BuildTrackState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void BuildTrackState::Update() {
+void BuildTrackState::Update(float dt) {
+    roadEditor->Update(dt);
+    
     if (isPlayTriggered())
         state_controller->requestChange(SelectCar);
     
     if (isAddTriggered())
-    {
-        //update the road
-    }
+        roadEditor->getRoadGenerator()->addPoint();
     
     if(isRemoveTriggered())
-    {
-        //update the road
-    }
+        roadEditor->getRoadGenerator()->removePoint();
     
     if(isSaveTriggered())
     {
@@ -51,14 +51,14 @@ void BuildTrackState::Update() {
     }
     
     if(isPreviousTriggered())
-    {
-        //update the road
-    }
+        roadEditor->getRoadGenerator()->previousPoint();
     
     if(isNextTriggered())
-    {
-        //update the road
-    }
+        roadEditor->getRoadGenerator()->nextPoint();
+    
+    if(isGenerateTriggered())
+        roadEditor->generateTexturedRoad();
+    
     if (isBackTriggered())
         state_controller->requestChange(Track);
 }
@@ -73,6 +73,13 @@ bool BuildTrackState::isNextTriggered() {
 bool BuildTrackState::isPreviousTriggered() {
     unsigned int mousex,mousey;
     if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("previousTrack", mousex, mousey, state_controller->_main_scene))
+        return true;
+    return false;
+}
+
+bool BuildTrackState::isGenerateTriggered() {
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("generateTrack", mousex, mousey, state_controller->_main_scene))
         return true;
     return false;
 }

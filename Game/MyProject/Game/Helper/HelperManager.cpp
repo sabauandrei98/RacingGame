@@ -434,10 +434,10 @@ namespace HelperManager{
             delete image;
             image = 0;
         }
-        
-        if(quadTexture)
+
+        if(quadTexture) {
             meshInstance->setUniformValue(0,quadTexture);
-        
+        }
         return node;
     }
     
