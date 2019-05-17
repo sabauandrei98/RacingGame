@@ -33,14 +33,16 @@ Terrain::Terrain(const char* name,uint32_t width,uint32_t height):SceneNode(name
         for(int j = 0 ; j < columns; j++)
         {
             IvTNPVertex vertex;
-            vertex.position={(float)i-rows/2,(float)(elevation[(int)i][(int)j]*2000),(float)j-columns/2};
+            float height=elevation[(int)i][(int)j]*2000;
+            height=remainder(height,2);
+            vertex.position={(float)i-rows/2,height,(float)j-columns/2};
             vertices.push_back(vertex);
         }
     }
     
-    for(int i = 0 ; i < (rows - 1);i++)//y
+    for(int i = 0 ; i < (rows - 1);i++)
     {
-        for(int j = 0 ; j < (columns - 1); j++)//x
+        for(int j = 0 ; j < (columns - 1); j++)
         {
             indices.push_back(i * columns + j);
             indices.push_back(i * columns + j + 1);
@@ -122,8 +124,8 @@ void Terrain::build()
                     0.98 * noise1( 4 * nx,  4 * ny) +
                     0.96 * noise1( 8 * nx,  8 * ny) +
                     0.90 * noise1(16 * nx, 16 * ny) +
-                    0.94 * noise1(32 * nx, 32 * ny));
-            e /= (0.94+0.86+0.98+0.96+0.90+0.94);
+                    0.05 * noise1(32 * nx, 32 * ny));
+            e /= (0.94+0.86+0.98+0.96+0.90+0.05);
             e = pow(e, 5.00);
             elevation[i][j]=e;
         }
@@ -137,7 +139,8 @@ void Terrain::build()
 double
 Terrain::noise1(double nx,double ny)
 {
-    PerlinNoise pn(rand()%500);
+    srand(time(0));
+    PerlinNoise pn(rand()%1000);
     return pn.noise(nx,1,ny);
 }
 
@@ -168,6 +171,6 @@ Terrain::calculateNormalAverage(std::vector<std::pair<IvVector3,IvVector3>> norm
         sum.z/=(float)count;
     }
     
-   // sum.Normalize();
+    sum.Normalize();
     return sum;
 }
