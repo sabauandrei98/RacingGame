@@ -14,10 +14,9 @@ CameraSceneNode::CameraSceneNode(const std::string& name, const CameraSceneNode:
 // PUBLIC FUNCTION(S) AND METHOD(S)
 // --------------------------------
 
-
 //void CameraSceneNode::updateNode(float dt) {
 //    float translationSpeed = 3.0f;
-//
+//    
 //    if (IvGame::mGame->mEventHandler->IsKeyDown('w'))
 //    {
 //        _camera->pan({0, dt * translationSpeed});

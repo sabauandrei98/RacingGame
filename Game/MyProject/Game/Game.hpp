@@ -32,7 +32,7 @@ public:
     Game();
     ~Game();
     bool PostRendererInitialize();
-    
+
 protected:
     virtual void UpdateObjects(float dt);
     virtual void Render();

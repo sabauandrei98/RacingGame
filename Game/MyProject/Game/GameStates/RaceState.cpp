@@ -139,7 +139,7 @@ void RaceState::addNewDigit()
     
         auto root=raceMenu->getScene()->getRoot();
         auto previousPos=root->findFirstNodeWithName(previousQuadName)->getLocalPosition();
-
+        
         countScoreQuad->setLocalTransform(IvVector3{previousPos.x-1,previousPos.y,previousPos.z}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
     
         root->findFirstNodeWithName("countRoot")->addChild(countScoreQuad);
