@@ -32,7 +32,7 @@ void MenuState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void MenuState::Update() {
+void MenuState::Update(float dt) {
     if (isPlayTriggered())
         state_controller->requestChange(Track);
     
