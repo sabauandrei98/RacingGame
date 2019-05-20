@@ -30,11 +30,13 @@ private:
     std::vector<SceneNode*> carsList;
     std::vector<IvVector3> roadMiddlePoints;
     
-    //data tables
-    std::unordered_map<std::string, int> laps;
-    std::unordered_map<std::string, int> checkpoints;
-    std::unordered_map<std::string, int> score;
-    std::unordered_map<std::string, float> lapTime;
+    struct CarProps {
+        int laps;
+        int checkpoints;
+        int score;
+        int lapTime;
+    };
+    std::unordered_map<std::string, CarProps> carsData;
     
     void setLap(const std::string& carName, int lap);
     void setScore(const std::string& carName, int score);

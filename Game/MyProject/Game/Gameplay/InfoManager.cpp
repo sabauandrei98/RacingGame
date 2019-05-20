@@ -5,12 +5,11 @@ InfoManager::InfoManager(SceneNode* root) : root(root) {
     //get list of all cars
     std::vector<std::shared_ptr<SceneNode>>cars;
     root->findAllNodesContainingName("Car", cars);
-    for(const auto& i : cars)
-        carsList.push_back(i.get());
     
     //set initial values
-    for(const auto& i : carsList)
+    for(const auto& i : cars)
     {
+        carsList.push_back(i.get());
         setLap(i->getName(), 1);
         setCheckpoint(i->getName(), 0);
         setScore(i->getName(), 0);
@@ -29,27 +28,27 @@ const float InfoManager::getCarSpeed(const std::string& carName) const{
 }
 
 void InfoManager::setLap(const std::string& carName, int lap){
-    laps[carName] = lap;
+    carsData[carName].laps = lap;
 }
 
-const int InfoManager::getLap(const std::string& carName) const{
-    return laps.at(carName);
+const int InfoManager::getLap(const std::string& carName)const {
+    return  carsData.at(carName).laps;
 }
 
 void InfoManager::setCheckpoint(const std::string& carName, int checkpoint){
-    checkpoints[carName] = checkpoint;
+    carsData[carName].checkpoints = checkpoint;
 }
 
 const int InfoManager::getCheckpoint(const std::string& carName) const{
-    return checkpoints.at(carName);
+    return carsData.at(carName).checkpoints;
 }
 
 void InfoManager::setScore(const std::string& carName, int scor){
-    score[carName] = scor;
+    carsData[carName].score = scor;
 }
 
 const int InfoManager::getScore(const std::string& carName) const{
-    return score.at(carName);
+    return carsData.at(carName).score;
 }
 
 const float InfoManager::getTime() const{
@@ -60,7 +59,7 @@ void InfoManager::updateCarStats(){
     for(int i = 0; i < carsList.size(); i++)
     {
         //get distance to next checkpoint
-        int nextCheckPointIndex = checkpoints[carsList[i]->getName()] + 1;
+        int nextCheckPointIndex = carsData[carsList[i]->getName()].checkpoints + 1;
         
         //reset the index if needed
         if (nextCheckPointIndex == roadMiddlePoints.size())
@@ -70,18 +69,18 @@ void InfoManager::updateCarStats(){
         if (Distance(carsList[i]->getLocalPosition(), roadMiddlePoints[nextCheckPointIndex]) < checkpointTriggerDistance)
         {
             //next checkpoint
-            checkpoints[carsList[i]->getName()] = nextCheckPointIndex;
+            carsData[carsList[i]->getName()].checkpoints = nextCheckPointIndex;
             
             //increase score
-            score[carsList[i]->getName()]++;
+            carsData[carsList[i]->getName()].score++;
             
             //if last checkpoint -> next lap
             if (nextCheckPointIndex == roadMiddlePoints.size())
             {
-                laps[carsList[i]->getName()]++;
+                carsData[carsList[i]->getName()].laps++;
                 
                 //mapping of form: key:CarName + lapNumber -> value: time
-                lapTime[carsList[i]->getName() + std::to_string(laps[carsList[i]->getName()])] = sinceStartTimer;
+                carsData[carsList[i]->getName() + std::to_string(carsData[carsList[i]->getName()].laps)].lapTime = sinceStartTimer;
             }
         }
     }
