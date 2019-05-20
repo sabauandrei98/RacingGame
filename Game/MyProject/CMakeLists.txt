@@ -138,6 +138,7 @@ ${PROJECT_SOURCE_DIR}/Game/Helper/
 ${PROJECT_SOURCE_DIR}/Game/Helper/Shaders/
 ${PROJECT_SOURCE_DIR}/Game/BasicMenu/
 ${PROJECT_SOURCE_DIR}/Game/Car/
+${PROJECT_SOURCE_DIR}/Game/Gameplay/
 ${PROJECT_SOURCE_DIR}/Game/BasicMenu/Resources/
 ${PROJECT_SOURCE_DIR}/Game/BasicMenu/Shaders/
 ${PROJECT_SOURCE_DIR}/Game/RoadGeneration/

@@ -9,8 +9,8 @@
 class RoadNode : std::enable_shared_from_this<RoadNode>, public SceneNode {
 
 public:
-    RoadNode(const std::string& name, std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints);
+    RoadNode(const std::string& name, const std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints);
     
 private:
-    void buildMesh(std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints);
+    void buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints);
 };

@@ -49,7 +49,12 @@ std::shared_ptr<SceneNode> ModelLoader::makeSceneNode(const aiMesh *mesh, const 
     aiVector3t<float>               rotation;
     aiVector3t<float>               position;
     
-    scene_node = std::make_shared<SceneNode>(node->mName.data);
+    RenderPacket render;
+    render._prim_type=kTriangleListPrim;
+    render._use_blend=true;
+    render._use_depth=true;
+    
+    scene_node = std::make_shared<HelperSceneNode>(node->mName.data,render);
     
     if (mesh) {
         for (unsigned int i = 0; i < mesh->mNumVertices; i++) {

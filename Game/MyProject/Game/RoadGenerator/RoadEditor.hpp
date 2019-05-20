@@ -5,13 +5,14 @@
 #include "../SceneManagement/RoadNode.hpp"
 #include "../Helper/HelperSceneNode.hpp"
 #include "RoadGeneratorControler.hpp"
+#include "RoadImporterExporter.hpp"
 #include <IvImage.h>
 
 class RoadEditor{
     
 public:
     RoadEditor(SceneGraph* sGraph);
-    ~RoadEditor() {};
+    ~RoadEditor();
     
     void Update(float dt);
     void generateTexturedRoad();
@@ -39,6 +40,7 @@ private:
     
     std::shared_ptr<RoadGeneratorControler> roadGenerator;
     SceneGraph* sceneGraph;
+    RoadImporterExporter roadIE;
     
     void setupPoints();
     void setupMeshes();

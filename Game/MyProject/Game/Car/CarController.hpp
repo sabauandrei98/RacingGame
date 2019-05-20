@@ -36,15 +36,15 @@ public:
 private:
     
     //increments
-    float carSpeedIncrement = 0.045f;
-    float angleSpeedIncrement = 0.0075f;
-    float nitroIncrement = 0.20f;
-    float turbineBoostIncrement = 0.25f;
-    float directionChangeIncrement = 0.25f;
+    float carSpeedIncrement = 0.045f * 5;
+    float angleSpeedIncrement = 0.0075f * 5;
+    float nitroIncrement = 0.20f * 5;
+    float turbineBoostIncrement = 0.25f * 5;
+    float directionChangeIncrement = 0.25f * 5;
     
     //coef
-    float frictionCoefficient = 0.05f;
-    float brakeCoefficient = 0.060f;
+    float frictionCoefficient = 0.05f * 5;
+    float brakeCoefficient = 0.060f * 5;
     
     //velocity
     float velocity = 0;

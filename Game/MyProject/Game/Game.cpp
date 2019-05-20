@@ -12,7 +12,7 @@ Game::Game() : IvGame()
 
 Game::~Game()
 {
-    
+
 }
 
 bool 
@@ -22,7 +22,9 @@ Game::PostRendererInitialize()
     if ( !IvGame::PostRendererInitialize() )
         return false;
     
+
     menu=std::make_shared<StateController>();
+
     
     ::IvSetDefaultLighting();
   
