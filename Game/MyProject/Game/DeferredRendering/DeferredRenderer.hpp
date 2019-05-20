@@ -16,11 +16,29 @@ public:
     
     void Render(SceneGraph*);
     
+    bool    _needs_motion_blur = false;
+    bool    _needs_debug_screen = false;
+    
 private:
-    IvFrameBuffer*                  _g_buffer;
-    MeshInstance                    _renderable;
+    IvFrameBuffer*      _g_buffer;
+    IvFrameBuffer*      _previous_position;
+    MeshInstance        _renderable;
     
-    IvShaderProgram*                _shader;
+    MeshInstance        _screen1;
+    MeshInstance        _screen2;
+    MeshInstance        _screen3;
     
-    bool                            _needs_motion_blur = false;
+    IvShaderProgram*    _shader;
+    IvShaderProgram*    _blur_shader;
+    IvShaderProgram*    _copy_shader;
+    IvShaderProgram*    _debug_shader;
+    
+    void setUpGBuffer();
+    void setUpPreviousBuffer();
+    void setUpMotionBlur();
+    void setUpDebugScreen();
+    
+    void renderNoEffect();
+    void renderMotionBlur();
+    void showDebugScreen();
 };

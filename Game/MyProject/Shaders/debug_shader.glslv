@@ -8,7 +8,7 @@ out vec4 col;
 out vec2 uv;
 
 void main() {
-    gl_Position = IvModelViewProjectionMatrix * position;
+    gl_Position = position;
     col = color;
     uv = texcoords;
 }

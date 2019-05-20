@@ -9,10 +9,16 @@ out vec3 pos;
 out vec3 norm;
 out vec2 uv;
 
+vec3 calculateNormal() {
+	mat3 normalMatrix = transpose(inverse(mat3(IvWorldMatrix)));
+	return normalMatrix * normal;
+}
+
 void main() 
 {
-    gl_Position = IvModelViewProjectionMatrix * vec4(position, 1.);
-    pos = gl_Position.xyz;//(IvWorldMatrix * vec4(position, 1.)).xyz;
-    norm = normal;
+	vec4 outPos = IvModelViewProjectionMatrix * vec4(position, 1.);
+    gl_Position = outPos;
+    pos = outPos.xyz;
+    norm = calculateNormal();
     uv = texcoords;
 }

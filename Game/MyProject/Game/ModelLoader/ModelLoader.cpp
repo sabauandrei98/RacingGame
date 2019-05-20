@@ -101,7 +101,6 @@ std::shared_ptr<SceneNode> ModelLoader::makeSceneNode(const aiMesh *mesh, const 
             
             if (material->GetTexture(aiTextureType_DIFFUSE, 0, &str) == AI_SUCCESS) {
                 texture_name = str.C_Str();
-                std::cout << mesh->mMaterialIndex << " " << texture_name << std::endl;
                 
                 win_style = texture_name.find_last_of('\\');
                 unix_style = texture_name.find_last_of('/');
@@ -112,8 +111,6 @@ std::shared_ptr<SceneNode> ModelLoader::makeSceneNode(const aiMesh *mesh, const 
                     texture_name = texture_name.substr(unix_style + 1, texture_name.length());
                 
                 texture_name = texture_name.substr(0, texture_name.find_last_of('.')) + ".tga";
-                
-                std::cout << mesh->mMaterialIndex << " " << texture_name << std::endl;
                 
                 // is 0. when has texture and 1. when has color
                 mesh_instace->addShaderUniforms(std::vector<std::string>{"TEXTURE"});
