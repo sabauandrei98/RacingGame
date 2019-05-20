@@ -27,7 +27,7 @@ private:
     //the root (good to search for objects)
     SceneNode* root;
     
-    std::vector<std::shared_ptr<SceneNode>> carsList;
+    std::vector<SceneNode*> carsList;
     std::vector<IvVector3> roadMiddlePoints;
     
     //data tables

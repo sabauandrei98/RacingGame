@@ -40,7 +40,7 @@ private:
     
     std::shared_ptr<RoadGeneratorControler> roadGenerator;
     SceneGraph* sceneGraph;
-    RoadImporterExporter* roadIE;
+    RoadImporterExporter roadIE;
     
     void setupPoints();
     void setupMeshes();

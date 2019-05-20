@@ -3,23 +3,24 @@
 InfoManager::InfoManager(SceneNode* root) : root(root) {
     
     //get list of all cars
-    root->findAllNodesContainingName("Car", carsList);
+    std::vector<std::shared_ptr<SceneNode>>cars;
+    root->findAllNodesContainingName("Car", cars);
+    for(auto& i : cars)
+        carsList.push_back(i.get());
     
     //set initial values
-    for(int i = 0; i < carsList.size(); i++)
+    for(auto& i : carsList)
     {
-        setLap(carsList[i]->getName(), 1);
-        setCheckpoint(carsList[i]->getName(), 0);
-        setScore(carsList[i]->getName(), 0);
+        setLap(i->getName(), 1);
+        setCheckpoint(i->getName(), 0);
+        setScore(i->getName(), 0);
     }
     
     //get the list of middle points
     std::vector<std::shared_ptr<SceneNode>>scene_nodes;
     root->findAllNodesContainingName("bezierMiddlePoint", scene_nodes);
-    for(int i = 0; i < scene_nodes.size(); i++)
-    {
-        roadMiddlePoints.push_back(scene_nodes[i]->getLocalPosition());
-    }
+    for(auto& i : scene_nodes)
+        roadMiddlePoints.push_back(i->getLocalPositon());
 }
 
 const float InfoManager::getCarSpeed(const std::string& carName) const{
