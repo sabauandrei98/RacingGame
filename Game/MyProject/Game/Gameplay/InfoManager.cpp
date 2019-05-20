@@ -5,11 +5,11 @@ InfoManager::InfoManager(SceneNode* root) : root(root) {
     //get list of all cars
     std::vector<std::shared_ptr<SceneNode>>cars;
     root->findAllNodesContainingName("Car", cars);
-    for(auto& i : cars)
+    for(const auto& i : cars)
         carsList.push_back(i.get());
     
     //set initial values
-    for(auto& i : carsList)
+    for(const auto& i : carsList)
     {
         setLap(i->getName(), 1);
         setCheckpoint(i->getName(), 0);
@@ -19,7 +19,7 @@ InfoManager::InfoManager(SceneNode* root) : root(root) {
     //get the list of middle points
     std::vector<std::shared_ptr<SceneNode>>scene_nodes;
     root->findAllNodesContainingName("bezierMiddlePoint", scene_nodes);
-    for(auto& i : scene_nodes)
+    for(const auto& i : scene_nodes)
         roadMiddlePoints.push_back(i->getLocalPositon());
 }
 
