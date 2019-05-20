@@ -33,9 +33,10 @@ class Terrain: std::enable_shared_from_this<Terrain>,public HelperSceneNode
     std::vector<unsigned int>        indices;
     
     std::shared_ptr<Mesh>            grid;
+    std::shared_ptr<MeshInstance>    meshInstance;
     
 public:
-    Terrain(const char*,RenderPacket,uint32_t width,uint32_t height);
+    Terrain(const char*,RenderPacket,uint32_t width,uint32_t height,const std::vector<std::pair<IvVector3,IvVector3>>& marginPoints);
     ~Terrain(){}
     
     std::vector<IvTNPVertex> getVertices(){return vertices;}
@@ -46,8 +47,8 @@ public:
     
 private:
     double noise1(double nx,double ny);
-   
-    IvVector3 calculateNormalAverage(std::vector<std::pair<IvVector3,IvVector3>> normalFaces,unsigned int index);
+    
+    int isPointRayIntersectLines(const IvVector3& point,const std::vector<std::pair<IvVector3,IvVector3>>& lines);
 };
 
 

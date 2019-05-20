@@ -38,8 +38,13 @@ void BuildTrackState::Update(float dt) {
     roadEditor->Update(dt);
     
     if (isPlayTriggered())
+    {
+        RoadImporterExporter roadImpExp;
+        std::string name="roadDataTest.txt";
+        if(roadEditor->getMarginPoints().size()!=0)
+            roadImpExp.exportTo(roadEditor->getMarginPoints(), name);
         state_controller->requestChange(SelectCar);
-    
+    }
     if (isAddTriggered())
         roadEditor->getRoadGenerator()->addPoint();
     

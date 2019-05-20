@@ -54,7 +54,9 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
     }
     
     //keep the normals and the indices for the current face
+    std::vector<std::pair<IvVector3,IvVector3>> normalFaces;
     IvVector3 p1,p2,p3;
+    int i=0;
     
     std::vector<std::pair<IvVector3,IvVector3>> lines;
     for(int i=0;i<marginPoints.size();i++)
@@ -63,15 +65,22 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
         lines.push_back(std::make_pair(marginPoints[i].second, marginPoints[i+1].second));
     }
     
-    int i=0;
     while(i<indices.size()-3)
     {
-        if(isPointRayIntersectLines(vertices[i].position, lines)%2==1)
+//        if(isPointOnRoad(vertices[i].position, marginPoints) || isPointOnRoad(vertices[i+1].position, marginPoints) || isPointOnRoad(vertices[i+2].position, marginPoints))
+//        {
+//            vertices[i].position.y   = -0.1;
+//            vertices[i+1].position.y = -0.1;
+//            vertices[i+2].position.y = -0.1;
+//        }
+        
+        if(isPointRayIntersectLines(vertices[i].position, lines))
         {
-                vertices[indices[i]].position.y   = -0.1;
-                vertices[indices[i+1]].position.y = -0.1;
-                vertices[indices[i+2]].position.y = -0.1;
+            vertices[i].position.y   = -0.1;
+            vertices[i+1].position.y = -0.1;
+            vertices[i+2].position.y = -0.1;
         }
+        
         p1=vertices[indices[i]].position;
         p2=vertices[indices[i+1]].position;
         p3=vertices[indices[i+2]].position;
@@ -101,7 +110,9 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
     meshInstance->setMesh(grid);
     meshInstance->setShader("../../Game/Environment/Shaders/TerrainShader");
     
-    this->setRenderable(meshInstance);
+    this->setRenderable(meshInstance);    
+    for(auto val:normalFaces)
+        normals.push_back(val.first);
     
     this->vertices=vertices;
     this->indices=indices;
@@ -157,10 +168,9 @@ Terrain::noise1(double nx,double ny)
 //-------------------------------------------------------------------------------
 //  @Terrain::noise1()
 //-------------------------------------------------------------------------------
-int
+bool
 Terrain::isPointRayIntersectLines(const IvVector3& point,const std::vector<std::pair<IvVector3,IvVector3>>& lines)
 {
-    int countLinesIntersected=0;
     for(auto& line:lines)
     {
         IvVector3 start=line.first;
@@ -189,8 +199,8 @@ Terrain::isPointRayIntersectLines(const IvVector3& point,const std::vector<std::
         float s = (ax * dz - az * dx) / det;
         
         if( !(r < 0 || r > 1 || s < 0 || s > 1))
-            countLinesIntersected++;
+            return true;
     }
-    return countLinesIntersected;
+    return false;
 }
 

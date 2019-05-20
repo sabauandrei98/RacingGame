@@ -9,7 +9,7 @@
 //-------------------------------------------------------------------------------
 //  @Environment::Environment()
 //-------------------------------------------------------------------------------
-Environment::Environment(const char* name):SceneNode(name)
+Environment::Environment(const char* name,const  std::vector<std::pair<IvVector3,IvVector3>>& marginPoints):SceneNode(name)
 {
     std::shared_ptr<SceneNode> sky=std::make_shared<SkyBox>("skyBox");
     
@@ -19,7 +19,7 @@ Environment::Environment(const char* name):SceneNode(name)
     renderPacket._use_depth=true;
     renderPacket._use_wireframe=false;
     
-    terrain=std::make_shared<Terrain>("terrain",renderPacket,36,36);
+    terrain=std::make_shared<Terrain>("terrain",renderPacket,50,50,marginPoints);
     std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootEnvironment");
 
     sky->setLocalTransform({0,0,30}, {0,0,0}, {30,30,30});
@@ -42,6 +42,7 @@ Environment::updateTerrain(const std::vector<std::pair<IvVector3,IvVector3>> & m
     {
         verifyPoint(point,vertices);
     }
+    
     ((Terrain*)terrain.get())->setVertices(vertices);
     
 }
@@ -52,6 +53,7 @@ Environment::updateTerrain(const std::vector<std::pair<IvVector3,IvVector3>> & m
 void
 Environment::verifyPoint(const std::pair<IvVector3, IvVector3> &point, std::vector<IvTNPVertex> &vertices)
 {
+    auto keep=vertices;
     for(int i=0;i<vertices.size();i++)
     {
         auto aux=point;
@@ -63,17 +65,16 @@ Environment::verifyPoint(const std::pair<IvVector3, IvVector3> &point, std::vect
         aux.second.y+=2;
         aux.second.z+=2;
         
-        for(auto vert:vertices)
-            std::cout<<vert.position.x<<" "<<vert.position.y<<" "<<vert.position.z<<std::endl;
+       
         auto vertex=vertices[i];
         if(distance(aux.first, aux.second) > distance(aux.first, vertex.position) ||
            distance(aux.first, aux.second) > distance(aux.second, vertex.position))
-            vertices[i].position.y=-2;
-        
-        std::cout<<"after update:";
-        for(auto vert:vertices)
-            std::cout<<vert.position.x<<" "<<vert.position.y<<" "<<vert.position.z<<std::endl;
+            vertices[i].position.y=-0.1;
     }
+
+    for(int i=0;i<vertices.size();i++)
+        if(keep[i].position.y !=vertices[i].position.y)
+        std::cout<<keep[i].position.y<<" "<<vertices[i].position.y<<std::endl;
 }
 
 //-------------------------------------------------------------------------------

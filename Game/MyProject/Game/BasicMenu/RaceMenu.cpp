@@ -31,8 +31,6 @@ RaceMenu::RaceMenu()
     
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     
-    std::shared_ptr<SceneNode> environment=std::make_shared<Environment>("environment");
-    
     std::shared_ptr<SceneNode> _child1 = HelperManager::BuildSphere("sphere", HelperManager::CreateMeshInstance( meshManager.GetMesh("sphere")));
     std::shared_ptr<SceneNode>  _child2 = ModelLoader::loadModel("jeep.fbx", "example_shader");
     
@@ -47,7 +45,9 @@ RaceMenu::RaceMenu()
     roadIE->importFrom("roadDataTest.txt");
     std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadIE->getMarginPoints());
     roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{3.144,0,0}, IvVector3{12,12,12});
-    ((Environment*)environment.get())->updateTerrain(roadIE->getMarginPoints());
+    
+    std::shared_ptr<SceneNode> environment=std::make_shared<Environment>("environment",roadIE->getMarginPoints());
+    
     delete roadIE;
     
     environment->setLocalTransform({0,10,0}, {0,0,0}, {2,2,2});

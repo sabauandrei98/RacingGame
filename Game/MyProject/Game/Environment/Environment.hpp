@@ -18,7 +18,7 @@
 class Environment:std::enable_shared_from_this<Environment>,public SceneNode
 {
 public:
-    Environment(const char* name);
+    Environment(const char* name,const std::vector<std::pair<IvVector3,IvVector3>>& marginPoints);
     ~Environment(){}
     
     void updateTerrain(const std::vector<std::pair<IvVector3,IvVector3>> & marginPoints);

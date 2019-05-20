@@ -25,8 +25,6 @@ TestMenu::TestMenu()
     uniforms.push_back("mTexture");
     std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backTest",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_back.tga");
     
-    std::shared_ptr<SceneNode> environment=std::make_shared<Environment>("environment");
-    
     
     std::shared_ptr<SceneNode> _child1 = HelperManager::BuildSphere("sphere", HelperManager::CreateMeshInstance( meshManager.GetMesh("sphere")));
     std::shared_ptr<SceneNode>  _child2 = ModelLoader::loadModel("jeep.fbx", "example_shader");
@@ -46,8 +44,10 @@ TestMenu::TestMenu()
     std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadIE->getMarginPoints());
     roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{3.144,0,0}, IvVector3{12,12,12});
     menu->getRoot()->addChild(roadNode);
-    delete roadIE;
     
+    std::shared_ptr<SceneNode> environment=std::make_shared<Environment>("environment",roadIE->getMarginPoints());
+    
+    delete roadIE;
     
     backQuad->setLocalTransform({14,0,-8}, {0,4.72,1}, {4,4,4});
     environment->setLocalTransform({0,10,0}, {0,0,0}, {2,2,2});

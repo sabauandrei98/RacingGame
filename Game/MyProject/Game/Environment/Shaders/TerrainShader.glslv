@@ -12,7 +12,7 @@ out float height;
 
 void main()
 {
-    gl_Position = IvModelViewProjectionMatrix * vec4(vec3(Position.x,Position.y/3,Position.z),1.0);
+    gl_Position = IvModelViewProjectionMatrix * vec4(Position,1.0);
     uv=texCoord.xy;
 	normal = aNormal;
     height = Position.z / 2000.0;
