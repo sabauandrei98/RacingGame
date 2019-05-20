@@ -68,9 +68,9 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
     {
         if(isPointRayIntersectLines(vertices[i].position, lines)%2==1)
         {
-                vertices[indices[i]].position.y   = -0.1;
-                vertices[indices[i+1]].position.y = -0.1;
-                vertices[indices[i+2]].position.y = -0.1;
+                vertices[indices[i]].position.y   = -13.;
+                vertices[indices[i+1]].position.y = -13.;
+                vertices[indices[i+2]].position.y = -13.;
         }
         p1=vertices[indices[i]].position;
         p2=vertices[indices[i+1]].position;
@@ -151,7 +151,8 @@ Terrain::setVertices(const std::vector<IvTNPVertex> &vertices)
 double
 Terrain::noise1(double nx,double ny)
 {
-    PerlinNoise pn(rand()%256);
+    //PerlinNoise pn(rand()%256);
+    PerlinNoise pn(244);
     return pn.noise(nx,1,ny);
 }
 //-------------------------------------------------------------------------------
@@ -161,36 +162,23 @@ int
 Terrain::isPointRayIntersectLines(const IvVector3& point,const std::vector<std::pair<IvVector3,IvVector3>>& lines)
 {
     int countLinesIntersected=0;
+    IvVector3 startP=point;
+    IvVector3 endP=point-IvVector3(-10000,0,0);
+    
+    startP.y=0;
+    endP.y=0;
+    
     for(auto& line:lines)
     {
         IvVector3 start=line.first;
         IvVector3 end=line.second;
-        
-        float ax = end.x - start.x;
-        float ay = end.y - start.y;
-        float az = end.z - start.z;
-        
-        auto startP=point;
-        auto endP=point+IvVector3{-100000.0,0.0,0.0};
-        
-        float bx = startP.x-endP.x;
-        float by = 0;
-        float bz = 0;
-        
-        float dx = startP.x - start.x;
-        float dy = startP.y - start.y;
-        float dz = startP.z - start.z;
-        
-        float det = ax * bz - az * bx;
-        
-        if (det == 0) return false;
-        
-        float r = (dx * bz - dz * bx) / det;
-        float s = (ax * dz - az * dx) / det;
-        
-        if( !(r < 0 || r > 1 || s < 0 || s > 1))
-            countLinesIntersected++;
+    
+    
     }
     return countLinesIntersected;
 }
 
+int Terrain::pointIntersectsLine(IvVector3 point, IvVector3 start, IvVector3 end)
+{
+    return (end.z-point.z) * (start.x -point.x) > (start.z-point.z) * (end.x-point.x);
+}
