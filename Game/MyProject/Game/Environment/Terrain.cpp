@@ -16,7 +16,7 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
     
     build();
 
-    std::shared_ptr<Mesh> grid=std::make_shared<Mesh>();
+    grid=std::make_shared<Mesh>();
     
     IvVertexFormat format=IvVertexFormat::kTNPFormat;
     std::vector<IvTNPVertex> vertices;
@@ -29,8 +29,10 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
             IvTNPVertex vertex;
             float height=elevation[(int)i][(int)j]*2000.0f;
             height=remainder(height,2);
+    
             vertex.position={(float)i-rows/2,height,(float)j-columns/2};
             vertices.push_back(vertex);
+            
         }
     }
     
@@ -123,6 +125,17 @@ void Terrain::build()
         }
 }
 //-------------------------------------------------------------------------------
+//  @Terrain::setVertices()
+//-------------------------------------------------------------------------------
+void
+Terrain::setVertices(const std::vector<IvTNPVertex> &vertices)
+{
+    IvVertexFormat format=IvVertexFormat::kTNPFormat;
+    
+    this->vertices=vertices;
+    grid->setVertexBuffer(vertices, format);
+}
+//-------------------------------------------------------------------------------
 //  PRIVATE METHODS
 //-------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------
@@ -132,8 +145,8 @@ double
 Terrain::noise1(double nx,double ny)
 {
     srand(time(0));
-    PerlinNoise pn(rand()%100);
-    //PerlinNoise pn(256);
+    //PerlinNoise pn(rand()%100);
+    PerlinNoise pn(333);
     return pn.noise(nx,1,ny);
 }
 

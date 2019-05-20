@@ -26,19 +26,21 @@ class Terrain: std::enable_shared_from_this<Terrain>,public HelperSceneNode
     uint32_t height;
     uint32_t rows;
     uint32_t columns;
-    std::vector<std::vector<float>> elevation;
+    std::vector<std::vector<float>>  elevation;
     
-    std::vector<IvVector3> normals;
-    std::vector<IvTNPVertex> vertices;
-    std::vector<unsigned int> indices;
+    std::vector<IvVector3>           normals;
+    std::vector<IvTNPVertex>         vertices;
+    std::vector<unsigned int>        indices;
+    
+    std::shared_ptr<Mesh>            grid;
     
 public:
     Terrain(const char*,RenderPacket,uint32_t width,uint32_t height);
     ~Terrain(){}
     
-    std::vector<IvVector3> getNormal(){return normals;}
     std::vector<IvTNPVertex> getVertices(){return vertices;}
     std::vector<unsigned int> getIndices(){return indices;}
+    void setVertices(const std::vector<IvTNPVertex>& vertices);
     
     void build();
     

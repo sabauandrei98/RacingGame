@@ -62,7 +62,6 @@ void MeshInstance::setUniformValue(unsigned int index, const IvVector3 &value){
 
 // sets the shader uniform values with float
 void MeshInstance::setUniformValue(unsigned int index,float value){
-
     _shader_uniforms[index]->SetValue(value,0);
 }
 

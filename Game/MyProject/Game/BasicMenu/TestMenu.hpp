@@ -13,6 +13,8 @@
 #include "../Environment/Environment.hpp"
 #include "../ModelLoader/ModelLoader.hpp"
 #include "../Car/CarController.hpp"
+#include "../RoadGenerator/RoadImporterExporter.hpp"
+#include "../SceneManagement/RoadNode.hpp"
 #include "../SceneManagement/CameraFollowAnimator.hpp"
 #include <stdio.h>
 #include <map>

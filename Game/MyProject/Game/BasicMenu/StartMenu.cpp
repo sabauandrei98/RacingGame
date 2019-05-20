@@ -34,9 +34,9 @@ StartMenu::StartMenu()
 
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     
-    playQuad->setLocalTransform(IvVector3{-7,0,0}, IvVector3{0,4.75,1}, IvVector3{4,4,5});
-    highscoresQuad->setLocalTransform(IvVector3{-1,0,0}, IvVector3{0,4.72,1}, IvVector3{7,6,5});
-    creditsQuad->setLocalTransform(IvVector3{4,0,0}, IvVector3{0,4.68,1}, IvVector3{10,6,5});
+    playQuad->setLocalTransform(IvVector3{-5,0,0}, IvVector3{0,4.75,1}, IvVector3{4,4,5});
+    highscoresQuad->setLocalTransform(IvVector3{1,0,0}, IvVector3{0,4.72,1}, IvVector3{7,6,5});
+    creditsQuad->setLocalTransform(IvVector3{6,0,0}, IvVector3{0,4.68,1}, IvVector3{10,6,5});
     exitQuad->setLocalTransform(IvVector3{14,0,-5}, IvVector3{0,4.72,1}, IvVector3{4,5,4});
     backQuad->setLocalTransform(IvVector3{14,0,-8}, IvVector3{0,4.72,1}, IvVector3{4,4,4});
     

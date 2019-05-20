@@ -229,17 +229,12 @@ private:
     bool isPauseTriggered();
     bool isGameOverTriggered();
 
-    void renderScore();
-    unsigned int noDigits(uint32_t number);
-    void addNewDigit();
-    void checkNeedChangeDigit();
-    int firstDigit(int no);
-    
     uint32_t score                  =   0;
     uint32_t frames                 =   0;
     
     std::shared_ptr<RaceMenu>           raceMenu;
     MeshManager                         meshManager;
+    std::unique_ptr<RoadEditor>         roadEditor;
 };
 
 class HighScoreState : public GameState {
