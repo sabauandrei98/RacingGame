@@ -14,7 +14,6 @@ InfoManager::InfoManager(SceneNode* root) : root(root) {
         prop.laps = 1;
         prop.checkpoints = 0;
         prop.score = 0;
-        prop.lapTime = 0;
         carsData[i->getName() ] = prop;
     }
     
@@ -36,6 +35,14 @@ void InfoManager::setLap(const std::string& carName, int lap){
 
 const int InfoManager::getLap(const std::string& carName)const {
     return  carsData.at(carName).laps;
+}
+
+void InfoManager::setLapTime(const std::string& carName, int lap, float time){
+    carsData[carName].lapTime[lap] = time;
+}
+
+const float InfoManager::getLapTime(const std::string& carName, int lap) const {
+    return  carsData.at(carName).lapTime[lap];
 }
 
 void InfoManager::setCheckpoint(const std::string& carName, int checkpoint){
@@ -61,8 +68,10 @@ const float InfoManager::getTime() const{
 void InfoManager::updateCarStats(){
     for(int i = 0; i < carsList.size(); i++)
     {
+        auto& carInfo = carsData[carsList[i]->getName()];
+        
         //get distance to next checkpoint
-        int nextCheckPointIndex = carsData[carsList[i]->getName()].checkpoints + 1;
+        int nextCheckPointIndex = carInfo.checkpoints + 1;
         
         //reset the index if needed
         if (nextCheckPointIndex == roadMiddlePoints.size())
@@ -72,18 +81,16 @@ void InfoManager::updateCarStats(){
         if (Distance(carsList[i]->getLocalPosition(), roadMiddlePoints[nextCheckPointIndex]) < checkpointTriggerDistance)
         {
             //next checkpoint
-            carsData[carsList[i]->getName()].checkpoints = nextCheckPointIndex;
+            carInfo.checkpoints = nextCheckPointIndex;
             
             //increase score
-            carsData[carsList[i]->getName()].score++;
+            carInfo.score++;
             
             //if last checkpoint -> next lap
             if (nextCheckPointIndex == roadMiddlePoints.size())
             {
-                carsData[carsList[i]->getName()].laps++;
-                
-                //mapping of form: key:CarName + lapNumber -> value: time
-                carsData[carsList[i]->getName() + std::to_string(carsData[carsList[i]->getName()].laps)].lapTime = sinceStartTimer;
+                carInfo.laps++;
+                carInfo.lapTime.push_back(sinceStartTimer);
             }
         }
     }
