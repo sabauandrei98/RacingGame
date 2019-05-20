@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <IvVector3.h>
 #include <IvVector2.h>
-#include <map>
+#include <unordered_map>
 #include "../SceneManagement/SceneNode.hpp"
 #include "../Car/CarController.hpp"
 
@@ -31,10 +31,10 @@ private:
     std::vector<IvVector3> roadMiddlePoints;
     
     //data tables
-    std::map<std::string, int> laps;
-    std::map<std::string, int> checkpoints;
-    std::map<std::string, int> score;
-    std::map<std::string, float> lapTime;
+    std::unordered_map<std::string, int> laps;
+    std::unordered_map<std::string, int> checkpoints;
+    std::unordered_map<std::string, int> score;
+    std::unordered_map<std::string, float> lapTime;
     
     void setLap(const std::string& carName, int lap);
     void setScore(const std::string& carName, int score);
