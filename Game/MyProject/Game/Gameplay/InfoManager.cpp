@@ -10,9 +10,12 @@ InfoManager::InfoManager(SceneNode* root) : root(root) {
     for(const auto& i : cars)
     {
         carsList.push_back(i.get());
-        setLap(i->getName(), 1);
-        setCheckpoint(i->getName(), 0);
-        setScore(i->getName(), 0);
+        CarProps prop;
+        prop.laps = 1;
+        prop.checkpoints = 0;
+        prop.score = 0;
+        prop.lapTime = 0;
+        carsData[i->getName() ] = prop;
     }
     
     //get the list of middle points
