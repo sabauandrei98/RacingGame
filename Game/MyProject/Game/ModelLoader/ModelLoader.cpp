@@ -51,7 +51,9 @@ std::shared_ptr<SceneNode> ModelLoader::makeSceneNode(const aiMesh *mesh, const 
     
     RenderPacket render;
     render._prim_type=kTriangleListPrim;
-    
+    render._use_blend=true;
+    render._use_depth=true;
+
     scene_node = std::make_shared<HelperSceneNode>(node->mName.data,render);
     
     if (mesh) {

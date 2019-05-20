@@ -43,10 +43,12 @@ public:
 
     const IvVector3& getLocalScale() const;
     const IvVector3& getLocalPositon() const;
+    const std::string& getName() const;
 
     
     void setAnimator(const std::shared_ptr<NodeAnimator>&);
     void setRenderable(const std::shared_ptr<MeshInstance>&);
+    void setName(const std::string& newName);
     const std::shared_ptr<MeshInstance>& getRenderable() const;
     
     const NodeAnimator* getAnimator() const;

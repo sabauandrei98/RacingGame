@@ -48,6 +48,14 @@ void SceneNode::findAllNodesWithName(const std::string& name, std::vector<std::s
         i->findAllNodesWithName(name, scene_nodes);
 }
 
+const std::string& SceneNode::getName() const{
+    return this->_name;
+}
+
+void SceneNode::setName(const std::string& newName){
+    this->_name = newName;
+}
+
 void SceneNode::findAllNodesContainingName(const std::string& name, std::vector<std::shared_ptr<SceneNode>>& scene_nodes) const {
     for (auto& i : _children)
         if (i->_name.find(name) != std::string::npos)

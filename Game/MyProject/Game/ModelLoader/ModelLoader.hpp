@@ -14,6 +14,7 @@
 #include <assimp/postprocess.h>
 
 #include "SceneNode.hpp"
+#include "../Helper/HelperSceneNode.hpp"
 #include "../ResourceManager/ResourceManager.hpp"
 #include "../Helper/HelperSceneNode.hpp"
 
