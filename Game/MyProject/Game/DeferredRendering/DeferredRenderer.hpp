@@ -16,8 +16,13 @@ public:
     
     void Render(SceneGraph*);
     
-    bool    _needs_motion_blur = false;
-    bool    _needs_debug_screen = false;
+    bool    needs_debug_screen = false;
+    bool    needs_motion_blur = false;
+    
+    float   exposure = 2.1f;
+    float   gamma = 0.8f;
+    float   vignette_intensity = 30.0f;
+    float   vignette_size = 0.5f;
     
 private:
     IvFrameBuffer*      _g_buffer;

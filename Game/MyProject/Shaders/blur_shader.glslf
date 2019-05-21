@@ -8,6 +8,11 @@ uniform sampler2D PREVIOUS_POSITION;
 uniform sampler2D CURRENT_POSITION;
 uniform sampler2D COLOR;
 
+uniform float EXPOSURE;
+uniform float GAMMA;
+uniform float INTENSITY;
+uniform float SIZE;
+
 float sampleNum = 10;
 
 void main() {
@@ -16,15 +21,27 @@ void main() {
  	vec4 currentPosition = texture(CURRENT_POSITION, texCoord);
  	vec4 prevPosition = texture(PREVIOUS_POSITION, texCoord);
 
-	vec2 velocity = (prevPosition - currentPosition).xy / 500.f;
+	vec2 velocity = (prevPosition - currentPosition).xy / 400.f;
 	vec3 color = texture(COLOR, texCoord).rgb;
 
 	for (int i = 1; i < sampleNum; i++, texCoord += velocity) {
-		
 		color += texture(COLOR, texCoord).rgb;
 	}
 
-	fragColor = vec4(color / sampleNum, 1.f);
- 	// fragColor = vec4(velocity, 0.0f, 1.);
+	color /= sampleNum;
+
+	// vignette
+    vec2 flipped_uv = uv * (1.0f - uv.yx);
+    float vignette = flipped_uv.x * flipped_uv.y * INTENSITY;
+    vignette = pow(vignette, SIZE);
+    color = min(color, vec3(vignette));
+
+	// tone mapping
+	vec3 mapped = vec3(1.0f) - exp(-color * EXPOSURE);
+
+	// gamma correction
+	mapped = pow(mapped, vec3(1.0f / GAMMA));
+
+ 	fragColor = vec4(mapped, 1.0f);
 }
 

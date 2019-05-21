@@ -49,7 +49,12 @@ std::shared_ptr<SceneNode> ModelLoader::makeSceneNode(const aiMesh *mesh, const 
     aiVector3t<float>               rotation;
     aiVector3t<float>               position;
     
-    scene_node = std::make_shared<SceneNode>(node->mName.data);
+    RenderPacket render;
+    render._prim_type=kTriangleListPrim;
+    render._use_blend=true;
+    render._use_depth=true;
+    
+    scene_node = std::make_shared<HelperSceneNode>(node->mName.data,render);
     
     if (mesh) {
         for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
@@ -101,7 +106,7 @@ std::shared_ptr<SceneNode> ModelLoader::makeSceneNode(const aiMesh *mesh, const 
             
             if (material->GetTexture(aiTextureType_DIFFUSE, 0, &str) == AI_SUCCESS) {
                 texture_name = str.C_Str();
-                
+
                 win_style = texture_name.find_last_of('\\');
                 unix_style = texture_name.find_last_of('/');
                 
@@ -111,13 +116,11 @@ std::shared_ptr<SceneNode> ModelLoader::makeSceneNode(const aiMesh *mesh, const 
                     texture_name = texture_name.substr(unix_style + 1, texture_name.length());
                 
                 texture_name = texture_name.substr(0, texture_name.find_last_of('.')) + ".tga";
-                
+
                 // is 0. when has texture and 1. when has color
                 mesh_instace->addShaderUniforms(std::vector<std::string>{"TEXTURE"});
-                //mesh_instace->addShaderUniforms(std::vector<std::string>{"TEXTURE_OR_COLOR"});
                 
                 mesh_instace->setUniformValue(0, resource_manager.getTexture(texture_name).get());
-                //mesh_instace->setUniformValue(1, 0.0f);
             }
             
 //            if (material->Get(AI_MATKEY_COLOR_DIFFUSE, ai_color) == AI_SUCCESS) {

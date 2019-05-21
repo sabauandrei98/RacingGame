@@ -24,10 +24,14 @@ void DeferredRenderer::setUpGBuffer() {
     
     _renderable.setMesh(mesh);
     
-    _shader = IvRenderer::mRenderer->GetResourceManager()->CreateShaderProgram(IvRenderer::mRenderer->GetResourceManager()->CreateVertexShaderFromFile("../../Shaders/example_shader"), IvRenderer::mRenderer->GetResourceManager()->CreateFragmentShaderFromFile("../../Shaders/example_shader"));
+    _shader = IvRenderer::mRenderer->GetResourceManager()->CreateShaderProgram(IvRenderer::mRenderer->GetResourceManager()->CreateVertexShaderFromFile("../../Shaders/simple_shader"), IvRenderer::mRenderer->GetResourceManager()->CreateFragmentShaderFromFile("../../Shaders/simple_shader"));
     
     IvRenderer::mRenderer->SetShaderProgram(_shader);
     glUniform1i(glGetUniformLocation(_shader->GetProgramID(), "TEXTURE"), 0);
+    glUniform1f(glGetUniformLocation(_shader->GetProgramID(), "EXPOSURE"), exposure);
+    glUniform1f(glGetUniformLocation(_shader->GetProgramID(), "GAMMA"), gamma);
+    glUniform1f(glGetUniformLocation(_shader->GetProgramID(), "INTENSITY"), vignette_intensity);
+    glUniform1f(glGetUniformLocation(_shader->GetProgramID(), "SIZE"), vignette_size);
     
     std::vector<IvRenderTarget*> _render_targets;
     _render_targets.push_back(IvRenderer::mRenderer->GetResourceManager()->CreateRenderTarget(RenderTargetType::COLOR));    // position
@@ -57,6 +61,10 @@ void DeferredRenderer::setUpMotionBlur() {
     glUniform1i(glGetUniformLocation(_blur_shader->GetProgramID(), "PREVIOUS_POSITION"), 0);
     glUniform1i(glGetUniformLocation(_blur_shader->GetProgramID(), "CURRENT_POSITION"), 1);
     glUniform1i(glGetUniformLocation(_blur_shader->GetProgramID(), "COLOR"), 2);
+    glUniform1f(glGetUniformLocation(_blur_shader->GetProgramID(), "EXPOSURE"), exposure);
+    glUniform1f(glGetUniformLocation(_blur_shader->GetProgramID(), "GAMMA"), gamma);
+    glUniform1f(glGetUniformLocation(_blur_shader->GetProgramID(), "INTENSITY"), vignette_intensity);
+    glUniform1f(glGetUniformLocation(_blur_shader->GetProgramID(), "SIZE"), vignette_size);
 }
 
 void DeferredRenderer::setUpDebugScreen() {
@@ -163,11 +171,11 @@ void DeferredRenderer::Render(SceneGraph* scene_graph) {
     _g_buffer->BindToDefault();
     IvRenderer::mRenderer->ClearBuffers(kColorDepthClear);
     
-    if (_needs_motion_blur)
+    if (needs_motion_blur)
         renderMotionBlur();
     else
         renderNoEffect();
     
-    if (_needs_debug_screen)
+    if (needs_debug_screen)
         showDebugScreen();
 }

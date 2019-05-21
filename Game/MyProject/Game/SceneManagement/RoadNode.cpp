@@ -1,12 +1,12 @@
 
 #include "RoadNode.hpp"
 
-RoadNode::RoadNode(const std::string& name, std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints) :  SceneNode(name)
+RoadNode::RoadNode(const std::string& name, const std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints) :  SceneNode(name)
 {
     buildMesh(rMarginPoints);
 }
 
-void RoadNode::buildMesh(std::vector<std::pair<IvVector3,IvVector3>>& roadPoints)
+void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& roadPoints)
 {
     std::shared_ptr<Mesh> meshTexture = std::make_shared<Mesh>();
     
@@ -42,17 +42,20 @@ void RoadNode::buildMesh(std::vector<std::pair<IvVector3,IvVector3>>& roadPoints
     meshTexture->setVertexBuffer(pointPosition, format);
     meshTexture->setIndexBuffer(indexBuffer);
     
-    const char* shader = "roadShader";
+    // const char* shader = "../../Game/RoadGenerator/Shaders/roadShader";
+    const char* shader = "../../Shaders/first_pass_shader";
     std::shared_ptr<MeshInstance> meshTextureInstance = std::make_shared<MeshInstance>();
     meshTextureInstance->setMesh(meshTexture);
     meshTextureInstance->setShader(shader);
     
     //UNIFORMS
     std::vector<std::string> uniforms;
-    uniforms.push_back("roadTexture");
+    // uniforms.push_back("roadTexture");
+    uniforms.push_back("TEXTURE");
     meshTextureInstance->addShaderUniforms(uniforms);
     
-    IvImage* image = IvImage::CreateFromFile("roadTexture.tga");
+    IvImage* image = IvImage::CreateFromFile("../../Game/RoadGenerator/Resources/road.tga");
+
     IvTexture* quadTexture;
     
     if (image)

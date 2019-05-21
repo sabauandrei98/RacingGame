@@ -8,6 +8,12 @@
 #include "Menu.hpp"
 #include "HelperManager.hpp"
 #include "MeshManager.hpp"
+#include "../ModelLoader/ModelLoader.hpp"
+#include "../Car/CarController.hpp"
+#include "../SceneManagement/CameraFollowAnimator.hpp"
+#include "../RoadGenerator/RoadImporterExporter.hpp"
+#include "../SceneManagement/RoadNode.hpp"
+#include "../Gameplay/InfoManager.hpp"
 #include <stdio.h>
 #include <map>
 //-------------------------------------------------------------------------------

@@ -31,7 +31,7 @@ void HighScoreState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void HighScoreState::Update() {
+void HighScoreState::Update(float dt) {
     if (isBackTriggered())
         state_controller->requestChange(Menu);
 }

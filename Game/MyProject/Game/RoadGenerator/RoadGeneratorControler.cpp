@@ -24,75 +24,72 @@ void RoadGeneratorControler::mergeHeadTail()
     rMarginPoints[rMarginPoints.size() - 1].second = rMarginPoints[0].second;
 }
 
+void
+RoadGeneratorControler::previousPoint()
+{
+    if (editIndex - 1 >= 0)
+        editIndex --;
+    needsUpdate = true;
+}
+void
+RoadGeneratorControler::nextPoint()
+{
+    if (editIndex + 1 <= bezierPoints.size() - 1)
+        editIndex ++;
+    needsUpdate = true;
+}
+void
+RoadGeneratorControler::addPoint()
+{
+    //move the edit on a fixed point
+    while(editIndex % 3 != 0)
+        editIndex ++;
+    
+    if(editIndex != bezierPoints.size() - 1)
+    {
+        bezierPoints.insert(bezierPoints.begin() + editIndex + 2, {-1, 0, 0});
+        bezierPoints.insert(bezierPoints.begin() + editIndex + 3, {0, 0, 0});
+        bezierPoints.insert(bezierPoints.begin() + editIndex + 4, {1, 0, 0});
+        updateControlPointsPosition(editIndex + 2);
+    }
+    else
+    {
+        bezierPoints.insert(bezierPoints.begin() + editIndex + 1, {-1, 0, 0});
+        bezierPoints.insert(bezierPoints.begin() + editIndex + 2, {0, 0, 0});
+        bezierPoints.insert(bezierPoints.begin() + editIndex + 3, {1, 0, 0});
+        updateControlPointsPosition(editIndex + 1);
+    }
+    
+    editIndex += 3;
+    needsUpdate = true;
+}
+
+void
+RoadGeneratorControler::removePoint()
+{
+    //works only on fixed points
+    if(editIndex % 3 != 0 || bezierPoints.size() == 4)
+        return;
+    
+    if(editIndex != bezierPoints.size() - 1)
+    {
+        bezierPoints.erase(bezierPoints.begin() + editIndex);
+        bezierPoints.erase(bezierPoints.begin() + editIndex);
+        bezierPoints.erase(bezierPoints.begin() + editIndex);
+    }
+    else
+    {
+        bezierPoints.erase(bezierPoints.begin() + editIndex);
+        bezierPoints.erase(bezierPoints.begin() + editIndex - 1);
+        bezierPoints.erase(bezierPoints.begin() + editIndex - 2);
+        editIndex = bezierPoints.size() - 1;
+    }
+    needsUpdate = true;
+}
 //returns true if the track was updated on the current frame
 bool
 RoadGeneratorControler::Update( float dt )
 {
-    bool isUpdated = false;
-    
-    //go to next point
-    if (IvGame::mGame->mEventHandler->IsKeyReleased('.'))
-    {
-        if (editIndex + 1 <= bezierPoints.size() - 1)
-            editIndex ++;
-        isUpdated = true;
-    }
-
-    //go to prev point
-    if (IvGame::mGame->mEventHandler->IsKeyReleased(','))
-    {
-        if (editIndex - 1 >= 0)
-            editIndex --;
-        isUpdated = true;
-    }
-    
-    if (IvGame::mGame->mEventHandler->IsKeyReleased('r'))
-    {
-        //move the edit on a fixed point
-        while(editIndex % 3 != 0)
-            editIndex ++;
-        
-        if(editIndex != bezierPoints.size() - 1)
-        {
-            bezierPoints.insert(bezierPoints.begin() + editIndex + 2, {-1, 0, 0});
-            bezierPoints.insert(bezierPoints.begin() + editIndex + 3, {0, 0, 0});
-            bezierPoints.insert(bezierPoints.begin() + editIndex + 4, {1, 0, 0});
-            updateControlPointsPosition(editIndex + 2);
-        }
-        else
-        {
-            bezierPoints.insert(bezierPoints.begin() + editIndex + 1, {-1, 0, 0});
-            bezierPoints.insert(bezierPoints.begin() + editIndex + 2, {0, 0, 0});
-            bezierPoints.insert(bezierPoints.begin() + editIndex + 3, {1, 0, 0});
-            updateControlPointsPosition(editIndex + 1);
-        }
-        
-        editIndex += 3;
-        isUpdated = true;
-    }
-        
-    if (IvGame::mGame->mEventHandler->IsKeyReleased('f'))
-    {
-        //works only on fixed points
-        if(editIndex % 3 != 0 || bezierPoints.size() == 4)
-            return false;
-    
-        if(editIndex != bezierPoints.size() - 1)
-        {
-            bezierPoints.erase(bezierPoints.begin() + editIndex);
-            bezierPoints.erase(bezierPoints.begin() + editIndex);
-            bezierPoints.erase(bezierPoints.begin() + editIndex);
-        }
-        else
-        {
-            bezierPoints.erase(bezierPoints.begin() + editIndex);
-            bezierPoints.erase(bezierPoints.begin() + editIndex - 1);
-            bezierPoints.erase(bezierPoints.begin() + editIndex - 2);
-            editIndex = bezierPoints.size() - 1;
-        }
-        isUpdated = true;
-    }
-
     static unsigned char input[4] = {'w','a','s','d'};
     for(int i = 0; i < 4; i++)
         if (IvGame::mGame->mEventHandler->IsKeyDown(input[i]))
@@ -172,9 +169,9 @@ RoadGeneratorControler::Update( float dt )
 
                 }
             }
-            isUpdated = true;
+            needsUpdate = true;
         }
-
+    
     
     rMiddlePoints = BezierCurve::buildCurve(bezierPoints, tStep);
     rMarginPoints =  RoadMargins::findTrackPoints(rMiddlePoints);
@@ -184,5 +181,11 @@ RoadGeneratorControler::Update( float dt )
         if (i % 3 != 0)
             updateControlPointsPosition(i);
     
-    return isUpdated;
+    if(needsUpdate)
+    {
+        needsUpdate = false;
+        return true;
+    }
+    else
+        return false;
 }

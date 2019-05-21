@@ -43,6 +43,7 @@ const IvMatrix44& NodeTransform::getMatrix() const {
     return _transform_matrix;
 }
 
+
 const IvVector3& NodeTransform::getPosition() const{
     return _position;
     

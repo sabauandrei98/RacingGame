@@ -24,6 +24,8 @@
 #include "../BasicMenu/GameOver.hpp"
 #include "../BasicMenu/FirstMenu.hpp"
 #include "../BasicMenu/TestMenu.hpp"
+#include "../RoadGenerator/RoadEditor.hpp"
+#include "../DeferredRendering/DeferredRenderer.hpp"
 
 class StateController;
 
@@ -36,11 +38,12 @@ public:
     // public function(s) and method(s)
     virtual void onEnter() = 0;
     virtual void onExit() = 0;
-    virtual void Update() = 0;
+    virtual void Update(float dt) = 0;
     
     virtual void Render(SceneGraph* mainScene)
     {
-        mainScene->drawScene();
+        //mainScene->drawScene();
+        _renderer.Render(mainScene);
     }
     
     bool rayIntersectsSceneNode(const char* name,unsigned int mousex,unsigned int mousey,const std::shared_ptr<SceneGraph>& mainScene)
@@ -59,6 +62,7 @@ public:
 protected:
     // protected variable(s)
     StateController*    state_controller;
+    DeferredRenderer    _renderer;
 };
 
 // ---------------
@@ -73,7 +77,7 @@ public:
     // public function(s) and method(s)
     void onEnter();
     void onExit();
-    void Update();
+    void Update(float dt);
     
     
 private:
@@ -93,7 +97,7 @@ public:
     // public function(s) and method(s)
     void onEnter();
     void onExit();
-    void Update();
+    void Update(float dt);
     
 private:
     // private function(s)
@@ -110,7 +114,7 @@ public:
     // public function(s) and method(s)
     void onEnter();
     void onExit();
-    void Update();
+    void Update(float dt);
     
 private:
     // private function(s)
@@ -126,12 +130,15 @@ public:
     // public function(s) and method(s)
     void onEnter();
     void onExit();
-    void Update();
+    void Update(float dt);
     
 private:
+    std::unique_ptr<RoadEditor> roadEditor;
+    
     // private function(s)
     bool isPreviousTriggered();
     bool isNextTriggered();
+    bool isGenerateTriggered();
     bool isAddTriggered();
     bool isRemoveTriggered();
     bool isPlayTriggered();
@@ -147,7 +154,7 @@ public:
     // public function(s) and method(s)
     void onEnter();
     void onExit();
-    void Update();
+    void Update(float dt);
     
 private:
     // private function(s)
@@ -163,7 +170,7 @@ public:
     // public function(s) and method(s)
     void onEnter();
     void onExit();
-    void Update();
+    void Update(float dt);
     
 private:
     // private function(s)
@@ -191,7 +198,7 @@ public:
     // public function(s) and method(s)
     void onEnter();
     void onExit();
-    void Update();
+    void Update(float dt);
     
 private:
     // private function(s)
@@ -206,7 +213,7 @@ public:
     // public function(s) and method(s)
     void onEnter();
     void onExit();
-    void Update();
+    void Update(float dt);
     
 private:
     // private function(s)
@@ -222,7 +229,7 @@ public:
     // public function(s) and method(s)
     void onEnter();
     void onExit();
-    void Update();
+    void Update(float dt);
     
 private:
     // private function(s)
@@ -238,7 +245,7 @@ public:
     //public functio(s) and method(s)
     void onEnter();
     void onExit();
-    void Update();
+    void Update(float dt);
     
 private:
     //private function(s)
@@ -256,7 +263,7 @@ public:
     //public functio(s) and method(s)
     void onEnter();
     void onExit();
-    void Update();
+    void Update(float dt);
     
 private:
     //private function(s)
@@ -275,7 +282,7 @@ public:
     //public functio(s) and method(s)
     void onEnter();
     void onExit();
-    void Update();
+    void Update(float dt);
     
 private:
     //private function(s)

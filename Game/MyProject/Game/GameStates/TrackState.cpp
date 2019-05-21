@@ -31,7 +31,7 @@ void TrackState::onExit() {
     std::cout << "-------------------------------" << std::endl;
 }
 
-void TrackState::Update() {
+void TrackState::Update(float dt) {
     if (isSelectTriggered())
         state_controller->requestChange(SelectTrack);
     

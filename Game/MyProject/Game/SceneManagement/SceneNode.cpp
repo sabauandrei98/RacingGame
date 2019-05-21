@@ -48,6 +48,14 @@ void SceneNode::findAllNodesWithName(const std::string& name, std::vector<std::s
         i->findAllNodesWithName(name, scene_nodes);
 }
 
+const std::string& SceneNode::getName() const{
+    return this->_name;
+}
+
+void SceneNode::setName(const std::string& newName){
+    this->_name = newName;
+}
+
 void SceneNode::findAllNodesContainingName(const std::string& name, std::vector<std::shared_ptr<SceneNode>>& scene_nodes) const {
     for (auto& i : _children)
         if (i->_name.find(name) != std::string::npos)
@@ -86,15 +94,18 @@ void SceneNode::setLocalTransform(const IvVector3& position, const IvVector3& ro
     _transform.set(position, rotation, scale);
 }
 
+
+
 // sets the local transforms position
 void SceneNode::setLocalPosition(const IvVector3& position) {
     _transform.set(position);
 }
 
-//gets local position
-const IvVector3& SceneNode::getLocalPosition() const{
-    return _transform._position;
+
+const  IvVector3& SceneNode::getLocalPosition() const {
+    return _transform.getPosition();
 }
+
 
 // returns the absolute transformation of the node
 const IvMatrix44& SceneNode::getAbsoluteTransform() const {
@@ -107,13 +118,13 @@ IvVector3 SceneNode::getAbsolutePosition() const {
 }
 
 // returns the local postion of the node
-IvVector3 SceneNode::getLocalPositon() const {
+const IvVector3& SceneNode::getLocalPositon() const {
     IvMatrix44 transform = _transform.getMatrix();
     
     return IvVector3(transform(0, 3), transform(1, 3), transform(2, 3));
 }
 
-IvVector3 SceneNode::getLocalScale() const {
+const IvVector3& SceneNode::getLocalScale() const {
     return _transform.getScale();
 }
 

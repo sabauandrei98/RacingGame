@@ -20,9 +20,10 @@
 #include "SceneManagement/CarAnimator.hpp"
 #include "SceneManagement/CameraFollowAnimator.hpp"
 #include "GameStates/StateController.hpp"
+
 #include "RoadGenerator/RoadEditor.hpp"
-#include "SceneManagement/CarController.hpp"
-#include "DeferredRendering/DeferredRenderer.hpp"
+#include "Car/CarController.hpp"
+#include "Gameplay/InfoManager.hpp"
 
 class CameraTestControler;
 class StateController;
@@ -41,15 +42,6 @@ protected:
 private:
     Game( const Game& other );
     Game& operator=( const Game& other );
-    
-    std::unique_ptr<SceneGraph>         _scene_graph;
-    std::shared_ptr<SceneNode>          _root;
-    std::shared_ptr<SceneNode>          _child1;
-    std::shared_ptr<SceneNode>          _child2;
-    std::shared_ptr<SceneNode>          _child3;
-    std::shared_ptr<Camera>             _camera;
-    std::shared_ptr<CameraSceneNode>    _camera_scene_node;
-    std::shared_ptr<NodeAnimator>       _controller;
-    
-    std::unique_ptr<DeferredRenderer>   _deferred_renderer;
+
+    std::shared_ptr<StateController> menu;
 };

@@ -48,6 +48,8 @@ private:
     State                                   _old_state;
     bool                                    _state_changed = false;
     
+    
+    
 protected:
      std::shared_ptr<SceneGraph>             _main_scene;
 };
