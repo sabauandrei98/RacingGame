@@ -17,6 +17,12 @@ public:
     
     void Update(float dt);
     
+    const int getLap(const std::string& carName) const;
+    const int getCheckpoint(const std::string& carName) const;
+    const int getScore(const std::string& carName) const;
+    const float getLapTime(const std::string& carName, int lap) const;
+    const float getCarSpeed(const std::string& carName) const;
+    const float getTime() const;
 private:
     
     float sinceStartTimer = 0.0f;
@@ -42,13 +48,6 @@ private:
     void setScore(const std::string& carName, int score);
     void setCheckpoint(const std::string& carName, int checkpoint);
     void setLapTime(const std::string& carName, int lap, float time);
-    
-    const int getLap(const std::string& carName) const;
-    const int getCheckpoint(const std::string& carName) const;
-    const int getScore(const std::string& carName) const;
-    const float getLapTime(const std::string& carName, int lap) const;
-    const float getCarSpeed(const std::string& carName) const;
-    const float getTime() const;
     
     void updateCarStats();
 };

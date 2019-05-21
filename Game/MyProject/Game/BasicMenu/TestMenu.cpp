@@ -12,9 +12,9 @@ TestMenu::TestMenu()
 {
     MeshManager meshManager;
     
-    std::shared_ptr<Camera> camera=std::make_shared<Camera>(45.0, 0.1, 200.0, 1280, 720);
-    camera->setLookAt({0.f, 0.f, 0.f });
-    camera->setPosition({0,25,0});
+    std::shared_ptr<Camera> camera=std::make_shared<Camera>(80.0, 0.1, 800.0, 1280, 720);
+    camera->setLookAt({0.f, -25.f, 0.f });
+    camera->setPosition({0,0,0});
     camera->setRotation({0,1,0});
     
     

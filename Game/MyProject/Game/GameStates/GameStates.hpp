@@ -235,6 +235,7 @@ private:
     std::shared_ptr<RaceMenu>           raceMenu;
     MeshManager                         meshManager;
     std::unique_ptr<RoadEditor>         roadEditor;
+    std::unique_ptr<InfoManager>        infoManager;
 };
 
 class HighScoreState : public GameState {

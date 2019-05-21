@@ -29,7 +29,8 @@ void RaceState::onEnter() {
     state_controller->_main_scene=raceMenu->getScene();
  
     roadEditor=std::make_unique<RoadEditor>(raceMenu->getScene().get());
-
+    infoManager=std::make_unique<InfoManager>(raceMenu->getScene()->getRoot().get());
+    
     RoadImporterExporter* roadImpExp=new RoadImporterExporter();
     roadImpExp->importFrom("roadDataTest.txt");
     
@@ -47,7 +48,8 @@ void RaceState::onExit() {
 
 void RaceState::Update(float dt) {
     
-//   roadEditor->Update(dt);
+    infoManager->Update(dt);
+    
     if(isPauseTriggered())
         state_controller->requestChange(Pause);
     else
@@ -60,12 +62,19 @@ void RaceState::Update(float dt) {
         else
         {
             frames++;
+            auto cameraPosition=raceMenu->getScene()->getRoot()->findFirstNodeWithName("camera")->getAbsolutePosition();
+            cameraPosition.x-=10;
+            cameraPosition.z+=10;
             if(frames==10)
             {
                 frames=0;
-                raceMenu->renderNo(score);
+                raceMenu->renderNo(score,cameraPosition);
                 score++;
              }
+            
+            if(score==10)
+                std::cout<<cameraPosition<<std::endl;
+            //raceMenu->renderNo(infoManager->getTime(),IvVector3{10,-25,5});
         }
 }   
     

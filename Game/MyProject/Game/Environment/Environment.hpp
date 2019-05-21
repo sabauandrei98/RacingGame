@@ -21,13 +21,7 @@ public:
     Environment(const char* name,const std::vector<std::pair<IvVector3,IvVector3>>& marginPoints);
     ~Environment(){}
     
-    void updateTerrain(const std::vector<std::pair<IvVector3,IvVector3>> & marginPoints);
 private:
-    std::shared_ptr<HelperSceneNode>         terrain;
-    
-    void verifyPoint(const std::pair<IvVector3,IvVector3>& point,std::vector< IvTNPVertex>& vertices);
-    
-    float distance(const IvVector3& point1,const IvVector3& point2);
 };
 
 

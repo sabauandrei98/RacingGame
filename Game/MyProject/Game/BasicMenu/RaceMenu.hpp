@@ -14,6 +14,7 @@
 #include "../Environment/Environment.hpp"
 #include "../ModelLoader/ModelLoader.hpp"
 #include "../SceneManagement/CameraFollowAnimator.hpp"
+#include "../Gameplay/InfoManager.hpp"
 #include <stdio.h>
 #include <map>
 //-------------------------------------------------------------------------------
@@ -26,7 +27,7 @@ public:
     RaceMenu();
     ~RaceMenu();
     
-    void renderNo(uint32_t no);
+    void renderNo(uint32_t no,const IvVector3& position);
 private:
     MeshManager             meshManager;
     
@@ -34,7 +35,7 @@ private:
     void addNewDigit(uint32_t no);
     void checkNeedChangeDigit(uint32_t no);
     int firstDigit(uint32_t no);
-    void renderScore(uint32_t no);
+    void renderScore(uint32_t no,const IvVector3& position);
 };
 
 

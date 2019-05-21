@@ -27,7 +27,7 @@ RaceMenu::RaceMenu()
     uniforms.push_back("noRows");
     uniforms.push_back("noColumns");
     
-    std::shared_ptr<SceneNode> countRoot=std::make_shared<SceneNode>("countRoot");
+    std::shared_ptr<SceneNode> info=std::make_shared<SceneNode>("infoRoot");
     
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     
@@ -43,7 +43,7 @@ RaceMenu::RaceMenu()
     
     RoadImporterExporter* roadIE = new RoadImporterExporter();
     roadIE->importFrom("roadDataTest.txt");
-    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadIE->getMarginPoints());
+    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("roadNode", roadIE->getMarginPoints());
     roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{3.144,0,0}, IvVector3{12,12,12});
     
     std::shared_ptr<SceneNode> environment=std::make_shared<Environment>("environment",roadIE->getMarginPoints());
@@ -59,9 +59,11 @@ RaceMenu::RaceMenu()
     menu->getRoot()->addChild(_child2);
     menu->getRoot()->addChild(roadNode);
     menu->getRoot()->addChild(environment);
-    menu->getRoot()->addChild(countRoot);
+    menu->getRoot()->addChild(info);
     menu->getRoot()->addChild(cameraSceneNode);
     menu->setCamera(camera);
+    
+    
     
 }
 //-------------------------------------------------------------------------------
@@ -75,7 +77,7 @@ RaceMenu::~RaceMenu()
 // @RaceMenu::renderNo()
 //-------------------------------------------------------------------------------
 void
-RaceMenu::renderNo(uint32_t no)
+RaceMenu::renderNo(uint32_t no,const IvVector3& position)
 {
     auto val=getRowCol(no%10 +'0');
     
@@ -83,7 +85,7 @@ RaceMenu::renderNo(uint32_t no)
     const char* quadName=name.c_str();
     
     auto root=getScene()->getRoot();
-    auto first=root->findFirstNodeWithName("countRoot");
+    auto first=root->findFirstNodeWithName("infoRoot");
     auto count1=first->findFirstNodeWithName("count1");
     if(count1==nullptr && no==0)
     {
@@ -95,7 +97,7 @@ RaceMenu::renderNo(uint32_t no)
         
         std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"../../Game/BasicMenu/Resources/font.tga");
         
-        countScoreQuad->setLocalTransform(IvVector3{17,-25,9}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
+        countScoreQuad->setLocalTransform(position , IvVector3{4.72,1.5,4.72}, IvVector3{1,1,1});
         first->addChild(countScoreQuad);
         
         auto quad=root->findFirstNodeWithName(quadName);
@@ -105,7 +107,7 @@ RaceMenu::renderNo(uint32_t no)
     else if(count1==nullptr)
     {
         //after pause state
-        renderScore(no);
+        renderScore(no,position);
     }
     else
     {
@@ -156,9 +158,9 @@ RaceMenu::addNewDigit(uint32_t no)
     auto root=getScene()->getRoot();
     auto previousPos=root->findFirstNodeWithName(previousQuadName)->getLocalPosition();
     
-    countScoreQuad->setLocalTransform(IvVector3{previousPos.x-1,previousPos.y,previousPos.z}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
+    countScoreQuad->setLocalTransform(IvVector3{previousPos.x+0.8f,previousPos.y,previousPos.z}, IvVector3{4.72,1.5,4.72}, IvVector3{1,1,1});
     
-    root->findFirstNodeWithName("countRoot")->addChild(countScoreQuad);
+    root->findFirstNodeWithName("infoRoot")->addChild(countScoreQuad);
     
     auto val=getRowCol(no%10 +'0');
     
@@ -230,7 +232,7 @@ int RaceMenu::firstDigit(uint32_t no)
     return no;
 }
 
-void RaceMenu::renderScore(uint32_t no)
+void RaceMenu::renderScore(uint32_t no,const IvVector3& position)
 {
     int auxScore=no;
     int noDig=noDigits(no);
@@ -252,15 +254,15 @@ void RaceMenu::renderScore(uint32_t no)
         
         auto root=getScene()->getRoot();
         
-        if(root->findFirstNodeWithName("countRoot")->findFirstNodeWithName(prevName)==nullptr)
-            countScoreQuad->setLocalTransform(IvVector3{17,0,9}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
+        if(root->findFirstNodeWithName("infoRoot")->findFirstNodeWithName(prevName)==nullptr)
+            countScoreQuad->setLocalTransform(position, IvVector3{4.72,1.5,4.72}, IvVector3{1,1,1});
         else
         {
             auto previousPos=getScene()->getRoot()->findFirstNodeWithName(prevName)->getLocalPosition();
-            countScoreQuad->setLocalTransform(IvVector3{previousPos.x-1,previousPos.y,previousPos.z}, IvVector3{0,4.72,1}, IvVector3{2,2,2});
+            countScoreQuad->setLocalTransform(IvVector3{previousPos.x+0.8f,previousPos.y,previousPos.z}, IvVector3{4.72,1.5,4.72}, IvVector3{1,1,1});
         };
         
-        root->findFirstNodeWithName("countRoot")->addChild(countScoreQuad);
+        root->findFirstNodeWithName("infoRoot")->addChild(countScoreQuad);
         
         auto val=getRowCol(auxScore%10 + '0');
         auto renderable=root->findFirstNodeWithName(quadName)->getRenderable();
