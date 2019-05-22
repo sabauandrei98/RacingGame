@@ -38,7 +38,6 @@ private:
     void checkNeedChangeDigit(uint32_t no);
     int firstDigit(uint32_t no);
     void renderNumber(std::string name,uint32_t no,const IvVector3& position);
-   
 };
 
 

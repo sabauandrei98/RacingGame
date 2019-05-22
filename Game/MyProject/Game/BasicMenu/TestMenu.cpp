@@ -40,18 +40,17 @@ TestMenu::TestMenu()
     menu->setRoot(root);
     menu->getRoot()->addChild(_child2);
 
-    RoadImporterExporter* roadIE = new RoadImporterExporter();
-    roadIE->importFrom("roadDataTest.txt");
-    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadIE->getMarginPoints(), 10.0f);
+    RoadImporterExporter roadIE;
+    roadIE.importFrom("roadDataTest.txt");
+    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadIE.getMarginPoints(), 10.0f);
     roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{0,0,0}, IvVector3{1,1,1});
     menu->getRoot()->addChild(roadNode);
     
-    std::shared_ptr<SceneNode> environment=std::make_shared<Environment>("environment",roadIE->getMarginPoints());
-    
-    delete roadIE;
+    std::shared_ptr<SceneNode> environment=std::make_shared<Environment>("environment",roadIE.getMarginPoints());
+   
     
     backQuad->setLocalTransform({14,0,-8}, {0,4.72,1}, {4,4,4});
-    environment->setLocalTransform({0,10,0}, {0,0,0}, {2,2,2});
+    environment->setLocalTransform({0,0,0}, {0,0,0}, {1,1,1});
     
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     

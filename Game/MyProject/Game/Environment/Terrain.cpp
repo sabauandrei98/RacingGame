@@ -30,6 +30,7 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
         box.expand(10.0f * p.first + IvVector3(0.0,1.0,0.0));
         box.expand(10.0f * p.second - IvVector3(0.0,1.0,0.0));
     }
+    
     auto _box_min = box.getMin();
     auto _box_max = box.getMax();
     box.expand(  0.1f * (_box_max - _box_min) + _box_max);
@@ -54,7 +55,7 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
         {
             IvTNPVertex vertex;
             float height=std::abs(elevation[(int)i][(int)j]) * 50000.000f;
-            //height=remainder(height,4);
+            height=remainder(height,24);
             float x = (float)i / (float)(rows - 1);
             float y = (float)j / (float)(columns - 1);
             x = x * 3.0 - 1.0;
@@ -91,41 +92,9 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
     std::size_t i =0;
     while(i<indices.size()-3)
     {
-        
-//        if(isPointRayIntersectLines(vertices[indices[i]].position, lines)==1)
-//        {
-//            std::cout<<vertices[indices[i]].position<<std::endl;
-//            if(i%3==0)
-//            {
-//                vertices[indices[i]].position.y   = 0.;
-//                vertices[indices[i+1]].position.y = 0.;
-//                vertices[indices[i+2]].position.y = 0.;
-//            }
-//            else if(i%3==1)
-//            {
-//                vertices[indices[i-1]].position.y = 0.;
-//                vertices[indices[i]].position.y   = 0.;
-//                vertices[indices[i+1]].position.y = 0.;
-//            }
-//            else if(i%3==2)
-//            {
-//                vertices[indices[i-2]].position.y = 0.;
-//                vertices[indices[i-1]].position.y = 0.;
-//                vertices[indices[i]].position.y  = 0.;
-//            }
-//        }
-//
-        
             auto& p1=vertices[indices[i]].position;
             auto& p2=vertices[indices[i+1]].position;
             auto& p3=vertices[indices[i+2]].position;
-        
-            //if(p1.y < -1000.0f || p2.y < -1000.0f || p3.y < -1000.0f)
-            {
-               //p1.y = p2.y = p3.y = -0.5;
-            }
-        
-        
         
             auto u=p2-p1;
             auto v=p2-p3;
@@ -139,10 +108,6 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
         
         i+=3;
     }
-    
-//    for (int i=0;i<vertices.size();i++)
-//       // if(vertices[i].position.y!=keep[i].position.y)
-//            std::cout<<vertices[i].position<<" changed from: "<<keep[i].position<<std::endl;
     
     for(auto & v : vertices)
     {
@@ -206,8 +171,7 @@ Terrain::setVertices(const std::vector<IvTNPVertex> &vertices)
 double
 Terrain::noise1(double nx,double ny)
 {
-   // PerlinNoise pn(rand()%256);
-    PerlinNoise pn(66);
+    PerlinNoise pn(rand()%256);
     return pn.noise(nx,1,ny);
 }
 //-------------------------------------------------------------------------------
@@ -232,21 +196,4 @@ bool Terrain::pointIntersectsLine(IvVector3 point, IvVector3 start, IvVector3 en
         return ( (point - start).Cross(end - start).y < 0.0f);
     }
     
-}
-
-bool Terrain::isOnSegment(IvVector3 point,IvVector3 start, IvVector3 end)
-{
-    if(std::min(start.x,end.x) <= point.x &&
-       std::max(start.x,end.x) >= point.x &&
-       std::min(start.z,end.z) <= point.z &&
-       std::max(start.z,end.z) >=point.z)
-        return true;
-    return false;
-}
-
-int Terrain::direction(IvVector3 p1, IvVector3 p2, IvVector3 p3)
-{
-    auto a=p3-p1;
-    auto b=p2-p1;
-    return (a.x* b.z - a.z * b.x);
 }

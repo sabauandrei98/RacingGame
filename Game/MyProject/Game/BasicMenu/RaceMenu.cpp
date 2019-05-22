@@ -74,27 +74,27 @@ RaceMenu::RaceMenu()
     carNode->setName("Car");
     
     RoadImporterExporter roadIE;
-    roadIE.importFrom("roadDataTest.txt");
+    roadIE.importFrom("roadData.txt");
     std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("roadNode", roadIE.getMarginPoints(), 10.0f);
     roadNode->setLocalTransform(IvVector3{0,-0.49,0}, IvVector3{0,0,0}, IvVector3{1,1,1});
     
     std::shared_ptr<SceneNode> environment=std::make_shared<Environment>("environment",roadIE.getMarginPoints());
     
-    timeText->setLocalPosition(     {-2, 0.80,-1});
-    lapText->setLocalPosition(      {-2, 0.10, -1});
+    timeText->setLocalPosition(         {-2, 0.80,-1});
+    lapText->setLocalPosition(          {-2, 0.10, -1});
     lapTimeText->setLocalPosition(      {-2, -0.55,-1});
     
     scoreText->setLocalPosition(        {-7, 0.80,-1});
     checkpointText->setLocalPosition(   {-7, 0.10, -1});
     carSpeedText->setLocalPosition(     {-7, -0.55,-1});
     
-    time->setLocalPosition(         {-2, -2.0,-1});
-    lap->setLocalPosition(          {-2, -2.25,  -1});
-    lapTime->setLocalPosition(      {-2, -2.5,-1});
+    time->setLocalPosition(             {-2, -2.0,-1});
+    lap->setLocalPosition(              {-2, -2.25,  -1});
+    lapTime->setLocalPosition(          {-2, -2.5,-1});
     
-    score->setLocalPosition(        {-4, -2.0,-1});
-    checkpoint->setLocalPosition(   {-4, -2.25, -1});
-    carSpeed->setLocalPosition(     {-4, -2.5,-1});
+    score->setLocalPosition(            {-4, -2.0,-1});
+    checkpoint->setLocalPosition(       {-4, -2.25, -1});
+    carSpeed->setLocalPosition(         {-4, -2.5,-1});
     
     environment->setLocalTransform({0,0,0}, {0,0,0}, {1,1,1});
     cameraSceneNode->setAbsolutePosition(IvVector3(0.f, 3.f, -15.f));
@@ -173,33 +173,40 @@ RaceMenu::renderDigit(std::string name,uint32_t no)
         }
     }
     
-    /*
     for(auto & ch : first->_children)
     {
         ch->_enabled = false;
     }
+    
+    auto keepNo=no;
+    
     while(no != 0)
     {
         int digit = no % 10;
-        no = no / 10;
+        auto val=getRowCol(digit+'0');
+        
+        m_name.clear();
+        m_name ="count"+ std::to_string(noDigits(no));
+        quadName=m_name.c_str();
         
         auto nd = first->findFirstNodeWithName(quadName);
-        nd->_enabled = true;
-        auto renderable=nd->getRenderable();
-        if(renderable!=nullptr)
+        if(nd!=nullptr)
         {
-            renderable->setUniformValue(1, val.first);
-            renderable->setUniformValue(2, val.second);
+            nd->_enabled = true;
+            auto renderable=nd->getRenderable();
+            if(renderable!=nullptr)
+            {
+                renderable->setUniformValue(1, val.first);
+                renderable->setUniformValue(2, val.second);
+            }
         }
-        
+        no = no / 10;
     }
-     */
-    if(noDigits(no)>noDigits(no-1))
-        addNewDigit(name,no);
     
-
-    checkNeedChangeDigit(no);
-
+    if(noDigits(keepNo)>noDigits(keepNo-1))
+        addNewDigit(name,keepNo);
+    
+    checkNeedChangeDigit(keepNo);
 }
 
 //-------------------------------------------------------------------------------
@@ -242,7 +249,7 @@ RaceMenu::addNewDigit(std::string name,uint32_t no)
     auto root=getScene()->getRoot()->findFirstNodeWithName("infoRoot");
     auto previousPos=root->findFirstNodeWithName(name)->findFirstNodeWithName(previousQuadName)->getLocalPosition();
     
-    countScoreQuad->setLocalTransform(IvVector3{previousPos.x+0.8f,previousPos.y+0.05f,previousPos.z}, IvVector3{4.72,1.5,4.72}, IvVector3{1,1,1});
+    countScoreQuad->setLocalTransform(IvVector3{previousPos.x-0.5f,previousPos.y,previousPos.z}, IvVector3{4.72,1.5,4.72}, IvVector3{1,1,1});
     
     root->findFirstNodeWithName(name)->addChild(countScoreQuad);
     
@@ -413,11 +420,6 @@ void RaceMenu::renderText(std::string name, std::string text)
                 position+={-0.5,0,0};
             }
         }
-        else
-        {
-        
-        }
-       
     }
 }
 

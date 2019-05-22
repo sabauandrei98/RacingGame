@@ -50,8 +50,6 @@ private:
     
     int isPointRayIntersectLines(const IvVector3& point,const std::vector<std::pair<IvVector3,IvVector3>>& lines);
     bool pointIntersectsLine(IvVector3 point,IvVector3 start,IvVector3 end);
-    int direction(IvVector3 p1,IvVector3 p2,IvVector3 p3);
-    bool isOnSegment(IvVector3 point,IvVector3 start,IvVector3 end);
 };
 
 

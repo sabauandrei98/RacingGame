@@ -15,5 +15,5 @@ void main()
     gl_Position = IvModelViewProjectionMatrix * vec4(Position,1.0);
     uv=texCoord.xy;
 	normal = aNormal;
-    height = Position.z / 2000.0;
+    height = Position.y / 2000.0;
 }

@@ -40,7 +40,7 @@ void BuildTrackState::Update(float dt) {
     if (isPlayTriggered())
     {
         RoadImporterExporter roadImpExp;
-        std::string name="roadDataTest.txt";
+        std::string name="roadData.txt";
         if(roadEditor->getMarginPoints().size()!=0)
             roadImpExp.exportTo(roadEditor->getMarginPoints(), name);
         state_controller->requestChange(SelectCar);

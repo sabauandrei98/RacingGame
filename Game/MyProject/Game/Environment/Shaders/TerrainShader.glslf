@@ -15,5 +15,4 @@ void main()
     vec3 baseColor = vec3(0.7 * height, 0.2, 0.1);
 
     fragColor = vec4(baseColor * diff + vec3(0.1, 0.1, 0.1), 1.0);
-    //fragColor.rgb = fragColor.rgb * 0.00001 + normal.x;
 }
