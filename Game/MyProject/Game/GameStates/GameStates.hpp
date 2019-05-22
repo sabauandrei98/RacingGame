@@ -42,7 +42,7 @@ public:
     
     virtual void Render(SceneGraph* mainScene)
     {
-        //mainScene->drawScene();
+        mainScene->drawScene();
         _renderer.Render(mainScene);
     }
     

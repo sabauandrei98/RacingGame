@@ -6,6 +6,8 @@
 //
 
 #include "DeferredRenderer.hpp"
+#include "../SceneManagement/CameraSceneNode.hpp"
+#include "../SceneManagement/CameraFollowAnimator.hpp"
 
 #include <IvRenderer.h>
 
@@ -110,6 +112,26 @@ void DeferredRenderer::setUpDebugScreen() {
     glUniform1i(glGetUniformLocation(_debug_shader->GetProgramID(), "TEXTURE"), 0);
 }
 
+void DeferredRenderer::setUpMiniMap() {
+    std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
+    std::vector<IvTCPVertex>  vertices;
+    
+    vertices.resize(4);
+    
+    vertices[0].position = {-0.95f, -0.35f, -0.001f};
+    vertices[1].position = {-0.95f, -0.95f, -0.001f};
+    vertices[2].position = {-0.3333f, -0.35f, -0.001f};
+    vertices[3].position = {-0.33333f, -0.95f, -0.001f};
+    
+    vertices[0].texturecoord = {0.f, 1.f};
+    vertices[1].texturecoord = {0.f, 0.f};
+    vertices[2].texturecoord = {1.f, 1.f};
+    vertices[3].texturecoord = {1.f, 0.f};
+    
+    mesh->setVertexBuffer(vertices, kTCPFormat);
+    _map.setMesh(mesh);
+}
+
 void DeferredRenderer::renderNoEffect() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _g_buffer->GetTextures()[2]->GetReference());
@@ -156,11 +178,19 @@ void DeferredRenderer::showDebugScreen() {
     IvRenderer::mRenderer->Draw(kTriangleStripPrim, _screen3.getMesh()->getVertexBuffer(), 4, _debug_shader);
 }
 
+void DeferredRenderer::showMiniMap() {
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, _g_buffer->GetTextures()[2]->GetReference());
+    
+    IvRenderer::mRenderer->Draw(kTriangleStripPrim, _map.getMesh()->getVertexBuffer(), 4, _debug_shader);
+}
+
 DeferredRenderer::DeferredRenderer() {
     setUpGBuffer();
     setUpPreviousBuffer();
     setUpMotionBlur();
     setUpDebugScreen();
+    setUpMiniMap();
 }
 
 void DeferredRenderer::Render(SceneGraph* scene_graph) {
@@ -178,4 +208,12 @@ void DeferredRenderer::Render(SceneGraph* scene_graph) {
     
     if (needs_debug_screen)
         showDebugScreen();
+    
+    _g_buffer->Bind();
+    IvRenderer::mRenderer->ClearBuffers(kColorDepthClear);
+    scene_graph->drawMap();
+    _g_buffer->BindToDefault();
+    
+    if (needs_mini_map)
+        showMiniMap();
 }

@@ -8,12 +8,12 @@
 #include "ModelLoader.hpp"
 
 // loads a model and returns the root scene node of it
-std::shared_ptr<SceneNode> ModelLoader::loadModel(const std::string& name, const std::string& shader_name) {
+std::shared_ptr<SceneNode> ModelLoader::loadModel(const std::string& name, const std::string& shader_name, bool flip_uv) {
     ResourceManager::ConstAiScenePtr    new_scene;
     std::shared_ptr<SceneNode>          new_root;
     ResourceManager&                    resource_manager = ResourceManager::getResourceManager();
     
-    new_scene = resource_manager.getModel(name);
+    new_scene = resource_manager.getModel(name, flip_uv);
     
     new_root = std::make_shared<SceneNode>(new_scene->mRootNode->mName.data);
     processNode(new_scene->mRootNode, new_scene.get(), new_root.get(), shader_name);
@@ -69,8 +69,6 @@ std::shared_ptr<SceneNode> ModelLoader::makeSceneNode(const aiMesh *mesh, const 
             if (mesh->HasNormals())
                 vertex.normal = {mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z};
             
-            //std::cout << vertex.position.x << " " << vertex.position.y << " " << vertex.position.z << std::endl;
-            
             vertices.push_back(vertex);
         }
         
@@ -116,20 +114,10 @@ std::shared_ptr<SceneNode> ModelLoader::makeSceneNode(const aiMesh *mesh, const 
                     texture_name = texture_name.substr(unix_style + 1, texture_name.length());
                 
                 texture_name = texture_name.substr(0, texture_name.find_last_of('.')) + ".tga";
-
-                // is 0. when has texture and 1. when has color
-                mesh_instace->addShaderUniforms(std::vector<std::string>{"TEXTURE"});
                 
+                mesh_instace->addShaderUniforms(std::vector<std::string>{"TEXTURE"});
                 mesh_instace->setUniformValue(0, resource_manager.getTexture(texture_name).get());
             }
-            
-//            if (material->Get(AI_MATKEY_COLOR_DIFFUSE, ai_color) == AI_SUCCESS) {
-//                // is 0. when has texture and 1. when has color
-//                mesh_instace->addShaderUniforms(std::vector<std::string>{"TEXTURE_OR_COLOR", "COLOR"});
-//
-//                mesh_instace->setUniformValue(0, 1.);
-//                mesh_instace->setUniformValue(1, {ai_color.r, ai_color.g, ai_color.b, ai_color.a});
-//            }
         }
     }
     

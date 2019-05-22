@@ -17,6 +17,7 @@ public:
     // public variable(s)d
     MeshInstance*   _mesh_instance;
     IvMatrix44      _world_view_projection_matrix;
+    IvMatrix44      _maps_wvpm;;
     IvMatrix44      _world_matrix;
     IvPrimType      _prim_type = kTriangleStripPrim;
     

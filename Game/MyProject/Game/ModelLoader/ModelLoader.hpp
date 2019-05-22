@@ -18,7 +18,7 @@
 #include "../ResourceManager/ResourceManager.hpp"
 
 namespace ModelLoader {
-    std::shared_ptr<SceneNode> loadModel(const std::string&, const std::string&);
+    std::shared_ptr<SceneNode> loadModel(const std::string&, const std::string&, bool);
     
     void processNode(aiNode*, const aiScene*, SceneNode*, const std::string&);
     std::shared_ptr<SceneNode> makeSceneNode(const aiMesh*, const aiScene*, const aiNode*, const std::string&);
