@@ -43,19 +43,19 @@ RaceMenu::RaceMenu()
     std::shared_ptr<SceneNode> carSpeedText=std::make_shared<SceneNode>("carSpeedTextRoot");
     std::shared_ptr<SceneNode> timeText=std::make_shared<SceneNode>("timeTextRoot");
     
-    //info->addChild(scoreText);
+    info->addChild(scoreText);
     info->addChild(score);
     
-  //  info->addChild(lapText);
+    info->addChild(lapText);
     info->addChild(lap);
     
-   // info->addChild(checkpointText);
+    info->addChild(checkpointText);
     info->addChild(checkpoint);
     
-    //info->addChild(lapTimeText);
+    info->addChild(lapTimeText);
     info->addChild(lapTime);
     
-    //info->addChild(carSpeedText);
+    info->addChild(carSpeedText);
     info->addChild(carSpeed);
     
     info->addChild(timeText);
@@ -76,21 +76,27 @@ RaceMenu::RaceMenu()
     RoadImporterExporter roadIE;
     roadIE.importFrom("roadDataTest.txt");
     std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("roadNode", roadIE.getMarginPoints(), 10.0f);
-    roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{0,0,0}, IvVector3{1,1,1});
+    roadNode->setLocalTransform(IvVector3{0,-0.49,0}, IvVector3{0,0,0}, IvVector3{1,1,1});
     
     std::shared_ptr<SceneNode> environment=std::make_shared<Environment>("environment",roadIE.getMarginPoints());
     
-    timeText->setLocalPosition(     {-2, 1.5,-1});
+    timeText->setLocalPosition(     {-2, 0.80,-1});
+    lapText->setLocalPosition(      {-2, 0.10, -1});
+    lapTimeText->setLocalPosition(      {-2, -0.55,-1});
     
-    time->setLocalPosition(         {-2, -1.5,-1});
-    lap->setLocalPosition(          {-2, -2,  -1});
+    scoreText->setLocalPosition(        {-7, 0.80,-1});
+    checkpointText->setLocalPosition(   {-7, 0.10, -1});
+    carSpeedText->setLocalPosition(     {-7, -0.55,-1});
+    
+    time->setLocalPosition(         {-2, -2.0,-1});
+    lap->setLocalPosition(          {-2, -2.25,  -1});
     lapTime->setLocalPosition(      {-2, -2.5,-1});
     
-    score->setLocalPosition(        {-6, -1.5,-1});
-    checkpoint->setLocalPosition(   {-6, -2., -1});
-    carSpeed->setLocalPosition(     {-6, -2.5,-1});
+    score->setLocalPosition(        {-4, -2.0,-1});
+    checkpoint->setLocalPosition(   {-4, -2.25, -1});
+    carSpeed->setLocalPosition(     {-4, -2.5,-1});
     
-    environment->setLocalTransform({0,10,0}, {0,0,0}, {2,2,2});
+    environment->setLocalTransform({0,0,0}, {0,0,0}, {1,1,1});
     cameraSceneNode->setAbsolutePosition(IvVector3(0.f, 3.f, -15.f));
     
     cameraSceneNode->setAnimator(std::make_shared<CameraFollowAnimator>(carNode.get(), IvVector2(3.f, 10.f), true));
@@ -101,7 +107,7 @@ RaceMenu::RaceMenu()
     
     carNode->addChild(info);
     carNode->setLocalPosition(pos);
-    info->setLocalTransform( -pos + IvVector3{0,10,0} , {0,0,0} ,{3.5,3.5,3.5});
+    info->setLocalTransform( -pos + IvVector3{-2,10,0} , {0,0,0} ,{3.5,3.5,3.5});
     
     menu->setRoot(root);
     menu->getRoot()->addChild(roadNode);
@@ -166,9 +172,31 @@ RaceMenu::renderDigit(std::string name,uint32_t no)
             renderable->setUniformValue(2, val.second);
         }
     }
-
+    
+    /*
+    for(auto & ch : first->_children)
+    {
+        ch->_enabled = false;
+    }
+    while(no != 0)
+    {
+        int digit = no % 10;
+        no = no / 10;
+        
+        auto nd = first->findFirstNodeWithName(quadName);
+        nd->_enabled = true;
+        auto renderable=nd->getRenderable();
+        if(renderable!=nullptr)
+        {
+            renderable->setUniformValue(1, val.first);
+            renderable->setUniformValue(2, val.second);
+        }
+        
+    }
+     */
     if(noDigits(no)>noDigits(no-1))
         addNewDigit(name,no);
+    
 
     checkNeedChangeDigit(no);
 
@@ -354,7 +382,7 @@ void RaceMenu::renderText(std::string name, std::string text)
         uniforms.push_back("row");
         uniforms.push_back("column");
         
-        std::string n="textQuad"+text;
+        std::string n="textQuad"+name;
         const char* _name=n.c_str();
         
         auto position=root->getLocalPositon();
@@ -377,14 +405,17 @@ void RaceMenu::renderText(std::string name, std::string text)
                 renderable->setUniformValue(1, val.first);
                 renderable->setUniformValue(2, val.second);
             }
-        }
-        else
-        {
+            
+            root->findAllNodesWithName(_name,quads);
             for(auto & quad:quads)
             {
                 quad->setLocalPosition(position);
                 position+={-0.5,0,0};
             }
+        }
+        else
+        {
+        
         }
        
     }

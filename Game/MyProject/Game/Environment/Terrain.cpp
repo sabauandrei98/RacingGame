@@ -8,7 +8,7 @@
 //-------------------------------------------------------------------------------
 //  @Terrain::Terrain()
 //-------------------------------------------------------------------------------
-Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t height,const std::vector<std::pair<IvVector3,IvVector3>>& marginPoints):HelperSceneNode(name,render),width(width),height(height),rows(height*7),columns(width*7)
+Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t height,const std::vector<std::pair<IvVector3,IvVector3>>& marginPoints):HelperSceneNode(name,render),width(width),height(height),rows(height),columns(width)
 {
     srand(time(0));
     
@@ -24,15 +24,50 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
     std::vector<IvTNPVertex> vertices;
     std::vector<unsigned int> indices;
     
+    BoundingBox box;
+    for(const auto & p : marginPoints)
+    {
+        box.expand(10.0f * p.first + IvVector3(0.0,1.0,0.0));
+        box.expand(10.0f * p.second - IvVector3(0.0,1.0,0.0));
+    }
+    auto _box_min = box.getMin();
+    auto _box_max = box.getMax();
+    box.expand(  0.1f * (_box_max - _box_min) + _box_max);
+    box.expand(  _box_min - 0.1f * (_box_max - _box_min));
+    
+    std::vector<std::pair<IvVector3,IvVector3> > line_segments;
+    for(std::size_t i = 0 ; i < marginPoints.size() - 1; i++)
+    {
+        auto p0 = std::make_pair(marginPoints[i].first, marginPoints[i + 1].first);
+        if (p0.first.x > p0.second.x)
+            std::swap(p0.first,p0.second);
+        line_segments.push_back(p0);
+        auto p1 = std::make_pair(marginPoints[i].second, marginPoints[i + 1].second);
+        if (p1.first.x > p1.second.x)
+            std::swap(p1.first,p1.second);
+        line_segments.push_back(p1);
+    }
+    
     for(int i = 0 ; i < rows;i++)
     {
         for(int j = 0 ; j < columns; j++)
         {
             IvTNPVertex vertex;
-            float height=elevation[(int)i][(int)j]*2000.0f;
-           // height=remainder(height,4);
-    
-            vertex.position={(float)i-rows/2,height,(float)j-columns/2};
+            float height=std::abs(elevation[(int)i][(int)j]) * 50000.000f;
+            //height=remainder(height,4);
+            float x = (float)i / (float)(rows - 1);
+            float y = (float)j / (float)(columns - 1);
+            x = x * 3.0 - 1.0;
+            y = y * 3.0 - 1.0;
+            vertex.position = box.getMin() + (box.getMax() - box.getMin()) * IvVector3{x,0.0f,y};
+            vertex.position.y = 0;
+
+            if(box.contains(vertex.position))
+                vertex.position.y = 0.0f;
+            else
+                vertex.position.y = height;
+            
+            vertex.position.y -= 0.5;
             vertex.normal = {0.0f,0.0f,0.0f};
             vertices.push_back(vertex);
         }
@@ -49,35 +84,11 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
             indices.push_back(i * columns + j + 1);
             indices.push_back((i + 1) * columns + j + 1);
             indices.push_back((i + 1) * columns + j);
+
         }
     }
-    
-    //keep the normals and the indices for the current face
-    IvVector3 p1,p2,p3;
-    
-    std::vector<std::pair<IvVector3,IvVector3>> lines;
-    for(int i=0;i<marginPoints.size()-1;i++)
-    {
-        std::pair<IvVector3,IvVector3> aux = marginPoints[i];
-        aux.first *= 10.0f;
-        aux.second *= 10.0f;
-        lines.push_back(std::make_pair(aux.first, aux.second));
-    }
-    
-    int i=0;
-    
-    auto keep=vertices;
-    
-    for(int i = 0; i < vertices.size(); i+=3)
-    {
-        //vertices[i].position.y = 0;
-        if(isPointRayIntersectLines(vertices[i].position, lines)==1)
-        {
-            vertices[i].position.y=0;
-        }
-        
-    }
-    
+   
+    std::size_t i =0;
     while(i<indices.size()-3)
     {
         
@@ -105,11 +116,17 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
 //        }
 //
         
-       
-            p1=vertices[indices[i]].position;
-            p2=vertices[indices[i+1]].position;
-            p3=vertices[indices[i+2]].position;
-    
+            auto& p1=vertices[indices[i]].position;
+            auto& p2=vertices[indices[i+1]].position;
+            auto& p3=vertices[indices[i+2]].position;
+        
+            //if(p1.y < -1000.0f || p2.y < -1000.0f || p3.y < -1000.0f)
+            {
+               //p1.y = p2.y = p3.y = -0.5;
+            }
+        
+        
+        
             auto u=p2-p1;
             auto v=p2-p3;
             
@@ -199,63 +216,22 @@ Terrain::noise1(double nx,double ny)
 int
 Terrain::isPointRayIntersectLines(const IvVector3& point,const std::vector<std::pair<IvVector3,IvVector3>>& lines)
 {
-    IvVector3 startP=point;
-    IvVector3 endP=point-IvVector3(-10000,0,0);
-    
-    startP.y=0;
-    endP.y=0;
-    
-    float min= 30;
-  
-    for(auto& line:lines)
+    std::size_t count = 0;
+    for(const auto & l : lines)
     {
-        IvVector3 start=line.first;
-        IvVector3 end=line.second;
-
-        auto p=point;
-        p.y=0;
-        start.y=0;
-        end.y=0;
-        float a = Distance(p, start);
-        float b = Distance(p, end);
-        
-        if (a < min || b < min)
-        {
-            //std::cout<<"ok"<<a<<" "<<b<< " "<<point<<" "<<start << " " <<end<<std::endl;
-
-            return 1;
-        }
-       // else
-         //std::cout<<a<<" "<<b<< " "<<start<<" "<<end<<std::endl;
-        //if(index==20)
-            // break;
-        //index++;
-        
+        if(pointIntersectsLine(point, l.first,l.second))
+            count ++;
     }
-    return 0;
+    return count;
 }
 bool Terrain::pointIntersectsLine(IvVector3 point, IvVector3 start, IvVector3 end)
 {
-    auto sPoint=point;
-    auto ePoint=point-IvVector3(10000,0,0);
     
-    auto d1=direction(start,end,sPoint);
-    auto d2=direction(start,end,ePoint);
-    auto d3=direction(sPoint,ePoint,start);
-    auto d4=direction(sPoint,ePoint,end);
+    if(start.x < point.x && point.x < end.x)
+    {
+        return ( (point - start).Cross(end - start).y < 0.0f);
+    }
     
-    if( ((d1>0 && d2<0) || (d1<0 && d2>0))  &&
-        ((d3>0 && d4<0) || (d3<0 && d4>0)))
-        return true;
-    else if( d1==0 && isOnSegment(sPoint,start,end))
-        return true;
-    else if( d2==0 && isOnSegment(ePoint,start,end))
-        return true;
-    else if( d3==0 && isOnSegment(start,sPoint,ePoint))
-        return true;
-    else if( d4==0 && isOnSegment(end,sPoint,ePoint))
-        return true;
-    else return false;
 }
 
 bool Terrain::isOnSegment(IvVector3 point,IvVector3 start, IvVector3 end)

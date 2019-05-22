@@ -9,5 +9,6 @@ out vec4 fragColor;
 
 void main()
 {
-    fragColor=texture(roadTexture,uv)*vec4(color,1.0);
+    fragColor=texture(roadTexture,uv) * vec4((color),1.0);
+//fragColor.r += 1.0;
 }
