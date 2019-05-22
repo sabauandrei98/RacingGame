@@ -25,6 +25,7 @@ public:
     void setShader(const std::string&);
     void addShaderUniforms(const std::vector<std::string>&);
     void setWorldViewProjectionMatrix(const IvMatrix44&);
+    void setWorldViewMatrix(const IvMatrix44&);
     
     // TODO: implement different uniform setters
     void setUniformValue(unsigned int, const IvVector4&);

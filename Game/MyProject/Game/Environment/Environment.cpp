@@ -19,6 +19,7 @@ Environment::Environment(const char* name,const  std::vector<std::pair<IvVector3
     renderPacket._use_depth=true;
     renderPacket._use_wireframe=false;
     
+
     std::shared_ptr<HelperSceneNode>  terrain=std::make_shared<Terrain>("terrain",renderPacket,64,64,marginPoints);
     std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootEnvironment");
 

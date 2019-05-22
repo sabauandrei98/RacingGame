@@ -17,6 +17,7 @@ public:
     // public variable(s)d
     MeshInstance*   _mesh_instance;
     IvMatrix44      _world_view_projection_matrix;
+    IvMatrix44      _world_view_matrix;
     IvPrimType      _prim_type = kTriangleStripPrim;
     
     bool            _use_depth = true;
