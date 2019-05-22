@@ -19,13 +19,13 @@ Environment::Environment(const char* name,const  std::vector<std::pair<IvVector3
     renderPacket._use_depth=true;
     renderPacket._use_wireframe=false;
     
-   // std::shared_ptr<HelperSceneNode>  terrain=std::make_shared<Terrain>("terrain",renderPacket,20,20,marginPoints);
+    std::shared_ptr<HelperSceneNode>  terrain=std::make_shared<Terrain>("terrain",renderPacket,20,20,marginPoints);
     std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootEnvironment");
 
     sky->setLocalTransform({0,0,30}, {0,0,0}, {30,30,30});
-   // terrain->setLocalTransform({0,-5.5,0},{1.57*3,1.57,1.57},{1,1,1});
+    terrain->setLocalTransform({0,-5.5,0},{1.57*3,1.57,1.57},{1,1,1});
     
     root->addChild(sky);
-   // root->addChild(terrain);
+    root->addChild(terrain);
     this->addChild(root);
 }

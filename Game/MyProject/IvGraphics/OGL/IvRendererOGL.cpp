@@ -499,6 +499,11 @@ void IvRendererOGL::SetWVPMat(const IvMatrix44& matrix)
     mWVPMat = matrix;
 }
 
+void IvRendererOGL::SetWVMat(const IvMatrix44& matrix)
+{
+    mWVMat = matrix;
+}
+
 
 //-------------------------------------------------------------------------------
 // @ IvRendererOGL::SetShaderProgram()
@@ -539,6 +544,11 @@ void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
         if ( modelviewproj )
         {
             modelviewproj->SetValue(mWVPMat, 0);
+        }
+        IvUniform* modelview = mShader->GetUniform("IvModelViewMatrix");
+        if ( modelview )
+        {
+            modelview->SetValue(mWVMat, 0);
         }
         IvUniform* normalMat = mShader->GetUniform("IvNormalMatrix");
         if ( normalMat )
@@ -596,6 +606,11 @@ void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
         if ( modelviewproj )
         {
             modelviewproj->SetValue(mWVPMat, 0);
+        }
+        IvUniform* modelview = mShader->GetUniform("IvModelViewMatrix");
+        if ( modelview )
+        {
+            modelview->SetValue(mWVMat, 0);
         }
         IvUniform* normalMat = mShader->GetUniform("IvNormalMatrix");
         if ( normalMat )
@@ -656,6 +671,11 @@ void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
         {
             modelviewproj->SetValue(mWVPMat, 0);
         }
+        IvUniform* modelview = mShader->GetUniform("IvModelViewMatrix");
+        if ( modelview )
+        {
+            modelview->SetValue(mWVMat, 0);
+        }
         IvUniform* normalMat = mShader->GetUniform("IvNormalMatrix");
         if ( normalMat )
         {
@@ -707,6 +727,11 @@ void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, unsi
         if ( modelviewproj )
         {
             modelviewproj->SetValue(mWVPMat, 0);
+        }
+        IvUniform* modelview = mShader->GetUniform("IvModelViewMatrix");
+        if ( modelview )
+        {
+            modelview->SetValue(mWVMat, 0);
         }
         IvUniform* normalMat = mShader->GetUniform("IvNormalMatrix");
         if ( normalMat )

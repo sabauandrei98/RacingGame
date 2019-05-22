@@ -56,6 +56,7 @@ public:
     void SetStencilMask(uint32_t mask);
     
     void SetWVPMat(const IvMatrix44& matrix);
+    void SetWVMat(const IvMatrix44& matrix);
 
     void SetDepthTest(IvDepthTestFunc func) final;
     IvDepthTestFunc GetDepthTest() final;
