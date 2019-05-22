@@ -228,9 +228,6 @@ private:
     // private function(s)
     bool isPauseTriggered();
     bool isGameOverTriggered();
-
-    uint32_t score                  =   0;
-    uint32_t frames                 =   0;
     
     std::shared_ptr<RaceMenu>           raceMenu;
     MeshManager                         meshManager;

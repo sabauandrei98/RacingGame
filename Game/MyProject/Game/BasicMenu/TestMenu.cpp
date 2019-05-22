@@ -35,14 +35,15 @@ TestMenu::TestMenu()
     
     std::shared_ptr<CarController> _controller = std::make_shared<CarController>();
     _child2->setAnimator(_controller);
+    //_child2->setLocalPosition({0,-10,0});
     
     menu->setRoot(root);
     menu->getRoot()->addChild(_child2);
 
     RoadImporterExporter* roadIE = new RoadImporterExporter();
     roadIE->importFrom("roadDataTest.txt");
-    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadIE->getMarginPoints());
-    roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{3.144,0,0}, IvVector3{12,12,12});
+    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadIE->getMarginPoints(), 10.0f);
+    roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{3.144,0,0}, IvVector3{1,1,1});
     menu->getRoot()->addChild(roadNode);
     
     std::shared_ptr<SceneNode> environment=std::make_shared<Environment>("environment",roadIE->getMarginPoints());

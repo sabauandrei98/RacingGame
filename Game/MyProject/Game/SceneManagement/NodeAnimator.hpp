@@ -19,4 +19,5 @@ public:
     NodeAnimator();
     virtual ~NodeAnimator();
     virtual void animateNode(float, SceneNode*);
+    virtual void animateNode(SceneNode*,SceneNode*,const IvVector3&);
 };

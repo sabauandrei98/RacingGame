@@ -109,7 +109,7 @@ Menu::Menu()
     characters.insert({'x',std::make_pair(1,8)});
     characters.insert({'y',std::make_pair(1,9)});
     
-    characters.insert({'z',std::make_pair(0,0)});
+    characters.insert({' ',std::make_pair(0,0)});
     characters.insert({'{',std::make_pair(0,1)});
     characters.insert({'|',std::make_pair(0,2)});
     characters.insert({'}',std::make_pair(0,3)});

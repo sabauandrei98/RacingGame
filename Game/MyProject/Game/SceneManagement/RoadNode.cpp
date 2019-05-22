@@ -1,8 +1,9 @@
 
 #include "RoadNode.hpp"
 
-RoadNode::RoadNode(const std::string& name, const std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints) :  SceneNode(name)
+RoadNode::RoadNode(const std::string& name, const std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints, float scaleFactor) :  SceneNode(name)
 {
+    vectorScaleFactor = scaleFactor;
     buildMesh(rMarginPoints);
 }
 
@@ -16,13 +17,19 @@ void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& road
     std::vector<IvTCPVertex> pointPosition;
     std::vector<unsigned int> indexBuffer;
     
+    
     point.color.Set(255, 255, 255, 255);
     for(int i = 0; i < roadPoints.size(); i++)
     {
-        point.position = roadPoints[i].first;
+        IvVector3 left = roadPoints[i].first;
+        point.position = left * vectorScaleFactor;
         pointPosition.push_back(point);
-        point.position = roadPoints[i].second;
+        
+        IvVector3 right = roadPoints[i].second;
+        point.position = right * vectorScaleFactor;
         pointPosition.push_back(point);
+        
+        rMiddlePoints.push_back((left+right)/2.0f);
     }
     
     
@@ -34,9 +41,12 @@ void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& road
         pointPosition[i+3].texturecoord = {0,1};
     }
     
-    for(int i = 0; i < roadPoints.size() * 2; i++)
+    for(int i = roadPoints.size() * 2 - 1; i >= 3; i-=2)
     {
         indexBuffer.push_back(i);
+        indexBuffer.push_back(i-1);
+        indexBuffer.push_back(i-2);
+        indexBuffer.push_back(i-3);
     }
     
     meshTexture->setVertexBuffer(pointPosition, format);

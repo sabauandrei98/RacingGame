@@ -53,6 +53,11 @@ const IvVector3& NodeTransform::getScale() const {
     return _scale;
 }
 
+const IvVector3& NodeTransform::getRotation() const {
+    return _rotation;
+}
+
+
 // ---------------------------------
 // PRIVATE FUNCTION(S) AND METHOD(S)
 // ---------------------------------

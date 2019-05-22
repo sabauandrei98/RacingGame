@@ -14,7 +14,6 @@
 RaceState::RaceState(StateController* state_controller) :
     GameState(state_controller) {
         meshManager=MeshManager();
-        score=0;
     }
 
 // -------------------------
@@ -34,8 +33,8 @@ void RaceState::onEnter() {
     RoadImporterExporter* roadImpExp=new RoadImporterExporter();
     roadImpExp->importFrom("roadDataTest.txt");
     
-    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadImpExp->getMarginPoints());
-    roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{3.144,0,0}, IvVector3{12,12,12});
+    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadImpExp->getMarginPoints(), 10);
+    roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{3.144,0,0}, IvVector3{1,1,1});
     raceMenu->getScene()->getRoot()->addChild(roadNode);
     delete roadImpExp;
     
@@ -47,7 +46,6 @@ void RaceState::onExit() {
 }
 
 void RaceState::Update(float dt) {
-    
     infoManager->Update(dt);
     
     if(isPauseTriggered())
@@ -55,26 +53,19 @@ void RaceState::Update(float dt) {
     else
         if(isGameOverTriggered())
         {
-            frames=0;
-            score=0;
             state_controller->requestChange(GOver);
         }
         else
         {
-            frames++;
-            auto cameraPosition=raceMenu->getScene()->getRoot()->findFirstNodeWithName("camera")->getAbsolutePosition();
-            cameraPosition.x-=10;
-            cameraPosition.z+=10;
-            if(frames==10)
-            {
-                frames=0;
-                raceMenu->renderNo(score,cameraPosition);
-                score++;
-             }
-            
-            if(score==10)
-                std::cout<<cameraPosition<<std::endl;
-            //raceMenu->renderNo(infoManager->getTime(),IvVector3{10,-25,5});
+            int time=infoManager->getTime();
+            raceMenu->renderText("timeTextRoot", "TIME");
+            raceMenu->renderDigit("timeRoot",time);
+            raceMenu->renderDigit("lapRoot",infoManager->getLap("Car"));
+            raceMenu->renderDigit("lapTimeRoot",infoManager->getLapTime("Car", infoManager->getLap("Car")));
+
+            raceMenu->renderDigit("scoreRoot",infoManager->getScore("Car"));
+            raceMenu->renderDigit("checkpointRoot",infoManager->getCheckpoint("Car"));
+            raceMenu->renderDigit("carSpeedRoot", infoManager->getCarSpeed("Car"));
         }
 }   
     

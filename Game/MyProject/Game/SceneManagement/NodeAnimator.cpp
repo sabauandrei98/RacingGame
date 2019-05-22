@@ -21,3 +21,8 @@ NodeAnimator::~NodeAnimator() {
 
 void NodeAnimator::animateNode(float dt, SceneNode* target_node) {
 }
+
+void NodeAnimator::animateNode(SceneNode* object, SceneNode* target, const IvVector3& offset)
+{
+    
+}

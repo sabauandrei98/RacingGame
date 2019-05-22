@@ -11,7 +11,7 @@ RoadEditor::RoadEditor(SceneGraph* sGraph) : sceneGraph(sGraph)
     //setting up a simple environment for the editor
     setupMeshes();
     setupPoints();
-    roadGenerator = std::make_shared<RoadGeneratorControler>(bezierPoints, rMiddlePoints, rMarginPoints, 4.0f, 0.05f);
+    roadGenerator = std::make_shared<RoadGeneratorControler>(bezierPoints, rMiddlePoints, rMarginPoints, 4.0f, 0.033f);
 }
 
 RoadEditor::~RoadEditor() {
@@ -142,7 +142,7 @@ void RoadEditor::generateTexturedRoad()
         roadNode.reset();
     }
 
-    roadNode =  std::make_shared<RoadNode>("roadNode", rMarginPoints);
+    roadNode =  std::make_shared<RoadNode>("roadNode", rMarginPoints,1);
     this->sceneGraph->getRoot()->addChild(roadNode);
     roadIE.exportTo(rMarginPoints, "roadData.txt");
 }

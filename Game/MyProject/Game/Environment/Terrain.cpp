@@ -8,7 +8,7 @@
 //-------------------------------------------------------------------------------
 //  @Terrain::Terrain()
 //-------------------------------------------------------------------------------
-Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t height,const std::vector<std::pair<IvVector3,IvVector3>>& marginPoints):HelperSceneNode(name,render),width(width),height(height),rows(height*2),columns(width*2)
+Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t height,const std::vector<std::pair<IvVector3,IvVector3>>& marginPoints):HelperSceneNode(name,render),width(width),height(height),rows(height*7),columns(width*7)
 {
     srand(time(0));
     
@@ -30,7 +30,7 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
         {
             IvTNPVertex vertex;
             float height=elevation[(int)i][(int)j]*2000.0f;
-            height=remainder(height,1.5);
+           // height=remainder(height,4);
     
             vertex.position={(float)i-rows/2,height,(float)j-columns/2};
             vertex.normal = {0.0f,0.0f,0.0f};
@@ -58,42 +58,74 @@ Terrain::Terrain(const char* name, RenderPacket render,uint32_t width,uint32_t h
     std::vector<std::pair<IvVector3,IvVector3>> lines;
     for(int i=0;i<marginPoints.size()-1;i++)
     {
-        lines.push_back(std::make_pair(marginPoints[i].first, marginPoints[i+1].first));
-        lines.push_back(std::make_pair(marginPoints[i].second, marginPoints[i+1].second));
+        std::pair<IvVector3,IvVector3> aux = marginPoints[i];
+        aux.first *= 10.0f;
+        aux.second *= 10.0f;
+        lines.push_back(std::make_pair(aux.first, aux.second));
     }
     
     int i=0;
     
     auto keep=vertices;
     
-    while(i<indices.size()-3)
+    for(int i = 0; i < vertices.size(); i+=3)
     {
-        if(isPointRayIntersectLines(vertices[i].position, lines)%2==1)
+        //vertices[i].position.y = 0;
+        if(isPointRayIntersectLines(vertices[i].position, lines)==1)
         {
-            vertices[indices[i]].position.y   = 0;
-            vertices[indices[i+1]].position.y = 0;
-            vertices[indices[i+2]].position.y = 0;
+            vertices[i].position.y=0;
         }
         
-        p1=vertices[indices[i]].position;
-        p2=vertices[indices[i+1]].position;
-        p3=vertices[indices[i+2]].position;
+    }
     
-        auto u=p2-p1;
-        auto v=p2-p3;
+    while(i<indices.size()-3)
+    {
         
-        IvVector3 normal = v.Cross(u);
+//        if(isPointRayIntersectLines(vertices[indices[i]].position, lines)==1)
+//        {
+//            std::cout<<vertices[indices[i]].position<<std::endl;
+//            if(i%3==0)
+//            {
+//                vertices[indices[i]].position.y   = 0.;
+//                vertices[indices[i+1]].position.y = 0.;
+//                vertices[indices[i+2]].position.y = 0.;
+//            }
+//            else if(i%3==1)
+//            {
+//                vertices[indices[i-1]].position.y = 0.;
+//                vertices[indices[i]].position.y   = 0.;
+//                vertices[indices[i+1]].position.y = 0.;
+//            }
+//            else if(i%3==2)
+//            {
+//                vertices[indices[i-2]].position.y = 0.;
+//                vertices[indices[i-1]].position.y = 0.;
+//                vertices[indices[i]].position.y  = 0.;
+//            }
+//        }
+//
+        
+       
+            p1=vertices[indices[i]].position;
+            p2=vertices[indices[i+1]].position;
+            p3=vertices[indices[i+2]].position;
     
-        vertices[indices[i]].normal += normal;
-        vertices[indices[i + 1]].normal += normal;
-        vertices[indices[i + 2]].normal += normal;
-
+            auto u=p2-p1;
+            auto v=p2-p3;
+            
+            IvVector3 normal = v.Cross(u);
+    
+            vertices[indices[i]].normal += normal;
+            vertices[indices[i + 1]].normal += normal;
+            vertices[indices[i + 2]].normal += normal;
+             
+        
         i+=3;
     }
     
-    for (int i=0;i<vertices.size();i++)
-        if(vertices[i].position.y!=keep[i].position.y)
-            std::cout<<vertices[i].position<<" changed from: "<<keep[i].position<<std::endl;
+//    for (int i=0;i<vertices.size();i++)
+//       // if(vertices[i].position.y!=keep[i].position.y)
+//            std::cout<<vertices[i].position<<" changed from: "<<keep[i].position<<std::endl;
     
     for(auto & v : vertices)
     {
@@ -157,8 +189,8 @@ Terrain::setVertices(const std::vector<IvTNPVertex> &vertices)
 double
 Terrain::noise1(double nx,double ny)
 {
-    //PerlinNoise pn(rand()%256);
-    PerlinNoise pn(344);
+   // PerlinNoise pn(rand()%256);
+    PerlinNoise pn(66);
     return pn.noise(nx,1,ny);
 }
 //-------------------------------------------------------------------------------
@@ -167,34 +199,50 @@ Terrain::noise1(double nx,double ny)
 int
 Terrain::isPointRayIntersectLines(const IvVector3& point,const std::vector<std::pair<IvVector3,IvVector3>>& lines)
 {
-    int countLinesIntersected=0;
     IvVector3 startP=point;
     IvVector3 endP=point-IvVector3(-10000,0,0);
     
     startP.y=0;
     endP.y=0;
     
+    float min= 30;
+  
     for(auto& line:lines)
     {
         IvVector3 start=line.first;
         IvVector3 end=line.second;
 
-        if(pointIntersectsLine(point, start, end))
-            countLinesIntersected++;
-    }
-    return countLinesIntersected;
-}
+        auto p=point;
+        p.y=0;
+        start.y=0;
+        end.y=0;
+        float a = Distance(p, start);
+        float b = Distance(p, end);
+        
+        if (a < min || b < min)
+        {
+            //std::cout<<"ok"<<a<<" "<<b<< " "<<point<<" "<<start << " " <<end<<std::endl;
 
+            return 1;
+        }
+       // else
+         //std::cout<<a<<" "<<b<< " "<<start<<" "<<end<<std::endl;
+        //if(index==20)
+            // break;
+        //index++;
+        
+    }
+    return 0;
+}
 bool Terrain::pointIntersectsLine(IvVector3 point, IvVector3 start, IvVector3 end)
 {
     auto sPoint=point;
-    auto ePoint=point-IvVector3(-10000,0,0);
+    auto ePoint=point-IvVector3(10000,0,0);
     
     auto d1=direction(start,end,sPoint);
     auto d2=direction(start,end,ePoint);
     auto d3=direction(sPoint,ePoint,start);
     auto d4=direction(sPoint,ePoint,end);
-    
     
     if( ((d1>0 && d2<0) || (d1<0 && d2>0))  &&
         ((d3>0 && d4<0) || (d3<0 && d4>0)))

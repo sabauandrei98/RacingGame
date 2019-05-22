@@ -128,6 +128,11 @@ const IvVector3& SceneNode::getLocalScale() const {
     return _transform.getScale();
 }
 
+const IvVector3& SceneNode::getLocalRotation() const
+{
+    return _transform.getRotation();
+}
+
 // returns the bounding box
 const BoundingBox& SceneNode::getBoundingBox() const {
     return _bounding_box;

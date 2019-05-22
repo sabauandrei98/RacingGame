@@ -5,6 +5,7 @@
 #include <IvVector2.h>
 #include <unordered_map>
 #include "../SceneManagement/SceneNode.hpp"
+#include "../SceneManagement/RoadNode.hpp"
 #include "../Car/CarController.hpp"
 
 //Manager supports more than one player
@@ -28,7 +29,7 @@ private:
     float sinceStartTimer = 0.0f;
     
     //range to trigger next checkpoint
-    float checkpointTriggerDistance = 0.5f;
+    float checkpointTriggerDistance = 3.0f;
     
     //the root (good to search for objects)
     SceneNode* root;

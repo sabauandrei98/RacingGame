@@ -37,7 +37,7 @@ private:
     
     //increments
     float carSpeedIncrement = 0.045f * 5;
-    float angleSpeedIncrement = 0.0075f * 5;
+    float angleSpeedIncrement = 0.0075f * 10;
     float nitroIncrement = 0.20f * 5;
     float turbineBoostIncrement = 0.25f * 5;
     float directionChangeIncrement = 0.25f * 5;
