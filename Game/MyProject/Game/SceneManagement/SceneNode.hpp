@@ -58,7 +58,7 @@ public:
     virtual void updateNode(float);
     virtual void collectRenderingPackets(const Camera*, std::vector<RenderPacket>&);
     
-protected:
+public:
     // protected variable(s)
     SceneNode*                              _parent;
     std::vector<std::shared_ptr<SceneNode>> _children;

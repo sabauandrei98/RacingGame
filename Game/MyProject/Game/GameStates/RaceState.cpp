@@ -30,13 +30,13 @@ void RaceState::onEnter() {
     roadEditor=std::make_unique<RoadEditor>(raceMenu->getScene().get());
     infoManager=std::make_unique<InfoManager>(raceMenu->getScene()->getRoot().get());
     
-    RoadImporterExporter* roadImpExp=new RoadImporterExporter();
-    roadImpExp->importFrom("roadDataTest.txt");
+    ///RoadImporterExporter* roadImpExp=new RoadImporterExporter();
+    //roadImpExp->importFrom("roadDataTest.txt");
     
-    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadImpExp->getMarginPoints(), 10);
-    roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{3.144,0,0}, IvVector3{1,1,1});
-    raceMenu->getScene()->getRoot()->addChild(roadNode);
-    delete roadImpExp;
+    //std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadImpExp->getMarginPoints(), 1);
+    //roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{3.144,0,0}, IvVector3{1,1,1});
+    //raceMenu->getScene()->getRoot()->addChild(roadNode);
+    //delete roadImpExp;
     
 }
 
@@ -57,14 +57,22 @@ void RaceState::Update(float dt) {
         }
         else
         {
-            int time=infoManager->getTime();
+            float time =infoManager->getTime();
             raceMenu->renderText("timeTextRoot", "TIME");
-            raceMenu->renderDigit("timeRoot",time);
+            raceMenu->renderText("carSpeedTextRoot", "SPEED");
+            raceMenu->renderText("scoreTextRoot", "SCORE");
+            raceMenu->renderText("lapTimeTextRoot", "LAPTIME");
+            raceMenu->renderText("checkpointTextRoot", "CHECKPOINT");
+            raceMenu->renderText("lapTextRoot", "LAP");
+            
+            
+            raceMenu->renderDigit("timeRoot",(int)infoManager->getTime());
             raceMenu->renderDigit("lapRoot",infoManager->getLap("Car"));
             raceMenu->renderDigit("lapTimeRoot",infoManager->getLapTime("Car", infoManager->getLap("Car")));
 
             raceMenu->renderDigit("scoreRoot",infoManager->getScore("Car"));
             raceMenu->renderDigit("checkpointRoot",infoManager->getCheckpoint("Car"));
+            int q = infoManager->getCarSpeed("Car");
             raceMenu->renderDigit("carSpeedRoot", infoManager->getCarSpeed("Car"));
         }
 }   

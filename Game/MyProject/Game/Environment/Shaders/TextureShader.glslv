@@ -1,4 +1,6 @@
 uniform mat4 IvModelViewProjectionMatrix;
+uniform mat4 IvViewProjectionMatrix;
+
 
 layout(location = POSITION) in vec3 Position;
 layout(location = TEXCOORD0) in vec2 texCoord;
