@@ -88,12 +88,12 @@ void IvRenderTargetOGL::Setup(uint32_t width,uint32_t height)
         glBindTexture(GL_TEXTURE_2D,reference);
         glTexImage2D(GL_TEXTURE_2D,
                      0,
-                     GL_RGBA,
+                     GL_RGB16F,
                      width,
                      height,
                      0,
                      GL_RGBA,
-                     GL_UNSIGNED_BYTE,
+                     GL_FLOAT,
                      nullptr);
         
         glTexParameteri(GL_TEXTURE_2D,

@@ -27,6 +27,17 @@ void SceneGraph::drawScene() {
         i.draw();
 }
 
+// draws all the nodes starting with root
+void SceneGraph::drawMap() {
+    _render_cache.clear();
+    _root->collectRenderingPackets(_map_camera.get(), _render_cache);
+    
+    // TODO: sort _render_cache
+    
+    for (const auto& i : _render_cache)
+        i.draw();
+}
+
 // sets the root of the graph
 void SceneGraph::setRoot(const std::shared_ptr<SceneNode>& root) {
     _root = root;
@@ -40,6 +51,11 @@ const std::shared_ptr<SceneNode>& SceneGraph::getRoot() const {
 // adds a camera to the graph
 void SceneGraph::setCamera(const std::shared_ptr<Camera>& camera) {
     _camera = camera;
+}
+
+// adds a camera to the graph
+void SceneGraph::setMapCamera(const std::shared_ptr<Camera>& camera) {
+    _map_camera = camera;
 }
 
 // return the camera

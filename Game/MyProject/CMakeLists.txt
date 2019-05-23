@@ -142,6 +142,7 @@ ${PROJECT_SOURCE_DIR}/Game/Gameplay/
 ${PROJECT_SOURCE_DIR}/Game/BasicMenu/Resources/
 ${PROJECT_SOURCE_DIR}/Game/BasicMenu/Shaders/
 ${PROJECT_SOURCE_DIR}/Game/RoadGeneration/
+${PROJECT_SOURCE_DIR}/Game/DeferredRendering/
 
 ${PROJECT_SOURCE_DIR}/Game/Test/
 ${PROJECT_SOURCE_DIR}/Game/Test/Resources/

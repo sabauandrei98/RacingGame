@@ -45,8 +45,18 @@ void MeshInstance::setWorldViewProjectionMatrix(const IvMatrix44& matrix) {
     IvRenderer::mRenderer->SetWVPMat(matrix);
 }
 
+// sets the world matrix
+void MeshInstance::setWorldMatrix(const IvMatrix44& matrix) {
+    IvRenderer::mRenderer->SetWorldMatrix(matrix);
+}
+
 // sets the shader uniform values with vec4
 void MeshInstance::setUniformValue(unsigned int index, const IvVector4& value) {
+    _shader_uniforms[index]->SetValue(value, 0);
+}
+
+// sets the shader uniform values with mat4
+void MeshInstance::setUniformValue(unsigned int index, const IvMatrix44& value) {
     _shader_uniforms[index]->SetValue(value, 0);
 }
 
