@@ -39,8 +39,6 @@ public:
     Terrain(const char*,RenderPacket,uint32_t width,uint32_t height,const std::vector<std::pair<IvVector3,IvVector3>>& marginPoints);
     ~Terrain(){}
     
-    std::vector<IvTNPVertex> getVertices(){return vertices;}
-    std::vector<unsigned int> getIndices(){return indices;}
     void setVertices(const std::vector<IvTNPVertex>& vertices);
     
     void build();

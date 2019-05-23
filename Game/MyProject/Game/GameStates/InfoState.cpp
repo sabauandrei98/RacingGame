@@ -43,7 +43,6 @@ InfoState::Update(float dt)
     infoMenu->renderDigit("lapTimeRoot",infoManager->getLapTime("Car", infoManager->getLap("Car")));
     infoMenu->renderDigit("scoreRoot",infoManager->getScore("Car"));
     
-    auto cc=infoManager->getCheckpoint("Car");
     infoMenu->renderDigit("checkpointRoot",infoManager->getCheckpoint("Car"));
     int speed = infoManager->getCarSpeed("Car");
     if(speed<0)

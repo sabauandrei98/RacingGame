@@ -69,27 +69,31 @@ public:
     
     void saveFile(std::string configurerFile,std::string fileName)
     {
-        std::ifstream fin(fileName);
+        std::ifstream fin(configurerFile);
         int noFiles;
         fin>>noFiles;
         
         std::vector<std::string> files;
         for(int i=0;i<noFiles;i++)
         {
-            std::string fileName;
-            fin>>fileName;
-            files.push_back(fileName);
+            std::string fName;
+            fin>>fName;
+            if(fName!=fileName)
+                files.push_back(fName);
         }
         fin.close();
         
-        noFiles++;
-        std::ofstream fout(fileName);
+        if(files.size()==noFiles)
+            noFiles++;
+        
+        std::ofstream fout(configurerFile);
         fout<<noFiles<<'\n';
         for(int i=0;i<files.size();i++)
             fout<<files[i]<<'\n';
         fout<<fileName<<'\n';
-        
+    
         fout.close();
+        
     }
     std::vector<std::string> getFilesName(const std::string& configurerFile)
     {

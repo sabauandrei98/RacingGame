@@ -195,5 +195,5 @@ bool Terrain::pointIntersectsLine(IvVector3 point, IvVector3 start, IvVector3 en
     {
         return ( (point - start).Cross(end - start).y < 0.0f);
     }
-    
+    return false;
 }
