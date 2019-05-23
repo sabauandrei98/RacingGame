@@ -22,11 +22,5 @@ public:
     //constructor/destructor
     StartMenu();
     ~StartMenu();
-    
-    std::shared_ptr<SceneGraph> GetScene()
-    {
-        return menu;
-    }
-    
 private:
 };

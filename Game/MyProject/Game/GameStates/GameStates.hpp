@@ -24,6 +24,7 @@
 #include "../BasicMenu/GameOver.hpp"
 #include "../BasicMenu/FirstMenu.hpp"
 #include "../BasicMenu/TestMenu.hpp"
+#include "../BasicMenu/InfoMenu.hpp"
 #include "../RoadGenerator/RoadEditor.hpp"
 #include "../RoadGenerator/RoadImporterExporter.hpp"
 
@@ -231,7 +232,7 @@ private:
     
     std::shared_ptr<RaceMenu>           raceMenu;
     MeshManager                         meshManager;
-    std::unique_ptr<InfoManager>        infoManager;
+    //std::unique_ptr<InfoManager>        infoManager;
 };
 
 class HighScoreState : public GameState {
@@ -333,3 +334,16 @@ private:
     bool isBackTriggered();
 };
 
+class InfoState:public GameState
+{
+public:
+    InfoState(StateController*);
+    void onEnter();
+    void onExit();
+    void Update(float dt);
+    
+private:
+    std::shared_ptr<SceneGraph>         infoScene;
+    std::shared_ptr<InfoMenu>           infoMenu;
+    std::unique_ptr<InfoManager>        infoManager;
+};

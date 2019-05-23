@@ -8,12 +8,13 @@
 #pragma once
 
 #include "GameStates.hpp"
+#include "../BasicMenu/InfoMenu.hpp"
 
 class GameState;
 
 // enumeration for states
 enum State {
-    Menu, Track, SelectTrack, BuildTrack, SelectCar, Race, HighScore, Credits,Pause,GOver,Tests,First
+    Menu, Track, SelectTrack, BuildTrack, SelectCar, Race, HighScore, Credits,Pause,GOver,Tests,First,Info
 };
 
 // state controller class
@@ -40,6 +41,7 @@ public:
     friend class TestState;
     friend class FirstState;
     friend class GameState;
+    friend class InfoState;
     
 private:
     // private variable(s)
@@ -48,6 +50,9 @@ private:
     State                                   _old_state;
     bool                                    _state_changed = false;
     
+    std::shared_ptr<SceneGraph>             _info;
+    bool                                    _gotInfoScene = false;
+    
 protected:
-     std::shared_ptr<SceneGraph>             _main_scene;
+    std::shared_ptr<SceneGraph>             _main_scene;
 };
