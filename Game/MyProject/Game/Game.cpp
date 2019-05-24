@@ -21,10 +21,8 @@ Game::PostRendererInitialize()
     // Set up base class
     if ( !IvGame::PostRendererInitialize() )
         return false;
-    
 
     menu=std::make_shared<StateController>();
-
     
     ::IvSetDefaultLighting();
   

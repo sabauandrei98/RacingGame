@@ -197,6 +197,7 @@ void SceneNode::collectRenderingPackets(const Camera* camera, std::vector<Render
 
         packet._world_view_projection_matrix = camera->getProjectionMatrix() * camera->getViewMatrix() * _absolute_transform;
         packet._world_view_matrix = camera->getViewMatrix() * _absolute_transform;
+        packet._world_matrix = _absolute_transform;
         
         render_packets.push_back(packet);
     }

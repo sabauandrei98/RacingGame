@@ -550,6 +550,11 @@ void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
         {
             modelview->SetValue(mWVMat, 0);
         }
+        IvUniform* world = mShader->GetUniform("IvWorldMatrix");
+        if ( world )
+        {
+            world->SetValue(mWorldMat, 0);
+        }
         IvUniform* normalMat = mShader->GetUniform("IvNormalMatrix");
         if ( normalMat )
         {
@@ -611,6 +616,11 @@ void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
         if ( modelview )
         {
             modelview->SetValue(mWVMat, 0);
+        }
+        IvUniform* world = mShader->GetUniform("IvWorldMatrix");
+        if ( world )
+        {
+            world->SetValue(mWorldMat, 0);
         }
         IvUniform* normalMat = mShader->GetUniform("IvNormalMatrix");
         if ( normalMat )
@@ -676,6 +686,11 @@ void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer,
         {
             modelview->SetValue(mWVMat, 0);
         }
+        IvUniform* world = mShader->GetUniform("IvWorldMatrix");
+        if ( world )
+        {
+            world->SetValue(mWorldMat, 0);
+        }
         IvUniform* normalMat = mShader->GetUniform("IvNormalMatrix");
         if ( normalMat )
         {
@@ -732,6 +747,11 @@ void IvRendererOGL::Draw(IvPrimType primType, IvVertexBuffer* vertexBuffer, unsi
         if ( modelview )
         {
             modelview->SetValue(mWVMat, 0);
+        }
+        IvUniform* world = mShader->GetUniform("IvWorldMatrix");
+        if ( world )
+        {
+            world->SetValue(mWorldMat, 0);
         }
         IvUniform* normalMat = mShader->GetUniform("IvNormalMatrix");
         if ( normalMat )

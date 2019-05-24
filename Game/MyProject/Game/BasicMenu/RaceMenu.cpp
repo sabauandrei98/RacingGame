@@ -29,7 +29,7 @@ RaceMenu::RaceMenu()
     
     std::shared_ptr<CameraSceneNode> cameraSceneNode=std::make_shared<CameraSceneNode>("camera",camera);
     
-    std::shared_ptr<SceneNode> carNode = ModelLoader::loadModel("jeep.fbx", "example_shader");
+    std::shared_ptr<SceneNode> carNode = ModelLoader::loadModel("jeep.fbx", "example_shader", true);
     
     std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>();
     std::shared_ptr<MeshInstance> mesh_instance = std::make_shared<MeshInstance>();

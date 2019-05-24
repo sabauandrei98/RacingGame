@@ -23,7 +23,6 @@
 #include "Car/CarController.hpp"
 #include "Gameplay/InfoManager.hpp"
 
-
 class CameraTestControler;
 class StateController;
 
@@ -41,8 +40,6 @@ protected:
 private:
     Game( const Game& other );
     Game& operator=( const Game& other );
-    
 
     std::shared_ptr<StateController> menu;
-
 };

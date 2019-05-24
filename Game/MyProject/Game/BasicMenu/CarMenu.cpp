@@ -20,7 +20,7 @@ CarMenu::CarMenu()
     menu=std::make_shared<SceneGraph>();
     std::shared_ptr<SceneNode> root=std::make_shared<SceneNode>("rootCar");
     
-    std::shared_ptr<SceneNode> model1=ModelLoader::loadModel("jeep.fbx", "example_shader");
+    std::shared_ptr<SceneNode> model1=ModelLoader::loadModel("jeep.fbx", "example_shader", true);
     
     std::vector<std::string> uniforms;
     uniforms.push_back("mTexture");

@@ -36,7 +36,7 @@ public:
     
     // public function(s) and method(s)
     const TexturePtr& getTexture(const std::string&) const;
-    const ConstAiScenePtr& getModel(const std::string&) const;
+    const ConstAiScenePtr& getModel(const std::string&, bool) const;
     
     // copy constructor and assignment operator are not needed
     ResourceManager(const ResourceManager&) = delete;

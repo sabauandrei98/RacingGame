@@ -145,6 +145,7 @@ ${PROJECT_SOURCE_DIR}/Game/Environment/
 ${PROJECT_SOURCE_DIR}/Game/Environment/Resources/
 ${PROJECT_SOURCE_DIR}/Game/Environment/Shaders/
 ${PROJECT_SOURCE_DIR}/Game/RoadGeneration/
+${PROJECT_SOURCE_DIR}/Game/DeferredRendering/
 
 ${PROJECT_SOURCE_DIR}/Game/Test/
 ${PROJECT_SOURCE_DIR}/Game/Test/Resources/
