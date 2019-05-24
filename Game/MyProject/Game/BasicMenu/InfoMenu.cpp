@@ -27,7 +27,6 @@ InfoMenu::InfoMenu()
     std::shared_ptr<SceneNode> score=std::make_shared<SceneNode>("scoreRoot");
     std::shared_ptr<SceneNode> lap=std::make_shared<SceneNode>("lapRoot");
     std::shared_ptr<SceneNode> checkpoint=std::make_shared<SceneNode>("checkpointRoot");
-    std::shared_ptr<SceneNode> lapTime=std::make_shared<SceneNode>("lapTimeRoot");
     std::shared_ptr<SceneNode> carSpeed=std::make_shared<SceneNode>("carSpeedRoot");
     std::shared_ptr<SceneNode> time=std::make_shared<SceneNode>("timeRoot");
     
@@ -35,7 +34,6 @@ InfoMenu::InfoMenu()
     std::shared_ptr<SceneNode> scoreText=std::make_shared<SceneNode>("scoreTextRoot");
     std::shared_ptr<SceneNode> lapText=std::make_shared<SceneNode>("lapTextRoot");
     std::shared_ptr<SceneNode> checkpointText=std::make_shared<SceneNode>("checkpointTextRoot");
-    std::shared_ptr<SceneNode> lapTimeText=std::make_shared<SceneNode>("lapTimeTextRoot");
     std::shared_ptr<SceneNode> carSpeedText=std::make_shared<SceneNode>("carSpeedTextRoot");
     std::shared_ptr<SceneNode> timeText=std::make_shared<SceneNode>("timeTextRoot");
     
@@ -48,33 +46,26 @@ InfoMenu::InfoMenu()
     info->addChild(checkpointText);
     info->addChild(checkpoint);
     
-    info->addChild(lapTimeText);
-    info->addChild(lapTime);
-    
     info->addChild(carSpeedText);
     info->addChild(carSpeed);
     
     info->addChild(timeText);
     info->addChild(time);
     
-    timeText->setLocalPosition(         {-8, -1, 0.80});
-    lapText->setLocalPosition(          {-8, -1, 0.10});
-    lapTimeText->setLocalPosition(      {-8, -1,-0.55});
+    timeText->setLocalPosition(         {-8, -1, 1.30});
+    lapText->setLocalPosition(          {-8, -1, 0.60});
+    scoreText->setLocalPosition(        {-8, -1,-0.10});
+    checkpointText->setLocalPosition(   {-8, -1,-0.80});
+    carSpeedText->setLocalPosition(     {-8, -1,-1.50});
     
-    scoreText->setLocalPosition(        {2, -1, 0.80});
-    checkpointText->setLocalPosition(   {2, -1, 0.10});
-    carSpeedText->setLocalPosition(     {2, -1,-0.55});
-    
-    time->setLocalPosition(             {-5, -1, -1.6});
-    lap->setLocalPosition(              {-5, -1, -2.3});
-    lapTime->setLocalPosition(          {-5, -1, -3.});
-    
-    score->setLocalPosition(            {7, -1, -1.5});
-    checkpoint->setLocalPosition(       {7, -1, -2.3});
-    carSpeed->setLocalPosition(         {7, -1, -3.});
+    time->setLocalPosition(             {-3, -1, -1.6});
+    lap->setLocalPosition(              {-3, -1, -2.3});
+    score->setLocalPosition(            {-3, -1, -3});
+    checkpoint->setLocalPosition(       {-3, -1, -3.7});
+    carSpeed->setLocalPosition(         {-3, -1, -4.3});
     
 
-    info->setLocalTransform( IvVector3{0,0,5} , {0,0,0} ,{1,1,1});
+    info->setLocalTransform( IvVector3{0,0,6} , {0,0,0} ,{1,1,1});
     
     menu->setRoot(info);
     menu->getRoot()->addChild(cameraSceneNode);
@@ -122,10 +113,10 @@ InfoMenu::renderDigit(std::string name,uint32_t no)
             renderable->setUniformValue(2, val.second);
         }
     }
-    else if(count1==nullptr)
+    else if(count1==nullptr )
     {
         //after pause state
-        renderNumber(name,no,first->getAbsolutePosition());
+        renderNumber(name,no);
     }
     else
     {
@@ -142,15 +133,15 @@ InfoMenu::renderDigit(std::string name,uint32_t no)
         ch->_enabled = false;
     }
     
-    auto keepNo=no;
+    auto needed=no;
     
-    while(no != 0)
+    while(needed != 0)
     {
-        int digit = no % 10;
+        int digit = needed % 10;
         auto val=getRowCol(digit+'0');
         
         m_name.clear();
-        m_name ="count"+ std::to_string(noDigits(no));
+        m_name ="count"+ std::to_string(noDigits(needed));
         quadName=m_name.c_str();
         
         auto nd = first->findFirstNodeWithName(quadName);
@@ -164,13 +155,13 @@ InfoMenu::renderDigit(std::string name,uint32_t no)
                 renderable->setUniformValue(2, val.second);
             }
         }
-        no = no / 10;
+        needed = needed / 10;
     }
     
-    if(noDigits(keepNo)>noDigits(keepNo-1))
-        addNewDigit(name,keepNo);
+    if(noDigits(no)>noDigits(no-1))
+        addNewDigit(name,no);
     
-    checkNeedChangeDigit(keepNo);
+    checkNeedChangeDigit(no);
 }
 //-------------------------------------------------------------------------------
 // @RaceMenu::renderDigit()
@@ -340,7 +331,7 @@ int InfoMenu::firstDigit(uint32_t no)
     return no;
 }
 
-void InfoMenu::renderNumber(std::string name,uint32_t no,const IvVector3& position)
+void InfoMenu::renderNumber(std::string name,uint32_t no)
 {
     int auxScore=no;
     int noDig=noDigits(no);

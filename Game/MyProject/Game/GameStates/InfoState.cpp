@@ -34,16 +34,11 @@ InfoState::Update(float dt)
     infoMenu->renderText("timeTextRoot", "TIME");
     infoMenu->renderText("carSpeedTextRoot", "SPEED");
     infoMenu->renderText("scoreTextRoot", "SCORE");
-    infoMenu->renderText("lapTimeTextRoot", "LAPTIME");
     infoMenu->renderText("checkpointTextRoot", "CHECKPOINT");
     infoMenu->renderText("lapTextRoot", "LAP");
 
     infoMenu->renderDigit("timeRoot",(int)infoManager->getTime());
     infoMenu->renderDigit("lapRoot",infoManager->getLap("Car"));
-    
-    auto laptime=infoManager->getLap("Car") - 1;
-    std::cout<<infoManager->getLapTime("Car", laptime)<<std::endl;
-    infoMenu->renderDigit("lapTimeRoot",infoManager->getLapTime("Car", laptime));
     infoMenu->renderDigit("scoreRoot",infoManager->getScore("Car"));
     infoMenu->renderDigit("checkpointRoot",infoManager->getCheckpoint("Car"));
     infoMenu->renderDigit("carSpeedRoot",infoManager->getCarSpeed("Car"));

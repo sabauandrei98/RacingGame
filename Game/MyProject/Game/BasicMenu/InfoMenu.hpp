@@ -23,7 +23,7 @@ public:
     
     void renderDigit(std::string name,uint32_t no);
     void renderText(std::string name,std::string text);
-    
+    void renderNumber(std::string name,uint32_t no);
 private:
     MeshManager meshManager;
     std::unordered_map<char,std::pair<uint32_t,uint32_t>> characters;
@@ -32,7 +32,6 @@ private:
     void addNewDigit(std::string name,uint32_t no);
     void checkNeedChangeDigit(uint32_t no);
     int firstDigit(uint32_t no);
-    void renderNumber(std::string name,uint32_t no,const IvVector3& position);
     std::pair<float,float> getRowCol(const char c) const;
     void setCharacters();
 };

@@ -349,7 +349,7 @@ public:
     void Update(float dt);
     
 private:
-    std::shared_ptr<SceneGraph>         infoScene;
     std::shared_ptr<InfoMenu>           infoMenu;
     std::unique_ptr<InfoManager>        infoManager;
+    
 };
