@@ -67,8 +67,8 @@ RaceMenu::RaceMenu()
     
     map_cameraSceneNode = std::make_shared<CameraSceneNode>("map_camera",map_camera);
     
-    map_cameraSceneNode->setAnimator(std::make_shared<CameraFollowAnimator>(carNode.get(), IvVector2(80.f, 1.f), false));
-    map_cameraSceneNode->setAbsolutePosition(IvVector3(0.f, 80.f, -1.f));
+    map_cameraSceneNode->setAnimator(std::make_shared<CameraFollowAnimator>(carNode.get(), IvVector2(40.f, 1.f), false));
+    map_cameraSceneNode->setAbsolutePosition(IvVector3(0.f, 40.f, -1.f));
     
     menu->setRoot(root);
     menu->getRoot()->addChild(roadNode);

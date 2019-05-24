@@ -67,8 +67,12 @@ void BuildTrackState::Update(float dt) {
         roadEditor->getRoadGenerator()->nextPoint();
     
     if(isGenerateTriggered())
+    {
+        RoadImporterExporter roadImpExp;
+        std::string name="roadData.txt";
+        roadImpExp.exportTo(roadEditor->getMarginPoints(), name);
         roadEditor->generateTexturedRoad();
-    
+    }
     if (isBackTriggered())
         state_controller->requestChange(Track);
 }

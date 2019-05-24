@@ -58,14 +58,14 @@ void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& road
     meshTexture->setVertexBuffer(pointPosition, format);
     meshTexture->setIndexBuffer(indexBuffer);
     
-    const char* shader = "../../Game/RoadGenerator/Shaders/roadShader";
+    const char* shader = "../../Shaders/first_pass_shader";
     std::shared_ptr<MeshInstance> meshTextureInstance = std::make_shared<MeshInstance>();
     meshTextureInstance->setMesh(meshTexture);
     meshTextureInstance->setShader(shader);
     
     //UNIFORMS
     std::vector<std::string> uniforms;
-    uniforms.push_back("roadTexture");
+    uniforms.push_back("TEXTURE");
     meshTextureInstance->addShaderUniforms(uniforms);
     
     IvImage* image = IvImage::CreateFromFile("../../Game/RoadGenerator/Resources/road.tga");

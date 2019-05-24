@@ -41,6 +41,6 @@ InfoState::Update(float dt)
     infoMenu->renderDigit("lapRoot",infoManager->getLap("Car"));
     infoMenu->renderDigit("scoreRoot",infoManager->getScore("Car"));
     infoMenu->renderDigit("checkpointRoot",infoManager->getCheckpoint("Car"));
-    infoMenu->renderDigit("carSpeedRoot",infoManager->getCarSpeed("Car"));
+    infoMenu->renderDigit("carSpeedRoot",infoManager->getCarSpeed("Car") * 2.5f);
 }
 
