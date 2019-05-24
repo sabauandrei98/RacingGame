@@ -37,9 +37,12 @@ StateController::StateController() {
 void StateController::update(float dt) {
     if (_state_changed) {
         if(_old_state==Race)
-            _states[Info]->onExit();
-        
+        {   _states[Info]->onExit();
+            _renderer.needs_mini_map=false;
+        }
         _states[_old_state]->onExit();
+        if(_current_state==Race)
+            _renderer.needs_mini_map=true;
         _states[_current_state]->onEnter();
         _state_changed = false;
     }
@@ -57,7 +60,8 @@ void StateController::update(float dt) {
 
 void StateController::render()
 {
-    _states[_current_state]->Render(_main_scene.get());
+    //_states[_current_state]->Render(_main_scene.get());
+    _renderer.Render(_main_scene.get());
     
     //!
     IvRenderer::mRenderer->SetClearDepth(1.0);

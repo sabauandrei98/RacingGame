@@ -25,19 +25,6 @@ void main() {
 	vec3 normal = texture(NORMAL, uv).xyz;
 	vec3 lightDir = normalize(lightPos - pos);
 	vec3 diffuse = max(dot(normal, lightDir), 0.0) * color;
-	color = diffuse + lighting;
-
-	// vignette
-    vec2 flipped_uv = uv * (1.0f - uv.yx);
-    float vignette = flipped_uv.x * flipped_uv.y * INTENSITY;
-    vignette = pow(vignette, SIZE);
-    color = min(color, vec3(vignette));
-
-	// tone mapping
-	vec3 mapped = vec3(1.0f) - exp(-color * EXPOSURE);
-
-	// gamma correction
-	mapped = pow(mapped, vec3(1.0f / GAMMA));
-
-    fragColor = vec4(mapped, 1.0f);
+	
+    fragColor = vec4(diffuse + lighting, 1.0f);
 }

@@ -12,13 +12,13 @@ void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& road
     std::shared_ptr<Mesh> meshTexture = std::make_shared<Mesh>();
     
     //BUFFERS
-    IvTCPVertex point;
-    IvVertexFormat format = IvVertexFormat::kTCPFormat;
-    std::vector<IvTCPVertex> pointPosition;
+    IvTNPVertex point;
+    IvVertexFormat format = IvVertexFormat::kTNPFormat;
+    std::vector<IvTNPVertex> pointPosition;
     std::vector<unsigned int> indexBuffer;
     
     
-    point.color.Set(255, 255, 255, 255);
+    point.normal.Set(0.f, 1.f, 0.f);
     for(int i = 0; i < roadPoints.size(); i++)
     {
         IvVector3 left = roadPoints[i].first;

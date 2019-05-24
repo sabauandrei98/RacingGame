@@ -14,14 +14,14 @@ SkyBox::SkyBox(const char* name):SceneNode(name)
     MeshManager meshManager;
     
     std::vector<std::string> uniforms;
-    uniforms.push_back("mTexture");
+    uniforms.push_back("TEXTURE");
     
-    std::shared_ptr<SceneNode> frontQuad=HelperManager::BuildTexturedQuad("frontQuad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/Environment/Shaders/TextureShader"), "../../Game/Environment/Resources/front.tga",IvVector3::zAxis);
-    std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backQuad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/Environment/Shaders/TextureShader"), "../../Game/Environment/Resources/back.tga",IvVector3::zAxis);
-    std::shared_ptr<SceneNode> upQuad=HelperManager::BuildTexturedQuad("upQuad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/Environment/Shaders/TextureShader"), "../../Game/Environment/Resources/up.tga",IvVector3::xAxis);
-    std::shared_ptr<SceneNode> downQuad=HelperManager::BuildTexturedQuad("downQuad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/Environment/Shaders/TextureShader"), "../../Game/Environment/Resources/down.tga",IvVector3::xAxis);
-    std::shared_ptr<SceneNode> rightQuad=HelperManager::BuildTexturedQuad("rightQuad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/Environment/Shaders/TextureShader"), "../../Game/Environment/Resources/left.tga",IvVector3::yAxis);
-    std::shared_ptr<SceneNode> leftQuad=HelperManager::BuildTexturedQuad("leftQuad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/Environment/Shaders/TextureShader"), "../../Game/Environment/Resources/right.tga",IvVector3::yAxis);
+    std::shared_ptr<SceneNode> frontQuad=HelperManager::BuildTexturedQuad("frontQuad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Shaders/first_pass_shader"), "../../Game/Environment/Resources/front.tga",IvVector3::zAxis);
+    std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backQuad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Shaders/first_pass_shader"), "../../Game/Environment/Resources/back.tga",IvVector3::zAxis);
+    std::shared_ptr<SceneNode> upQuad=HelperManager::BuildTexturedQuad("upQuad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Shaders/first_pass_shader"), "../../Game/Environment/Resources/up.tga",IvVector3::xAxis);
+    std::shared_ptr<SceneNode> downQuad=HelperManager::BuildTexturedQuad("downQuad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Shaders/first_pass_shader"), "../../Game/Environment/Resources/down.tga",IvVector3::xAxis);
+    std::shared_ptr<SceneNode> rightQuad=HelperManager::BuildTexturedQuad("rightQuad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Shaders/first_pass_shader"), "../../Game/Environment/Resources/left.tga",IvVector3::yAxis);
+    std::shared_ptr<SceneNode> leftQuad=HelperManager::BuildTexturedQuad("leftQuad", HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Shaders/first_pass_shader"), "../../Game/Environment/Resources/right.tga",IvVector3::yAxis);
 
     frontQuad->setLocalTransform({0,4.97,0},    {0,4.72,6.3/4},            {10,10,10});
     backQuad->setLocalTransform({0,-4.97,0},    {4.71*2,4.71*3,6.29/4},    {10,10,10});

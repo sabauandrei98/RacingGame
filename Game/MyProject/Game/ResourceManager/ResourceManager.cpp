@@ -82,9 +82,9 @@ const ResourceManager::ConstAiScenePtr& ResourceManager::getModel(const std::str
     }
     
     if (flip_uv)
-        importer.ReadFile("../../Models/" + name, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
+        importer.ReadFile("../../Models/" + name, aiProcess_Triangulate | aiProcess_FlipUVs);
     else
-        importer.ReadFile("../../Models/" + name, aiProcess_Triangulate | aiProcess_GenNormals);
+        importer.ReadFile("../../Models/" + name, aiProcess_Triangulate);
     
     // when the importer runs out of scope it deletes all of his owned scenes, thus I have to own the scenes stored in models map
     // and I have to delete them properly

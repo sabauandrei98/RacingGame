@@ -9,6 +9,7 @@
 
 #include "GameStates.hpp"
 #include "../BasicMenu/InfoMenu.hpp"
+#include "../DeferredRendering/DeferredRenderer.hpp"
 
 class GameState;
 
@@ -52,6 +53,8 @@ private:
     
     std::shared_ptr<SceneGraph>             _info;
     bool                                    _gotInfoScene = false;
+    
+    DeferredRenderer                        _renderer;
     
 protected:
     std::shared_ptr<SceneGraph>             _main_scene;

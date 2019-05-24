@@ -27,7 +27,6 @@
 #include "../BasicMenu/InfoMenu.hpp"
 #include "../RoadGenerator/RoadEditor.hpp"
 #include "../RoadGenerator/RoadImporterExporter.hpp"
-#include "../DeferredRendering/DeferredRenderer.hpp"
 
 class StateController;
 
@@ -45,7 +44,6 @@ public:
     virtual void Render(SceneGraph* mainScene)
     {
         mainScene->drawScene();
-        //_renderer.Render(mainScene);
     }
     
     bool rayIntersectsSceneNode(const char* name,unsigned int mousex,unsigned int mousey,const std::shared_ptr<SceneGraph>& mainScene)
@@ -119,7 +117,6 @@ public:
 protected:
     // protected variable(s)
     StateController*    state_controller;
-    DeferredRenderer    _renderer;
 };
 
 // ---------------
