@@ -34,20 +34,13 @@ InfoState::Update(float dt)
     infoMenu->renderText("timeTextRoot", "TIME");
     infoMenu->renderText("carSpeedTextRoot", "SPEED");
     infoMenu->renderText("scoreTextRoot", "SCORE");
-    infoMenu->renderText("lapTimeTextRoot", "LAPTIME");
     infoMenu->renderText("checkpointTextRoot", "CHECKPOINT");
     infoMenu->renderText("lapTextRoot", "LAP");
 
     infoMenu->renderDigit("timeRoot",(int)infoManager->getTime());
     infoMenu->renderDigit("lapRoot",infoManager->getLap("Car"));
-    infoMenu->renderDigit("lapTimeRoot",infoManager->getLapTime("Car", infoManager->getLap("Car")));
     infoMenu->renderDigit("scoreRoot",infoManager->getScore("Car"));
-    
     infoMenu->renderDigit("checkpointRoot",infoManager->getCheckpoint("Car"));
-    int speed = infoManager->getCarSpeed("Car");
-    if(speed<0)
-        speed*=-1;
-    infoMenu->renderDigit("carSpeedRoot", speed);
-    
+    infoMenu->renderDigit("carSpeedRoot",infoManager->getCarSpeed("Car"));
 }
 

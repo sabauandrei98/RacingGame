@@ -24,12 +24,17 @@ public:
     const float getLapTime(const std::string& carName, int lap) const;
     const float getCarSpeed(const std::string& carName) const;
     const float getTime() const;
+    
+    void setLap(const std::string& carName, int lap);
+    void setScore(const std::string& carName, int score);
+    void setCheckpoint(const std::string& carName, int checkpoint);
+    void setLapTime(const std::string& carName, int lap, float time);
 private:
     
     float sinceStartTimer = 0.0f;
     
     //range to trigger next checkpoint
-    float checkpointTriggerDistance = 3.0f;
+    float checkpointTriggerDistance = 10.0;
     
     //the root (good to search for objects)
     SceneNode* root;
@@ -44,11 +49,6 @@ private:
         std::vector<float> lapTime;
     };
     std::unordered_map<std::string, CarProps> carsData;
-    
-    void setLap(const std::string& carName, int lap);
-    void setScore(const std::string& carName, int score);
-    void setCheckpoint(const std::string& carName, int checkpoint);
-    void setLapTime(const std::string& carName, int lap, float time);
-    
+
     void updateCarStats();
 };

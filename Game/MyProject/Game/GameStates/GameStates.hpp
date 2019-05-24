@@ -236,7 +236,6 @@ private:
     
     std::shared_ptr<RaceMenu>           raceMenu;
     MeshManager                         meshManager;
-    //std::unique_ptr<InfoManager>        infoManager;
 };
 
 class HighScoreState : public GameState {
@@ -347,7 +346,7 @@ public:
     void Update(float dt);
     
 private:
-    std::shared_ptr<SceneGraph>         infoScene;
     std::shared_ptr<InfoMenu>           infoMenu;
     std::unique_ptr<InfoManager>        infoManager;
+    
 };

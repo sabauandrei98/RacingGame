@@ -25,7 +25,7 @@ InfoManager::InfoManager(SceneNode* root) : root(root) {
 
 const float InfoManager::getCarSpeed(const std::string& carName) const{
     IvVector3 velocityVector = ((CarController*)root->findFirstNodeWithName(carName)->getAnimator())->getVelocity();
-    return velocityVector.x + velocityVector.z;
+    return abs(velocityVector.x) + abs(velocityVector.z);
 }
 
 void InfoManager::setLap(const std::string& carName, int lap){
@@ -86,10 +86,13 @@ void InfoManager::updateCarStats(){
             carInfo.score++;
             
             //if last checkpoint -> next lap
-            if (nextCheckPointIndex == roadMiddlePoints.size())
+            if (nextCheckPointIndex == roadMiddlePoints.size() - 1)
             {
                 carInfo.laps++;
-                carInfo.lapTime.push_back(sinceStartTimer);
+                int sz = carInfo.lapTime.size() - 1;
+                if (sz < 0)
+                    sz = 0;
+                carInfo.lapTime.push_back((int)sinceStartTimer - carInfo.lapTime[sz]);
             }
         }
     }

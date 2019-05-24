@@ -142,7 +142,7 @@ void RoadEditor::generateTexturedRoad()
         roadNode.reset();
     }
 
-    roadNode =  std::make_shared<RoadNode>("roadNode", rMarginPoints,1);
+    roadNode =  std::make_shared<RoadNode>("roadNode", rMarginPoints,1,false);
     this->sceneGraph->getRoot()->addChild(roadNode);
     roadIE.exportTo(rMarginPoints, "roadData.txt");
 }
@@ -217,7 +217,7 @@ void RoadEditor::setupMeshes()
     meshYellow->setIndexBuffer(indexBuffer);
     
     //mesh instance
-    const char* shader = "testShader";
+    const char* shader = "../Game/RoadGenerator/Shaders/testShader";
     meshInstanceRed = std::make_shared<MeshInstance>();
     meshInstanceRed->setMesh(meshRed);
     meshInstanceRed->setShader(shader);
