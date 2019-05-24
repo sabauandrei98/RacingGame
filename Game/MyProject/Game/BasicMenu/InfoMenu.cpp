@@ -65,12 +65,12 @@ InfoMenu::InfoMenu()
     checkpointText->setLocalPosition(   {2, -1, 0.10});
     carSpeedText->setLocalPosition(     {2, -1,-0.55});
     
-    time->setLocalPosition(             {-5, -1, -1.5});
-    lap->setLocalPosition(              {-5, -1, -2.2});
-    lapTime->setLocalPosition(          {-5, -1, -3.55});
+    time->setLocalPosition(             {-5, -1, -1.6});
+    lap->setLocalPosition(              {-5, -1, -2.3});
+    lapTime->setLocalPosition(          {-5, -1, -3.});
     
     score->setLocalPosition(            {7, -1, -1.5});
-    checkpoint->setLocalPosition(       {7, -1, -2.});
+    checkpoint->setLocalPosition(       {7, -1, -2.3});
     carSpeed->setLocalPosition(         {7, -1, -3.});
     
 
@@ -213,7 +213,7 @@ void InfoMenu::renderText(std::string name, std::string text)
             for(auto & quad:quads)
             {
                 quad->setLocalPosition(position);
-                position+={0.7,0,0};
+                position+={0.8,0,0};
             }
         }
     }

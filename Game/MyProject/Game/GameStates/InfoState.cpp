@@ -45,12 +45,7 @@ InfoState::Update(float dt)
     std::cout<<infoManager->getLapTime("Car", laptime)<<std::endl;
     infoMenu->renderDigit("lapTimeRoot",infoManager->getLapTime("Car", laptime));
     infoMenu->renderDigit("scoreRoot",infoManager->getScore("Car"));
-    
     infoMenu->renderDigit("checkpointRoot",infoManager->getCheckpoint("Car"));
-    int speed = infoManager->getCarSpeed("Car");
-    if(speed<0)
-        speed*=-1;
-    infoMenu->renderDigit("carSpeedRoot", speed);
-    
+    infoMenu->renderDigit("carSpeedRoot",infoManager->getCarSpeed("Car"));
 }
 

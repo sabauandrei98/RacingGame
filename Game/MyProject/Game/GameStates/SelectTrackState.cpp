@@ -29,7 +29,7 @@ void SelectTrackState::onEnter() {
     
     std::vector<std::string> files=getFilesName("manageFiles.txt");
     
-    for(int i=0;i<files.size();i++)
+    for(int i=0;i<1;i++)
     {
         roadImpExp.importFrom(files[i]);
         std::vector<std::pair<IvVector3,IvVector3>> marginPoints;
