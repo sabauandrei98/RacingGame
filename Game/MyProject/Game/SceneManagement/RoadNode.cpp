@@ -29,7 +29,7 @@ void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& road
         point.position = right * vectorScaleFactor;
         pointPosition.push_back(point);
         
-        rMiddlePoints.push_back((left+right)/2.0f);
+        rMiddlePoints.push_back((left * vectorScaleFactor + right * vectorScaleFactor)/2.0f);
     }
     
     

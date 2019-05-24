@@ -29,7 +29,7 @@ private:
     float sinceStartTimer = 0.0f;
     
     //range to trigger next checkpoint
-    float checkpointTriggerDistance = 3.0f;
+    float checkpointTriggerDistance = 10.0;
     
     //the root (good to search for objects)
     SceneNode* root;

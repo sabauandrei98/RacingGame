@@ -86,12 +86,19 @@ void InfoManager::updateCarStats(){
             carInfo.score++;
             
             //if last checkpoint -> next lap
-            if (nextCheckPointIndex == roadMiddlePoints.size())
+            if (nextCheckPointIndex == roadMiddlePoints.size() - 1)
             {
                 carInfo.laps++;
-                carInfo.lapTime.push_back(sinceStartTimer);
+                int sz = carInfo.lapTime.size() - 1;
+                if (sz < 0)
+                    sz = 0;
+                carInfo.lapTime.push_back((int)sinceStartTimer - carInfo.lapTime[sz]);
+                
+                
             }
+            
         }
+         std::cout<<carInfo.lapTime[carInfo.lapTime.size() - 1]<<std::endl;
     }
 }
 
