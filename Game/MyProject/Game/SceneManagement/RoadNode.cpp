@@ -1,13 +1,13 @@
 
 #include "RoadNode.hpp"
 
-RoadNode::RoadNode(const std::string& name, const std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints, float scaleFactor) :  SceneNode(name)
+RoadNode::RoadNode(const std::string& name, const std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints, float scaleFactor,bool reversedNormals) :  SceneNode(name)
 {
     vectorScaleFactor = scaleFactor;
-    buildMesh(rMarginPoints);
+    buildMesh(rMarginPoints,reversedNormals);
 }
 
-void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& roadPoints)
+void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& roadPoints,bool reversedNormals)
 {
     std::shared_ptr<Mesh> meshTexture = std::make_shared<Mesh>();
     
@@ -40,22 +40,19 @@ void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& road
         pointPosition[i+2].texturecoord = {0,0};
         pointPosition[i+3].texturecoord = {0,1};
     }
-//
-//    for(int i = roadPoints.size() * 2 - 1; i >= 3; i-=2)
-//    {
-//        indexBuffer.push_back(i);
-//        indexBuffer.push_back(i-1);
-//        indexBuffer.push_back(i-2);
-//        indexBuffer.push_back(i-3);
-//    }
     
     for(int i = 0; i < pointPosition.size(); i+=2)
     {
-        indexBuffer.push_back(i+1);
-        indexBuffer.push_back(i);
-        
-        //indexBuffer.push_back(i+2);
-        //indexBuffer.push_back(i+3);
+        if(reversedNormals)
+        {
+            indexBuffer.push_back(i+1);
+            indexBuffer.push_back(i);
+        }
+        else
+        {
+            indexBuffer.push_back(i);
+            indexBuffer.push_back(i+1);
+        }
     }
     
     meshTexture->setVertexBuffer(pointPosition, format);

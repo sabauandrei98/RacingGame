@@ -71,7 +71,7 @@ InfoMenu::InfoMenu()
     
     score->setLocalPosition(            {7, -1, -1.5});
     checkpoint->setLocalPosition(       {7, -1, -2.});
-    carSpeed->setLocalPosition(         {7, -1, -3.55});
+    carSpeed->setLocalPosition(         {7, -1, -3.});
     
 
     info->setLocalTransform( IvVector3{0,0,5} , {0,0,0} ,{1,1,1});

@@ -41,7 +41,7 @@ RaceMenu::RaceMenu()
     
     RoadImporterExporter roadIE;
     roadIE.importFrom("roadData.txt");
-    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("roadNode", roadIE.getMarginPoints(), 10.0f);
+    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("roadNode", roadIE.getMarginPoints(), 10.0f,true);
     roadNode->setLocalTransform(IvVector3{0,-0.49,0}, IvVector3{0,0,0}, IvVector3{1,1,1});
     
     std::shared_ptr<SceneNode> environment=std::make_shared<Environment>("environment",roadIE.getMarginPoints());

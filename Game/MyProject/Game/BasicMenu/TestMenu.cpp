@@ -40,7 +40,7 @@ TestMenu::TestMenu()
 
     RoadImporterExporter roadIE;
     roadIE.importFrom("roadDataTest.txt");
-    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadIE.getMarginPoints(), 10.0f);
+    std::shared_ptr<RoadNode> roadNode = std::make_shared<RoadNode>("Road", roadIE.getMarginPoints(), 10.0f,true);
     roadNode->setLocalTransform(IvVector3{0,-0.5,0}, IvVector3{0,0,0}, IvVector3{1,1,1});
     menu->getRoot()->addChild(roadNode);
     
