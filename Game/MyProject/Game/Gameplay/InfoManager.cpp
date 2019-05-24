@@ -94,11 +94,8 @@ void InfoManager::updateCarStats(){
                     sz = 0;
                 carInfo.lapTime.push_back((int)sinceStartTimer - carInfo.lapTime[sz]);
                 
-                
             }
-            
         }
-         std::cout<<carInfo.lapTime[carInfo.lapTime.size() - 1]<<std::endl;
     }
 }
 
