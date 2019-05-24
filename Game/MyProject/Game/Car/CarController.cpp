@@ -79,6 +79,7 @@ void CarController::animateNode(float dt, SceneNode* car)
             velocity += frictionCoefficient;
     }
     
+    
     //APPLY A STEERING COEFFICIENT CONSIDERING THE CURRENT VELOCITY
     float coef = abs(velocity / forwardMaxSpeed);
     
