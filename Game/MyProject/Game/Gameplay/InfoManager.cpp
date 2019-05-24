@@ -25,7 +25,7 @@ InfoManager::InfoManager(SceneNode* root) : root(root) {
 
 const float InfoManager::getCarSpeed(const std::string& carName) const{
     IvVector3 velocityVector = ((CarController*)root->findFirstNodeWithName(carName)->getAnimator())->getVelocity();
-    return velocityVector.x + velocityVector.z;
+    return abs(velocityVector.x) + abs(velocityVector.z);
 }
 
 void InfoManager::setLap(const std::string& carName, int lap){
