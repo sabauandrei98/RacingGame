@@ -38,9 +38,8 @@ void RaceState::Update(float dt) {
         state_controller->requestChange(Pause);
     else
         if(isGameOverTriggered())
-        {
             state_controller->requestChange(GOver);
-        }
+        
 }   
     
 bool RaceState::isPauseTriggered()

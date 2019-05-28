@@ -36,14 +36,23 @@ StateController::StateController() {
 
 void StateController::update(float dt) {
     if (_state_changed) {
-        if(_old_state==Race)
+        if(_old_state==Race &&  _current_state !=Pause)
         {   _states[Info]->onExit();
             _renderer.needs_mini_map=false;
         }
-        _states[_old_state]->onExit();
+        if(_old_state!=Race)
+            _states[_old_state]->onExit();
+        
+        if(_old_state!=Pause)
+            _states[_current_state]->onEnter();
+        else
+            _main_scene=_keep_race_scene;
+        
         if(_current_state==Race)
+        {
             _renderer.needs_mini_map=true;
-        _states[_current_state]->onEnter();
+            _keep_race_scene=_main_scene;
+        }
         _state_changed = false;
     }
     //scene update
@@ -79,6 +88,8 @@ void StateController::render()
         }
         _states[Info]->Render(_info.get());
     }
+    if(_current_state==GOver)
+        _gotInfoScene=false;
 }
 
 void StateController::requestChange(State state) {

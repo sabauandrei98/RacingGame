@@ -128,6 +128,11 @@ InfoMenu::renderDigit(std::string name,uint32_t no)
         }
     }
     
+    if(noDigits(no)>noDigits(no-1))
+        addNewDigit(name,no);
+    
+    checkNeedChangeDigit(no);
+    
     for(auto & ch : first->_children)
     {
         ch->_enabled = false;
@@ -138,7 +143,7 @@ InfoMenu::renderDigit(std::string name,uint32_t no)
     while(needed != 0)
     {
         int digit = needed % 10;
-        auto val=getRowCol(digit+'0');
+        val=getRowCol(digit+'0');
         
         m_name.clear();
         m_name ="count"+ std::to_string(noDigits(needed));
@@ -157,11 +162,6 @@ InfoMenu::renderDigit(std::string name,uint32_t no)
         }
         needed = needed / 10;
     }
-    
-    if(noDigits(no)>noDigits(no-1))
-        addNewDigit(name,no);
-    
-    checkNeedChangeDigit(no);
 }
 //-------------------------------------------------------------------------------
 // @RaceMenu::renderDigit()
@@ -231,56 +231,57 @@ InfoMenu::noDigits(uint32_t number)
 void
 InfoMenu::addNewDigit(std::string name,uint32_t no)
 {
-    //create a new quad
-    std::vector<std::string> uniforms;
-    uniforms.push_back("mTexture");
-    uniforms.push_back("row");
-    uniforms.push_back("column");
-    
-    std::string m_name="count"+std::to_string(noDigits(no));
-    
-    const char* quadName=m_name.c_str();
-    
-    std::string preName="count"+std::to_string(noDigits(no-1));
-    
-    const char* previousQuadName=preName.c_str();
-    
-    std::shared_ptr<SceneNode> countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"../../Game/BasicMenu/Resources/font.tga");
-    
     auto root= menu->getRoot();
-    auto previousPos=root->findFirstNodeWithName(name)->findFirstNodeWithName(previousQuadName)->getLocalPosition();
-    
-    countScoreQuad->setLocalTransform(IvVector3{previousPos.x+0.7f,previousPos.y,previousPos.z}, IvVector3{0,4.72,1}, IvVector3{1,1,1});
-    
-    root->findFirstNodeWithName(name)->addChild(countScoreQuad);
-    
-    auto val=getRowCol(no%10 +'0');
-    
-    m_name="count"+std::to_string(noDigits(no%10));
-    
-    quadName=m_name.c_str();
-    
-    auto renderable=root->findFirstNodeWithName(quadName)->getRenderable();
-    if(renderable!=nullptr)
+    std::string m_name="count"+std::to_string(noDigits(no));
+    const char* quadName=m_name.c_str();
+    if(root->findFirstNodeWithName(name)->findFirstNodeWithName(m_name)==nullptr)
     {
-        renderable->setUniformValue(1, val.first);
-        renderable->setUniformValue(2, val.second);
-    }
-    
-    if(no>=10)
-    {
-        val=getRowCol(firstDigit(no)+'0');
+        //create a new quad
+        std::vector<std::string> uniforms;
+        uniforms.push_back("mTexture");
+        uniforms.push_back("row");
+        uniforms.push_back("column");
         
-        m_name="count"+std::to_string(noDigits(no));
+        std::string preName="count"+std::to_string(noDigits(no-1));
+        
+        const char* previousQuadName=preName.c_str();
+        
+        std::shared_ptr<SceneNode>  countScoreQuad=HelperManager::BuildTexturedQuad(quadName,HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AtlasSpriteShader"),"../../Game/BasicMenu/Resources/font.tga");
+        
+        auto previousPos=root->findFirstNodeWithName(name)->findFirstNodeWithName(previousQuadName)->getLocalPosition();
+        
+        countScoreQuad->setLocalTransform(IvVector3{previousPos.x+0.7f,previousPos.y,previousPos.z},   IvVector3{0,4.72,1}, IvVector3{1,1,1});
+        
+        root->findFirstNodeWithName(name)->addChild(countScoreQuad);
+        
+        auto val=getRowCol(no%10 +'0');
+        
+        m_name="count"+std::to_string(noDigits(no%10));
         
         quadName=m_name.c_str();
         
-        renderable=root->findFirstNodeWithName(quadName)->getRenderable();
+        auto renderable=root->findFirstNodeWithName(quadName)->getRenderable();
         if(renderable!=nullptr)
         {
             renderable->setUniformValue(1, val.first);
             renderable->setUniformValue(2, val.second);
         }
+        
+//        if(no>=10)
+//        {
+//            val=getRowCol(firstDigit(no)+'0');
+//        
+//            m_name="count"+std::to_string(noDigits(no));
+//        
+//            quadName=m_name.c_str();
+//        
+//            renderable=root->findFirstNodeWithName(quadName)->getRenderable();
+//            if(renderable!=nullptr)
+//            {
+//                renderable->setUniformValue(1, val.first);
+//                renderable->setUniformValue(2, val.second);
+//            }
+//        }
     }
 }
 

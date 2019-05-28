@@ -52,6 +52,7 @@ private:
     bool                                    _state_changed = false;
     
     std::shared_ptr<SceneGraph>             _info;
+    std::shared_ptr<SceneGraph>             _keep_race_scene;
     bool                                    _gotInfoScene = false;
     
     DeferredRenderer                        _renderer;

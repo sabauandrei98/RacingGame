@@ -60,7 +60,7 @@ RaceMenu::RaceMenu()
     std::shared_ptr<Camera> map_camera;
     std::shared_ptr<CameraSceneNode> map_cameraSceneNode;
     
-    map_camera = std::make_shared<Camera>(70.0, 0.1, 200.0, 1280, 720);
+    map_camera = std::make_shared<Camera>(70.0, 0.1, 800.0, 1280, 720);
     map_camera->setLookAt({0.f, 0.f, 0.f });
     map_camera->setPosition({0,25,0});
     map_camera->setRotation({0,1,0});
