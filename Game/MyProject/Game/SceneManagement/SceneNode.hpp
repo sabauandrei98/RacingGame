@@ -35,6 +35,7 @@ public:
     void setLocalTransform(const IvVector3&, const IvVector3&, const IvVector3&);
     void setLocalPosition(const IvVector3&);
     
+    const IvVector3& getLocalRotation() const;
     const IvVector3& getLocalPosition() const;
     const IvMatrix44& getAbsoluteTransform() const;
     IvVector3 getAbsolutePosition() const;
@@ -57,7 +58,7 @@ public:
     virtual void updateNode(float);
     virtual void collectRenderingPackets(const Camera*, std::vector<RenderPacket>&);
     
-protected:
+public:
     // protected variable(s)
     SceneNode*                              _parent;
     std::vector<std::shared_ptr<SceneNode>> _children;
@@ -73,3 +74,4 @@ protected:
     std::shared_ptr<NodeAnimator>           _animator;
     std::shared_ptr<MeshInstance>           _rendarable;
 };
+

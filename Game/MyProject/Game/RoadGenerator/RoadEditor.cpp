@@ -11,7 +11,7 @@ RoadEditor::RoadEditor(SceneGraph* sGraph) : sceneGraph(sGraph)
     //setting up a simple environment for the editor
     setupMeshes();
     setupPoints();
-    roadGenerator = std::make_shared<RoadGeneratorControler>(bezierPoints, rMiddlePoints, rMarginPoints, 4.0f, 0.05f);
+    roadGenerator = std::make_shared<RoadGeneratorControler>(bezierPoints, rMiddlePoints, rMarginPoints, 4.0f, 0.033f);
 }
 
 RoadEditor::~RoadEditor() {
@@ -142,7 +142,7 @@ void RoadEditor::generateTexturedRoad()
         roadNode.reset();
     }
 
-    roadNode =  std::make_shared<RoadNode>("roadNode", rMarginPoints);
+    roadNode =  std::make_shared<RoadNode>("roadNode", rMarginPoints,1,false);
     this->sceneGraph->getRoot()->addChild(roadNode);
     roadIE.exportTo(rMarginPoints, "roadData.txt");
 }
@@ -162,6 +162,16 @@ void RoadEditor::Update(float dt)
     }
     
     sceneGraph->updateScene(dt);
+}
+
+void RoadEditor::setMarginPoints(const std::vector<std::pair<IvVector3, IvVector3> > &marginPoints)
+{
+    this->rMarginPoints=marginPoints;
+}
+
+void RoadEditor::setLocalTransform(const IvVector3& translate,const IvVector3& rotation,const IvVector3& scale)
+{
+    roadNode->setLocalTransform(translate, rotation, scale);
 }
 
 void RoadEditor::setupMeshes()
@@ -207,7 +217,7 @@ void RoadEditor::setupMeshes()
     meshYellow->setIndexBuffer(indexBuffer);
     
     //mesh instance
-    const char* shader = "testShader";
+    const char* shader = "../Game/RoadGenerator/Shaders/testShader";
     meshInstanceRed = std::make_shared<MeshInstance>();
     meshInstanceRed->setMesh(meshRed);
     meshInstanceRed->setShader(shader);

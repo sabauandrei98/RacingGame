@@ -8,7 +8,6 @@ in vec3 pos;
 in vec3 norm;
 in vec2 uv;
 
-uniform mat4 IvModelViewProjectionMatrix;
 uniform sampler2D TEXTURE;
 
 void main() 

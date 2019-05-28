@@ -14,19 +14,18 @@ InfoManager::InfoManager(SceneNode* root) : root(root) {
         prop.laps = 1;
         prop.checkpoints = 0;
         prop.score = 0;
+        prop.lapTime.push_back(0);
         carsData[i->getName() ] = prop;
     }
     
     //get the list of middle points
     std::vector<std::shared_ptr<SceneNode>>scene_nodes;
-    root->findAllNodesContainingName("bezierMiddlePoint", scene_nodes);
-    for(const auto& i : scene_nodes)
-        roadMiddlePoints.push_back(i->getLocalPositon());
+    roadMiddlePoints = ((RoadNode*)root->findFirstNodeWithName("roadNode"))->getMiddlePoints();
 }
 
 const float InfoManager::getCarSpeed(const std::string& carName) const{
     IvVector3 velocityVector = ((CarController*)root->findFirstNodeWithName(carName)->getAnimator())->getVelocity();
-    return velocityVector.x + velocityVector.z;
+    return abs(velocityVector.x) + abs(velocityVector.z);
 }
 
 void InfoManager::setLap(const std::string& carName, int lap){
@@ -87,10 +86,13 @@ void InfoManager::updateCarStats(){
             carInfo.score++;
             
             //if last checkpoint -> next lap
-            if (nextCheckPointIndex == roadMiddlePoints.size())
+            if (nextCheckPointIndex == roadMiddlePoints.size() - 1)
             {
                 carInfo.laps++;
-                carInfo.lapTime.push_back(sinceStartTimer);
+                int sz = carInfo.lapTime.size() - 1;
+                if (sz < 0)
+                    sz = 0;
+                carInfo.lapTime.push_back((int)sinceStartTimer - carInfo.lapTime[sz]);
             }
         }
     }

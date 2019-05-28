@@ -52,7 +52,13 @@ void BoundingBox::invalidate() {
     
     _center = IvVector3(0.f, 0.f, 0.f);
 }
+bool BoundingBox::contains(const IvVector3& p)const
+{
+    return p.x > _min.x && p.y > _min.y && p.z > _min.z &&
+    p.x < _max.x && p.y < _max.y && p.z < _max.z;
 
+    
+}
 void BoundingBox::expand(const IvVector3& v) {
     _min = IvVector3(std::min(_min.x, v.x), std::min(_min.y, v.y), std::min(_min.z, v.z));
     _max = IvVector3(std::max(_max.x, v.x), std::max(_max.y, v.y), std::max(_max.z, v.z));

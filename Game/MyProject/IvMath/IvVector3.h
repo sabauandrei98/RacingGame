@@ -102,6 +102,7 @@ public:
 
     // matrix products
     friend IvVector3 operator*( const IvVector3& vector, const IvMatrix33& mat );
+    friend IvVector3 operator*( const IvVector3& vector, const IvVector3& v2 );
  
     // useful defaults
     static IvVector3    xAxis;

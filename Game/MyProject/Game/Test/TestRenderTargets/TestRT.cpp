@@ -111,8 +111,8 @@ TestRT::~TestRT()
 
 void TestRT::Setup()
 {
-    shapes[0]->Setup("testShaderRT","b1.tga");
-    shapes[1]->Setup("testBlurShader","b1.tga");
+    shapes[0]->Setup("testShaderRT","hills_bk.tga");
+    shapes[1]->Setup("testBlurShader","hills_bk.tga");
 }
 
 void TestRT::Draw()
@@ -120,15 +120,15 @@ void TestRT::Draw()
     frameBuffer->Bind();
     IvRenderer::mRenderer->SetClearDepth(1.0);
     IvRenderer::mRenderer->ClearBuffers(kColorDepthClear);
-    
+
     shapes[0]->SetUniforms();
     shapes[0]->Draw();
-    
+
     frameBuffer->BindToDefault();
     
     IvRenderer::mRenderer->SetClearDepth(1.0);
     IvRenderer::mRenderer->ClearBuffers(kColorDepthClear);
-    
+
     IvRenderTarget* render=frameBuffer->GetTextures()[0];
     shapes[1]->SetTexture("Texture",render->GetReference());
     shapes[1]->Draw();

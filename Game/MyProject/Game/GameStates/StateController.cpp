@@ -24,6 +24,7 @@ StateController::StateController() {
     _states.push_back(std::make_unique<GameOverState>(this));
     _states.push_back(std::make_unique<TestState>(this));
     _states.push_back(std::make_unique<FirstState>(this));
+    _states.push_back(std::make_unique<InfoState>(this));
     
     _current_state = First;
     _states[_current_state]->onEnter();
@@ -35,20 +36,61 @@ StateController::StateController() {
 
 void StateController::update(float dt) {
     if (_state_changed) {
-        _states[_old_state]->onExit();
-        _states[_current_state]->onEnter();
+        if(_old_state==Race &&  _current_state !=Pause)
+        {   _states[Info]->onExit();
+            _renderer.needs_mini_map=false;
+        }
+        if(_old_state!=Race)
+            _states[_old_state]->onExit();
+        
+        if(_old_state!=Pause)
+            _states[_current_state]->onEnter();
+        else
+            _main_scene=_keep_race_scene;
+        
+        if(_current_state==Race)
+        {
+            _renderer.needs_mini_map=true;
+            _keep_race_scene=_main_scene;
+        }
         _state_changed = false;
     }
     //scene update
     _main_scene->updateScene(dt);
-    _states[_current_state]->Update(dt);
+   _states[_current_state]->Update(dt);
+    
+    //!!hack
+    if(_current_state==Race && _gotInfoScene)
+    {
+        _info->updateScene(dt);
+        _states[Info]->Update(dt);
+    }
 }
 
 void StateController::render()
 {
-    _states[_current_state]->Render(_main_scene.get());
+    //_states[_current_state]->Render(_main_scene.get());
+    _renderer.Render(_main_scene.get());
+    
+    //!
+    IvRenderer::mRenderer->SetClearDepth(1.0);
+    IvRenderer::mRenderer->ClearBuffers(kDepthClear);
+    
+    if(_current_state==Race && !_state_changed)
+    {
+        if(!_gotInfoScene)
+        {
+            auto keepScene=_main_scene;
+            _states[Info]->onEnter();
+            _gotInfoScene=true;
+            _info= _main_scene;
+            _main_scene=keepScene;
+        }
+        _states[Info]->Render(_info.get());
+    }
+    if(_current_state==GOver)
+        _gotInfoScene=false;
 }
-
 
 void StateController::requestChange(State state) {
     _old_state = _current_state;

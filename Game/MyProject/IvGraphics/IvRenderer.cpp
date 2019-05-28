@@ -140,6 +140,10 @@ void IvRenderer::SetWVPMat(const IvMatrix44& matrix){
     mWVPMat = matrix;
 }
 
+void IvRenderer::SetWVMat(const IvMatrix44& matrix) {
+    mWVMat = matrix;
+}
+
 //-------------------------------------------------------------------------------
 // @ IvRenderer::GetViewMatrix()
 //-------------------------------------------------------------------------------

@@ -21,6 +21,7 @@ public:
     void calculate(const IvVector3&, const IvVector3&, const IvMatrix44&);
     void invalidate();
     void expand(const IvVector3&);
+    bool contains(const IvVector3&)const;
     
     const IvVector3& getMax() const;
     const IvVector3& getMin() const;

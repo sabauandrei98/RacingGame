@@ -1,28 +1,35 @@
 
 #include "RoadNode.hpp"
 
-RoadNode::RoadNode(const std::string& name, const std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints) :  SceneNode(name)
+RoadNode::RoadNode(const std::string& name, const std::vector<std::pair<IvVector3,IvVector3>>& rMarginPoints, float scaleFactor,bool reversedNormals) :  SceneNode(name)
 {
-    buildMesh(rMarginPoints);
+    vectorScaleFactor = scaleFactor;
+    buildMesh(rMarginPoints,reversedNormals);
 }
 
-void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& roadPoints)
+void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& roadPoints,bool reversedNormals)
 {
     std::shared_ptr<Mesh> meshTexture = std::make_shared<Mesh>();
     
     //BUFFERS
-    IvTCPVertex point;
-    IvVertexFormat format = IvVertexFormat::kTCPFormat;
-    std::vector<IvTCPVertex> pointPosition;
+    IvTNPVertex point;
+    IvVertexFormat format = IvVertexFormat::kTNPFormat;
+    std::vector<IvTNPVertex> pointPosition;
     std::vector<unsigned int> indexBuffer;
     
-    point.color.Set(255, 255, 255, 255);
+    
+    point.normal.Set(0.f, 1.f, 0.f);
     for(int i = 0; i < roadPoints.size(); i++)
     {
-        point.position = roadPoints[i].first;
+        IvVector3 left = roadPoints[i].first;
+        point.position = left * vectorScaleFactor;
         pointPosition.push_back(point);
-        point.position = roadPoints[i].second;
+        
+        IvVector3 right = roadPoints[i].second;
+        point.position = right * vectorScaleFactor;
         pointPosition.push_back(point);
+        
+        rMiddlePoints.push_back((left * vectorScaleFactor + right * vectorScaleFactor)/2.0f);
     }
     
     
@@ -34,15 +41,23 @@ void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& road
         pointPosition[i+3].texturecoord = {0,1};
     }
     
-    for(int i = 0; i < roadPoints.size() * 2; i++)
+    for(int i = 0; i < pointPosition.size(); i+=2)
     {
-        indexBuffer.push_back(i);
+        if(reversedNormals)
+        {
+            indexBuffer.push_back(i+1);
+            indexBuffer.push_back(i);
+        }
+        else
+        {
+            indexBuffer.push_back(i);
+            indexBuffer.push_back(i+1);
+        }
     }
     
     meshTexture->setVertexBuffer(pointPosition, format);
     meshTexture->setIndexBuffer(indexBuffer);
     
-    // const char* shader = "../../Game/RoadGenerator/Shaders/roadShader";
     const char* shader = "../../Shaders/first_pass_shader";
     std::shared_ptr<MeshInstance> meshTextureInstance = std::make_shared<MeshInstance>();
     meshTextureInstance->setMesh(meshTexture);
@@ -50,7 +65,6 @@ void RoadNode::buildMesh(const std::vector<std::pair<IvVector3,IvVector3>>& road
     
     //UNIFORMS
     std::vector<std::string> uniforms;
-    // uniforms.push_back("roadTexture");
     uniforms.push_back("TEXTURE");
     meshTextureInstance->addShaderUniforms(uniforms);
     

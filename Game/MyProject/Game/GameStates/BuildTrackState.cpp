@@ -34,11 +34,17 @@ void BuildTrackState::onExit() {
 }
 
 void BuildTrackState::Update(float dt) {
+    static int i=0;
     roadEditor->Update(dt);
     
     if (isPlayTriggered())
+    {
+        RoadImporterExporter roadImpExp;
+        std::string name="roadData.txt";
+        if(roadEditor->getMarginPoints().size()!=0)
+            roadImpExp.exportTo(roadEditor->getMarginPoints(), name);
         state_controller->requestChange(SelectCar);
-    
+    }
     if (isAddTriggered())
         roadEditor->getRoadGenerator()->addPoint();
     
@@ -47,7 +53,11 @@ void BuildTrackState::Update(float dt) {
     
     if(isSaveTriggered())
     {
-        //save the road
+        RoadImporterExporter roadImpExp;
+        std::string name="roadData"+std::to_string(i)+".txt";
+        roadImpExp.exportTo(roadEditor->getMarginPoints(), name);
+        i++;
+        saveFile("manageFiles.txt",name);
     }
     
     if(isPreviousTriggered())
@@ -57,8 +67,12 @@ void BuildTrackState::Update(float dt) {
         roadEditor->getRoadGenerator()->nextPoint();
     
     if(isGenerateTriggered())
+    {
+        RoadImporterExporter roadImpExp;
+        std::string name="roadData.txt";
+        roadImpExp.exportTo(roadEditor->getMarginPoints(), name);
         roadEditor->generateTexturedRoad();
-    
+    }
     if (isBackTriggered())
         state_controller->requestChange(Track);
 }
@@ -106,6 +120,9 @@ bool BuildTrackState::isPlayTriggered(){
 }
 
 bool BuildTrackState::isSaveTriggered(){
+    unsigned int mousex,mousey;
+    if(IvGame::mGame->mEventHandler->IsMousePressed(mousex,mousey) && rayIntersectsSceneNode("saveTrack", mousex, mousey, state_controller->_main_scene))
+        return true;
     return false;
 }
 
@@ -115,3 +132,5 @@ bool BuildTrackState::isBackTriggered() {
         return true;
     return false;
 }
+
+

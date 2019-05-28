@@ -8,6 +8,8 @@
 #include "Menu.hpp"
 #include "HelperManager.hpp"
 #include "MeshManager.hpp"
+#include "../RoadGenerator/RoadImporterExporter.hpp"
+#include "../RoadGenerator/RoadEditor.hpp"
 #include <stdio.h>
 #include <map>
 //-------------------------------------------------------------------------------

@@ -35,6 +35,9 @@ void DeferredRenderer::setUpGBuffer() {
     glUniform1f(glGetUniformLocation(_shader->GetProgramID(), "INTENSITY"), vignette_intensity);
     glUniform1f(glGetUniformLocation(_shader->GetProgramID(), "SIZE"), vignette_size);
     
+    glUniform1i(glGetUniformLocation(_shader->GetProgramID(), "NORMAL"), 1);
+    glUniform1i(glGetUniformLocation(_shader->GetProgramID(), "POSITION"), 2);
+    
     std::vector<IvRenderTarget*> _render_targets;
     _render_targets.push_back(IvRenderer::mRenderer->GetResourceManager()->CreateRenderTarget(RenderTargetType::COLOR));    // position
     _render_targets.push_back(IvRenderer::mRenderer->GetResourceManager()->CreateRenderTarget(RenderTargetType::COLOR));    // normal
@@ -63,6 +66,7 @@ void DeferredRenderer::setUpMotionBlur() {
     glUniform1i(glGetUniformLocation(_blur_shader->GetProgramID(), "PREVIOUS_POSITION"), 0);
     glUniform1i(glGetUniformLocation(_blur_shader->GetProgramID(), "CURRENT_POSITION"), 1);
     glUniform1i(glGetUniformLocation(_blur_shader->GetProgramID(), "COLOR"), 2);
+    glUniform1i(glGetUniformLocation(_blur_shader->GetProgramID(), "NORMAL"), 3);
     glUniform1f(glGetUniformLocation(_blur_shader->GetProgramID(), "EXPOSURE"), exposure);
     glUniform1f(glGetUniformLocation(_blur_shader->GetProgramID(), "GAMMA"), gamma);
     glUniform1f(glGetUniformLocation(_blur_shader->GetProgramID(), "INTENSITY"), vignette_intensity);
@@ -133,8 +137,16 @@ void DeferredRenderer::setUpMiniMap() {
 }
 
 void DeferredRenderer::renderNoEffect() {
+    IvRenderer::mRenderer->SetShaderProgram(_shader);
+    
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _g_buffer->GetTextures()[2]->GetReference());
+    
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, _g_buffer->GetTextures()[1]->GetReference());
+    
+    glActiveTexture(GL_TEXTURE2);
+    glBindTexture(GL_TEXTURE_2D, _g_buffer->GetTextures()[0]->GetReference());
     
     IvRenderer::mRenderer->Draw(kTriangleStripPrim, _renderable.getMesh()->getVertexBuffer(), 4, _shader);
 }
@@ -148,6 +160,9 @@ void DeferredRenderer::renderMotionBlur() {
     
     glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D, _g_buffer->GetTextures()[2]->GetReference());
+    
+    glActiveTexture(GL_TEXTURE3);
+    glBindTexture(GL_TEXTURE_2D, _g_buffer->GetTextures()[1]->GetReference());
     
     IvRenderer::mRenderer->Draw(kTriangleStripPrim, _renderable.getMesh()->getVertexBuffer(), 4, _blur_shader);
     

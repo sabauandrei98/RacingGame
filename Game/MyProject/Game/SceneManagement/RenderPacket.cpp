@@ -17,6 +17,8 @@ void RenderPacket::draw() const {
     IvRenderer::mRenderer->SetShaderProgram(_mesh_instance->getShader());
     _mesh_instance->setWorldMatrix(_world_matrix);
     _mesh_instance->setWorldViewProjectionMatrix(_world_view_projection_matrix);
+    _mesh_instance->setWorldViewMatrix(_world_view_matrix);
+
     
     // setting up the states
     if (_use_depth)

@@ -3,8 +3,6 @@
 #include "BasicMenu/StartMenu.hpp"
 #include "BasicMenu/TrackMenu.hpp"
 #include "Player/Player.hpp"
-#include "Test/TestRayBoxIntersection/TestCollision.hpp"
-#include "Test/TestHelper/TestHelper.hpp"
 #include <stdio.h>
 #include <iostream>
 #include <IvGame.h>

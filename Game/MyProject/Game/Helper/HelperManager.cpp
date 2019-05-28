@@ -103,7 +103,6 @@ namespace HelperManager{
     {
         std::shared_ptr<Mesh> quad=std::make_shared<Mesh>();
         
-        
         float x=0;
         float y=0;
         float z=0;
@@ -435,8 +434,8 @@ namespace HelperManager{
             delete image;
             image = 0;
         }
+
         if(quadTexture) {
-            meshInstance->addShaderUniforms(std::vector<std::string>{"TEXTURE"});
             meshInstance->setUniformValue(0,quadTexture);
         }
         return node;

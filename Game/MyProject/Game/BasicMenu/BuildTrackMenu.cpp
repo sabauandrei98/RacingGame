@@ -26,15 +26,17 @@ BuildTrackMenu::BuildTrackMenu()
     std::shared_ptr<SceneNode> previousQuad=HelperManager::BuildTexturedQuad("previousTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_previous.tga");
 
     std::shared_ptr<SceneNode> nextQuad=HelperManager::BuildTexturedQuad("nextTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_next.tga");
-    
+
     std::shared_ptr<SceneNode> generateQuad=HelperManager::BuildTexturedQuad("generateTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_generate.tga");
     
     std::shared_ptr<SceneNode> addQuad=HelperManager::BuildTexturedQuad("addTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_add.tga");
     
     std::shared_ptr<SceneNode> removeQuad=HelperManager::BuildTexturedQuad("removeTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_remove.tga");
-    
+
+    std::shared_ptr<SceneNode> saveQuad=HelperManager::BuildTexturedQuad("saveTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_save.tga");
+
     std::shared_ptr<SceneNode> playQuad=HelperManager::BuildTexturedQuad("playTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_play.tga");
-    
+
     std::shared_ptr<SceneNode> backQuad=HelperManager::BuildTexturedQuad("backTrack",HelperManager::CreateMeshInstance(meshManager.GetMesh("quad"),uniforms,"../../Game/BasicMenu/Shaders/AlphaChanger"),"../../Game/BasicMenu/Resources/tr_back.tga");
     
     
@@ -45,7 +47,8 @@ BuildTrackMenu::BuildTrackMenu()
     generateQuad->setLocalTransform(IvVector3{0,-1,-8}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
     addQuad->setLocalTransform(IvVector3{14,-1,6}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
     removeQuad->setLocalTransform(IvVector3{14,-1,3}, IvVector3{0,4.72,1}, IvVector3{2,2,4});
-    playQuad->setLocalTransform(IvVector3{14,-1,0}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
+    saveQuad->setLocalTransform(IvVector3{14,-1,0}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
+    playQuad->setLocalTransform(IvVector3{14,-1,-3}, IvVector3{0,4.72,1}, IvVector3{1,2,4});
     backQuad->setLocalTransform(IvVector3{14,-1,-8}, IvVector3{0,4.72,1}, IvVector3{4,4,4});
     
     menu->setRoot(root);
@@ -54,6 +57,7 @@ BuildTrackMenu::BuildTrackMenu()
     menu->getRoot()->addChild(generateQuad);
     menu->getRoot()->addChild(addQuad);
     menu->getRoot()->addChild(removeQuad);
+    menu->getRoot()->addChild(saveQuad);
     menu->getRoot()->addChild(playQuad);
     menu->getRoot()->addChild(backQuad);
     menu->getRoot()->addChild(cameraSceneNode);

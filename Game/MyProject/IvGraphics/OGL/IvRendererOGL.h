@@ -41,7 +41,7 @@ public:
 
     bool Initialize(unsigned int  width, unsigned int  height) final;
     void Resize(unsigned int width, unsigned int height) final;
-        
+    
     void  SetClearColor(float red, float green, float blue, float alpha) final;
     void  SetClearDepth(float depth) final;
     void  ClearBuffers(IvClearBuffer buffer) final;
@@ -56,6 +56,7 @@ public:
     void SetStencilMask(uint32_t mask);
     
     void SetWVPMat(const IvMatrix44& matrix);
+    void SetWVMat(const IvMatrix44& matrix);
 
     void SetDepthTest(IvDepthTestFunc func) final;
     IvDepthTestFunc GetDepthTest() final;

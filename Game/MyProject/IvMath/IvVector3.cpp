@@ -333,7 +333,10 @@ IvVector3::operator*( float scalar )
 
 }   // End of operator*()
 
-
+IvVector3 operator*( const IvVector3& vector, const IvVector3& v2 )
+{
+    return IvVector3( vector.x * v2.x, vector.y * v2.y, vector.z * v2.z );
+}
 //-------------------------------------------------------------------------------
 // @ operator*()
 //-------------------------------------------------------------------------------

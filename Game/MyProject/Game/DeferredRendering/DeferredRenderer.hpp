@@ -18,10 +18,10 @@ public:
     
     bool    needs_debug_screen = false;
     bool    needs_motion_blur = true;
-    bool    needs_mini_map = true;
+    bool    needs_mini_map = false;
     
-    float   exposure = 2.1f;
-    float   gamma = 0.8f;
+    float   exposure = 1.0f;
+    float   gamma = 1.0f;
     float   vignette_intensity = 30.0f;
     float   vignette_size = 0.5f;
     
@@ -39,6 +39,7 @@ private:
     IvShaderProgram*    _blur_shader;
     IvShaderProgram*    _copy_shader;
     IvShaderProgram*    _debug_shader;
+    IvShaderProgram*    _map_shader;
     
     void setUpGBuffer();
     void setUpPreviousBuffer();

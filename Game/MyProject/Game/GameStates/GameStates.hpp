@@ -24,8 +24,9 @@
 #include "../BasicMenu/GameOver.hpp"
 #include "../BasicMenu/FirstMenu.hpp"
 #include "../BasicMenu/TestMenu.hpp"
+#include "../BasicMenu/InfoMenu.hpp"
 #include "../RoadGenerator/RoadEditor.hpp"
-#include "../DeferredRendering/DeferredRenderer.hpp"
+#include "../RoadGenerator/RoadImporterExporter.hpp"
 
 class StateController;
 
@@ -43,13 +44,21 @@ public:
     virtual void Render(SceneGraph* mainScene)
     {
         mainScene->drawScene();
-        _renderer.Render(mainScene);
     }
     
     bool rayIntersectsSceneNode(const char* name,unsigned int mousex,unsigned int mousey,const std::shared_ptr<SceneGraph>& mainScene)
     {
         RayBoxIntersection raybox(mainScene->getCamera()->getRay(mousex,mousey));
-        if(raybox.IsRayIntersectingBox(mainScene->getRoot()->findFirstNodeWithName(name)->getBoundingBox()))
+        auto nd = mainScene->getRoot()->findFirstNodeWithName(name);
+        if(nd != nullptr && raybox.IsRayIntersectingBox(nd->getBoundingBox()))
+            return true;
+        return false;
+    }
+    
+    bool rayIntersectsSceneNode(const std::shared_ptr<SceneNode>& node,unsigned int mousex,unsigned int mousey,const std::shared_ptr<SceneGraph>& mainScene)
+    {
+        RayBoxIntersection raybox(mainScene->getCamera()->getRay(mousex,mousey));
+        if(node != nullptr && raybox.IsRayIntersectingBox(node->getBoundingBox()))
             return true;
         return false;
     }
@@ -57,12 +66,57 @@ public:
     GameState(StateController* state_controller) :
         state_controller(state_controller) {
         }
+    
+    void saveFile(std::string configurerFile,std::string fileName)
+    {
+        std::ifstream fin(configurerFile);
+        int noFiles;
+        fin>>noFiles;
+        
+        std::vector<std::string> files;
+        for(int i=0;i<noFiles;i++)
+        {
+            std::string fName;
+            fin>>fName;
+            if(fName!=fileName)
+                files.push_back(fName);
+        }
+        fin.close();
+        
+        if(files.size()==noFiles)
+            noFiles++;
+        
+        std::ofstream fout(configurerFile);
+        fout<<noFiles<<'\n';
+        for(int i=0;i<files.size();i++)
+            fout<<files[i]<<'\n';
+        fout<<fileName<<'\n';
+    
+        fout.close();
+        
+    }
+    std::vector<std::string> getFilesName(const std::string& configurerFile)
+    {
+        std::ifstream fin(configurerFile);
+        int noFiles;
+        fin>>noFiles;
+        
+        std::vector<std::string> files;
+        for(int i=0;i<noFiles;i++)
+        {
+            std::string fileName;
+            fin>>fileName;
+            files.push_back(fileName);
+        }
+        fin.close();
+        
+        return files;
+    }
     virtual ~GameState(){}
     
 protected:
     // protected variable(s)
     StateController*    state_controller;
-    DeferredRenderer    _renderer;
 };
 
 // ---------------
@@ -117,9 +171,12 @@ public:
     void Update(float dt);
     
 private:
+    std::unique_ptr<RoadEditor> roadEditor;
+    
     // private function(s)
     bool isNextTriggered();
     bool isBackTriggered();
+    
 };
 
 class BuildTrackState : public GameState {
@@ -176,15 +233,6 @@ private:
     // private function(s)
     bool isPauseTriggered();
     bool isGameOverTriggered();
-
-    void renderScore();
-    unsigned int noDigits(uint32_t number);
-    void addNewDigit();
-    void checkNeedChangeDigit();
-    int firstDigit(int no);
-    
-    uint32_t score                  =   0;
-    uint32_t frames                 =   0;
     
     std::shared_ptr<RaceMenu>           raceMenu;
     MeshManager                         meshManager;
@@ -289,3 +337,16 @@ private:
     bool isBackTriggered();
 };
 
+class InfoState:public GameState
+{
+public:
+    InfoState(StateController*);
+    void onEnter();
+    void onExit();
+    void Update(float dt);
+    
+private:
+    std::shared_ptr<InfoMenu>           infoMenu;
+    std::unique_ptr<InfoManager>        infoManager;
+    
+};
